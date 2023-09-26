@@ -22,7 +22,7 @@ Members: Vivian Deng, Jaehyeong Jang, Min Tun Myo, Emily Shen
 
 - Link to the repository for Pomodoro Time Management API https://github.com/jordanch/pomodoro
   - This API could be an extra feature to provide Pomodoro Time management.
-  - This is a potential feature to me implemented.
+  - This is a potential side feature to me implemented.
 
 
 
