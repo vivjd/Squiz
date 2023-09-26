@@ -24,8 +24,6 @@ Members: Vivian Deng, Jaehyeong Jang, Min Tun Myo, Emily Shen
   - This API could be an extra feature to provide Pomodoro Time management.
   - This is a potential side feature to me implemented.
 
-
-
 ## API Call
 
 ## Example Output
