@@ -26,6 +26,9 @@ Members: Vivian Deng, Jaehyeong Jang, Min Tun Myo, Emily Shen
 
 ## API Call
 
+![What is this](myimage.png)
 ## Example Output
+{"parent":{"page_id":"cbc4c95a-f066-4f8f-ab34-0835434484b5"},"properties":{"title":[{"text":{"content":"created with API on Java"}}]}}
+Response{protocol=h2, code=200, message=, url=https://api.notion.com/v1/pages}
 
 ## Technical Problem
