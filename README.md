@@ -2,7 +2,11 @@
 Members: Vivian Deng, Jaehyeong Jang, Min Tun Myo, Emily Shen
 
 ## Problem Domain
+As university students, studying plays a large part in our daily lives and remains a crucial component of our academic career. Although there is a wide variety of studying available apps, we want to create a study tailored to university students, and if able, specifically for University of Toronto students.
 
+A large part of our learning stems from attending lectures and self-revision of these materials. We believe that note-taking and self-assessment are the major tools used by current students to increase their understanding of course materials. These tasks seem trivial but are rather crucial for our learning in many areas, and the experience can be enhanced with an application.
+
+The primary learning platform at the University of Toronto is Quercus (also known as Canvas), where course materials can be accessed via a web browser or mobile application. This makes Quercus an important part of our learning career. However, this system is relatively isolated and not integrated with other learning tools we may have. We often create our own calendar of assignment deadlines and important dates (in Google, Outlook, etc.) that is time inefficient and error-prone. We plan on integrating this into our application, so students can easily access course materials from our studying application, which can increase their efficiency.
 
 ## Description
 This study program will be a combination of multiple different productivity tools we have right now. Features we plan on implementing:
