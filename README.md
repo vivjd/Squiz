@@ -39,3 +39,16 @@ This study program will be a combination of multiple different productivity tool
 Response{protocol=h2, code=200, message=, url=https://api.notion.com/v1/pages}
 
 ## Technical Problem
+1. Retrieving personal information such as individual assignments, due dates, and notifications on Quercus (Canvas).
+The way of authentication is strictly limited when using Quercus API, Moreover, since all the UofT-related web 
+services utilize an external application called "Duo" as a mean of authentication, related API calls incorporating 
+the Duo service has to be explored as well.
+
+
+2. Limited capacity of free open APIs: Though all the APIs we have so far identified to use do provide full features with its paid version,
+free version has quite limited capacities such as limited lenght of document when using Notion API and limited file size 
+for a text file to be converted into a PDF through an API called "pspdfkit.
+
+
+3. Construction of UI with Java GUI: for this assignment, since use of another language and external tools are restricted, 
+the overall aesthetics and functionalities are limited.
