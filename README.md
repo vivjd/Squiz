@@ -45,8 +45,20 @@ Features we are considering of implementing:
 ## Example Output
 
 ```
-{"parent":{"page_id":"cbc4c95a-f066-4f8f-ab34-0835434484b5"},"properties":{"title":[{"text":{"content":"created with API on Java"}}]}}
-Response{protocol=h2, code=200, message=, url=https://api.notion.com/v1/pages}
+{
+  "parent": {
+    "page_id": "cbc4c95a-f066-4f8f-ab34-0835434484b5"
+  },
+  "properties": {
+    "title": [
+      {
+        "text": {
+          "content": "created with API on Java"
+        }
+      }
+    ]
+  }
+}
 ```
 
 
