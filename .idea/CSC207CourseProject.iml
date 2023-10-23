@@ -22,5 +22,9 @@
     <orderEntry type="library" name="Maven: org.jetbrains:annotations:13.0" level="project" />
     <orderEntry type="library" name="Maven: io.github.cdimascio:dotenv-java:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20230618" level="project" />
+    <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-sync:4.11.0" level="project" />
+    <orderEntry type="library" name="Maven: org.mongodb:bson:4.11.0" level="project" />
+    <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-core:4.11.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.mongodb:bson-record-codec:4.11.0" level="project" />
   </component>
 </module>
