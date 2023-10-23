@@ -1,23 +1,24 @@
 package main.java;
 
-import main.java.db.Database;
-import main.java.db.MongoDB;
+import main.java.data_access.NoteDataAccessObject;
+import main.java.entity.Note;
 
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        // Example usage of the NoteDataAccessObject
+        NoteDataAccessObject dataAccess = new NoteDataAccessObject();
+        Note note = new Note();
+        note.setTitle("Example Title");
+        note.setUserPrompt("Example Prompt");
 
-        // Initialize and use the MongoDB implementation of the Database interface
-        Database mongoDB = new MongoDB();
-        mongoDB.connect();
+        dataAccess.saveNote(note);
 
-        // Example usage:
-        mongoDB.saveData("Your data to save");
-        List<String> retrievedData = mongoDB.retrieveData();
-        System.out.println("Retrieved data: " + retrievedData);
-
-        // Don't forget to disconnect when you're done with the database
-        mongoDB.disconnect();
+        // Retrieve all notes
+        List<String> allNotes = dataAccess.getAllNotes();
+        for (String noteJson : allNotes) {
+            System.out.println(noteJson);
+        }
     }
 }
