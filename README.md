@@ -20,7 +20,9 @@ Features we plan on implementing:
 - **Customized input questions:** sometimes users want to create their own questions for their quiz. This option allows them to write their own answers and questions. After they added their questions, they will be shuffled into the generated quiz questions.
 
 Our program will have screens to allow users to click different buttons and type. As a rough design, this is what we plan on incorporating:
-![Work in Progress of Our Design](https://github.com/vivjd/CSC207CourseProject/assets/105073190/f80bacda-f2f5-4fec-a524-92995a2549f0)
+![UI - Rought Draft](https://github.com/vivjd/Squiz/assets/105073190/1d38aafe-d783-4039-96c6-d211dd9c8029)
+
+
 
 
 ## API Documentation
