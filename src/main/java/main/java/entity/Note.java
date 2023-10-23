@@ -1,6 +1,8 @@
 package main.java.entity;
 
 import com.google.gson.Gson;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+import main.java.usecase.quiz.Generator;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.types.ObjectId;
 
@@ -9,6 +11,11 @@ public class Note {
     private ObjectId id;
     private String title;
     private String userPrompt;
+    private Generator quizGenerator;
+
+    public Note(Generator quizGenerator) {
+        this.quizGenerator = quizGenerator;
+    }
 
     public ObjectId getId() {
         return id;
@@ -41,4 +48,9 @@ public class Note {
         // Use Gson to convert the Note object to JSON.
         return gson.toJson(this);
     }
+
+    public Quiz createQuiz() {
+        return quizGenerator.createQuiz(userPrompt);
+    }
+
 }
