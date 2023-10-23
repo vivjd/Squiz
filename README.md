@@ -21,8 +21,8 @@ Our program will have screens to allow users to click different buttons and type
 
 
 ## API Documentation
-- Link to the HuggingFace API:
-- Link to MongoDB API:
+- Link to the HuggingFace API: https://huggingface.co/inference-api
+- Link to MongoDB API: https://www.mongodb.com/docs/atlas/app-services/data-api/
   
 ## API Call
 
