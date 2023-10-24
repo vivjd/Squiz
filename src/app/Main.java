@@ -1,8 +1,8 @@
-package main.java;
+package app;
 
-import main.java.data_access.NoteDataAccessObject;
-import main.java.entity.Note;
-import main.java.usecase.note.NoteDataAccessInterface;
+import data_access.NoteDataAccessObject;
+import entity.Note;
+import use_case.note.NoteDataAccessInterface;
 
 import java.util.List;
 

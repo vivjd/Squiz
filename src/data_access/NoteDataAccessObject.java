@@ -1,8 +1,8 @@
-package main.java.data_access;
+package data_access;
 
 import com.mongodb.client.*;
-import main.java.entity.Note;
-import main.java.usecase.note.NoteDataAccessInterface;
+import entity.Note;
+import use_case.note.NoteDataAccessInterface;
 import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;

@@ -1,4 +1,4 @@
-package main.java.notion;
+package notion;
 
 import org.json.JSONObject;
 

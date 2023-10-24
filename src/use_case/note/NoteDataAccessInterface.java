@@ -1,6 +1,6 @@
-package main.java.usecase.note;
+package use_case.note;
 
-import main.java.entity.Note;
+import entity.Note;
 
 import java.util.List;
 

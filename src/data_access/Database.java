@@ -1,4 +1,4 @@
-package main.java.data_access;
+package data_access;
 
 import java.util.List;
 

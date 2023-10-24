@@ -1,6 +1,6 @@
-package main.java.usecase.quiz;
+package use_case.quiz;
 
-import main.java.entity.Quiz;
+import entity.Quiz;
 
 public interface Generator {
 
