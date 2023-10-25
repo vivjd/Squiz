@@ -20,7 +20,7 @@ public class NoteInteractor implements NoteInputBoundary {
             notePresenter.prepareFailView("Please enter a title for your note.");
         } else if (inputNote.getUserPrompt().isEmpty()) {
             // Display a message telling the user to input contents for their note
-            notePresenter.prepareFailView("Please enter a minimum of 40 words for your " + inputNote.getTitle() + " note.")
+            notePresenter.prepareFailView("Please enter a minimum of 40 words for your " + inputNote.getTitle() + " note.");
         } else {
             Note note = noteDataAccessObject.getNote(inputNote.getTitle());
 //            The two lines below will be implemented after the Presenter and OutputData are implemented.
