@@ -31,7 +31,6 @@ Our program will have screens to allow users to click different buttons and type
   
 ## API Call
 
-![What is this](hoppscotch_trying_API.png)
 ## Example Output
 
 ```

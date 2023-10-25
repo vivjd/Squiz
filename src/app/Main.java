@@ -1,7 +1,6 @@
 package app;
 
 import data_access.NoteDataAccessObject;
-import entity.Note;
 import use_case.note.NoteDataAccessInterface;
 
 import java.util.List;
