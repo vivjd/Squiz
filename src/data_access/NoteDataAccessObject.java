@@ -18,11 +18,9 @@ public class NoteDataAccessObject implements NoteDataAccessInterface, Database{
     private MongoClient mongoClient;
     private MongoDatabase mongoDatabase;
 
-    // NoteDataAccessObject database name
     private final String databaseName = "CSC207CourseProject";
     final String password = "wHobkrGFVf089B3d";
 
-    // NoteDataAccessObject connection string (replace with your NoteDataAccessObject URI)
     final String connectionString = "mongodb+srv://mintunxd:" + password + "@csc207courseproject.w8yhgiq.mongodb.net/?retryWrites=true&w=majority";
 
     // Codec for MongoDB
@@ -31,10 +29,8 @@ public class NoteDataAccessObject implements NoteDataAccessInterface, Database{
 
 
     public void connect() {
-        // Create a MongoClient with the given connection string
         mongoClient = MongoClients.create(connectionString);
 
-        // Get the database instance
         mongoDatabase = mongoClient.getDatabase(databaseName).withCodecRegistry(pojoCodecRegistry);
     }
 
@@ -65,7 +61,7 @@ public class NoteDataAccessObject implements NoteDataAccessInterface, Database{
         FindIterable<Note> notes = mongoDatabase.getCollection("notes", Note.class).find();
 
         for (Note note : notes) {
-            resultList.add(note.toJson()); // Convert retrieved data to the desired format
+            resultList.add(note.toJson());
         }
 
         return resultList;
