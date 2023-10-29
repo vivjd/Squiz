@@ -9,8 +9,5 @@
         <module name="CSC207COURSEPROJECT" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="CSC207CourseProject" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,4 +1,4 @@
-package interface_adapter;
+package interface_adapter.note;
 
 import data_access.NoteDataAccessObject;
 import entity.Note;
