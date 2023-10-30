@@ -1,7 +1,8 @@
 package interface_adapter.note;
 
 import data_access.NoteDataAccessObject;
-import entity.Note;
+import use_case.note.NoteInputBoundary;
+import use_case.note.NoteInputData;
 
 public class NoteController {
 
@@ -9,9 +10,8 @@ public class NoteController {
     public NoteController(NoteInputBoundary noteUseCaseInteractor) {
         this.noteUseCaseInteractor = noteUseCaseInteractor;
     }
-    public void execute(String title, Note inputText) {
-        NoteInputData noteInputData = new NoteInputData(
-                title, inputText);
-        NoteUseCaseInteractor.execute(loginInputData);
+    public void execute(String title, String inputText) {
+        NoteInputData noteInputData = new NoteInputData(title, inputText);
+        this.noteUseCaseInteractor.execute(noteInputData);
     }
 }

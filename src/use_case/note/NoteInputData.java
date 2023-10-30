@@ -4,14 +4,14 @@ import entity.Note;
 
 public class NoteInputData {
     private String title;
-    private Note inputText;
+    private String inputText;
 
-    public NoteInputData(String title, Note inputText) {
+    public NoteInputData(String title, String inputText) {
         this.title = title;
         this.inputText = inputText;
     }
 
-    public void setInputText(Note inputText) {
+    public void setInputText(String inputText) {
         this.inputText = inputText;
     }
 
@@ -23,7 +23,7 @@ public class NoteInputData {
         return this.title;
     }
 
-    public Note getInputText() {
+    public String getInputText() {
         return this.inputText;
     }
 }
