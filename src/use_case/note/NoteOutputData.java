@@ -3,13 +3,13 @@ package use_case.note;
 public class NoteOutputData {
 
     private final String title;
-    private Note note;
+    private String inputText;
 
     private boolean useCaseFailed;
 
-    public SignupOutputData(String title, Note note, boolean useCaseFailed) {
+    public NoteOutputData(String title, String inputText, boolean useCaseFailed) {
         this.title = title;
-        this.note = note;
+        this.inputText = inputText;
         this.useCaseFailed = useCaseFailed;
     }
 
@@ -17,11 +17,8 @@ public class NoteOutputData {
         return this.title;
     }
 
-    public String getNote() {
-        return this.note;
+    public String getInputText() {
+        return this.inputText;
     }
-
-    public void setNote(Note newNote) {
-        this.note = newNote;
-    }
+    public void setInputText(String inputText){this.inputText = inputText;}
 }
