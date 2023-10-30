@@ -1,7 +1,6 @@
 package entity;
 
 import com.google.gson.Gson;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import use_case.quiz.Generator;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.types.ObjectId;
