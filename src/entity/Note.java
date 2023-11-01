@@ -1,6 +1,8 @@
 package entity;
 
 import com.google.gson.Gson;
+import org.bson.codecs.pojo.annotations.BsonCreator;
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import use_case.quiz.Generator;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.types.ObjectId;
@@ -10,10 +12,14 @@ public class Note {
     private ObjectId id;
     private String title;
     private String userPrompt;
-    private Generator quizGenerator;
 
-    public Note(Generator quizGenerator) {
-        this.quizGenerator = quizGenerator;
+
+    public Note() {}
+
+    @BsonCreator
+    public Note(@BsonProperty("title") String title, @BsonProperty("userPrompt") String userPrompt) {
+        this.title = title;
+        this.userPrompt = userPrompt;
     }
 
     public ObjectId getId() {
@@ -47,9 +53,4 @@ public class Note {
         // Use Gson to convert the Note object to JSON.
         return gson.toJson(this);
     }
-
-    public Quiz createQuiz() {
-        return quizGenerator.createQuiz(userPrompt);
-    }
-
 }
