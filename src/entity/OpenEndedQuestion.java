@@ -1,6 +1,11 @@
 package entity;
 class OpenEndedQuestion extends Question {
     private String answer;
+
+    public OpenEndedQuestion(){
+
+    }
+
     public void setQuesion(String answer){
         this.setQuesion(answer);
     }
