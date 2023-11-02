@@ -33,9 +33,6 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         this.noteViewModel = noteViewModel;
         noteViewModel.addPropertyChangeListener(this);
 
-        JLabel title = new JLabel(NoteViewModel.TITLE_LABEL);
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-
         userInputNote.setColumns(50);
         userInputNote.setLineWrap(true);
         userInputNote.setRows(20);
@@ -43,6 +40,8 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                 new JLabel(NoteViewModel.NOTE_LABEL), userInputNote);
         LabelTextPanel titleInfo = new LabelTextPanel(
                 new JLabel(NoteViewModel.TITLE_LABEL), userInputTitle);
+
+        JScrollPane scrollbar = new JScrollPane(userInputNote,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 
         JPanel buttons = new JPanel();
@@ -90,7 +89,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                 }
         );
 
-        titleInfo.addKeyListener(
+        userInputTitle.addKeyListener(
                 new KeyListener() {
 
                     @Override
@@ -111,9 +110,9 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                 }
         );
 
-        this.add(title);
         this.add(titleInfo);
         this.add(noteInfo);
+        this.add(scrollbar);
         this.add(buttons);
 
     }
