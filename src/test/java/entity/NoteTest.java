@@ -1,14 +1,20 @@
 package entity;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import java.time.LocalDateTime;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class NoteTest {
 
-    @org.junit.jupiter.api.BeforeEach
+    @BeforeEach
     void setUp() {
+        note = new Note();
+        note.set
     }
 
-    @org.junit.jupiter.api.AfterEach
-    void tearDown() {
-    }
+//    @AfterEach
+//    void tearDown() {
+//    }
 }
