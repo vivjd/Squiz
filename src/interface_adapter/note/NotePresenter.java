@@ -1,7 +1,6 @@
 package interface_adapter.note;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.ViewModel;
 import interface_adapter.note.NoteViewModel;
 import use_case.note.NoteOutputData;
 import use_case.note.NoteOutputBoundary;
