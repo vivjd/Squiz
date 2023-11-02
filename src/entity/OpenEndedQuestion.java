@@ -12,10 +12,10 @@ class OpenEndedQuestion extends Question {
     public String getQuesion(){
         this.getQuesion();
     }
-    public String getAnswer() {
+    public String getCorrectAnswer() {
         return answer;
     }
-    public void setAnswer(String answer) {
+    public void setCorrectAnswer(String answer) {
         this.answer = answer;
     }
 }

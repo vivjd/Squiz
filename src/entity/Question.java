@@ -8,6 +8,6 @@ public abstract class Question {
     public void displayAnswer(){}
     public void setQuestion(){}
     public String getQuesiton(){}
-    public void setAnswer(){}
-    public String getAnswer(){}
+    public void setCorrectAnswer(){}
+    public String getCorrectAnswer(){}
 }
