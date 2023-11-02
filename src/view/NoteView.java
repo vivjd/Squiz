@@ -17,7 +17,9 @@ import java.beans.PropertyChangeListener;
 public class NoteView extends JPanel implements ActionListener, PropertyChangeListener{
     public final String viewName = "note";
 
-    private final JTextField userInputNote = new JTextField("enter your notes here");
+    private final JTextArea userInputNote = new JTextArea("enter your notes here");
+    private final JTextField userInputTitle = new JTextField("enter title here", 30);
+
     private final JButton save;
     private final JButton edit;
     private final JButton generate_quiz;
@@ -34,9 +36,14 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         JLabel title = new JLabel(NoteViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        userInputNote.setColumns(50);
+        userInputNote.setLineWrap(true);
+        userInputNote.setRows(20);
         LabelTextPanel noteInfo = new LabelTextPanel(
                 new JLabel(NoteViewModel.NOTE_LABEL), userInputNote);
-        userInputNote.setSize(50,50);
+        LabelTextPanel titleInfo = new LabelTextPanel(
+                new JLabel(NoteViewModel.TITLE_LABEL), userInputTitle);
+
 
         JPanel buttons = new JPanel();
         edit = new JButton(NoteViewModel.EDIT_LABEL);
@@ -83,7 +90,29 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                 }
         );
 
+        titleInfo.addKeyListener(
+                new KeyListener() {
+
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        NoteState currentState = noteViewModel.getState();
+                        String text = userInputTitle.getText() + e.getKeyChar();
+                        currentState.setTitle(text);
+                        noteViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+                    }
+                }
+        );
+
         this.add(title);
+        this.add(titleInfo);
         this.add(noteInfo);
         this.add(buttons);
 
