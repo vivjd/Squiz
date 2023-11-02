@@ -1,20 +1,29 @@
 package entity;
 
 import com.google.gson.Gson;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
+import org.bson.codecs.pojo.annotations.BsonCreator;
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import use_case.quiz.Generator;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.types.ObjectId;
 
+/**
+ * The Note class represents a note that can be used to create quizzes.
+ * It contains information about the note, including its title, user prompt, and an associated quiz generator.
+ */
 public class Note {
     @BsonId
     private ObjectId id;
     private String title;
     private String userPrompt;
-    private Generator quizGenerator;
 
-    public Note(Generator quizGenerator) {
-        this.quizGenerator = quizGenerator;
+    public Note() {}
+
+    @BsonCreator
+    public Note(@BsonProperty("title") String title, @BsonProperty("userPrompt") String userPrompt) {
+        this.title = title;
+        this.userPrompt = userPrompt;
+
     }
 
     public ObjectId getId() {
@@ -47,10 +56,6 @@ public class Note {
 
         // Use Gson to convert the Note object to JSON.
         return gson.toJson(this);
-    }
-
-    public Quiz createQuiz() {
-        return quizGenerator.createQuiz(userPrompt);
     }
 
 }
