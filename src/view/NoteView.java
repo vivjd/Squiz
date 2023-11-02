@@ -83,6 +83,10 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                 }
         );
 
+        this.add(title);
+        this.add(noteInfo);
+        this.add(buttons);
+
     }
 
     private void showSavedPopup(){
