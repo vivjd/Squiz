@@ -7,12 +7,15 @@ import use_case.quiz.Generator;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.types.ObjectId;
 
+/**
+ * The Note class represents a note that can be used to create quizzes.
+ * It contains information about the note, including its title, user prompt, and an associated quiz generator.
+ */
 public class Note {
     @BsonId
     private ObjectId id;
     private String title;
     private String userPrompt;
-
 
     public Note() {}
 
@@ -20,6 +23,7 @@ public class Note {
     public Note(@BsonProperty("title") String title, @BsonProperty("userPrompt") String userPrompt) {
         this.title = title;
         this.userPrompt = userPrompt;
+
     }
 
     public ObjectId getId() {
@@ -53,4 +57,5 @@ public class Note {
         // Use Gson to convert the Note object to JSON.
         return gson.toJson(this);
     }
+
 }
