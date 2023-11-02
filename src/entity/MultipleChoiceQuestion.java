@@ -3,7 +3,7 @@ class MultipleChoiceQuestion extends Question {
     private Map<int, String> answerOptions = new HashMap<>();
     private int correctAnswer;
 
-    public OpenEndedQuestion(){}
+    public MultipleChoiceQuestion(){}
 
     public void setQuesion(String answer){
         this.setQuesion(answer);
