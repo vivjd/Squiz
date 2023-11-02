@@ -20,7 +20,6 @@ public class NotePresenter implements NoteOutputBoundary{
         NoteState noteState = noteViewModel.getState();
         noteState.setNote(user.getInputText());
         noteState.setTitle(user.getTitle());
-        //TODO: next panel? check to see which state goes to next
     }
 
     @Override
