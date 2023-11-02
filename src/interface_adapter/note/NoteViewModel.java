@@ -13,6 +13,8 @@ public class NoteViewModel extends ViewModel {
     public static final String EDIT_LABEL = "Edit Quiz";
     public static final String TITLE_LABEL = "Note Page";
 
+    public static final String NOTE_LABEL = "Note";
+
     private NoteState state = new NoteState();
 
     public NoteViewModel(){super("note");}

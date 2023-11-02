@@ -1,6 +1,5 @@
 package use_case.note;
 
-import data_access.NoteDataAccessObject;
 import entity.Note;
 
 /**
@@ -8,7 +7,7 @@ import entity.Note;
  * The NotePresenter is invoked and the NoteOutputData object is passed in.
  */
 public class NoteInteractor implements NoteInputBoundary {
-    final NoteDataAccessObject noteDataAccessObject;
+    final NoteDataAccessInterface noteDataAccessObject;
     final NoteOutputBoundary notePresenter;
 
     /**
@@ -16,7 +15,7 @@ public class NoteInteractor implements NoteInputBoundary {
      * @param noteDataAccessObject the DAO for notes to access the Note entity.
      * @param noteOutputBoundary the output data for notes.
      */
-    public NoteInteractor(NoteDataAccessObject noteDataAccessObject, NoteOutputBoundary noteOutputBoundary) {
+    public NoteInteractor(NoteDataAccessInterface noteDataAccessObject, NoteOutputBoundary noteOutputBoundary) {
         this.noteDataAccessObject = noteDataAccessObject;
         this.notePresenter = noteOutputBoundary;
     }
