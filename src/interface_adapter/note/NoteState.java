@@ -1,7 +1,5 @@
 package interface_adapter.note;
 
-import entity.Note;
-
 public class NoteState {
     private String title = "";
     private String note = "";
