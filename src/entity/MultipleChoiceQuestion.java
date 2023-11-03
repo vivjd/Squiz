@@ -1,31 +1,33 @@
 package entity;
+import java.util.HashMap;
+
 class MultipleChoiceQuestion extends Question {
-    private Map<int, String> answerOptions = new HashMap<>();
-    private int correctAnswer;
+    private HashMap<Integer, String> answerOptions = new HashMap<>();
+    private String correctAnswer;
     private String question;
 
-    public MultipleChoiceQuestion(String question, Map<int, String> answerOptions, int correctAnswer){
+    public MultipleChoiceQuestion(String question, HashMap<Integer, String> answerOptions, String correctAnswer){
         this.question = question;
         this.answerOptions = answerOptions;
         this.correctAnswer = correctAnswer;
     }
 
-    public void setQuesion(String question){
-        this.question = question;
-    }
-    public String getQuesion(){
+    public String getQuestion(){
         return this.question;
     }
-    public String getAnswerOptions() {
+    public void setQuestion(String question){
+        this.question = question;
+    }
+    public HashMap<Integer, String> getAnswerOptions() {
         return answerOptions;
     }
-    public void setAnswerOptions(Map<int, String> ansOps) {
+    public void setAnswerOptions(HashMap<Integer, String> ansOps) {
         this.answerOptions = ansOps;
     }
     public String getCorrectAnswer() {
         return correctAnswer;
     }
-    public void setCorrectAnswer(int ans) {
+    public void setCorrectAnswer(String ans) {
         this.correctAnswer = ans;
     }
 }
