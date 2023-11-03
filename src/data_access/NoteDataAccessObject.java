@@ -18,7 +18,7 @@ import static com.mongodb.MongoClientSettings.getDefaultCodecRegistry;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-public class NoteDataAccessObject implements NoteDataAccessInterface, Database{
+public class NoteDataAccessObject implements NoteDataAccessInterface, Database {
     private MongoClient mongoClient;
     private MongoDatabase mongoDatabase;
 
@@ -77,8 +77,15 @@ public class NoteDataAccessObject implements NoteDataAccessInterface, Database{
 
         this.connect();
         FindOneAndDeleteOptions options = new FindOneAndDeleteOptions().projection(Document.parse("{_id: 1}"));
-        mongoDatabase.getCollection("notes", Note.class).findOneAndDelete(Filters.eq("_id", objectId), options);
+        Note deletedDocument = mongoDatabase
+                .getCollection("notes", Note.class)
+                .findOneAndDelete(Filters.eq("_id", objectId), options);
         this.disconnect();
+        if (deletedDocument != null) {
+            return;
+        } else {
+            throw new RuntimeException("note with objectId " + objectId + " note found");
+        }
 
 
     }

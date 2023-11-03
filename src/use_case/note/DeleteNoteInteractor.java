@@ -3,17 +3,21 @@ package use_case.note;
 public class DeleteNoteInteractor implements DeleteNoteInputBoundary {
 
     final NoteDataAccessInterface noteDataAccessObject;
-    final SaveNoteOutputBoundary saveNoteOutputBoundary;
+    final DeleteNoteOutputBoundary deleteNoteOutputBoundary;
 
     public DeleteNoteInteractor(NoteDataAccessInterface noteDataAccessObject,
-                                SaveNoteOutputBoundary saveNoteOutputBoundary) {
+                                DeleteNoteOutputBoundary deleteNoteOutputBoundary) {
         this.noteDataAccessObject = noteDataAccessObject;
-        this.saveNoteOutputBoundary = saveNoteOutputBoundary;
+        this.deleteNoteOutputBoundary = deleteNoteOutputBoundary;
     }
 
 
     @Override
     public void execute(DeleteNoteInputData deleteNoteInputData) {
-        noteDataAccessObject.deleteNote(deleteNoteInputData.getObjectId());
+        try {
+            noteDataAccessObject.deleteNote(deleteNoteInputData.getObjectId());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
