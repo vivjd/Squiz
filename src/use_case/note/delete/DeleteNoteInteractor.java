@@ -1,4 +1,6 @@
-package use_case.note;
+package use_case.note.delete;
+
+import use_case.note.NoteDataAccessInterface;
 
 public class DeleteNoteInteractor implements DeleteNoteInputBoundary {
 

@@ -1,8 +1,8 @@
 package interface_adapter.note;
 
 import org.bson.types.ObjectId;
-import use_case.note.DeleteNoteInputBoundary;
-import use_case.note.DeleteNoteInputData;
+import use_case.note.delete.DeleteNoteInputBoundary;
+import use_case.note.delete.DeleteNoteInputData;
 
 public class DeleteNoteController {
 

@@ -5,9 +5,9 @@ import interface_adapter.note.SaveNoteController;
 import interface_adapter.note.SaveSaveNotePresenter;
 import interface_adapter.note.NoteViewModel;
 import use_case.note.NoteDataAccessInterface;
-import use_case.note.SaveNoteInputBoundary;
-import use_case.note.SaveNoteInteractor;
-import use_case.note.SaveNoteOutputBoundary;
+import use_case.note.save.SaveNoteInputBoundary;
+import use_case.note.save.SaveNoteInteractor;
+import use_case.note.save.SaveNoteOutputBoundary;
 import view.NoteView;
 
 public class NoteUseCaseFactory {
