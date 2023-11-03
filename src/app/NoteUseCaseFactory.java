@@ -2,12 +2,12 @@ package app;
 
 import interface_adapter.ViewManagerModel;
 import interface_adapter.note.SaveNoteController;
-import interface_adapter.note.SaveNotePresenter;
+import interface_adapter.note.SaveSaveNotePresenter;
 import interface_adapter.note.NoteViewModel;
 import use_case.note.NoteDataAccessInterface;
 import use_case.note.SaveNoteInputBoundary;
 import use_case.note.SaveNoteInteractor;
-import use_case.note.NoteOutputBoundary;
+import use_case.note.SaveNoteOutputBoundary;
 import view.NoteView;
 
 public class NoteUseCaseFactory {
@@ -27,8 +27,8 @@ public class NoteUseCaseFactory {
             NoteViewModel noteViewModel,
             NoteDataAccessInterface noteDataAccessObject) {
 
-        NoteOutputBoundary noteOutputBoundary = new SaveNotePresenter(noteViewModel, viewManagerModel);
-        SaveNoteInputBoundary noteInteractor = new SaveNoteInteractor(noteDataAccessObject, noteOutputBoundary);
+        SaveNoteOutputBoundary saveNoteOutputBoundary = new SaveSaveNotePresenter(noteViewModel, viewManagerModel);
+        SaveNoteInputBoundary noteInteractor = new SaveNoteInteractor(noteDataAccessObject, saveNoteOutputBoundary);
 
         return new SaveNoteController(noteInteractor);
     }

@@ -8,16 +8,16 @@ import entity.Note;
  */
 public class SaveNoteInteractor implements SaveNoteInputBoundary {
     final NoteDataAccessInterface noteDataAccessObject;
-    final NoteOutputBoundary notePresenter;
+    final SaveNoteOutputBoundary notePresenter;
 
     /**
      *
      * @param noteDataAccessObject the DAO for notes to access the Note entity.
-     * @param noteOutputBoundary the output data for notes.
+     * @param saveNoteOutputBoundary the output data for notes.
      */
-    public SaveNoteInteractor(NoteDataAccessInterface noteDataAccessObject, NoteOutputBoundary noteOutputBoundary) {
+    public SaveNoteInteractor(NoteDataAccessInterface noteDataAccessObject, SaveNoteOutputBoundary saveNoteOutputBoundary) {
         this.noteDataAccessObject = noteDataAccessObject;
-        this.notePresenter = noteOutputBoundary;
+        this.notePresenter = saveNoteOutputBoundary;
     }
 
     /**
