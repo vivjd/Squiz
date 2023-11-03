@@ -1,11 +1,9 @@
 package use_case.note;
 
-import entity.Note;
-
 /**
  * This extracts the inputted data by the user.
  */
-public class NoteInputData {
+public class SaveNoteInputData {
     private String title;
     private String inputText;
 
@@ -14,7 +12,7 @@ public class NoteInputData {
      * @param title the title of the note as inputted by the user
      * @param inputText the body of the note
      */
-    public NoteInputData(String title, String inputText) {
+    public SaveNoteInputData(String title, String inputText) {
         this.title = title;
         this.inputText = inputText;
     }

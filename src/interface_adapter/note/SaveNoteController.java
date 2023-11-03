@@ -1,17 +1,17 @@
 package interface_adapter.note;
 
-import use_case.note.NoteInputBoundary;
-import use_case.note.NoteInputData;
+import use_case.note.SaveNoteInputBoundary;
+import use_case.note.SaveNoteInputData;
 
-public class NoteController {
+public class SaveNoteController {
 
-    final NoteInputBoundary noteUseCaseInteractor;
+    final SaveNoteInputBoundary noteUseCaseInteractor;
 
     /**
      * This constructor creates a NoteController object.
      * @param noteUseCaseInteractor the interactor of the current Note usecase.
      */
-    public NoteController(NoteInputBoundary noteUseCaseInteractor) {
+    public SaveNoteController(SaveNoteInputBoundary noteUseCaseInteractor) {
         this.noteUseCaseInteractor = noteUseCaseInteractor;
     }
 
@@ -21,7 +21,7 @@ public class NoteController {
      * @param inputText the body of the note
      */
     public void execute(String title, String inputText) {
-        NoteInputData noteInputData = new NoteInputData(title, inputText);
-        this.noteUseCaseInteractor.execute(noteInputData);
+        SaveNoteInputData saveNoteInputData = new SaveNoteInputData(title, inputText);
+        this.noteUseCaseInteractor.execute(saveNoteInputData);
     }
 }
