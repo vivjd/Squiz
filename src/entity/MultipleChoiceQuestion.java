@@ -15,6 +15,17 @@ class MultipleChoiceQuestion extends Question {
     public String getQuestion(){
         return this.question;
     }
+
+    @Override
+    public void setCorrectAnswer(String answer) {
+        this.correctAnswer = answer;
+    }
+
+    @Override
+    public void displayAnswer() {
+        this.answerDisplayed = true;
+    }
+
     public void setQuestion(String question){
         this.question = question;
     }
@@ -26,8 +37,5 @@ class MultipleChoiceQuestion extends Question {
     }
     public String getCorrectAnswer() {
         return correctAnswer;
-    }
-    public void setCorrectAnswer(String ans) {
-        this.correctAnswer = ans;
     }
 }

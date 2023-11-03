@@ -8,6 +8,11 @@ class OpenEndedQuestion extends Question {
         this.answer = answer;
     }
 
+    @Override
+    public void displayAnswer() {
+        this.answerDisplayed = true;
+    }
+
     public void setQuestion(String question){
         this.question = question;
     }
