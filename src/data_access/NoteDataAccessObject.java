@@ -1,7 +1,11 @@
 package data_access;
 
 import com.mongodb.client.*;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.FindOneAndDeleteOptions;
 import entity.Note;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 import use_case.note.NoteDataAccessInterface;
 import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -63,7 +67,19 @@ public class NoteDataAccessObject implements NoteDataAccessInterface, Database{
         for (Note note : notes) {
             resultList.add(note.toJson());
         }
+        this.disconnect();
 
         return resultList;
+    }
+
+    @Override
+    public void deleteNote(ObjectId objectId) {
+
+        this.connect();
+        FindOneAndDeleteOptions options = new FindOneAndDeleteOptions().projection(Document.parse("{_id: 1}"));
+        mongoDatabase.getCollection("notes", Note.class).findOneAndDelete(Filters.eq("_id", objectId), options);
+        this.disconnect();
+
+
     }
 }
