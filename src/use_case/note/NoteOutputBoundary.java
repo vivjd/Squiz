@@ -1,6 +1,6 @@
 package use_case.note;
 
 public interface NoteOutputBoundary {
-    void prepareSuccessView(NoteOutputData user);
+    void prepareSuccessView(SaveNoteOutputData user);
     void prepareFailView(String error);
 }

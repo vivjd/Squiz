@@ -1,21 +1,20 @@
 package interface_adapter.note;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.note.NoteViewModel;
-import use_case.note.NoteOutputData;
+import use_case.note.SaveNoteOutputData;
 import use_case.note.NoteOutputBoundary;
 
-public class NotePresenter implements NoteOutputBoundary{
+public class SaveNotePresenter implements NoteOutputBoundary{
     private final NoteViewModel noteViewModel;
     private ViewManagerModel viewManagerModel;
 
-    public NotePresenter(NoteViewModel noteViewModel, ViewManagerModel viewManagerModel) {
+    public SaveNotePresenter(NoteViewModel noteViewModel, ViewManagerModel viewManagerModel) {
         this.noteViewModel = noteViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
     @Override
-    public void prepareSuccessView(NoteOutputData user) {
+    public void prepareSuccessView(SaveNoteOutputData user) {
         NoteState noteState = noteViewModel.getState();
         noteState.setNote(user.getInputText());
         noteState.setTitle(user.getTitle());

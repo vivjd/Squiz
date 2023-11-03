@@ -1,12 +1,11 @@
 package view;
 
 
-import interface_adapter.note.NoteController;
+import interface_adapter.note.SaveNoteController;
 import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -25,11 +24,11 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     private final JButton generate_quiz;
 
 
-    private final NoteController noteController;
+    private final SaveNoteController saveNoteController;
     private final NoteViewModel noteViewModel;
 
-    public NoteView(NoteController noteController, NoteViewModel noteViewModel) {
-        this.noteController = noteController;
+    public NoteView(SaveNoteController saveNoteController, NoteViewModel noteViewModel) {
+        this.saveNoteController = saveNoteController;
         this.noteViewModel = noteViewModel;
         noteViewModel.addPropertyChangeListener(this);
 
@@ -59,7 +58,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                         if (e.getSource().equals(save)) {
                             NoteState currentState = noteViewModel.getState();
 
-                            noteController.execute(
+                            saveNoteController.execute(
                                     currentState.getTitle(),
                                     currentState.getNote());
                             showSavedPopup();
