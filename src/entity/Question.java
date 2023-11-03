@@ -6,13 +6,10 @@ public abstract class Question {
     String question;
     String correctAnswer;
 
-    public void displayAnswer(){}
-    public void setQuestion(String question){}
-    public String getQuestion(){
-        return this.question;
-    }
-    public void setCorrectAnswer(){}
-    public String getCorrectAnswer(){
-        return this.correctAnswer;
-    }
+
+    public abstract void displayAnswer();
+    public abstract void setQuestion(String question);
+    public abstract String getQuestion();
+    public abstract void setCorrectAnswer(String ans);
+    public abstract String getCorrectAnswer();
 }
