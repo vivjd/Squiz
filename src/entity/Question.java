@@ -4,10 +4,12 @@ public abstract class Question {
 
     boolean answerDisplayed = false;
     String question;
+    String correctAnswer;
 
-    public void displayAnswer(){}
-    public void setQuestion(){}
-    public String getQuesiton(){}
-    public void setCorrectAnswer(){}
-    public String getCorrectAnswer(){}
+
+    public abstract void displayAnswer();
+    public abstract void setQuestion(String question);
+    public abstract String getQuestion();
+    public abstract void setCorrectAnswer(String ans);
+    public abstract String getCorrectAnswer();
 }
