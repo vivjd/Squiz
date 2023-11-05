@@ -15,8 +15,8 @@ class OpenEndedQuestionTest {
 
     @Test
     void displayAnswerTest() {
-//        sampleQuestion.displayAnswer();
-//        assertTrue(sampleQuestion.isAnswerDisplayed());
+        sampleQuestion.displayAnswer();
+        assertTrue(sampleQuestion.answerDisplayed);
     }
 
     @Test
