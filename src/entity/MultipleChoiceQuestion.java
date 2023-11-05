@@ -29,10 +29,10 @@ class MultipleChoiceQuestion extends Question {
     public void setAnswerOptions(HashMap<Integer, String> ansOps) {
         this.answerOptions = ansOps;
     }
-    public int getCorrectAnswer() {
+    public int getCorrectAnswerIndex() {
         return correctAnswerIndex;
     }
-    public void setCorrectAnswer(int correctAnswer){
+    public void setCorrectAnswerIndex(int correctAnswer){
         this.correctAnswerIndex = correctAnswer;
     }
 }
