@@ -3,22 +3,16 @@ import java.util.HashMap;
 
 class MultipleChoiceQuestion extends Question {
     private HashMap<Integer, String> answerOptions = new HashMap<>();
-    private String correctAnswer;
+    private int correctAnswer;
     private String question;
 
-    public MultipleChoiceQuestion(String question, HashMap<Integer, String> answerOptions, String correctAnswer){
+    public MultipleChoiceQuestion(String question, HashMap<Integer, String> answerOptions, int correctAnswer){
         this.question = question;
         this.answerOptions = answerOptions;
         this.correctAnswer = correctAnswer;
     }
-
     public String getQuestion(){
         return this.question;
-    }
-
-    @Override
-    public void setCorrectAnswer(String answer) {
-        this.correctAnswer = answer;
     }
 
     @Override
@@ -35,7 +29,10 @@ class MultipleChoiceQuestion extends Question {
     public void setAnswerOptions(HashMap<Integer, String> ansOps) {
         this.answerOptions = ansOps;
     }
-    public String getCorrectAnswer() {
+    public int getCorrectAnswer() {
         return correctAnswer;
+    }
+    public void setCorrectAnswer(int correctAnswer){
+        this.correctAnswer = correctAnswer;
     }
 }
