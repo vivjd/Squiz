@@ -1,5 +1,7 @@
 package entity;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 public class Quiz {
@@ -22,4 +24,11 @@ public class Quiz {
         this.questions = questions;
     }
 
+    public String toJson() {
+        // Create a Gson instance.
+        Gson gson = new Gson();
+
+        // Use Gson to convert the Quiz object to JSON.
+        return gson.toJson(this);
+    }
 }
