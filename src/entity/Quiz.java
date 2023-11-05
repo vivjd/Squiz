@@ -1,14 +1,34 @@
 package entity;
 
+import com.google.gson.Gson;
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.types.ObjectId;
+
 import java.util.List;
 
 public class Quiz {
-
+    @BsonId
+    private ObjectId id;
+    private String title;
     List<Question> questions;
     int quizLength = 0;
     int numCorrect = 0;
 
-    public Quiz(){
+    public Quiz(@BsonProperty("title") String title){
+        this.title = title;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public int getQuizLength() {
@@ -22,4 +42,11 @@ public class Quiz {
         this.questions = questions;
     }
 
+    public String toJson() {
+        // Create a Gson instance.
+        Gson gson = new Gson();
+
+        // Use Gson to convert the Quiz object to JSON.
+        return gson.toJson(this);
+    }
 }
