@@ -9,7 +9,9 @@ public abstract class Question {
 
     public abstract void displayAnswer();
     public abstract void setQuestion(String question);
-    public abstract String getQuestion();
+    public abstract String getQuestion();g
+
     public abstract void setCorrectAnswer(String ans);
     public abstract String getCorrectAnswer();
+
 }
