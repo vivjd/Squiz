@@ -1,16 +1,14 @@
 package app;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.note.NoteController;
-import interface_adapter.note.NotePresenter;
+import interface_adapter.note.SaveNoteController;
+import interface_adapter.note.SaveSaveNotePresenter;
 import interface_adapter.note.NoteViewModel;
 import use_case.note.NoteDataAccessInterface;
-import use_case.note.NoteInputBoundary;
-import use_case.note.NoteInteractor;
-import use_case.note.NoteOutputBoundary;
+import use_case.note.SaveNoteInputBoundary;
+import use_case.note.SaveNoteInteractor;
+import use_case.note.SaveNoteOutputBoundary;
 import view.NoteView;
-
-import javax.swing.*;
 
 public class NoteUseCaseFactory {
     private NoteUseCaseFactory() {}
@@ -20,19 +18,19 @@ public class NoteUseCaseFactory {
             NoteViewModel noteViewModel,
             NoteDataAccessInterface noteDataAccessObject) {
 
-        NoteController noteController = createNoteUseCase(viewManagerModel, noteViewModel, noteDataAccessObject);
-        return new NoteView(noteController, noteViewModel);
+        SaveNoteController saveNoteController = createNoteUseCase(viewManagerModel, noteViewModel, noteDataAccessObject);
+        return new NoteView(saveNoteController, noteViewModel);
     }
 
-    private static NoteController createNoteUseCase(
+    private static SaveNoteController createNoteUseCase(
             ViewManagerModel viewManagerModel,
             NoteViewModel noteViewModel,
             NoteDataAccessInterface noteDataAccessObject) {
 
-        NoteOutputBoundary noteOutputBoundary = new NotePresenter(noteViewModel, viewManagerModel);
-        NoteInputBoundary noteInteractor = new NoteInteractor(noteDataAccessObject, noteOutputBoundary);
+        SaveNoteOutputBoundary saveNoteOutputBoundary = new SaveSaveNotePresenter(noteViewModel, viewManagerModel);
+        SaveNoteInputBoundary noteInteractor = new SaveNoteInteractor(noteDataAccessObject, saveNoteOutputBoundary);
 
-        return new NoteController(noteInteractor);
+        return new SaveNoteController(noteInteractor);
     }
 
 }

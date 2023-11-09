@@ -5,7 +5,7 @@ package use_case.note;
  * It contains information about the note's title and associated input text, as well as a flag
  * indicating whether the save notes operation failed.
  */
-public class NoteOutputData {
+public class SaveNoteOutputData {
     private final String title;
     private String inputText;
 
@@ -18,7 +18,7 @@ public class NoteOutputData {
      * @param inputText The input text associated with the note.
      * @param useCaseFailed A boolean indicating whether the save notes use case failed.
      */
-    public NoteOutputData(String title, String inputText, boolean useCaseFailed) {
+    public SaveNoteOutputData(String title, String inputText, boolean useCaseFailed) {
         this.title = title;
         this.inputText = inputText;
         this.useCaseFailed = useCaseFailed;

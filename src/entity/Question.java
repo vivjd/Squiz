@@ -2,9 +2,12 @@ package entity;
 
 public abstract class Question {
 
-    boolean answerDisplayed;
+    boolean answerDisplayed = false;
     String question;
-    String answer;
 
+
+    public abstract void displayAnswer();
+    public abstract void setQuestion(String question);
+    public abstract String getQuestion();
 
 }
