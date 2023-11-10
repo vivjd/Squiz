@@ -15,6 +15,7 @@ import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
+    public static final int COLUMN_NUM = 3;
     private MongoClient mongoClient;
     private MongoDatabase mongoDatabase;
 
@@ -55,7 +56,44 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
     }
 
     @Override
-    public List<String> getAllQuizzes() {
+    public List<Quiz> getAllQuizzes() {
+        List<Quiz> resultList = new ArrayList<>();
+
+        this.connect();
+
+        FindIterable<Quiz> quizzes = mongoDatabase.getCollection("quizzes", Quiz.class).find();
+
+        for (Quiz quiz : quizzes) {
+            resultList.add(quiz);
+        }
+
+        return resultList;
+    }
+
+    @Override
+    public String[][] getAllQuizzesTable(){
+        List<Quiz> resultList = new ArrayList<>();
+
+        this.connect();
+
+        FindIterable<Quiz> quizzes = mongoDatabase.getCollection("quizzes", Quiz.class).find();
+
+        for (Quiz quiz : quizzes) {
+            resultList.add(quiz);
+        }
+
+        String[][] outputTableData = new String[resultList.size()][COLUMN_NUM];
+        for (int i = 0; i < resultList.size(); i++) {
+            Quiz currentQuiz = resultList.get(i);
+            outputTableData[i][0] = currentQuiz.getTitle();
+            outputTableData[i][1] = Integer.toString(currentQuiz.getQuizLength());
+            outputTableData[i][2] = currentQuiz.getCreationTime().toString();
+        }
+        return outputTableData;
+    }
+
+    @Override
+    public List<String> getAllQuizTitles() {
         List<String> resultList = new ArrayList<>();
 
         this.connect();
