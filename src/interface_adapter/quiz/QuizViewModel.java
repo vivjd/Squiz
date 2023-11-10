@@ -6,8 +6,7 @@ import java.beans.PropertyChangeSupport;
 
 public class QuizViewModel extends ViewModel {
     public static final String START_LABEL = "Start Quiz";
-//    public static final String EDIT_LABEL = "Edit Quiz";
-//    public static final String TITLE_LABEL = "Quiz";
+    public static final String EDIT_LABEL = "Edit Quiz";
     public static final String QUIZ_LABEL = "Quiz";
 
     public static final String BACK_LABEL = "Back";

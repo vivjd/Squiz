@@ -17,7 +17,7 @@ public class DisplayQuizPresenter implements DisplayQuizOutputBoundary {
     @Override
     public void prepareSuccessView(DisplayQuizOutputData quiz) {
         QuizState quizState = quizViewModel.getState();
-        quizState.setTitle(quiz.getTitle());
+        quizViewModel.firePropertyChanged();
     }
 
     @Override
