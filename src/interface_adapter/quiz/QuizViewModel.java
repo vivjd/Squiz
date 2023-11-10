@@ -10,17 +10,17 @@ public class QuizViewModel extends ViewModel {
     public static final String QUIZ_LABEL = "Quiz";
 
     public static final String BACK_LABEL = "Back";
-    private QuizState state = new QuizState();
+    private DisplayQuizState state = new DisplayQuizState();
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public QuizState getState(){return state;}
+    public DisplayQuizState getState(){return state;}
 
     public QuizViewModel() {
         super("quiz");
     }
 
-    public void setState(QuizState state){
+    public void setState(DisplayQuizState state){
         this.state = state;
     }
 

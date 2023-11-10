@@ -16,13 +16,13 @@ public class DisplayQuizPresenter implements DisplayQuizOutputBoundary {
 
     @Override
     public void prepareSuccessView(DisplayQuizOutputData quiz) {
-        QuizState quizState = quizViewModel.getState();
+        DisplayQuizState quizState = quizViewModel.getState();
         quizViewModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
-        QuizState quizState = quizViewModel.getState();
+        DisplayQuizState quizState = quizViewModel.getState();
         quizState.setEmptyQuizError(error);
         quizViewModel.firePropertyChanged();
     }

@@ -3,7 +3,6 @@ package view;
 import interface_adapter.quiz.DisplayQuizController;
 import interface_adapter.quiz.DisplayQuizState;
 import interface_adapter.quiz.QuizViewModel;
-import interface_adapter.quiz.QuizState;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
