@@ -11,8 +11,7 @@ public class DisplayQuizController {
         this.displayQuizUseCaseInteractor = displayQuizUseCaseInteractor;
     }
 
-    public void execute(String title){
-        DisplayQuizInputData displayQuizInputData = new DisplayQuizInputData(title);
-        this.displayQuizUseCaseInteractor.execute(displayQuizInputData);
+    public void execute(){
+        this.displayQuizUseCaseInteractor.execute();
     }
 }
