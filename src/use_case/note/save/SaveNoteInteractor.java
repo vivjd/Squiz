@@ -1,6 +1,7 @@
-package use_case.note;
+package use_case.note.save;
 
 import entity.Note;
+import use_case.note.NoteDataAccessInterface;
 
 /**
  * The NoteInteractor will execute the save notes interaction using the Note entities, and collects the result in a NoteOutputData object.

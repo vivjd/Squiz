@@ -1,4 +1,4 @@
-package use_case.note;
+package use_case.note.save;
 
 /**
  * The `NoteOutputData` class represents the output data from the Save Notes use case.
