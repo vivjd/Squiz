@@ -18,7 +18,7 @@ public class Quiz {
     @BsonProperty("creationTime")
     private final LocalDateTime creationTime;
 
-    @BsonProperty("numberOfQuestions")
+    @BsonProperty("quizLength")
     int quizLength = 0;
     int numCorrect = 0;
 
