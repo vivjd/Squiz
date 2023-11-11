@@ -28,14 +28,16 @@ public class SaveNoteInteractor implements SaveNoteInputBoundary {
     public void execute(SaveNoteInputData saveNoteInputData) {
         // Assume that the user always enters a valid input or the input is empty?
         String inputNote = saveNoteInputData.getInputText();
-        if (saveNoteInputData.getTitle().isEmpty()) {
+        String inputTitle = saveNoteInputData.getTitle();
+        if (inputTitle.isEmpty()) {
             // Display a message telling the user to input a title
             notePresenter.prepareFailView("Please enter a title for your note.");
-        } else if (saveNoteInputData.getInputText().isEmpty()) {
+        } else if (inputNote.isEmpty()) {
             // Display a message telling the user to input contents for their note
             notePresenter.prepareFailView("Please enter a minimum of 40 words for your " + saveNoteInputData.getTitle() + " note.");
         } else {
-            Note note = noteDataAccessObject.getNote(saveNoteInputData.getTitle());
+            Note note = new Note(inputTitle, inputNote);
+            noteDataAccessObject.saveNote(note);
             SaveNoteOutputData saveNoteOutputData = new SaveNoteOutputData(saveNoteInputData.getTitle(), inputNote, false);
             notePresenter.prepareSuccessView(saveNoteOutputData);
         }
