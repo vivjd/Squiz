@@ -1,7 +1,7 @@
 package entity;
 import java.util.HashMap;
 
-class MultipleChoiceQuestion extends Question {
+public class MultipleChoiceQuestion extends Question {
     private HashMap<Integer, String> answerOptions;
     private int correctAnswerIndex;
     private String question;
