@@ -1,4 +1,4 @@
-package use_case.note;
+package use_case.note.save;
 
 /**
  * This extracts the inputted data by the user.
