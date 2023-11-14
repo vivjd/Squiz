@@ -9,5 +9,9 @@ public interface QuizDataAccessInterface {
 
     Quiz getQuiz(String title);
 
-    List<String> getAllQuizzes();
+    List<Quiz> getAllQuizzes();
+
+    String[][] getAllQuizzesTable();
+
+    List<String> getAllQuizTitles();
 }
