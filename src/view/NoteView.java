@@ -69,7 +69,10 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                             saveNoteController.execute(
                                     currentState.getTitle(),
                                     currentState.getNote());
-                            showSavedPopup();
+
+                            if (currentState.getEmptyNoteError().isEmpty()) {
+                                showSavedPopup();
+                            }
                         }
                     }
                 }
