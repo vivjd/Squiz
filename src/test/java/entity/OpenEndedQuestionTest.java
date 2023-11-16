@@ -16,22 +16,22 @@ class OpenEndedQuestionTest {
     @Test
     void displayAnswerTest() {
         sampleQuestion.displayAnswer();
-        assertTrue(sampleQuestion.answerDisplayed);
+        Assertions.assertTrue(sampleQuestion.answerDisplayed);
     }
 
     @Test
     void getQuestionTest() {
-        assertEquals("What is Clean Architecture?", sampleQuestion.getQuestion());
+        Assertions.assertEquals("What is Clean Architecture?", sampleQuestion.getQuestion());
     }
 
     @Test
     void getCorrectAnswerTest() {
-        assertEquals("Clean Architecture is a software design pattern.", sampleQuestion.getCorrectAnswer());
+        Assertions.assertEquals("Clean Architecture is a software design pattern.", sampleQuestion.getCorrectAnswer());
     }
 
     @Test
     void setCorrectAnswerTest() {
         sampleQuestion.setCorrectAnswer("Software design.");
-        assertEquals("Software design.", sampleQuestion.getCorrectAnswer());
+        Assertions.assertEquals("Software design.", sampleQuestion.getCorrectAnswer());
     }
 }
