@@ -76,6 +76,7 @@ public class QuestionDataAccessObject implements QuestionDataAccessInterface, Da
     }
 
     public boolean isInstanceOfMCQ(String questionName){
+        // TODO: Implementation below assumes that each Question stores as
         Question q = getQuestionByName(questionName);
         return q instanceof MultipleChoiceQuestion;
     }

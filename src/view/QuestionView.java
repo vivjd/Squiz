@@ -35,10 +35,11 @@ public class QuestionView extends JPanel implements PropertyChangeListener {
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(submit)){
                             AnswerQuestionState currentState = questionViewModel.getState();
-
                             answerQuestionController.execute(
                                     currentState.getUserAnswer()
                             );
+                            //TODO: QuestionViewModel may need to be renamed as we have a DisplayQuestion use case.
+                            questionViewModel.setState(currentState);
                         }
                     }
                 }
