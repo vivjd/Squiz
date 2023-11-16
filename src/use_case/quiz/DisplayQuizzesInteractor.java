@@ -4,13 +4,13 @@ import entity.Quiz;
 
 import java.util.List;
 
-public class DisplayQuizInteractor implements DisplayQuizInputBoundary{
+public class DisplayQuizzesInteractor implements DisplayQuizzesInputBoundary {
 //    public static final int COLUMN_NUM = 3;
     final QuizDataAccessInterface quizDataAccessObject;
 
-    final DisplayQuizOutputBoundary quizPresenter;
+    final DisplayQuizzesOutputBoundary quizPresenter;
 
-    public DisplayQuizInteractor(QuizDataAccessInterface quizDataAccessObject, DisplayQuizOutputBoundary quizPresenter) {
+    public DisplayQuizzesInteractor(QuizDataAccessInterface quizDataAccessObject, DisplayQuizzesOutputBoundary quizPresenter) {
         this.quizDataAccessObject = quizDataAccessObject;
         this.quizPresenter = quizPresenter;
     }
@@ -21,7 +21,7 @@ public class DisplayQuizInteractor implements DisplayQuizInputBoundary{
 //            quizPresenter.prepareFailView("Please enter the quiz title you wish to display.");
 //        } else {
 //            Quiz quiz = quizDataAccessObject.getQuiz(title);
-//            DisplayQuizOutputData displayQuizOutputData = new DisplayQuizOutputData(title, false);
+//            DisplayQuizzesOutputData displayQuizOutputData = new DisplayQuizzesOutputData(title, false);
 //            quizPresenter.prepareSuccessView(displayQuizOutputData);
 //        }
         List<Quiz> quizzes = quizDataAccessObject.getAllQuizzes();
@@ -36,8 +36,8 @@ public class DisplayQuizInteractor implements DisplayQuizInputBoundary{
 //                outputTableData[i][2] = currentQuiz.getCreationTime().toString();
 //            }
             String[][] outputTableData = quizDataAccessObject.getAllQuizzesTable();
-            DisplayQuizOutputData displayQuizOutputData = new DisplayQuizOutputData(outputTableData);
-            quizPresenter.prepareSuccessView(displayQuizOutputData);
+            DisplayQuizzesOutputData displayQuizzesOutputData = new DisplayQuizzesOutputData(outputTableData);
+            quizPresenter.prepareSuccessView(displayQuizzesOutputData);
         }
     }
 }

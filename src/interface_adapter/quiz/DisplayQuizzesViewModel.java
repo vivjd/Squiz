@@ -4,23 +4,23 @@ import interface_adapter.ViewModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class QuizViewModel extends ViewModel {
+public class DisplayQuizzesViewModel extends ViewModel {
     public static final String START_LABEL = "Start Quiz";
     public static final String EDIT_LABEL = "Edit Quiz";
     public static final String QUIZ_LABEL = "Quiz";
 
     public static final String BACK_LABEL = "Back";
-    private DisplayQuizState state = new DisplayQuizState();
+    private DisplayQuizzesState state = new DisplayQuizzesState();
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public DisplayQuizState getState(){return state;}
+    public DisplayQuizzesState getState(){return state;}
 
-    public QuizViewModel() {
+    public DisplayQuizzesViewModel() {
         super("quiz");
     }
 
-    public void setState(DisplayQuizState state){
+    public void setState(DisplayQuizzesState state){
         this.state = state;
     }
 

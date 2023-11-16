@@ -1,11 +1,11 @@
 package interface_adapter.quiz;
 
-public class DisplayQuizState {
+public class DisplayQuizzesState {
     private String[][] quizzesTable;
 
     private String emptyQuizzesError = null;
 
-    public DisplayQuizState(){
+    public DisplayQuizzesState(){
 
     }
 
@@ -13,7 +13,7 @@ public class DisplayQuizState {
         return quizzesTable;
     }
 
-    public DisplayQuizState(DisplayQuizState copy){
+    public DisplayQuizzesState(DisplayQuizzesState copy){
         this.quizzesTable = copy.quizzesTable;
         this.emptyQuizzesError = copy.emptyQuizzesError;
     }

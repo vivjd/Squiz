@@ -1,17 +1,17 @@
 package view;
 
-import interface_adapter.quiz.DisplayQuizController;
-import interface_adapter.quiz.DisplayQuizState;
-import interface_adapter.quiz.QuizViewModel;
+import interface_adapter.quiz.DisplayQuizzesController;
+import interface_adapter.quiz.DisplayQuizzesState;
+import interface_adapter.quiz.DisplayQuizzesViewModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class QuizView extends JPanel implements PropertyChangeListener {
+public class DisplayQuizzesView extends JPanel implements PropertyChangeListener {
     public final String viewName = "quiz";
-    private final QuizViewModel quizViewModel;
+    private final DisplayQuizzesViewModel displayQuizzesViewModel;
     // frame
     JFrame frame;
     // Table
@@ -24,19 +24,19 @@ public class QuizView extends JPanel implements PropertyChangeListener {
     final JButton edit;
 
     final JButton back;
-    private final DisplayQuizController displayQuizController;
+    private final DisplayQuizzesController displayQuizzesController;
 
-    public QuizView(QuizViewModel quizViewModel, DisplayQuizController controller) {
-        this.quizViewModel = quizViewModel;
-        this.displayQuizController = controller;
+    public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel, DisplayQuizzesController controller) {
+        this.displayQuizzesViewModel = displayQuizzesViewModel;
+        this.displayQuizzesController = controller;
 
-        quizViewModel.addPropertyChangeListener(this);
+        displayQuizzesViewModel.addPropertyChangeListener(this);
         populateTable();
 
         JPanel buttons = new JPanel();
-        start = new JButton(QuizViewModel.START_LABEL);
-        back = new JButton(QuizViewModel.BACK_LABEL);
-        edit = new JButton(QuizViewModel.EDIT_LABEL);
+        start = new JButton(DisplayQuizzesViewModel.START_LABEL);
+        back = new JButton(DisplayQuizzesViewModel.BACK_LABEL);
+        edit = new JButton(DisplayQuizzesViewModel.EDIT_LABEL);
         buttons.add(start);
         buttons.add(back);
         buttons.add(edit);
@@ -48,7 +48,7 @@ public class QuizView extends JPanel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        DisplayQuizState state = (DisplayQuizState) evt.getNewValue();
+        DisplayQuizzesState state = (DisplayQuizzesState) evt.getNewValue();
         quizData = state.getQuizzesTable();
     }
 

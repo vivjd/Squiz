@@ -1,9 +1,9 @@
 package use_case.quiz;
 
-public class DisplayQuizInputData{
+public class DisplayQuizzesInputData {
 //    private String title;
 //
-//    public DisplayQuizInputData(String title){
+//    public DisplayQuizzesInputData(String title){
 //        this.title = title;
 //    }
 //
