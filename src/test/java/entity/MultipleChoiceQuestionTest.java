@@ -20,27 +20,27 @@ class MultipleChoiceQuestionTest {
 
     @Test
     void getQuestion() {
-        Assertions.assertEquals("What does SRP stand for?", question.getQuestion());
+        assertEquals("What does SRP stand for?", question.getQuestion());
     }
 
     @Test
     void displayAnswer() {
         question.displayAnswer();
-        Assertions.assertTrue(question.answerDisplayed);
+        assertTrue(question.answerDisplayed);
     }
 
     @Test
     void setQuestion() {
         question.setQuestion("What does SRP stand for in Clean Architecture?");
-        Assertions.assertEquals("What does SRP stand for in Clean Architecture?", question.getQuestion());
+        assertEquals("What does SRP stand for in Clean Architecture?", question.getQuestion());
     }
 
     @Test
     void getAnswerOptions() {
         HashMap<Integer, String> answerOptions = question.getAnswerOptions();
-        Assertions.assertEquals("Single Reason Principle", answerOptions.get(1));
-        Assertions.assertEquals("Singular Reason Principle", answerOptions.get(2));
-        Assertions.assertEquals("Single Responsibility Principle", answerOptions.get(3));
+        assertEquals("Single Reason Principle", answerOptions.get(1));
+        assertEquals("Singular Reason Principle", answerOptions.get(2));
+        assertEquals("Single Responsibility Principle", answerOptions.get(3));
     }
 
     @Test
@@ -53,19 +53,19 @@ class MultipleChoiceQuestionTest {
         question.setAnswerOptions(newAnswerOptions);
         HashMap<Integer, String> updatedAnswerOptions = question.getAnswerOptions();
 
-        Assertions.assertEquals("S R P", updatedAnswerOptions.get(1));
-        Assertions.assertEquals("Single R P", updatedAnswerOptions.get(2));
-        Assertions.assertEquals("R P", updatedAnswerOptions.get(3));
+        assertEquals("S R P", updatedAnswerOptions.get(1));
+        assertEquals("Single R P", updatedAnswerOptions.get(2));
+        assertEquals("R P", updatedAnswerOptions.get(3));
     }
 
     @Test
     void getCorrectAnswerIndex() {
-        Assertions.assertEquals(2, question.getCorrectAnswerIndex());
+        assertEquals(2, question.getCorrectAnswerIndex());
     }
 
     @Test
     void setCorrectAnswerIndex() {
         question.setCorrectAnswerIndex(1);
-        Assertions.assertEquals(1, question.getCorrectAnswerIndex());
+        assertEquals(1, question.getCorrectAnswerIndex());
     }
 }

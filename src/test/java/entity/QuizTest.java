@@ -28,23 +28,23 @@ class QuizTest {
 
     @Test
     void getQuizLengthTest() {
-        Assertions.assertEquals(sampleQuestions.size(), sampleQuiz.getQuizLength());
+        assertEquals(sampleQuestions.size(), sampleQuiz.getQuizLength());
     }
 
     @Test
     void getNumCorrectTest() {
-        Assertions.assertEquals(0, sampleQuiz.getNumCorrect());
+        assertEquals(0, sampleQuiz.getNumCorrect());
     }
 
     @Test
     void setQuestionsTest() {
-        Assertions.assertEquals(sampleQuestions, sampleQuiz.questions);
+        assertEquals(sampleQuestions, sampleQuiz.questions);
     }
 
     @Test
     void setQuestionsShouldNotModifyOriginalListTest() {
         List<Question> modifiedList = sampleQuiz.questions;
         modifiedList.add(new OpenEndedQuestion("Sample Question new", "New Answer new"));
-        Assertions.assertNotEquals(sampleQuestions, modifiedList);
+        assertNotEquals(sampleQuestions, modifiedList);
     }
 }
