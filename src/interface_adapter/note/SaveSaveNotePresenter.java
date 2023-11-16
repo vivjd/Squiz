@@ -1,8 +1,8 @@
 package interface_adapter.note;
 
 import interface_adapter.ViewManagerModel;
-import use_case.note.SaveNoteOutputData;
-import use_case.note.SaveNoteOutputBoundary;
+import use_case.note.save.SaveNoteOutputData;
+import use_case.note.save.SaveNoteOutputBoundary;
 
 public class SaveSaveNotePresenter implements SaveNoteOutputBoundary {
     private final NoteViewModel noteViewModel;

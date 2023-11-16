@@ -1,7 +1,7 @@
 package interface_adapter.note;
 
-import use_case.note.SaveNoteInputBoundary;
-import use_case.note.SaveNoteInputData;
+import use_case.note.save.SaveNoteInputBoundary;
+import use_case.note.save.SaveNoteInputData;
 
 public class SaveNoteController {
 
