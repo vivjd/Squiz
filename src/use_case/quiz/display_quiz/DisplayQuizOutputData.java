@@ -1,8 +1,4 @@
-package use_case.quiz;
-
-import interface_adapter.quiz.DisplayQuizController;
-
-import java.util.List;
+package use_case.quiz.display_quiz;
 
 public class DisplayQuizOutputData {
     private final String[][] quizzes;

@@ -1,6 +1,7 @@
-package use_case.quiz;
+package use_case.quiz.display_quiz;
 
 import entity.Quiz;
+import use_case.quiz.QuizDataAccessInterface;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class DisplayQuizInteractor implements DisplayQuizInputBoundary{
     @Override
     public void execute() {
 //        if (title.isEmpty()){
-//            quizPresenter.prepareFailView("Please enter the quiz title you wish to display.");
+//            quizPresenter.prepareFailView("Please enter the quiz title you wish to display_quiz.");
 //        } else {
 //            Quiz quiz = quizDataAccessObject.getQuiz(title);
 //            DisplayQuizOutputData displayQuizOutputData = new DisplayQuizOutputData(title, false);
@@ -26,7 +27,7 @@ public class DisplayQuizInteractor implements DisplayQuizInputBoundary{
 //        }
         List<Quiz> quizzes = quizDataAccessObject.getAllQuizzes();
         if (quizzes.isEmpty()){
-            quizPresenter.prepareFailView("There are no saved quizzes to display.");
+            quizPresenter.prepareFailView("There are no saved quizzes to display_quiz.");
         } else {
 //            String[][] outputTableData = new String[quizzes.size()][COLUMN_NUM];
 //            for (int i = 0; i < quizzes.size(); i++) {
