@@ -31,6 +31,10 @@ public class Quiz {
         return id;
     }
 
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
     public void setId(ObjectId id) {
         this.id = id;
     }

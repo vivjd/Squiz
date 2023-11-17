@@ -1,7 +1,6 @@
 package interface_adapter.quiz;
 
-import use_case.quiz.DisplayQuizInputBoundary;
-import use_case.quiz.DisplayQuizInputData;
+import use_case.quiz.display_quiz.DisplayQuizInputBoundary;
 
 public class DisplayQuizController {
     final DisplayQuizInputBoundary displayQuizUseCaseInteractor;
