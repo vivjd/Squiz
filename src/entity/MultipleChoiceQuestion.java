@@ -1,7 +1,7 @@
 package entity;
 import java.util.HashMap;
 
-public class MultipleChoiceQuestion extends Question {
+public class MultipleChoiceQuestion extends Question<Integer> {
     private HashMap<Integer, String> answerOptions;
     private int correctAnswerIndex;
     private String question;
@@ -13,6 +13,12 @@ public class MultipleChoiceQuestion extends Question {
     }
     public String getQuestion(){
         return this.question;
+    }
+
+    @Override
+    public int answerQuestion(Integer userResponse) {
+        if (userResponse == correctAnswerIndex) return 1;
+        return 0;
     }
 
     @Override

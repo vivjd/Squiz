@@ -1,5 +1,5 @@
 package entity;
-public class OpenEndedQuestion extends Question {
+public class OpenEndedQuestion extends Question<String> {
     private String answer;
     private String question;
 
@@ -19,6 +19,13 @@ public class OpenEndedQuestion extends Question {
     public String getQuestion(){
         return this.question;
     }
+
+    @Override
+    public int answerQuestion(String userResponse) {
+        if (userResponse == answer) return 1;
+        return 0;
+    }
+
     public String getCorrectAnswer() {
         return answer;
     }
