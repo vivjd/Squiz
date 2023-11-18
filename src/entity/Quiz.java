@@ -13,7 +13,7 @@ public class Quiz {
     private ObjectId id;
 
     private String title;
-    List<Question> questions;
+    List<Question<?>> questions;
 
     @BsonProperty("creationTime")
     private final LocalDateTime creationTime;
@@ -31,7 +31,7 @@ public class Quiz {
         return id;
     }
 
-    public List<Question> getQuestions() {
+    public List<Question<?>> getQuestions() {
         return questions;
     }
 
@@ -54,7 +54,7 @@ public class Quiz {
         return creationTime;
     }
 
-    public void setQuestions(List<Question> questions) {
+    public void setQuestions(List<Question<?>> questions) {
         this.questions = questions;
         this.quizLength = questions.size();
     }
