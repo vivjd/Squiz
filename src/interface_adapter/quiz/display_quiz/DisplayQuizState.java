@@ -1,4 +1,4 @@
-package interface_adapter.quiz;
+package interface_adapter.quiz.display_quiz;
 
 public class DisplayQuizState {
     private String[][] quizzesTable;
