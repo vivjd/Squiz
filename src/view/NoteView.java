@@ -32,10 +32,16 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
     private final SaveNoteController saveNoteController;
     private final NoteViewModel noteViewModel;
+    private final DisplayQuizzesController displayQuizzesController;
+    private final DisplayQuizzesViewModel displayQuizzesViewModel;
 
-    public NoteView(SaveNoteController saveNoteController, NoteViewModel noteViewModel) {
+    public NoteView(SaveNoteController saveNoteController, NoteViewModel noteViewModel,
+                    DisplayQuizzesController displayQuizzesController, DisplayQuizzesViewModel displayQuizzesViewModel) {
         this.saveNoteController = saveNoteController;
         this.noteViewModel = noteViewModel;
+        this.displayQuizzesController = displayQuizzesController;
+        this.displayQuizzesViewModel = displayQuizzesViewModel;
+        displayQuizzesViewModel.addPropertyChangeListener(this);
         noteViewModel.addPropertyChangeListener(this);
 
         //creating title and note box
@@ -94,7 +100,9 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(allQuizzes)) {
-                            // TODO: finish this
+                            DisplayQuizzesState currentState = displayQuizzesViewModel.getState();
+
+                            displayQuizzesController.execute();
                         }
                     }
                 }
