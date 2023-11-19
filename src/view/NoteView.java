@@ -20,8 +20,11 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     private final JTextField userInputTitle = new JTextField("enter title here", 30);
 
     private final JButton save;
-    private final JButton edit;
     private final JButton generate_quiz;
+
+    private final JButton all_quizzes;
+
+    private final JButton all_notes;
 
 
     private final SaveNoteController saveNoteController;
@@ -44,11 +47,13 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
 
         JPanel buttons = new JPanel();
-        edit = new JButton(NoteViewModel.EDIT_LABEL);
+        all_quizzes = new JButton(NoteViewModel.ALL_QUIZZES_LABEL);
+        all_notes = new JButton(NoteViewModel.ALL_NOTES_LABEL);
         save = new JButton(NoteViewModel.SAVE_LABEL);
         generate_quiz = new JButton(NoteViewModel.SUBMIT_BUTTON_LABEL);
-        buttons.add(edit);
         buttons.add(save);
+        buttons.add(all_quizzes);
+        buttons.add(all_notes);
         buttons.add(generate_quiz);
 
         save.addActionListener(
