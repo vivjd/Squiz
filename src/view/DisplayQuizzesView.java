@@ -68,7 +68,7 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         String[] columnNames = {"Quiz Title", "No. Questions", "Time Created" };
 
         // Initializing the JTable
-        // quizData = new String[10000][4];
+        //quizData = new String[10000][4]; //this is for testing purposes - getting blank data entries to put on
 
         table = new JTable(quizData, columnNames);
         table.setBounds(30, 40, 200, 300);
