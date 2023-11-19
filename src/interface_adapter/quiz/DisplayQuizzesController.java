@@ -3,12 +3,16 @@ package interface_adapter.quiz;
 import use_case.quiz.DisplayQuizzesInputBoundary;
 
 public class DisplayQuizzesController {
-    final DisplayQuizzesInputBoundary displayQuizUseCaseInteractor;
+
+    // TODO: put back final
+    DisplayQuizzesInputBoundary displayQuizUseCaseInteractor;
 
 
     public DisplayQuizzesController(DisplayQuizzesInputBoundary displayQuizUseCaseInteractor) {
         this.displayQuizUseCaseInteractor = displayQuizUseCaseInteractor;
     }
+
+    public DisplayQuizzesController() {}
 
     public void execute(){
         this.displayQuizUseCaseInteractor.execute();
