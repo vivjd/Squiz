@@ -1,4 +1,4 @@
-package use_case.note;
+package use_case.note.save;
 
 public interface SaveNoteOutputBoundary {
     void prepareSuccessView(SaveNoteOutputData user);

@@ -1,7 +1,11 @@
 package data_access;
 
 import com.mongodb.client.*;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.FindOneAndDeleteOptions;
 import entity.Note;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 import use_case.note.NoteDataAccessInterface;
 import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -14,7 +18,7 @@ import static com.mongodb.MongoClientSettings.getDefaultCodecRegistry;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-public class NoteDataAccessObject implements NoteDataAccessInterface, Database{
+public class NoteDataAccessObject implements NoteDataAccessInterface, Database {
     private MongoClient mongoClient;
     private MongoDatabase mongoDatabase;
 
@@ -63,7 +67,26 @@ public class NoteDataAccessObject implements NoteDataAccessInterface, Database{
         for (Note note : notes) {
             resultList.add(note.toJson());
         }
+        this.disconnect();
 
         return resultList;
+    }
+
+    @Override
+    public void deleteNote(ObjectId objectId) {
+
+        this.connect();
+        FindOneAndDeleteOptions options = new FindOneAndDeleteOptions().projection(Document.parse("{_id: 1}"));
+        Note deletedDocument = mongoDatabase
+                .getCollection("notes", Note.class)
+                .findOneAndDelete(Filters.eq("_id", objectId), options);
+        this.disconnect();
+        if (deletedDocument != null) {
+            return;
+        } else {
+            throw new RuntimeException("note with objectId " + objectId + " note found");
+        }
+
+
     }
 }

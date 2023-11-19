@@ -1,6 +1,5 @@
 package view;
 
-
 import interface_adapter.note.SaveNoteController;
 import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
@@ -20,11 +19,8 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     private final JTextField userInputTitle = new JTextField("enter title here", 30);
 
     private final JButton save;
+    private final JButton edit;
     private final JButton generate_quiz;
-
-    private final JButton all_quizzes;
-
-    private final JButton all_notes;
 
 
     private final SaveNoteController saveNoteController;
@@ -35,6 +31,8 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         this.noteViewModel = noteViewModel;
         noteViewModel.addPropertyChangeListener(this);
 
+        //creating title and note box
+        Box textPanes = Box.createVerticalBox();
         userInputNote.setColumns(50);
         userInputNote.setLineWrap(true);
         userInputNote.setRows(20);
@@ -45,15 +43,20 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
         JScrollPane scrollbar = new JScrollPane(userInputNote,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
+        textPanes.add(titleInfo);
+        textPanes.add(Box.createVerticalStrut(10));
+        textPanes.add(noteInfo);
+        textPanes.add(scrollbar);
 
-        JPanel buttons = new JPanel();
-        all_quizzes = new JButton(NoteViewModel.ALL_QUIZZES_LABEL);
-        all_notes = new JButton(NoteViewModel.ALL_NOTES_LABEL);
+        //creating buttons
+        Box buttons = Box.createVerticalBox();
+        edit = new JButton(NoteViewModel.EDIT_LABEL);
         save = new JButton(NoteViewModel.SAVE_LABEL);
         generate_quiz = new JButton(NoteViewModel.SUBMIT_BUTTON_LABEL);
+        buttons.add(edit);
+        buttons.add(Box.createVerticalStrut(10));
         buttons.add(save);
-        buttons.add(all_quizzes);
-        buttons.add(all_notes);
+        buttons.add(Box.createVerticalStrut(10));
         buttons.add(generate_quiz);
 
         save.addActionListener(
@@ -66,7 +69,10 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                             saveNoteController.execute(
                                     currentState.getTitle(),
                                     currentState.getNote());
-                            showSavedPopup();
+
+                            if (currentState.getEmptyNoteError().isEmpty()) {
+                                showSavedPopup();
+                            }
                         }
                     }
                 }
@@ -114,9 +120,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                 }
         );
 
-        this.add(titleInfo);
-        this.add(noteInfo);
-        this.add(scrollbar);
+        this.add(textPanes);
         this.add(buttons);
 
     }
