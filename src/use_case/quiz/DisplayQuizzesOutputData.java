@@ -12,4 +12,8 @@ public class DisplayQuizzesOutputData {
 //        return this.quizTitles;
 //    }
 
+    public String[][] getQuizzes() {
+        return quizzes;
+    }
+
 }

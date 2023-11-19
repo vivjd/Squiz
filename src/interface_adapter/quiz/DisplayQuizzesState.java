@@ -9,13 +9,17 @@ public class DisplayQuizzesState {
 
     }
 
-    public String[][] getQuizzesTable() {
-        return quizzesTable;
+//    public DisplayQuizzesState(DisplayQuizzesState copy){
+//        this.quizzesTable = copy.quizzesTable;
+//        this.emptyQuizzesError = copy.emptyQuizzesError;
+//    }
+
+    public void setQuizzesTable(String[][] quizzesTable){
+        this.quizzesTable = quizzesTable;
     }
 
-    public DisplayQuizzesState(DisplayQuizzesState copy){
-        this.quizzesTable = copy.quizzesTable;
-        this.emptyQuizzesError = copy.emptyQuizzesError;
+    public String[][] getQuizzesTable() {
+        return quizzesTable;
     }
 
     public void setEmptyQuizError(String emptyQuizzesError) {

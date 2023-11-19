@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Arrays;
 
 public class DisplayQuizzesView extends JPanel implements PropertyChangeListener {
     public final String viewName = "quiz";
@@ -32,7 +33,6 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
 
         displayQuizzesViewModel.addPropertyChangeListener(this);
 
-        table = populateTable();
         JScrollPane scrollbar = new JScrollPane(table,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         Box buttons = Box.createVerticalBox();
@@ -46,6 +46,8 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         buttons.add(edit);
         buttons.add(Box.createVerticalStrut(10));
 
+        table = populateTable();
+
         this.add(scrollbar);
         this.add(buttons);
     }
@@ -56,8 +58,10 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        //TODO: I'm not exactly sure how to use this.
         DisplayQuizzesState state = (DisplayQuizzesState) evt.getNewValue();
         quizData = state.getQuizzesTable();
+        System.out.println(Arrays.deepToString(quizData));
     }
 
     public JTable populateTable(){
@@ -68,9 +72,9 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         String[] columnNames = {"Quiz Title", "No. Questions", "Time Created" };
 
         // Initializing the JTable
-        //quizData = new String[10000][4]; //this is for testing purposes - getting blank data entries to put on
+//        quizData = new String[10000][4]; //this is for testing purposes - getting blank data entries to put on
 
-        table = new JTable(quizData, columnNames);
+        table = new JTable(displayQuizzesViewModel.getState().getQuizzesTable(), columnNames);
         table.setBounds(30, 40, 200, 300);
 
         // adding it to JScrollPane

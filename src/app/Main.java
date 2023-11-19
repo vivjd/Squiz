@@ -19,8 +19,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // showQuizzesPage();
         buildInitialPage();
+        showQuizzesPage();
     }
 
     public static void buildInitialPage() {
@@ -64,9 +64,10 @@ public class Main {
 
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         new ViewManager(views, cardLayout, viewManagerModel);
-        DisplayQuizzesView quizzesView = new DisplayQuizzesView(new DisplayQuizzesViewModel(), new DisplayQuizzesController());
 
+        DisplayQuizzesView quizzesView = new DisplayQuizzesView(new DisplayQuizzesViewModel(), new DisplayQuizzesController());
         views.add(quizzesView, quizzesView.viewName);
+
         viewManagerModel.setActiveView(quizzesView.viewName);
         viewManagerModel.firePropertyChanged();
 
