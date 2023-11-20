@@ -5,7 +5,8 @@ import use_case.quiz.DisplayQuizzesInputBoundary;
 public class DisplayQuizzesController {
 
     // TODO: put back final
-    DisplayQuizzesInputBoundary displayQuizUseCaseInteractor;
+
+    final DisplayQuizzesInputBoundary displayQuizUseCaseInteractor;
 
 
     public DisplayQuizzesController(DisplayQuizzesInputBoundary displayQuizUseCaseInteractor) {
