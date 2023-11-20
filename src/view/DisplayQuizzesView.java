@@ -60,8 +60,11 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
     public void propertyChange(PropertyChangeEvent evt) {
         //TODO: I'm not exactly sure how to use this.
         DisplayQuizzesState state = (DisplayQuizzesState) evt.getNewValue();
-        quizData = state.getQuizzesTable();
-        System.out.println(Arrays.deepToString(quizData));
+        if (state.getEmptyQuizzesError() != null){
+            JOptionPane.showMessageDialog(this, state.getEmptyQuizzesError());
+        }
+//        quizData = state.getQuizzesTable();
+//        System.out.println(Arrays.deepToString(quizData));
     }
 
     public JTable populateTable(){

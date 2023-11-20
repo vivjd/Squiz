@@ -25,4 +25,6 @@ public class DisplayQuizzesState {
     public void setEmptyQuizError(String emptyQuizzesError) {
         this.emptyQuizzesError = emptyQuizzesError;
     }
+
+    public String getEmptyQuizzesError(){return emptyQuizzesError;}
 }

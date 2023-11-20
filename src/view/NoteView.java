@@ -166,9 +166,13 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-            NoteState state = (NoteState) evt.getNewValue();
-            if (state.getEmptyNoteError() != null) {
-                JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
-            }
+//            NoteState state = (NoteState) evt.getNewValue();
+//            if (state.getEmptyNoteError() != null) {
+//                JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
+//            }
+        DisplayQuizzesState state = (DisplayQuizzesState) evt.getNewValue();
+        if (state.getEmptyQuizzesError() != null) {
+            JOptionPane.showMessageDialog(this, state.getEmptyQuizzesError());
+        }
     }
 }

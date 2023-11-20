@@ -20,7 +20,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         buildInitialPage();
-        showQuizzesPage();
+        //showQuizzesPage();
     }
 
     public static void buildInitialPage() {
@@ -54,24 +54,24 @@ public class Main {
     }
 
     // TODO: Delete after UseCase is Done
-    public static void showQuizzesPage() {
-        JFrame application = new JFrame("test");
-        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        CardLayout cardLayout = new CardLayout();
-        JPanel views = new JPanel(cardLayout);
-        application.add(views);
-
-        ViewManagerModel viewManagerModel = new ViewManagerModel();
-        new ViewManager(views, cardLayout, viewManagerModel);
-
-        DisplayQuizzesView quizzesView = new DisplayQuizzesView(new DisplayQuizzesViewModel(), new DisplayQuizzesController());
-        views.add(quizzesView, quizzesView.viewName);
-
-        viewManagerModel.setActiveView(quizzesView.viewName);
-        viewManagerModel.firePropertyChanged();
-
-        application.pack();
-        application.setVisible(true);
-    }
+//    public static void showQuizzesPage() {
+//        JFrame application = new JFrame("test");
+//        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//
+//        CardLayout cardLayout = new CardLayout();
+//        JPanel views = new JPanel(cardLayout);
+//        application.add(views);
+//
+//        ViewManagerModel viewManagerModel = new ViewManagerModel();
+//        new ViewManager(views, cardLayout, viewManagerModel);
+//
+//        DisplayQuizzesView quizzesView = new DisplayQuizzesView(new DisplayQuizzesViewModel(), new DisplayQuizzesController());
+//        views.add(quizzesView, quizzesView.viewName);
+//
+//        viewManagerModel.setActiveView(quizzesView.viewName);
+//        viewManagerModel.firePropertyChanged();
+//
+//        application.pack();
+//        application.setVisible(true);
+//    }
 }

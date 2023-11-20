@@ -12,7 +12,7 @@ import java.util.List;
  *
  */
 public class DisplayQuizzesInteractor implements DisplayQuizzesInputBoundary {
-//    public static final int COLUMN_NUM = 3;
+    public static final int COLUMN_NUM = 3;
     final QuizDataAccessInterface quizDataAccessObject;
 
     final DisplayQuizzesOutputBoundary quizPresenter;
@@ -34,18 +34,20 @@ public class DisplayQuizzesInteractor implements DisplayQuizzesInputBoundary {
      */
     @Override
     public void execute() {
-//        if (title.isEmpty()){
-//            quizPresenter.prepareFailView("Please enter the quiz title you wish to display.");
-//        } else {
-//            Quiz quiz = quizDataAccessObject.getQuiz(title);
-//            DisplayQuizzesOutputData displayQuizOutputData = new DisplayQuizzesOutputData(title, false);
-//            quizPresenter.prepareSuccessView(displayQuizOutputData);
-//        }
         List<Quiz> quizzes = quizDataAccessObject.getAllQuizzes();
         if (quizzes.isEmpty()){
-            quizPresenter.prepareFailView("There are no saved quizzes to display.");
+            quizPresenter.prepareFailView("There are no saved quizzes to display. Please create a quiz first.");
         } else {
-            String[][] outputTableData = quizDataAccessObject.getAllQuizzesTable();
+            List<Quiz> allQuizzes = quizDataAccessObject.getAllQuizzes();
+            String[][] outputTableData = new String[allQuizzes.size()][COLUMN_NUM];
+            for (int i = 0; i < allQuizzes.size(); i++) {
+                Quiz currentQuiz = allQuizzes.get(i);
+
+                outputTableData[i][0] = currentQuiz.getTitle();
+                outputTableData[i][1] = Integer.toString(currentQuiz.getQuizLength());
+                outputTableData[i][2] = currentQuiz.getCreationTime();
+            }
+//            String[][] outputTableData = quizDataAccessObject.getAllQuizzesTable();
             DisplayQuizzesOutputData displayQuizzesOutputData = new DisplayQuizzesOutputData(outputTableData);
             quizPresenter.prepareSuccessView(displayQuizzesOutputData);
         }
