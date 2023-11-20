@@ -4,7 +4,6 @@ import entity.Question;
 import entity.Quiz;
 import use_case.quiz.QuizDataAccessInterface;
 
-import java.awt.*;
 import java.util.List;
 
 public class TakeQuizInteractor implements TakeQuizInputBoundary{
@@ -37,7 +36,7 @@ public class TakeQuizInteractor implements TakeQuizInputBoundary{
             Question question = questionList.get(i);
             Object response = responses.get(i);
 
-            score += question.answerQuestion(response);
+            score += question.checkAnswer(response);
         }
 
         return score;

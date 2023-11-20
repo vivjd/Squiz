@@ -19,5 +19,5 @@ public abstract class Question<T> {
         return gson.toJson(this);
     }
 
-    public abstract int answerQuestion(T userResponse);
+    public abstract int checkAnswer(T userResponse);
 }

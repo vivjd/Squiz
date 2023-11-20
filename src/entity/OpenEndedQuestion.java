@@ -21,7 +21,7 @@ public class OpenEndedQuestion extends Question<String> {
     }
 
     @Override
-    public int answerQuestion(String userResponse) {
+    public int checkAnswer(String userResponse) {
         if (userResponse == answer) return 1;
         return 0;
     }
