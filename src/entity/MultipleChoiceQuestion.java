@@ -17,8 +17,9 @@ public class MultipleChoiceQuestion extends Question<Integer> {
     }
 
     @Override
-    public int checkAnswer(Integer userResponse) {
-        if (userResponse == correctAnswerIndex) return 1;
+    public int checkAnswer(Object userResponse) {
+        int userResponseInt = (int) userResponse;
+        if (userResponseInt == correctAnswerIndex) return 1;
         return 0;
     }
 

@@ -4,6 +4,7 @@ import entity.Question;
 import entity.Quiz;
 import use_case.quiz.QuizDataAccessInterface;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class TakeQuizInteractor implements TakeQuizInputBoundary {
@@ -22,21 +23,21 @@ public class TakeQuizInteractor implements TakeQuizInputBoundary {
         int score;
 
         Quiz quiz = quizDataAccessObject.getQuiz(takeQuizInputData.getTitle());
-        List<Question<?>> questionList = quiz.getQuestions();
-        List<?> responses = takeQuizInputData.getResponses();
+        Iterator<Question<?>> questionIterator= quiz.getQuestions().iterator();
+        Iterator<?> responses = takeQuizInputData.getResponses().iterator();
 
-        score = gradeQuiz(questionList, responses);
+        score = gradeQuiz(questionIterator, responses);
 
         TakeQuizOutputData outputData = new TakeQuizOutputData(score);
 
         takeQuizPresenter.prepareSuccessView(outputData);
     }
 
-    private int gradeQuiz(List<Question<?>> questionList, List<?> responses) {
+    private int gradeQuiz(Iterator<Question<?>> questionIterator, Iterator<? extends Object> responseIterator) {
         int score = 0;
-        for (int i = 0; i < questionList.size(); i++) {
-            Question question = questionList.get(i);
-            Object response = responses.get(i);
+        while (questionIterator.hasNext() && responseIterator.hasNext()) {
+            Question<?> question = questionIterator.next();
+            Object response = responseIterator.next();
 
             score += question.checkAnswer(response);
         }
