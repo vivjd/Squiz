@@ -4,7 +4,7 @@ import use_case.quiz.display_quiz.DisplayQuizOutputData;
 
 public interface TakeQuizOutputBoundary {
 
-    void prepareSuccessView(DisplayQuizOutputData quizOutputData);
+    void prepareSuccessView(TakeQuizOutputData takeQuizOutputData);
 
     void prepareFailView(String error);
 

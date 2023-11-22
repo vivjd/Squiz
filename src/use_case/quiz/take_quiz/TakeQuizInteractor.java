@@ -6,7 +6,7 @@ import use_case.quiz.QuizDataAccessInterface;
 
 import java.util.List;
 
-public class TakeQuizInteractor implements TakeQuizInputBoundary{
+public class TakeQuizInteractor implements TakeQuizInputBoundary {
 
     final QuizDataAccessInterface quizDataAccessObject;
     final TakeQuizOutputBoundary takeQuizPresenter;
@@ -17,7 +17,7 @@ public class TakeQuizInteractor implements TakeQuizInputBoundary{
     }
 
     @Override
-    public int execute(TakeQuizInputData takeQuizInputData) {
+    public void execute(TakeQuizInputData takeQuizInputData) {
 
         int score;
 
@@ -27,12 +27,14 @@ public class TakeQuizInteractor implements TakeQuizInputBoundary{
 
         score = gradeQuiz(questionList, responses);
 
-        return score;
+        TakeQuizOutputData outputData = new TakeQuizOutputData(score);
+
+        takeQuizPresenter.prepareSuccessView(outputData);
     }
 
     private int gradeQuiz(List<Question<?>> questionList, List<?> responses) {
         int score = 0;
-        for (int i = 0; i < questionList.size(); i ++ ) {
+        for (int i = 0; i < questionList.size(); i++) {
             Question question = questionList.get(i);
             Object response = responses.get(i);
 

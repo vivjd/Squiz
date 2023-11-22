@@ -5,6 +5,7 @@ import interface_adapter.quiz.QuizViewModel;
 import interface_adapter.quiz.display_quiz.DisplayQuizState;
 import use_case.quiz.display_quiz.DisplayQuizOutputData;
 import use_case.quiz.take_quiz.TakeQuizOutputBoundary;
+import use_case.quiz.take_quiz.TakeQuizOutputData;
 
 public class TakeQuizPresenter implements TakeQuizOutputBoundary {
 
@@ -16,9 +17,9 @@ public class TakeQuizPresenter implements TakeQuizOutputBoundary {
         this.viewManagerModel = viewManagerModel;
     }
 
-    @Override
-    public void prepareSuccessView(DisplayQuizOutputData quizOutputData) {
 
+    @Override
+    public void prepareSuccessView(TakeQuizOutputData takeQuizOutputData) {
 
     }
 
