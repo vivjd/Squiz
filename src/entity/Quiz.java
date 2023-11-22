@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Spliterator;
@@ -19,10 +20,11 @@ public class Quiz implements Iterable<Question<?>>{
     private String title;
     List<Question<?>> questions;
 
+
     @BsonProperty("creationTime")
     private final LocalDateTime creationTime;
 
-    @BsonProperty("numberOfQuestions")
+    @BsonProperty("quizLength")
     int quizLength = 0;
     int numCorrect = 0;
 
@@ -57,6 +59,7 @@ public class Quiz implements Iterable<Question<?>>{
     public LocalDateTime getCreationTime(){
         return creationTime;
     }
+
 
     public void setQuestions(List<Question<?>> questions) {
         this.questions = questions;
