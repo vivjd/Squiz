@@ -13,7 +13,7 @@ public class Quiz {
     @BsonId
     private ObjectId id;
 
-//    @BsonProperty("title")
+    @BsonProperty("title")
     private String title;
     @BsonProperty("questions")
     List<Question> questions;
@@ -24,12 +24,29 @@ public class Quiz {
     @BsonProperty("quizLength")
     int quizLength = 0;
 
+
     public Quiz(@BsonProperty("title") String title, @BsonProperty("creationTime")LocalDateTime creationTime){
         this.title = title;
         this.creationTime = creationTime.toString();
     }
 
     public Quiz(){}
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public void setQuizLength(int quizLength) {
+        this.quizLength = quizLength;
+    }
 
     public ObjectId getId() {
         return id;
@@ -54,6 +71,17 @@ public class Quiz {
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
         this.quizLength = questions.size();
+    }
+
+    @Override
+    public String toString() {
+        return "Quiz{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", questions=" + questions +
+                ", creationTime='" + creationTime + '\'' +
+                ", quizLength=" + quizLength +
+                '}';
     }
 
     public String toJson() {
