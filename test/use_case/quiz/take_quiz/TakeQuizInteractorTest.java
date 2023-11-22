@@ -110,7 +110,7 @@ public class TakeQuizInteractorTest {
     }
 
     @Test
-    public void testExecuteMCQ() {
+    public void testAllCorrectExecuteMCQ() {
 
         takeQuizInteractor = new TakeQuizInteractor(quizDataAccessObject, takeQuizPresenter);
         String quizTitle = "Sample Quiz";
@@ -132,5 +132,63 @@ public class TakeQuizInteractorTest {
         takeQuizInteractor.execute(input);
 
         verify(takeQuizPresenter).prepareSuccessView(ArgumentMatchers.any(TakeQuizOutputData.class));
+        verify(takeQuizPresenter).prepareSuccessView(outputCaptor.capture());
+
+        assertEquals(outputCaptor.getValue().getScore(), 2);
+    }
+    @Test
+    public void testAllWrongExecuteMCQ() {
+
+        takeQuizInteractor = new TakeQuizInteractor(quizDataAccessObject, takeQuizPresenter);
+        String quizTitle = "Sample Quiz";
+        TakeQuizInputData input = new TakeQuizInputData(quizTitle, new ObjectId(), Arrays.asList(0, 0));
+        Map<Integer, String> answerOptions = new HashMap<>();
+        answerOptions.put(1, "Answer1");
+        answerOptions.put(2, "Answer2");
+        answerOptions.put(3, "Answer3");
+        answerOptions.put(4, "Answer4");
+        List<Question<?>> mockQuestions = Arrays.asList(
+                new MultipleChoiceQuestion("Question1", answerOptions, 1),
+                new MultipleChoiceQuestion("Question2", answerOptions, 2)
+        );
+
+
+        when(quizDataAccessObject.getQuiz(quizTitle)).thenReturn(quiz);
+        when(quiz.getQuestions()).thenReturn(mockQuestions);
+
+        takeQuizInteractor.execute(input);
+
+        verify(takeQuizPresenter).prepareSuccessView(ArgumentMatchers.any(TakeQuizOutputData.class));
+        verify(takeQuizPresenter).prepareSuccessView(outputCaptor.capture());
+
+        assertEquals(outputCaptor.getValue().getScore(), 0);
+    }
+
+    @Test
+    public void testOneCorrectExecuteMCQ() {
+
+        takeQuizInteractor = new TakeQuizInteractor(quizDataAccessObject, takeQuizPresenter);
+        String quizTitle = "Sample Quiz";
+        TakeQuizInputData input = new TakeQuizInputData(quizTitle, new ObjectId(), Arrays.asList(1, 0));
+        Map<Integer, String> answerOptions = new HashMap<>();
+        answerOptions.put(1, "Answer1");
+        answerOptions.put(2, "Answer2");
+        answerOptions.put(3, "Answer3");
+        answerOptions.put(4, "Answer4");
+        List<Question<?>> mockQuestions = Arrays.asList(
+                new MultipleChoiceQuestion("Question1", answerOptions, 1),
+                new MultipleChoiceQuestion("Question2", answerOptions, 2)
+        );
+
+
+        when(quizDataAccessObject.getQuiz(quizTitle)).thenReturn(quiz);
+        when(quiz.getQuestions()).thenReturn(mockQuestions);
+
+        takeQuizInteractor.execute(input);
+
+        verify(takeQuizPresenter).prepareSuccessView(ArgumentMatchers.any(TakeQuizOutputData.class));
+        verify(takeQuizPresenter).prepareSuccessView(outputCaptor.capture());
+
+        assertEquals(outputCaptor.getValue().getScore(), 1);
     }
 }
