@@ -7,9 +7,7 @@ import entity.Quiz;
 import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentMatchers;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 import use_case.quiz.QuizDataAccessInterface;
 import use_case.quiz.display_quiz.DisplayQuizOutputData;
 
@@ -34,6 +32,9 @@ public class TakeQuizInteractorTest {
 
     private TakeQuizInputBoundary takeQuizInteractor;
 
+    @Captor
+    ArgumentCaptor<TakeQuizOutputData> outputCaptor;
+
     @Before
     public void init() {
         MockitoAnnotations.openMocks(this);
@@ -41,11 +42,11 @@ public class TakeQuizInteractorTest {
 
 
     @Test
-    public void testExecuteOpenEndedQuestion() {
+    public void testAllCorrectExecuteOpenEndedQuestion() {
 
         takeQuizInteractor = new TakeQuizInteractor(quizDataAccessObject, takeQuizPresenter);
         String quizTitle = "Sample Quiz";
-        TakeQuizInputData input = new TakeQuizInputData(quizTitle, new ObjectId(),Arrays.asList("Answer1", "Answer2"));
+        TakeQuizInputData input = new TakeQuizInputData(quizTitle, new ObjectId(), Arrays.asList("Answer1", "Answer2"));
         List<Question<?>> mockQuestions = Arrays.asList(
                 new OpenEndedQuestion("Question1", "Answer1"),
                 new OpenEndedQuestion("Question2", "Answer2")
@@ -58,6 +59,54 @@ public class TakeQuizInteractorTest {
         takeQuizInteractor.execute(input);
 
         verify(takeQuizPresenter).prepareSuccessView(ArgumentMatchers.any(TakeQuizOutputData.class));
+        verify(takeQuizPresenter).prepareSuccessView(outputCaptor.capture());
+
+        assertEquals(outputCaptor.getValue().getScore(), 2);
+    }
+
+    @Test
+    public void testAllWrongExecuteOpenEndedQuestion() {
+
+        takeQuizInteractor = new TakeQuizInteractor(quizDataAccessObject, takeQuizPresenter);
+        String quizTitle = "Sample Quiz";
+        TakeQuizInputData input = new TakeQuizInputData(quizTitle, new ObjectId(), Arrays.asList("WrongAnswer1", "WrongAnswer2"));
+        List<Question<?>> mockQuestions = Arrays.asList(
+                new OpenEndedQuestion("Question1", "Answer1"),
+                new OpenEndedQuestion("Question2", "Answer2")
+        );
+
+
+        when(quizDataAccessObject.getQuiz(quizTitle)).thenReturn(quiz);
+        when(quiz.getQuestions()).thenReturn(mockQuestions);
+
+        takeQuizInteractor.execute(input);
+
+        verify(takeQuizPresenter).prepareSuccessView(ArgumentMatchers.any(TakeQuizOutputData.class));
+        verify(takeQuizPresenter).prepareSuccessView(outputCaptor.capture());
+
+        assertEquals(outputCaptor.getValue().getScore(), 0);
+    }
+    @Test
+    public void testOneAnswerCorrectExecuteOpenEndedQuestion() {
+
+        takeQuizInteractor = new TakeQuizInteractor(quizDataAccessObject, takeQuizPresenter);
+        String quizTitle = "Sample Quiz";
+        TakeQuizInputData input = new TakeQuizInputData(quizTitle, new ObjectId(), Arrays.asList("Answer1", "WrongAnswer2"));
+        List<Question<?>> mockQuestions = Arrays.asList(
+                new OpenEndedQuestion("Question1", "Answer1"),
+                new OpenEndedQuestion("Question2", "Answer2")
+        );
+
+
+        when(quizDataAccessObject.getQuiz(quizTitle)).thenReturn(quiz);
+        when(quiz.getQuestions()).thenReturn(mockQuestions);
+
+        takeQuizInteractor.execute(input);
+
+        verify(takeQuizPresenter).prepareSuccessView(ArgumentMatchers.any(TakeQuizOutputData.class));
+        verify(takeQuizPresenter).prepareSuccessView(outputCaptor.capture());
+
+        assertEquals(outputCaptor.getValue().getScore(), 1);
     }
 
     @Test
@@ -65,7 +114,7 @@ public class TakeQuizInteractorTest {
 
         takeQuizInteractor = new TakeQuizInteractor(quizDataAccessObject, takeQuizPresenter);
         String quizTitle = "Sample Quiz";
-        TakeQuizInputData input = new TakeQuizInputData(quizTitle, new ObjectId(),Arrays.asList("Answer1", "Answer2"));
+        TakeQuizInputData input = new TakeQuizInputData(quizTitle, new ObjectId(), Arrays.asList(1, 2));
         Map<Integer, String> answerOptions = new HashMap<>();
         answerOptions.put(1, "Answer1");
         answerOptions.put(2, "Answer2");
