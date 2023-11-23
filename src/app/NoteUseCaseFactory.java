@@ -3,6 +3,7 @@ package app;
 import data_access.NoteDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.note.*;
+import interface_adapter.quiz.GenerateQuizController;
 import use_case.note.NoteDataAccessInterface;
 import use_case.note.delete.DeleteNoteInputBoundary;
 import use_case.note.delete.DeleteNoteInteractor;

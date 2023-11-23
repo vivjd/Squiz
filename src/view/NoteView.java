@@ -3,6 +3,9 @@ package view;
 import interface_adapter.note.SaveNoteController;
 import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
+import interface_adapter.quiz.GenerateQuizController;
+import use_case.quiz.GenerateQuizInteractor;
+import use_case.quiz.GenerateQuizOutputBoundary;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,11 +27,25 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
 
     private final SaveNoteController saveNoteController;
+    private final GenerateQuizController generateQuizController;
     private final NoteViewModel noteViewModel;
 
     public NoteView(SaveNoteController saveNoteController, NoteViewModel noteViewModel) {
         this.saveNoteController = saveNoteController;
         this.noteViewModel = noteViewModel;
+        GenerateQuizOutputBoundary quizPresenter = new GenerateQuizOutputBoundary() {
+            @Override
+            public void prepareSuccessView(String quiz) {
+
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+
+            }
+        };
+        GenerateQuizInteractor generateQuizInteractor = new GenerateQuizInteractor(quizPresenter);
+        this.generateQuizController = new GenerateQuizController(generateQuizInteractor);
         noteViewModel.addPropertyChangeListener(this);
 
         //creating title and note box
@@ -74,6 +91,25 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                     }
                 }
         );
+
+        generate_quiz.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(generate_quiz)) {
+                            NoteState currentState = noteViewModel.getState();
+                            try {
+                                generateQuizController.execute(
+                                        currentState.getTitle(),
+                                        currentState.getNote());
+                            } catch (Exception ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                    }
+                }
+        );
+
 
         userInputNote.addKeyListener(
                 new KeyListener() {
