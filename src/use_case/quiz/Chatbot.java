@@ -1,23 +1,30 @@
 package use_case.quiz;
+
 import io.github.cdimascio.dotenv.Dotenv;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpHeaders;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 public class Chatbot {
     static Dotenv dotenv = Dotenv.load();
-
-
-
-    private static final String OPENAI_API_KEY = dotenv.get("OPENAI_API_KEY");;
-    private static final String OPENAI_ENDPOINT = "https://api.openai.com/v1/fine_tuning/jobs";
+    private static final String OPENAI_API_KEY = dotenv.get("OPENAI_API_KEY");
+    private static final String OPENAI_ENDPOINT = "https://api.openai.com/v1/chat/completions";
 
     public static void main(String[] args) {
         try {
-            String userInput = getUserInput();
-            String response = getChatGPTResponse(userInput);
+            Chatbot gpt = new Chatbot();
+            String userInput = gpt.getUserInput();
+            String response = gpt.getChatGPTResponse(userInput);
 
             System.out.println("ChatGPT: " + response);
         } catch (Exception e) {
@@ -25,38 +32,47 @@ public class Chatbot {
         }
     }
 
-    private static String getUserInput() throws Exception {
+    public Chatbot(){
+    }
+
+    public String getUserInput() throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("You: ");
         return reader.readLine();
     }
 
-    private static String getChatGPTResponse(String userInput) throws Exception {
-        String apiKey = "Bearer " + OPENAI_API_KEY;
-        String data = "{\"messages\": [{\"role\": \"system\", \"content\": \"You are a helpful assistant.\"}, {\"role\": \"user\", \"content\": \"" + userInput + "\"}]}";
+    public static String getChatGPTResponse(String userInput) throws Exception {
+        String apiKey = OPENAI_API_KEY;
+        String model = "gpt-4-1106-preview";
+        String prompt = "[{\"role\": \"user\", \"content\": \"" + userInput + "\"}]";
+        int maxTokens = 2000;
 
-        URL url = new URL(OPENAI_ENDPOINT);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        String requestBody = "{\"model\": \"" + model + "\", \"messages\": " + prompt + ", \"max_tokens\": " + maxTokens + "}";
 
-        connection.setRequestMethod("POST");
-        connection.setRequestProperty("Authorization", apiKey);
-        connection.setRequestProperty("Content-Type", "application/json");
-        connection.setDoOutput(true);
+        HttpClient httpClient = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost(OPENAI_ENDPOINT);
 
-        byte[] input = data.getBytes(StandardCharsets.UTF_8);
-        connection.getOutputStream().write(input);
+        httpPost.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey);
+        httpPost.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        StringBuilder response = new StringBuilder();
-        String line;
+        httpPost.setEntity(new StringEntity(requestBody));
 
-        while ((line = reader.readLine()) != null) {
-            response.append(line);
+        HttpResponse httpResponse = httpClient.execute(httpPost);
+        HttpEntity responseEntity = httpResponse.getEntity();
+
+        if (responseEntity != null) {
+
+            String response = EntityUtils.toString(responseEntity);
+            String apiResponse = response;
+            JSONObject jsonResponse = new JSONObject(apiResponse);
+            EntityUtils.consume(responseEntity);
+            JSONArray choices = jsonResponse.getJSONArray("choices");
+            JSONObject firstChoice = choices.getJSONObject(0);
+            JSONObject message = firstChoice.getJSONObject("message");
+            String content = message.getString("content");
+            return content;
+        } else {
+            throw new IllegalStateException("Empty response entity");
         }
-
-        reader.close();
-        connection.disconnect();
-
-        return response.toString();
     }
 }
