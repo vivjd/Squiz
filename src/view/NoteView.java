@@ -101,9 +101,10 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(allQuizzes)) {
                            DisplayQuizzesState currentState = displayQuizzesViewModel.getState();
-                           //TODO: change DAO and input table here
+                            currentState.getQuizzesTable();
                            //currentState.setQuizzesTable();
                             displayQuizzesController.execute();
+                            displayQuizzesViewModel.setState(currentState);
                         }
                     }
                 }

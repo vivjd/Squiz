@@ -2,6 +2,7 @@ package use_case.quiz;
 
 import entity.Quiz;
 
+import java.util.Arrays;
 import java.util.List;
 /**
  * The {@code DisplayQuizzesInteractor} class is responsible for executing the display of quizzes
@@ -38,15 +39,15 @@ public class DisplayQuizzesInteractor implements DisplayQuizzesInputBoundary {
         if (quizzes.isEmpty()){
             quizPresenter.prepareFailView("There are no saved quizzes to display. Please create a quiz first.");
         } else {
-            List<Quiz> allQuizzes = quizDataAccessObject.getAllQuizzes();
-            String[][] outputTableData = new String[allQuizzes.size()][COLUMN_NUM];
-            for (int i = 0; i < allQuizzes.size(); i++) {
-                Quiz currentQuiz = allQuizzes.get(i);
-                outputTableData[i][0] = currentQuiz.getTitle();
-                outputTableData[i][1] = Integer.toString(currentQuiz.getQuizLength());
-                outputTableData[i][2] = currentQuiz.getCreationTime();
-            }
-//            String[][] outputTableData = quizDataAccessObject.getAllQuizzesTable();
+//            List<Quiz> allQuizzes = quizDataAccessObject.getAllQuizzes();
+//            String[][] outputTableData = new String[allQuizzes.size()][COLUMN_NUM];
+//            for (int i = 0; i < allQuizzes.size(); i++) {
+//                Quiz currentQuiz = allQuizzes.get(i);
+//                outputTableData[i][0] = currentQuiz.getTitle();
+//                outputTableData[i][1] = Integer.toString(currentQuiz.getQuizLength());
+//                outputTableData[i][2] = currentQuiz.getCreationTime();
+//            }
+            String[][] outputTableData = quizDataAccessObject.getAllQuizzesTable();
             DisplayQuizzesOutputData displayQuizzesOutputData = new DisplayQuizzesOutputData(outputTableData);
             quizPresenter.prepareSuccessView(displayQuizzesOutputData);
         }

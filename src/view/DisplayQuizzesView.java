@@ -1,10 +1,12 @@
 package view;
 
+import data_access.QuizDataAccessObject;
 import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
 import interface_adapter.quiz.DisplayQuizzesController;
 import interface_adapter.quiz.DisplayQuizzesState;
 import interface_adapter.quiz.DisplayQuizzesViewModel;
+import use_case.quiz.QuizDataAccessInterface;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -34,7 +36,8 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         this.displayQuizzesController = controller;
 
         displayQuizzesViewModel.addPropertyChangeListener(this);
-        //quizData = displayQuizzesViewModel.getState().getQuizzesTable();
+        quizData = displayQuizzesViewModel.getState().getQuizzesTable();
+//        popUpTest();
 
         Box buttons = Box.createVerticalBox();
         start = new JButton(DisplayQuizzesViewModel.START_LABEL);
@@ -84,14 +87,16 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        //TODO: I'm not exactly sure how to use this.
         DisplayQuizzesState state = (DisplayQuizzesState) evt.getNewValue();
         if (state.getEmptyQuizzesError() != null){
             JOptionPane.showMessageDialog(this, state.getEmptyQuizzesError());
         }
-
 //        quizData = state.getQuizzesTable();
 //        System.out.println(Arrays.deepToString(quizData));
+    }
+
+    public void popUpTest(){
+        JOptionPane.showMessageDialog(this, quizData);
     }
 
     public JTable populateTable(){
@@ -101,9 +106,16 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         // Initializing the JTable
         //quizData = new String[10000][4]; //this is for testing purposes - getting blank data entries to put on
 
+        //the following two lines works but is not allowed as we pass in a quiz DAO
+//        QuizDataAccessInterface quizDAO = new QuizDataAccessObject();
+//        quizData = quizDAO.getAllQuizzesTable();
+
+        quizData = displayQuizzesViewModel.getState().getQuizzesTable();
         if (quizData == null) {
+            System.out.println("Quiz data is empty so the empty table is displayed");
             quizData = new String[3][3];
         } else {
+            System.out.println("Quiz data should display");
             quizData = displayQuizzesViewModel.getState().getQuizzesTable();
         }
 

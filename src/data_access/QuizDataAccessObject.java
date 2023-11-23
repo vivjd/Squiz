@@ -73,31 +73,31 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
         return resultList;
     }
 
-//    @Override
-//    public String[][] getAllQuizzesTable(){
-//        List<Quiz> resultList = new ArrayList<>();
-//
-//        this.connect();
-//
-//        FindIterable<Quiz> quizzes = mongoDatabase.getCollection("quizzes", Quiz.class).find();
-//
-//        for (Quiz quiz : quizzes) {
-//            resultList.add(quiz);
-//        }
-//
-//        String[][] outputTableData = new String[resultList.size()][COLUMN_NUM];
-//        for (int i = 0; i < resultList.size(); i++) {
-//            Quiz currentQuiz = resultList.get(i);
-//            outputTableData[i][0] = currentQuiz.getTitle();
-//            outputTableData[i][1] = Integer.toString(currentQuiz.getQuizLength());
-////            outputTableData[i][2] = currentQuiz.getCreationTime().toString();
-//            outputTableData[i][2] = currentQuiz.getCreationTime();
-//        }
-//
-//        this.disconnect();
-//
-//        return outputTableData;
-//    }
+    @Override
+    public String[][] getAllQuizzesTable(){
+        List<Quiz> resultList = new ArrayList<>();
+
+        this.connect();
+
+        FindIterable<Quiz> quizzes = mongoDatabase.getCollection("quizzes", Quiz.class).find();
+
+        for (Quiz quiz : quizzes) {
+            resultList.add(quiz);
+        }
+
+        String[][] outputTableData = new String[resultList.size()][COLUMN_NUM];
+        for (int i = 0; i < resultList.size(); i++) {
+            Quiz currentQuiz = resultList.get(i);
+            outputTableData[i][0] = currentQuiz.getTitle();
+            outputTableData[i][1] = Integer.toString(currentQuiz.getQuizLength());
+//            outputTableData[i][2] = currentQuiz.getCreationTime().toString();
+            outputTableData[i][2] = currentQuiz.getCreationTime();
+        }
+
+        this.disconnect();
+
+        return outputTableData;
+    }
 
     @Override
     public List<String> getAllQuizTitles() {

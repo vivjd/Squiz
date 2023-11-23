@@ -13,6 +13,8 @@ public interface QuizDataAccessInterface {
 
 //    String[][] getAllQuizzesTable();
 
+    String[][] getAllQuizzesTable();
+
     List<String> getAllQuizTitles();
 
     Quiz getQuizById(String quizId);
