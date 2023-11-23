@@ -20,7 +20,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         buildInitialPage();
-        //showQuizzesPage();
+//        showQuizzesPage();
     }
 
     public static void buildInitialPage() {

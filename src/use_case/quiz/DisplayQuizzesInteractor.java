@@ -42,7 +42,6 @@ public class DisplayQuizzesInteractor implements DisplayQuizzesInputBoundary {
             String[][] outputTableData = new String[allQuizzes.size()][COLUMN_NUM];
             for (int i = 0; i < allQuizzes.size(); i++) {
                 Quiz currentQuiz = allQuizzes.get(i);
-
                 outputTableData[i][0] = currentQuiz.getTitle();
                 outputTableData[i][1] = Integer.toString(currentQuiz.getQuizLength());
                 outputTableData[i][2] = currentQuiz.getCreationTime();

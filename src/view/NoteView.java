@@ -101,7 +101,6 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(allQuizzes)) {
                             DisplayQuizzesState currentState = displayQuizzesViewModel.getState();
-
                             displayQuizzesController.execute();
                         }
                     }
@@ -166,13 +165,23 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-//            NoteState state = (NoteState) evt.getNewValue();
+        //TODO: perhaps this is the issue?
+        NoteState state = (NoteState) evt.getNewValue();
+        if (state.getEmptyNoteError() != null) {
+            JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
+        }
+//        Object newValue = evt.getNewValue();
+//        if (newValue instanceof DisplayQuizzesState) {
+//            DisplayQuizzesState state = (DisplayQuizzesState) newValue;
+//            if (state.getEmptyQuizzesError() != null) {
+//                JOptionPane.showMessageDialog(this, state.getEmptyQuizzesError());
+//            }
+//        } else if (newValue instanceof NoteState) {
+//            NoteState state = (NoteState) newValue;
 //            if (state.getEmptyNoteError() != null) {
 //                JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
 //            }
-        DisplayQuizzesState state = (DisplayQuizzesState) evt.getNewValue();
-        if (state.getEmptyQuizzesError() != null) {
-            JOptionPane.showMessageDialog(this, state.getEmptyQuizzesError());
-        }
+//        }
+
     }
 }

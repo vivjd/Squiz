@@ -1,14 +1,16 @@
 package view;
 
+import interface_adapter.note.NoteState;
+import interface_adapter.note.NoteViewModel;
 import interface_adapter.quiz.DisplayQuizzesController;
 import interface_adapter.quiz.DisplayQuizzesState;
 import interface_adapter.quiz.DisplayQuizzesViewModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Arrays;
 
 public class DisplayQuizzesView extends JPanel implements PropertyChangeListener {
     public final String viewName = "quiz";
@@ -50,6 +52,30 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
 
         this.add(scrollbar);
         this.add(buttons);
+
+        start.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(start)) {
+//                            TakeQuizState currentState = takeQuizViewModel.getState();
+//                            takeQuizController.execute();
+                        }
+                    }
+                }
+        );
+
+        back.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e){
+//                        if (e.getSource().equals(back)) {
+//                            NoteState currentState = noteViewModel.getState();
+//                            noteViewModel.setState(currentState);
+//                        }
+                    }
+                }
+        );
     }
 
     public void actionPerformed(ActionEvent evt) {
@@ -68,9 +94,6 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
     }
 
     public JTable populateTable(){
-//        frame = new JFrame();
-//        frame.setTitle("Saved Quizzes");
-
         // Column Names
         String[] columnNames = {"Quiz Title", "No. Questions", "Time Created" };
 
@@ -79,14 +102,6 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
 
         table = new JTable(displayQuizzesViewModel.getState().getQuizzesTable(), columnNames);
         table.setBounds(30, 40, 200, 300);
-
-        // adding it to JScrollPane
-//        JScrollPane sp = new JScrollPane(table);
-//        frame.add(sp);
-//        // Frame Size
-//        frame.setSize(500, 200);
-//        // Frame Visible = true
-//        frame.setVisible(true);
 
         return table;
     }
