@@ -1,2 +1,4 @@
-package interface_adapter.quiz;public class generateQuizViewModel {
+package interface_adapter.quiz;
+
+public class GenerateQuizViewModel {
 }
