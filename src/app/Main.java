@@ -3,7 +3,11 @@ package app;
 import data_access.NoteDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.note.NoteViewModel;
+import interface_adapter.quiz.GenerateQuizController;
+import interface_adapter.quiz.GenerateQuizPresenter;
 import use_case.note.NoteDataAccessInterface;
+import use_case.quiz.GenerateQuizInteractor;
+import use_case.quiz.GenerateQuizOutputBoundary;
 import view.NoteView;
 import view.ViewManager;
 
@@ -32,6 +36,7 @@ public class Main {
         NoteDataAccessObject noteDataAccessObject = new NoteDataAccessObject();
 
         NoteViewModel noteViewModel = new NoteViewModel();
+
         NoteView noteView = NoteUseCaseFactory.create(viewManagerModel, noteViewModel, noteDataAccessObject);
         views.add(noteView, noteView.viewName);
 
