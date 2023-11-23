@@ -100,7 +100,9 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(allQuizzes)) {
-                            DisplayQuizzesState currentState = displayQuizzesViewModel.getState();
+                           DisplayQuizzesState currentState = displayQuizzesViewModel.getState();
+                           //TODO: change DAO and input table here
+                           //currentState.setQuizzesTable();
                             displayQuizzesController.execute();
                         }
                     }
@@ -166,10 +168,10 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         //TODO: perhaps this is the issue?
-        NoteState state = (NoteState) evt.getNewValue();
-        if (state.getEmptyNoteError() != null) {
-            JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
-        }
+//        NoteState state = (NoteState) evt.getNewValue();
+//        if (state.getEmptyNoteError() != null) {
+//            JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
+//        }
 //        Object newValue = evt.getNewValue();
 //        if (newValue instanceof DisplayQuizzesState) {
 //            DisplayQuizzesState state = (DisplayQuizzesState) newValue;

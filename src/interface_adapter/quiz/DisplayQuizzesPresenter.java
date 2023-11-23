@@ -1,6 +1,7 @@
 package interface_adapter.quiz;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.note.NoteViewModel;
 import use_case.quiz.DisplayQuizzesOutputBoundary;
 import use_case.quiz.DisplayQuizzesOutputData;
 
@@ -18,7 +19,13 @@ public class DisplayQuizzesPresenter implements DisplayQuizzesOutputBoundary {
     public void prepareSuccessView(DisplayQuizzesOutputData quiz) {
         DisplayQuizzesState quizState = displayQuizzesViewModel.getState();
         quizState.setQuizzesTable(quiz.getQuizzes());
-//        displayQuizzesViewModel.firePropertyChanged();
+        //System.out.println(quizState.getQuizzesTable().length);
+
+        this.displayQuizzesViewModel.setState(quizState);
+        displayQuizzesViewModel.firePropertyChanged();
+
+        viewManagerModel.setActiveView(displayQuizzesViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 
     @Override

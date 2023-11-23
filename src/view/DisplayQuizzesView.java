@@ -34,8 +34,7 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         this.displayQuizzesController = controller;
 
         displayQuizzesViewModel.addPropertyChangeListener(this);
-
-        JScrollPane scrollbar = new JScrollPane(table,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        //quizData = displayQuizzesViewModel.getState().getQuizzesTable();
 
         Box buttons = Box.createVerticalBox();
         start = new JButton(DisplayQuizzesViewModel.START_LABEL);
@@ -47,11 +46,6 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         buttons.add(Box.createVerticalStrut(10));
         buttons.add(edit);
         buttons.add(Box.createVerticalStrut(10));
-
-        table = populateTable();
-
-        this.add(scrollbar);
-        this.add(buttons);
 
         start.addActionListener(
                 new ActionListener() {
@@ -76,6 +70,12 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
                     }
                 }
         );
+
+        table = populateTable();
+        JScrollPane scrollbar = new JScrollPane(table,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        this.add(scrollbar);
+        this.add(buttons);
     }
 
     public void actionPerformed(ActionEvent evt) {
@@ -89,6 +89,7 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         if (state.getEmptyQuizzesError() != null){
             JOptionPane.showMessageDialog(this, state.getEmptyQuizzesError());
         }
+
 //        quizData = state.getQuizzesTable();
 //        System.out.println(Arrays.deepToString(quizData));
     }
@@ -98,9 +99,16 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         String[] columnNames = {"Quiz Title", "No. Questions", "Time Created" };
 
         // Initializing the JTable
-//        quizData = new String[10000][4]; //this is for testing purposes - getting blank data entries to put on
+        //quizData = new String[10000][4]; //this is for testing purposes - getting blank data entries to put on
 
-        table = new JTable(displayQuizzesViewModel.getState().getQuizzesTable(), columnNames);
+        if (quizData == null) {
+            quizData = new String[3][3];
+        } else {
+            quizData = displayQuizzesViewModel.getState().getQuizzesTable();
+        }
+
+        //System.out.println(quizData[0][0]);
+        table = new JTable(quizData, columnNames);
         table.setBounds(30, 40, 200, 300);
 
         return table;
