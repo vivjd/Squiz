@@ -1,14 +1,11 @@
 package view;
 
-import data_access.QuizDataAccessObject;
-import interface_adapter.note.NoteState;
-import interface_adapter.note.NoteViewModel;
 import interface_adapter.quiz.DisplayQuizzesController;
 import interface_adapter.quiz.DisplayQuizzesState;
 import interface_adapter.quiz.DisplayQuizzesViewModel;
-import use_case.quiz.QuizDataAccessInterface;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -18,8 +15,6 @@ import java.util.Arrays;
 public class DisplayQuizzesView extends JPanel implements PropertyChangeListener {
     public final String viewName = "quiz";
     private final DisplayQuizzesViewModel displayQuizzesViewModel;
-    // frame
-    JFrame frame;
     // Table
     JTable table;
 
@@ -93,7 +88,7 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         if (state.getEmptyQuizzesError() != null){
             JOptionPane.showMessageDialog(this, state.getEmptyQuizzesError());
         } else{
-            table = populateTable();
+            updateTable();
         }
 //        quizData = state.getQuizzesTable();
 //        System.out.println(Arrays.deepToString(quizData));
@@ -124,9 +119,27 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
             System.out.println(Arrays.deepToString(quizData));
         }
 
-        table = new JTable(quizData, columnNames);
+        table = new JTable(new DefaultTableModel(quizData, columnNames));
         table.setBounds(30, 40, 200, 300);
-
         return table;
+    }
+
+    public void updateTable(){
+        quizData = displayQuizzesViewModel.getState().getQuizzesTable();
+//        if (quizData == null) {
+//            System.out.println("Quiz data is empty so the empty table is displayed");
+//            quizData = new String[3][3];
+//        } else {
+//            System.out.println("Quiz data should display");
+//            quizData = displayQuizzesViewModel.getState().getQuizzesTable();
+//            System.out.println(Arrays.deepToString(quizData));
+//        }
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        tableModel.setRowCount(0);
+
+        for (String[] quizDatum : quizData) {
+            tableModel.addRow(quizDatum);
+        }
+
     }
 }

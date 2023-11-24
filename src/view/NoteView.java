@@ -15,6 +15,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Arrays;
 
 public class NoteView extends JPanel implements ActionListener, PropertyChangeListener{
     public final String viewName = "note";
@@ -171,18 +172,21 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 //        if (state.getEmptyNoteError() != null) {
 //            JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
 //        }
-//        Object newValue = evt.getNewValue();
-//        if (newValue instanceof DisplayQuizzesState) {
-//            DisplayQuizzesState state = (DisplayQuizzesState) newValue;
-//            if (state.getEmptyQuizzesError() != null) {
-//                JOptionPane.showMessageDialog(this, state.getEmptyQuizzesError());
-//            }
-//        } else if (newValue instanceof NoteState) {
-//            NoteState state = (NoteState) newValue;
-//            if (state.getEmptyNoteError() != null) {
-//                JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
-//            }
-//        }
+        Object newValue = evt.getNewValue();
+        if (newValue instanceof DisplayQuizzesState) {
+            DisplayQuizzesState state = (DisplayQuizzesState) newValue;
+            if (state.getEmptyQuizzesError() != null) {
+                JOptionPane.showMessageDialog(this, state.getEmptyQuizzesError());
+            } else {
+                System.out.println("From NoteView" + Arrays.deepToString(state.getQuizzesTable()));
+                displayQuizzesViewModel.setState(state);
+            }
+        } else if (newValue instanceof NoteState) {
+            NoteState state = (NoteState) newValue;
+            if (state.getEmptyNoteError() != null) {
+                JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
+            }
+        }
 
     }
 
