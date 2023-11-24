@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Arrays;
 
 public class DisplayQuizzesView extends JPanel implements PropertyChangeListener {
     public final String viewName = "quiz";
@@ -37,6 +38,7 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
 
         displayQuizzesViewModel.addPropertyChangeListener(this);
         quizData = displayQuizzesViewModel.getState().getQuizzesTable();
+        System.out.println("this is from the DisplayQuizzesView: " + Arrays.deepToString(quizData));
 //        popUpTest();
 
         Box buttons = Box.createVerticalBox();
@@ -90,6 +92,8 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         DisplayQuizzesState state = (DisplayQuizzesState) evt.getNewValue();
         if (state.getEmptyQuizzesError() != null){
             JOptionPane.showMessageDialog(this, state.getEmptyQuizzesError());
+        } else{
+            table = populateTable();
         }
 //        quizData = state.getQuizzesTable();
 //        System.out.println(Arrays.deepToString(quizData));
@@ -117,9 +121,9 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         } else {
             System.out.println("Quiz data should display");
             quizData = displayQuizzesViewModel.getState().getQuizzesTable();
+            System.out.println(Arrays.deepToString(quizData));
         }
 
-        //System.out.println(quizData[0][0]);
         table = new JTable(quizData, columnNames);
         table.setBounds(30, 40, 200, 300);
 

@@ -101,8 +101,6 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(allQuizzes)) {
                            DisplayQuizzesState currentState = displayQuizzesViewModel.getState();
-                            currentState.getQuizzesTable();
-                           //currentState.setQuizzesTable();
                             displayQuizzesController.execute();
                             displayQuizzesViewModel.setState(currentState);
                         }
@@ -187,4 +185,5 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 //        }
 
     }
+
 }
