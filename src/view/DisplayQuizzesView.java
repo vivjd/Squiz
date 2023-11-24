@@ -10,31 +10,33 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Arrays;
 
 public class DisplayQuizzesView extends JPanel implements PropertyChangeListener {
     public final String viewName = "quiz";
+
+    /** The column names for the quiz table. */
+    String[] columnNames = {"Quiz Title", "No. Questions", "Time Created" };
+
+    /** The data to be displayed in the quiz table. */
+    private String[][] quizData;
+    private final DisplayQuizzesController displayQuizzesController;
     private final DisplayQuizzesViewModel displayQuizzesViewModel;
+//    private final NoteViewModel noteViewModel;
     // Table
     JTable table;
-
-    private String[][] quizData;
 
     final JButton start;
 
     final JButton edit;
 
     final JButton back;
-    private final DisplayQuizzesController displayQuizzesController;
 
     public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel, DisplayQuizzesController controller) {
         this.displayQuizzesViewModel = displayQuizzesViewModel;
         this.displayQuizzesController = controller;
+//        this.noteViewModel = noteViewModel;
 
         displayQuizzesViewModel.addPropertyChangeListener(this);
-        quizData = displayQuizzesViewModel.getState().getQuizzesTable();
-        System.out.println("this is from the DisplayQuizzesView: " + Arrays.deepToString(quizData));
-//        popUpTest();
 
         Box buttons = Box.createVerticalBox();
         start = new JButton(DisplayQuizzesViewModel.START_LABEL);
@@ -52,6 +54,7 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(start)) {
+                            // TODO: implement start quiz button
 //                            TakeQuizState currentState = takeQuizViewModel.getState();
 //                            takeQuizController.execute();
                         }
@@ -63,15 +66,18 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e){
-//                        if (e.getSource().equals(back)) {
+                        if (e.getSource().equals(back)) {
+                            // TODO: implement back button
 //                            NoteState currentState = noteViewModel.getState();
+//                            System.out.println(noteViewModel.getState());
 //                            noteViewModel.setState(currentState);
-//                        }
+                        }
                     }
                 }
         );
 
-        table = populateTable();
+        table = new JTable(new DefaultTableModel(new String[0][0], columnNames));
+        table.setBounds(30, 40, 200, 300);
         JScrollPane scrollbar = new JScrollPane(table,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         this.add(scrollbar);
@@ -90,56 +96,20 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         } else{
             updateTable();
         }
-//        quizData = state.getQuizzesTable();
-//        System.out.println(Arrays.deepToString(quizData));
     }
 
-    public void popUpTest(){
-        JOptionPane.showMessageDialog(this, quizData);
-    }
-
-    public JTable populateTable(){
-        // Column Names
-        String[] columnNames = {"Quiz Title", "No. Questions", "Time Created" };
-
-        // Initializing the JTable
-        //quizData = new String[10000][4]; //this is for testing purposes - getting blank data entries to put on
-
-        //the following two lines works but is not allowed as we pass in a quiz DAO
-//        QuizDataAccessInterface quizDAO = new QuizDataAccessObject();
-//        quizData = quizDAO.getAllQuizzesTable();
-
-        quizData = displayQuizzesViewModel.getState().getQuizzesTable();
-        if (quizData == null) {
-            System.out.println("Quiz data is empty so the empty table is displayed");
-            quizData = new String[3][3];
-        } else {
-            System.out.println("Quiz data should display");
-            quizData = displayQuizzesViewModel.getState().getQuizzesTable();
-            System.out.println(Arrays.deepToString(quizData));
-        }
-
-        table = new JTable(new DefaultTableModel(quizData, columnNames));
-        table.setBounds(30, 40, 200, 300);
-        return table;
-    }
-
+    /**
+     * Updates the quiz table based on the current state of the view model.
+     * It will delete all the initial data in the table and add all the current quizzes from quizData
+     * into the table.
+     */
     public void updateTable(){
         quizData = displayQuizzesViewModel.getState().getQuizzesTable();
-//        if (quizData == null) {
-//            System.out.println("Quiz data is empty so the empty table is displayed");
-//            quizData = new String[3][3];
-//        } else {
-//            System.out.println("Quiz data should display");
-//            quizData = displayQuizzesViewModel.getState().getQuizzesTable();
-//            System.out.println(Arrays.deepToString(quizData));
-//        }
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         tableModel.setRowCount(0);
 
         for (String[] quizDatum : quizData) {
             tableModel.addRow(quizDatum);
         }
-
     }
 }

@@ -1,5 +1,16 @@
 package interface_adapter.quiz;
 
+/**
+ * The {@code DisplayQuizzesState} class represents the state of the "Display Quizzes" view.
+ * It holds information such as the table of quizzes and any error messages related to the
+ * absence of quizzes.
+ *
+ * <p>Instances of this class are used to communicate the state of the view between the
+ * {@link DisplayQuizzesViewModel} and the {@link DisplayQuizzesPresenter}.</p>
+ *
+ * @see DisplayQuizzesViewModel
+ * @see DisplayQuizzesPresenter
+ */
 public class DisplayQuizzesState {
     private String[][] quizzesTable;
 
@@ -8,11 +19,6 @@ public class DisplayQuizzesState {
     public DisplayQuizzesState(){
 
     }
-
-//    public DisplayQuizzesState(DisplayQuizzesState copy){
-//        this.quizzesTable = copy.quizzesTable;
-//        this.emptyQuizzesError = copy.emptyQuizzesError;
-//    }
 
     public void setQuizzesTable(String[][] quizzesTable){
         this.quizzesTable = quizzesTable;

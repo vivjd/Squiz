@@ -15,7 +15,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Arrays;
 
 public class NoteView extends JPanel implements ActionListener, PropertyChangeListener{
     public final String viewName = "note";
@@ -29,7 +28,6 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     private final JButton allNotes;
 
     private final JButton generateQuiz;
-
 
     private final SaveNoteController saveNoteController;
     private final NoteViewModel noteViewModel;
@@ -167,19 +165,11 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        //TODO: perhaps this is the issue?
-//        NoteState state = (NoteState) evt.getNewValue();
-//        if (state.getEmptyNoteError() != null) {
-//            JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
-//        }
         Object newValue = evt.getNewValue();
         if (newValue instanceof DisplayQuizzesState) {
             DisplayQuizzesState state = (DisplayQuizzesState) newValue;
             if (state.getEmptyQuizzesError() != null) {
                 JOptionPane.showMessageDialog(this, state.getEmptyQuizzesError());
-            } else {
-                System.out.println("From NoteView" + Arrays.deepToString(state.getQuizzesTable()));
-                displayQuizzesViewModel.setState(state);
             }
         } else if (newValue instanceof NoteState) {
             NoteState state = (NoteState) newValue;
@@ -187,7 +177,6 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                 JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
             }
         }
-
     }
 
 }
