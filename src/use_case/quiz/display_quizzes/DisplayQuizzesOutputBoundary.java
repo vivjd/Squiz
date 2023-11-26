@@ -1,4 +1,4 @@
-package use_case.quiz.display_quiz;
+package use_case.quiz.display_quizzes;
 
 /**
  * The {@code DisplayQuizzesOutputBoundary} interface defines methods for preparing views

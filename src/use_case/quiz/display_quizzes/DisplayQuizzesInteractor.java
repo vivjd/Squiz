@@ -1,4 +1,4 @@
-package use_case.quiz.display_quiz;
+package use_case.quiz.display_quizzes;
 
 import entity.Quiz;
 import use_case.quiz.QuizDataAccessInterface;

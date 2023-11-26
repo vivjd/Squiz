@@ -4,9 +4,9 @@ import interface_adapter.note.SaveNoteController;
 import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
 
-import interface_adapter.quiz.display_quiz.DisplayQuizzesViewModel;
-import interface_adapter.quiz.display_quiz.DisplayQuizzesController;
-import interface_adapter.quiz.display_quiz.DisplayQuizzesState;
+import interface_adapter.quiz.display_quizzes.DisplayQuizzesViewModel;
+import interface_adapter.quiz.display_quizzes.DisplayQuizzesController;
+import interface_adapter.quiz.display_quizzes.DisplayQuizzesState;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
