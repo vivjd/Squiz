@@ -53,7 +53,7 @@ public class MultipleChoiceQuestion extends Question<Integer> {
         return answerOptions;
     }
 
-    public void setAnswerOptions(HashMap<Integer, String> ansOps) {
+    public void setAnswerOptions(Map<Integer, String> ansOps) {
         this.answerOptions = ansOps;
     }
 
