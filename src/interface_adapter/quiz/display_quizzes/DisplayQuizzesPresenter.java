@@ -1,8 +1,8 @@
 package interface_adapter.quiz.display_quizzes;
 
 import interface_adapter.ViewManagerModel;
-import use_case.quiz.DisplayQuizzesOutputBoundary;
-import use_case.quiz.DisplayQuizzesOutputData;
+import use_case.quiz.display_quizzes.DisplayQuizzesOutputBoundary;
+import use_case.quiz.display_quizzes.DisplayQuizzesOutputData;
 
 import java.util.Arrays;
 

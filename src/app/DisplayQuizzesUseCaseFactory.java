@@ -4,10 +4,10 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.quiz.display_quizzes.DisplayQuizzesController;
 import interface_adapter.quiz.display_quizzes.DisplayQuizzesPresenter;
 import interface_adapter.quiz.display_quizzes.DisplayQuizzesViewModel;
-import use_case.quiz.DisplayQuizzesInputBoundary;
-import use_case.quiz.DisplayQuizzesInteractor;
-import use_case.quiz.DisplayQuizzesOutputBoundary;
 import use_case.quiz.QuizDataAccessInterface;
+import use_case.quiz.display_quizzes.DisplayQuizzesInputBoundary;
+import use_case.quiz.display_quizzes.DisplayQuizzesInteractor;
+import use_case.quiz.display_quizzes.DisplayQuizzesOutputBoundary;
 import view.DisplayQuizzesView;
 
 public class DisplayQuizzesUseCaseFactory {
