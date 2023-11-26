@@ -5,12 +5,12 @@ import org.bson.codecs.pojo.annotations.BsonDiscriminator;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.types.ObjectId;
 
-
 @BsonDiscriminator
 public abstract class Question <T> {
 
     @BsonId
     private ObjectId id;
+
     boolean answerDisplayed = false;
     String question;
 
@@ -26,5 +26,6 @@ public abstract class Question <T> {
         return gson.toJson(this);
     }
 
-    public abstract int checkAnswer(Object userResponse);
+  public abstract int checkAnswer(Object userResponse);
+
 }
