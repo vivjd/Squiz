@@ -1,10 +1,8 @@
 package view;
 
-import interface_adapter.ViewModel;
-import interface_adapter.quiz.DisplayQuizzesViewModel;
-import interface_adapter.quiz.display_quiz.DisplayQuizController;
-import interface_adapter.quiz.display_quiz.DisplayQuizState;
-
+import interface_adapter.quiz.display_quiz.DisplayQuizzesController;
+import interface_adapter.quiz.display_quiz.DisplayQuizzesState;
+import interface_adapter.quiz.display_quiz.DisplayQuizzesViewModel;
 
 
 import javax.swing.*;
@@ -27,9 +25,9 @@ public class QuizView extends JPanel implements PropertyChangeListener {
     final JButton edit;
 
     final JButton back;
-    private final DisplayQuizController displayQuizController;
+    private final DisplayQuizzesController displayQuizController;
 
-    public QuizView(DisplayQuizzesViewModel quizViewModel, DisplayQuizController controller) {
+    public QuizView(DisplayQuizzesViewModel quizViewModel, DisplayQuizzesController controller) {
         this.quizViewModel = quizViewModel;
         this.displayQuizController = controller;
 
@@ -51,7 +49,7 @@ public class QuizView extends JPanel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        DisplayQuizState state = (DisplayQuizState) evt.getNewValue();
+        DisplayQuizzesState state = (DisplayQuizzesState) evt.getNewValue();
         quizData = state.getQuizzesTable();
     }
 

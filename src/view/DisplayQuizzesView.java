@@ -1,8 +1,8 @@
 package view;
 
-import interface_adapter.quiz.DisplayQuizzesController;
-import interface_adapter.quiz.DisplayQuizzesState;
-import interface_adapter.quiz.DisplayQuizzesViewModel;
+import interface_adapter.quiz.display_quiz.DisplayQuizzesController;
+import interface_adapter.quiz.display_quiz.DisplayQuizzesState;
+import interface_adapter.quiz.display_quiz.DisplayQuizzesViewModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

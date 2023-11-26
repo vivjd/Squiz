@@ -1,11 +1,9 @@
-package interface_adapter.quiz;
+package interface_adapter.quiz.display_quiz;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.note.NoteViewModel;
 import use_case.quiz.DisplayQuizzesOutputBoundary;
 import use_case.quiz.DisplayQuizzesOutputData;
 
-import javax.swing.*;
 import java.util.Arrays;
 
 public class DisplayQuizzesPresenter implements DisplayQuizzesOutputBoundary {

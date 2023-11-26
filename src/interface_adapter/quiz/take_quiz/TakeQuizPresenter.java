@@ -1,8 +1,6 @@
 package interface_adapter.quiz.take_quiz;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.quiz.display_quiz.DisplayQuizState;
-import use_case.quiz.display_quiz.DisplayQuizOutputData;
 import use_case.quiz.take_quiz.TakeQuizOutputBoundary;
 import use_case.quiz.take_quiz.TakeQuizOutputData;
 

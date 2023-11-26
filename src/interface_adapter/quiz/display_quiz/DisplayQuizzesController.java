@@ -1,4 +1,4 @@
-package interface_adapter.quiz;
+package interface_adapter.quiz.display_quiz;
 
 import use_case.quiz.DisplayQuizzesInputBoundary;
 
@@ -11,7 +11,7 @@ public class DisplayQuizzesController {
         this.displayQuizUseCaseInteractor = displayQuizUseCaseInteractor;
     }
 
-    public void execute(){
+    public void execute() {
         this.displayQuizUseCaseInteractor.execute();
     }
 }

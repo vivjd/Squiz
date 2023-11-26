@@ -1,17 +1,14 @@
 package app;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.quiz.DisplayQuizzesController;
-import interface_adapter.quiz.DisplayQuizzesPresenter;
-import interface_adapter.quiz.DisplayQuizzesState;
-import interface_adapter.quiz.DisplayQuizzesViewModel;
+import interface_adapter.quiz.display_quiz.DisplayQuizzesController;
+import interface_adapter.quiz.display_quiz.DisplayQuizzesPresenter;
+import interface_adapter.quiz.display_quiz.DisplayQuizzesViewModel;
 import use_case.quiz.DisplayQuizzesInputBoundary;
 import use_case.quiz.DisplayQuizzesInteractor;
 import use_case.quiz.DisplayQuizzesOutputBoundary;
 import use_case.quiz.QuizDataAccessInterface;
 import view.DisplayQuizzesView;
-
-import java.io.IOException;
 
 public class DisplayQuizzesUseCaseFactory {
     private DisplayQuizzesUseCaseFactory () {}

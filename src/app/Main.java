@@ -5,17 +5,14 @@ import data_access.QuizDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.note.NoteViewModel;
 
-import interface_adapter.quiz.DisplayQuizzesController;
-import interface_adapter.quiz.DisplayQuizzesViewModel;
+import interface_adapter.quiz.display_quiz.DisplayQuizzesViewModel;
 import view.DisplayQuizzesView;
 
-import use_case.note.NoteDataAccessInterface;
 import view.NoteView;
 import view.ViewManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
