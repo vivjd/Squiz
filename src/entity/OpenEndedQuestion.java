@@ -1,9 +1,26 @@
 package entity;
+<<<<<<< HEAD
 public class OpenEndedQuestion extends Question<String> {
+=======
+
+import org.bson.codecs.pojo.annotations.BsonCreator;
+import org.bson.codecs.pojo.annotations.BsonDiscriminator;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+
+@BsonDiscriminator
+public
+class OpenEndedQuestion extends Question {
+
+    @BsonProperty("answer")
+>>>>>>> DisplayQuizUseCase
     private String answer;
+    @BsonProperty("question")
     private String question;
 
-    public OpenEndedQuestion(String question, String answer){
+    public OpenEndedQuestion() {
+    }
+
+    public OpenEndedQuestion(@BsonProperty("question") String question, @BsonProperty("answer") String answer){
         this.question = question;
         this.answer = answer;
     }

@@ -4,6 +4,10 @@ import interface_adapter.note.SaveNoteController;
 import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
 
+import interface_adapter.quiz.DisplayQuizzesViewModel;
+import interface_adapter.quiz.DisplayQuizzesController;
+import interface_adapter.quiz.DisplayQuizzesState;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +15,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Arrays;
 
 public class NoteView extends JPanel implements ActionListener, PropertyChangeListener{
     public final String viewName = "note";
@@ -19,16 +24,25 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     private final JTextField userInputTitle = new JTextField("enter title here", 30);
 
     private final JButton save;
-    private final JButton edit;
-    private final JButton generate_quiz;
+    private final JButton allQuizzes;
+
+    private final JButton allNotes;
+
+    private final JButton generateQuiz;
 
 
     private final SaveNoteController saveNoteController;
     private final NoteViewModel noteViewModel;
+    private final DisplayQuizzesController displayQuizzesController;
+    private final DisplayQuizzesViewModel displayQuizzesViewModel;
 
-    public NoteView(SaveNoteController saveNoteController, NoteViewModel noteViewModel) {
+    public NoteView(SaveNoteController saveNoteController, NoteViewModel noteViewModel,
+                    DisplayQuizzesController displayQuizzesController, DisplayQuizzesViewModel displayQuizzesViewModel) {
         this.saveNoteController = saveNoteController;
         this.noteViewModel = noteViewModel;
+        this.displayQuizzesController = displayQuizzesController;
+        this.displayQuizzesViewModel = displayQuizzesViewModel;
+        displayQuizzesViewModel.addPropertyChangeListener(this);
         noteViewModel.addPropertyChangeListener(this);
 
         //creating title and note box
@@ -50,14 +64,18 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
         //creating buttons
         Box buttons = Box.createVerticalBox();
-        edit = new JButton(NoteViewModel.EDIT_LABEL);
+        allQuizzes = new JButton(NoteViewModel.ALL_QUIZZES_LABEL);
         save = new JButton(NoteViewModel.SAVE_LABEL);
-        generate_quiz = new JButton(NoteViewModel.SUBMIT_BUTTON_LABEL);
-        buttons.add(edit);
-        buttons.add(Box.createVerticalStrut(10));
+        generateQuiz = new JButton(NoteViewModel.SUBMIT_BUTTON_LABEL);
+        allNotes = new JButton(NoteViewModel.ALL_NOTES_LABEL);
+
         buttons.add(save);
         buttons.add(Box.createVerticalStrut(10));
-        buttons.add(generate_quiz);
+        buttons.add(allQuizzes);
+        buttons.add(Box.createVerticalStrut(10));
+        buttons.add(allNotes);
+        buttons.add(Box.createVerticalStrut(10));
+        buttons.add(generateQuiz);
 
         save.addActionListener(
                 new ActionListener() {
@@ -73,6 +91,19 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                             if (currentState.getEmptyNoteError().isEmpty()) {
                                 showSavedPopup();
                             }
+                        }
+                    }
+                }
+        );
+
+        allQuizzes.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(allQuizzes)) {
+                           DisplayQuizzesState currentState = displayQuizzesViewModel.getState();
+                            displayQuizzesController.execute();
+                            displayQuizzesViewModel.setState(currentState);
                         }
                     }
                 }
@@ -136,9 +167,27 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-            NoteState state = (NoteState) evt.getNewValue();
+        //TODO: perhaps this is the issue?
+//        NoteState state = (NoteState) evt.getNewValue();
+//        if (state.getEmptyNoteError() != null) {
+//            JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
+//        }
+        Object newValue = evt.getNewValue();
+        if (newValue instanceof DisplayQuizzesState) {
+            DisplayQuizzesState state = (DisplayQuizzesState) newValue;
+            if (state.getEmptyQuizzesError() != null) {
+                JOptionPane.showMessageDialog(this, state.getEmptyQuizzesError());
+            } else {
+                System.out.println("From NoteView" + Arrays.deepToString(state.getQuizzesTable()));
+                displayQuizzesViewModel.setState(state);
+            }
+        } else if (newValue instanceof NoteState) {
+            NoteState state = (NoteState) newValue;
             if (state.getEmptyNoteError() != null) {
                 JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
             }
+        }
+
     }
+
 }

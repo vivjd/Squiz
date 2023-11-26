@@ -2,9 +2,11 @@ package data_access;
 
 import com.mongodb.client.*;
 import entity.Quiz;
+import org.bson.Document;
 import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
+import org.bson.types.ObjectId;
 import use_case.quiz.QuizDataAccessInterface;
 
 import java.util.ArrayList;
@@ -57,6 +59,7 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
 
     @Override
     public List<Quiz> getAllQuizzes() {
+        //TODO: It appears that this method does not correctly return the quizzes. Instead, it only gets the ID.
         List<Quiz> resultList = new ArrayList<>();
 
         this.connect();
@@ -87,13 +90,18 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
             Quiz currentQuiz = resultList.get(i);
             outputTableData[i][0] = currentQuiz.getTitle();
             outputTableData[i][1] = Integer.toString(currentQuiz.getQuizLength());
-            outputTableData[i][2] = currentQuiz.getCreationTime().toString();
+//            outputTableData[i][2] = currentQuiz.getCreationTime().toString();
+            outputTableData[i][2] = currentQuiz.getCreationTime();
         }
+
+        this.disconnect();
+
         return outputTableData;
     }
 
     @Override
     public List<String> getAllQuizTitles() {
+        //TODO: may have issue, I think it doesn't actually get the Quiz
         List<String> resultList = new ArrayList<>();
 
         this.connect();
@@ -104,6 +112,23 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
             resultList.add(quiz.toJson());
         }
 
+        this.disconnect();
+
         return resultList;
     }
+
+    @Override
+    public Quiz getQuizById(String quizId) {
+        this.connect();
+
+        ObjectId objectId = new ObjectId(quizId);
+        Quiz quiz = mongoDatabase.getCollection("quizzes", Quiz.class)
+                .find(new Document("_id", objectId))
+                .first();
+
+        this.disconnect();
+
+        return quiz;
+    }
+
 }
