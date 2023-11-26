@@ -1,8 +1,13 @@
 package view;
 
+import interface_adapter.quiz.QuizViewModel;
+import interface_adapter.quiz.display_quiz.DisplayQuizController;
+import interface_adapter.quiz.display_quiz.DisplayQuizState;
+
 import interface_adapter.quiz.DisplayQuizController;
 import interface_adapter.quiz.DisplayQuizState;
 import interface_adapter.quiz.QuizViewModel;
+
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
