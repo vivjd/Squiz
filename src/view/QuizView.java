@@ -1,12 +1,10 @@
 package view;
 
-import interface_adapter.quiz.QuizViewModel;
+import interface_adapter.ViewModel;
+import interface_adapter.quiz.DisplayQuizzesViewModel;
 import interface_adapter.quiz.display_quiz.DisplayQuizController;
 import interface_adapter.quiz.display_quiz.DisplayQuizState;
 
-import interface_adapter.quiz.DisplayQuizController;
-import interface_adapter.quiz.DisplayQuizState;
-import interface_adapter.quiz.QuizViewModel;
 
 
 import javax.swing.*;
@@ -16,7 +14,7 @@ import java.beans.PropertyChangeListener;
 
 public class QuizView extends JPanel implements PropertyChangeListener {
     public final String viewName = "quiz";
-    private final QuizViewModel quizViewModel;
+    private final DisplayQuizzesViewModel quizViewModel;
     // frame
     JFrame frame;
     // Table
@@ -31,7 +29,7 @@ public class QuizView extends JPanel implements PropertyChangeListener {
     final JButton back;
     private final DisplayQuizController displayQuizController;
 
-    public QuizView(QuizViewModel quizViewModel, DisplayQuizController controller) {
+    public QuizView(DisplayQuizzesViewModel quizViewModel, DisplayQuizController controller) {
         this.quizViewModel = quizViewModel;
         this.displayQuizController = controller;
 
@@ -39,9 +37,9 @@ public class QuizView extends JPanel implements PropertyChangeListener {
         populateTable();
 
         JPanel buttons = new JPanel();
-        start = new JButton(QuizViewModel.START_LABEL);
-        back = new JButton(QuizViewModel.BACK_LABEL);
-        edit = new JButton(QuizViewModel.EDIT_LABEL);
+        start = new JButton(DisplayQuizzesViewModel.START_LABEL);
+        back = new JButton(DisplayQuizzesViewModel.BACK_LABEL);
+        edit = new JButton(DisplayQuizzesViewModel.EDIT_LABEL);
         buttons.add(start);
         buttons.add(back);
         buttons.add(edit);
