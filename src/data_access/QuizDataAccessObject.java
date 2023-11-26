@@ -1,6 +1,8 @@
 package data_access;
 
 import com.mongodb.client.*;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.FindOneAndDeleteOptions;
 import entity.Quiz;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecProvider;
@@ -125,16 +127,30 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
      * @return The retrieved quiz.
      */
     @Override
-    public Quiz getQuizById(String quizId) {
+    public Quiz getQuizById(ObjectId quizId) {
         this.connect();
 
-        ObjectId objectId = new ObjectId(quizId);
         Quiz quiz = mongoDatabase.getCollection("quizzes", Quiz.class)
-                .find(new Document("_id", objectId))
+                .find(new Document("_id", quizId))
                 .first();
 
         this.disconnect();
 
         return quiz;
+    }
+
+    @Override
+    public void deleteQuizById(ObjectId quizId){
+        this.connect();
+        FindOneAndDeleteOptions options = new FindOneAndDeleteOptions().projection(Document.parse("{_id: 1}"));
+        Quiz deletedDocument = mongoDatabase
+                .getCollection("quizzes", Quiz.class)
+                .findOneAndDelete(Filters.eq("_id", quizId), options);
+        this.disconnect();
+        if (deletedDocument != null) {
+            return;
+        } else {
+            throw new RuntimeException("Quiz with objectId: " + quizId + " not found.");
+        }
     }
 }

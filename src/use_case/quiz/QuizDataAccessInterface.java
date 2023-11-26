@@ -1,6 +1,7 @@
 package use_case.quiz;
 
 import entity.Quiz;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 /**
@@ -42,5 +43,7 @@ public interface QuizDataAccessInterface {
      * @param quizId The unique identifier of the quiz to retrieve.
      * @return The retrieved quiz.
      */
-    Quiz getQuizById(String quizId);
+    Quiz getQuizById(ObjectId quizId);
+
+    void deleteQuizById(ObjectId quizId);
 }
