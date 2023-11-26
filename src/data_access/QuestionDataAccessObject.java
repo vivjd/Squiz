@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import static com.mongodb.MongoClientSettings.getDefaultCodecRegistry;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
@@ -103,6 +104,7 @@ public class QuestionDataAccessObject implements QuestionDataAccessInterface, Da
 
     public String getMCQCorrectAnswer(MultipleChoiceQuestion q){
         Map<Integer, String> answerOptions = q.getAnswerOptions();
+
         return answerOptions.get(q.getCorrectAnswerIndex());
     }
 

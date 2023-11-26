@@ -1,5 +1,7 @@
 package entity;
+
 public class OpenEndedQuestion extends Question<String> {
+
     private String answer;
     private String question;
 

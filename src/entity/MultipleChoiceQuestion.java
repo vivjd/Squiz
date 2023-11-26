@@ -4,6 +4,7 @@ import java.util.Map;
 
 public class MultipleChoiceQuestion extends Question<Integer> {
     private Map<Integer, String> answerOptions;
+
     private int correctAnswerIndex;
     private String question;
 
