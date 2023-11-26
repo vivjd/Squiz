@@ -5,7 +5,7 @@ import data_access.QuizDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.note.NoteViewModel;
 
-import interface_adapter.quiz.DisplayQuizzesViewModel;
+import interface_adapter.quiz.display.DisplayQuizzesViewModel;
 import view.DisplayQuizzesView;
 
 import view.NoteView;

@@ -1,4 +1,4 @@
-package use_case.quiz;
+package use_case.quiz.display;
 
 /**
  * The {@code DisplayQuizzesOutputData} class represents the output data for displaying quizzes.

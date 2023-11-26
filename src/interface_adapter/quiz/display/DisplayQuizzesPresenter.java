@@ -1,8 +1,8 @@
-package interface_adapter.quiz;
+package interface_adapter.quiz.display;
 
 import interface_adapter.ViewManagerModel;
-import use_case.quiz.DisplayQuizzesOutputBoundary;
-import use_case.quiz.DisplayQuizzesOutputData;
+import use_case.quiz.display.DisplayQuizzesOutputBoundary;
+import use_case.quiz.display.DisplayQuizzesOutputData;
 
 /**
  * The {@code DisplayQuizzesPresenter} class implements the {@link DisplayQuizzesOutputBoundary}

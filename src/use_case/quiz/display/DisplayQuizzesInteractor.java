@@ -1,6 +1,7 @@
-package use_case.quiz;
+package use_case.quiz.display;
 
 import entity.Quiz;
+import use_case.quiz.QuizDataAccessInterface;
 
 import java.util.List;
 /**

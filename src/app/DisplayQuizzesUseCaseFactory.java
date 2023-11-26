@@ -1,12 +1,12 @@
 package app;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.quiz.DisplayQuizzesController;
-import interface_adapter.quiz.DisplayQuizzesPresenter;
-import interface_adapter.quiz.DisplayQuizzesViewModel;
-import use_case.quiz.DisplayQuizzesInputBoundary;
-import use_case.quiz.DisplayQuizzesInteractor;
-import use_case.quiz.DisplayQuizzesOutputBoundary;
+import interface_adapter.quiz.display.DisplayQuizzesController;
+import interface_adapter.quiz.display.DisplayQuizzesPresenter;
+import interface_adapter.quiz.display.DisplayQuizzesViewModel;
+import use_case.quiz.display.DisplayQuizzesInputBoundary;
+import use_case.quiz.display.DisplayQuizzesInteractor;
+import use_case.quiz.display.DisplayQuizzesOutputBoundary;
 import use_case.quiz.QuizDataAccessInterface;
 import view.DisplayQuizzesView;
 
