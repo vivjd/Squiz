@@ -4,6 +4,9 @@ import interface_adapter.note.SaveNoteController;
 import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
 
+import interface_adapter.note.display_notes.DisplayNotesController;
+import interface_adapter.note.display_notes.DisplayNotesState;
+import interface_adapter.note.display_notes.DisplayNotesViewModel;
 import interface_adapter.quiz.DisplayQuizzesViewModel;
 import interface_adapter.quiz.DisplayQuizzesController;
 import interface_adapter.quiz.DisplayQuizzesState;
@@ -33,13 +36,19 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     private final NoteViewModel noteViewModel;
     private final DisplayQuizzesController displayQuizzesController;
     private final DisplayQuizzesViewModel displayQuizzesViewModel;
+    private final DisplayNotesController displayNotesController;
+    private final DisplayNotesViewModel displayNotesViewModel;
 
     public NoteView(SaveNoteController saveNoteController, NoteViewModel noteViewModel,
-                    DisplayQuizzesController displayQuizzesController, DisplayQuizzesViewModel displayQuizzesViewModel) {
+                    DisplayQuizzesController displayQuizzesController, DisplayQuizzesViewModel displayQuizzesViewModel,
+                    DisplayNotesController displayNotesController, DisplayNotesViewModel displayNotesViewModel) {
         this.saveNoteController = saveNoteController;
         this.noteViewModel = noteViewModel;
         this.displayQuizzesController = displayQuizzesController;
         this.displayQuizzesViewModel = displayQuizzesViewModel;
+        this.displayNotesController = displayNotesController;
+        this.displayNotesViewModel = displayNotesViewModel;
+
         displayQuizzesViewModel.addPropertyChangeListener(this);
         noteViewModel.addPropertyChangeListener(this);
 
@@ -102,6 +111,19 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                            DisplayQuizzesState currentState = displayQuizzesViewModel.getState();
                             displayQuizzesController.execute();
                             displayQuizzesViewModel.setState(currentState);
+                        }
+                    }
+                }
+        );
+
+        allNotes.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(allNotes)) {
+                            DisplayNotesState currentState = displayNotesViewModel.getState();
+                            displayNotesController.execute();
+                            displayNotesViewModel.setState(currentState);
                         }
                     }
                 }
@@ -175,6 +197,11 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
             NoteState state = (NoteState) newValue;
             if (state.getEmptyNoteError() != null) {
                 JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
+            }
+        } else if (newValue instanceof  DisplayNotesState) {
+            DisplayNotesState state = (DisplayNotesState) newValue;
+            if (state.getEmptyNotesError() != null) {
+                JOptionPane.showMessageDialog(this, state.getEmptyNotesError());
             }
         }
     }
