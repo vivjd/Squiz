@@ -1,13 +1,14 @@
 package app;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.quiz.display_quizzes.DisplayQuizzesController;
-import interface_adapter.quiz.display_quizzes.DisplayQuizzesPresenter;
-import interface_adapter.quiz.display_quizzes.DisplayQuizzesViewModel;
+
+import interface_adapter.quiz.display.DisplayQuizzesController;
+import interface_adapter.quiz.display.DisplayQuizzesPresenter;
+import interface_adapter.quiz.display.DisplayQuizzesViewModel;
+import use_case.quiz.display.DisplayQuizzesInputBoundary;
+import use_case.quiz.display.DisplayQuizzesInteractor;
+import use_case.quiz.display.DisplayQuizzesOutputBoundary;
 import use_case.quiz.QuizDataAccessInterface;
-import use_case.quiz.display_quizzes.DisplayQuizzesInputBoundary;
-import use_case.quiz.display_quizzes.DisplayQuizzesInteractor;
-import use_case.quiz.display_quizzes.DisplayQuizzesOutputBoundary;
 import view.DisplayQuizzesView;
 
 public class DisplayQuizzesUseCaseFactory {
@@ -32,6 +33,4 @@ public class DisplayQuizzesUseCaseFactory {
 
         return new DisplayQuizzesController(displayQuizzesInteractor);
     }
-
-
 }

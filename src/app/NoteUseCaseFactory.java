@@ -3,9 +3,11 @@ package app;
 import data_access.NoteDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.note.*;
-import interface_adapter.quiz.display_quizzes.DisplayQuizzesController;
-import interface_adapter.quiz.display_quizzes.DisplayQuizzesPresenter;
-import interface_adapter.quiz.display_quizzes.DisplayQuizzesViewModel;
+
+import interface_adapter.quiz.display.DisplayQuizzesController;
+import interface_adapter.quiz.display.DisplayQuizzesPresenter;
+import interface_adapter.quiz.display.DisplayQuizzesViewModel;
+
 import use_case.note.NoteDataAccessInterface;
 import use_case.note.delete.DeleteNoteInputBoundary;
 import use_case.note.delete.DeleteNoteInteractor;
@@ -14,10 +16,10 @@ import use_case.note.save.SaveNoteInputBoundary;
 import use_case.note.save.SaveNoteInteractor;
 import use_case.note.save.SaveNoteOutputBoundary;
 
+import use_case.quiz.display.DisplayQuizzesInputBoundary;
+import use_case.quiz.display.DisplayQuizzesInteractor;
+import use_case.quiz.display.DisplayQuizzesOutputBoundary;
 import use_case.quiz.QuizDataAccessInterface;
-import use_case.quiz.display_quizzes.DisplayQuizzesInputBoundary;
-import use_case.quiz.display_quizzes.DisplayQuizzesInteractor;
-import use_case.quiz.display_quizzes.DisplayQuizzesOutputBoundary;
 import view.NoteView;
 
 public class NoteUseCaseFactory {

@@ -1,4 +1,3 @@
-
 package interface_adapter.quiz.display;
 
 import interface_adapter.ViewManagerModel;

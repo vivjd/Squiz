@@ -4,9 +4,9 @@ import interface_adapter.note.SaveNoteController;
 import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
 
-import interface_adapter.quiz.display_quizzes.DisplayQuizzesViewModel;
-import interface_adapter.quiz.display_quizzes.DisplayQuizzesController;
-import interface_adapter.quiz.display_quizzes.DisplayQuizzesState;
+import interface_adapter.quiz.display.DisplayQuizzesViewModel;
+import interface_adapter.quiz.display.DisplayQuizzesController;
+import interface_adapter.quiz.display.DisplayQuizzesState;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +15,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Arrays;
 
 public class NoteView extends JPanel implements ActionListener, PropertyChangeListener{
     public final String viewName = "note";
@@ -29,7 +28,6 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     private final JButton allNotes;
 
     private final JButton generateQuiz;
-
 
     private final SaveNoteController saveNoteController;
     private final NoteViewModel noteViewModel;
@@ -167,19 +165,11 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        //TODO: perhaps this is the issue?
-//        NoteState state = (NoteState) evt.getNewValue();
-//        if (state.getEmptyNoteError() != null) {
-//            JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
-//        }
         Object newValue = evt.getNewValue();
         if (newValue instanceof DisplayQuizzesState) {
             DisplayQuizzesState state = (DisplayQuizzesState) newValue;
             if (state.getEmptyQuizzesError() != null) {
                 JOptionPane.showMessageDialog(this, state.getEmptyQuizzesError());
-            } else {
-                System.out.println("From NoteView" + Arrays.deepToString(state.getQuizzesTable()));
-                displayQuizzesViewModel.setState(state);
             }
         } else if (newValue instanceof NoteState) {
             NoteState state = (NoteState) newValue;
@@ -187,7 +177,6 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                 JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
             }
         }
-
     }
 
 }
