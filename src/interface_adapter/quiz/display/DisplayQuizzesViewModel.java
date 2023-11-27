@@ -24,6 +24,7 @@ public class DisplayQuizzesViewModel extends ViewModel {
     public static final String START_LABEL = "Start Quiz";
     public static final String EDIT_LABEL = "Edit Quiz";
     public static final String QUIZ_LABEL = "Quiz";
+    public static final String DELETE_LABEL = "Delete Quiz";
 
     public static final String BACK_LABEL = "Back";
     private DisplayQuizzesState state = new DisplayQuizzesState();

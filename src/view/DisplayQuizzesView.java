@@ -1,5 +1,8 @@
 package view;
 
+import interface_adapter.quiz.delete.DeleteQuizController;
+import interface_adapter.quiz.delete.DeleteQuizState;
+import interface_adapter.quiz.delete.DeleteQuizViewModel;
 import interface_adapter.quiz.display.DisplayQuizzesController;
 import interface_adapter.quiz.display.DisplayQuizzesState;
 import interface_adapter.quiz.display.DisplayQuizzesViewModel;
@@ -21,6 +24,9 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
     private String[][] quizData;
     private final DisplayQuizzesController displayQuizzesController;
     private final DisplayQuizzesViewModel displayQuizzesViewModel;
+
+    private final DeleteQuizViewModel deleteQuizViewModel;
+    private final DeleteQuizController deleteQuizController;
 //    private final NoteViewModel noteViewModel;
     // Table
     JTable table;
@@ -30,16 +36,20 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
     final JButton edit;
 
     final JButton back;
+    final JButton delete;
 
-    public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel, DisplayQuizzesController controller) {
+    public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel, DisplayQuizzesController controller, DeleteQuizViewModel deleteQuizViewModel, DeleteQuizController deleteQuizController) {
         this.displayQuizzesViewModel = displayQuizzesViewModel;
         this.displayQuizzesController = controller;
+        this.deleteQuizViewModel = deleteQuizViewModel;
+        this.deleteQuizController = deleteQuizController;
 //        this.noteViewModel = noteViewModel;
 
         displayQuizzesViewModel.addPropertyChangeListener(this);
 
         Box buttons = Box.createVerticalBox();
         start = new JButton(DisplayQuizzesViewModel.START_LABEL);
+        delete = new JButton (DisplayQuizzesViewModel.DELETE_LABEL);
         back = new JButton(DisplayQuizzesViewModel.BACK_LABEL);
         edit = new JButton(DisplayQuizzesViewModel.EDIT_LABEL);
         buttons.add(start);
@@ -47,6 +57,8 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         buttons.add(back);
         buttons.add(Box.createVerticalStrut(10));
         buttons.add(edit);
+        buttons.add(Box.createVerticalStrut(10));
+        buttons.add(delete);
         buttons.add(Box.createVerticalStrut(10));
 
         start.addActionListener(
@@ -71,6 +83,19 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
 //                            NoteState currentState = noteViewModel.getState();
 //                            System.out.println(noteViewModel.getState());
 //                            noteViewModel.setState(currentState);
+                        }
+                    }
+                }
+        );
+
+        delete.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(delete)){
+                            DeleteQuizState currentState = deleteQuizViewModel.getState();
+//                            deleteQuizController.execute();
+                            deleteQuizViewModel.setState(currentState);
                         }
                     }
                 }
