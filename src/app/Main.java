@@ -43,7 +43,7 @@ public class Main {
                 displayQuizzesViewModel, quizDataAccessObject, displayNotesViewModel);
         views.add(noteView, noteView.viewName);
 
-        DisplayQuizzesView displayQuizzesView = DisplayQuizzesUseCaseFactory.create(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject);
+        DisplayQuizzesView displayQuizzesView = DisplayQuizzesUseCaseFactory.create(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject, noteViewModel);
         views.add(displayQuizzesView, displayQuizzesView.viewName);
 
         DisplayNotesView displayNotesView = DisplayNotesUseCaseFactory.create(viewManagerModel, displayNotesViewModel, noteDataAccessObject, noteViewModel);

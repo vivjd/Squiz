@@ -1,6 +1,9 @@
 package app;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.note.NoteViewModel;
+import interface_adapter.note.back.BackController;
+import interface_adapter.note.back.BackPresenter;
 import interface_adapter.quiz.DisplayQuizzesController;
 import interface_adapter.quiz.DisplayQuizzesPresenter;
 import interface_adapter.quiz.DisplayQuizzesViewModel;
@@ -16,10 +19,14 @@ public class DisplayQuizzesUseCaseFactory {
     public static DisplayQuizzesView create(
             ViewManagerModel viewManagerModel,
             DisplayQuizzesViewModel displayQuizzesViewModel,
-            QuizDataAccessInterface quizDataAccessObject) {
+            QuizDataAccessInterface quizDataAccessObject,
+            NoteViewModel noteViewModel) {
 
         DisplayQuizzesController quizzesController= createDisplayQuizzesUseCase(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject);
-        return new DisplayQuizzesView(displayQuizzesViewModel, quizzesController);
+        BackPresenter backPresenter = new BackPresenter(noteViewModel, viewManagerModel);
+        BackController backController = new BackController(backPresenter);
+
+        return new DisplayQuizzesView(displayQuizzesViewModel, quizzesController, backController);
     }
 
     private static DisplayQuizzesController createDisplayQuizzesUseCase(

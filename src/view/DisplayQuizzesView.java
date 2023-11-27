@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.note.back.BackController;
 import interface_adapter.quiz.DisplayQuizzesController;
 import interface_adapter.quiz.DisplayQuizzesState;
 import interface_adapter.quiz.DisplayQuizzesViewModel;
@@ -20,8 +21,9 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
     /** The data to be displayed in the quiz table. */
     private String[][] quizData;
     private final DisplayQuizzesController displayQuizzesController;
+    private final BackController backController;
     private final DisplayQuizzesViewModel displayQuizzesViewModel;
-//    private final NoteViewModel noteViewModel;
+
     // Table
     JTable table;
 
@@ -31,10 +33,11 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
 
     final JButton back;
 
-    public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel, DisplayQuizzesController controller) {
+    public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel, DisplayQuizzesController controller,
+                              BackController backController) {
         this.displayQuizzesViewModel = displayQuizzesViewModel;
         this.displayQuizzesController = controller;
-//        this.noteViewModel = noteViewModel;
+        this.backController = backController;
 
         displayQuizzesViewModel.addPropertyChangeListener(this);
 
@@ -67,10 +70,7 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
                     @Override
                     public void actionPerformed(ActionEvent e){
                         if (e.getSource().equals(back)) {
-                            // TODO: implement back button
-//                            NoteState currentState = noteViewModel.getState();
-//                            System.out.println(noteViewModel.getState());
-//                            noteViewModel.setState(currentState);
+                            backController.execute();
                         }
                     }
                 }
