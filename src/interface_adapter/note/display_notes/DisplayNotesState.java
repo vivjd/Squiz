@@ -1,6 +1,7 @@
 package interface_adapter.note.display_notes;
 
 import interface_adapter.quiz.DisplayQuizzesState;
+import org.bson.types.ObjectId;
 
 /**
  * The {@code DisplayNotesState} class represents the state of the "Display Notes" view.
@@ -16,10 +17,13 @@ import interface_adapter.quiz.DisplayQuizzesState;
 public class DisplayNotesState {
     private String[][] table;
     private String emptyNotesError = null;
+    private ObjectId[] ids;
 
     public DisplayNotesState(){}
     public void setTable(String[][] table) {this.table = table;}
     public String[][] getTable(){return table;}
+    public ObjectId[] getIds(){return ids;}
+    public void setIds(ObjectId[] ids) {this.ids = ids;}
     public void setEmptyNotesError(String emptyNotesError){this.emptyNotesError = emptyNotesError;}
     public String getEmptyNotesError(){return emptyNotesError;}
 

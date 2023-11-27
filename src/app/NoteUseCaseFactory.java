@@ -75,15 +75,4 @@ public class NoteUseCaseFactory {
 
         return new DisplayQuizzesController(displayQuizzesInteractor);
     }
-
-    private static DeleteNoteController deleteNoteUseCase(
-            ViewManagerModel viewManagerModel,
-            NoteViewModel noteViewModel,
-            NoteDataAccessObject noteDataAccessObject) {
-        DeleteNoteOutputBoundary deleteNoteOutputBoundary = new DeleteNotePresenter(noteViewModel, viewManagerModel);
-        DeleteNoteInputBoundary deleteNoteInteractor = new DeleteNoteInteractor(noteDataAccessObject, deleteNoteOutputBoundary);
-
-        return new DeleteNoteController(deleteNoteInteractor);
-    }
-
 }

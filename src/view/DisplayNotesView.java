@@ -1,8 +1,10 @@
 package view;
 
+import interface_adapter.note.DeleteNoteController;
 import interface_adapter.note.display_notes.DisplayNotesController;
 import interface_adapter.note.display_notes.DisplayNotesState;
 import interface_adapter.note.display_notes.DisplayNotesViewModel;
+import org.bson.types.ObjectId;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -20,11 +22,14 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
     private final JButton back = new JButton(DisplayNotesViewModel.BACK_LABEL);
     private final JButton view = new JButton(DisplayNotesViewModel.NOTE_LABEL);
     private final DisplayNotesController displayNotesController;
+    private final DeleteNoteController deleteNoteController;
     private final DisplayNotesViewModel displayNotesViewModel;
 
-    public DisplayNotesView(DisplayNotesViewModel displayNotesViewModel, DisplayNotesController controller) {
+    public DisplayNotesView(DisplayNotesViewModel displayNotesViewModel, DisplayNotesController displayNotesController,
+                            DeleteNoteController deleteNoteController) {
         this.displayNotesViewModel = displayNotesViewModel;
-        this.displayNotesController = controller;
+        this.displayNotesController = displayNotesController;
+        this.deleteNoteController = deleteNoteController;
 
         displayNotesViewModel.addPropertyChangeListener(this);
 
@@ -47,7 +52,11 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(delete)) {
-                            notImplemented();
+                            ObjectId noteId = displayNotesViewModel.getState().getIds()[table.getSelectedRow()];
+                            deleteNoteController.execute(noteId);
+                            displayNotesController.execute();
+
+                            showDeletePopUp();
                         }
                     }
                 }
@@ -111,5 +120,9 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
 
     private void notImplemented() {
         JOptionPane.showMessageDialog(this, "not implemented");
+    }
+
+    private void showDeletePopUp() {
+        JOptionPane.showMessageDialog(this, "note deleted");
     }
 }
