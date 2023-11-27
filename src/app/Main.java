@@ -5,7 +5,9 @@ import data_access.QuizDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.note.NoteViewModel;
 
-import interface_adapter.quiz.display.DisplayQuizzesViewModel;
+import interface_adapter.note.display_notes.DisplayNotesViewModel;
+import interface_adapter.quiz.DisplayQuizzesViewModel;
+import view.DisplayNotesView;
 import view.DisplayQuizzesView;
 
 import view.NoteView;
@@ -30,19 +32,22 @@ public class Main {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         new ViewManager(views, cardLayout, viewManagerModel);
 
-        //unsure if this is the right DataAccessObject...
         NoteDataAccessObject noteDataAccessObject = new NoteDataAccessObject();
         QuizDataAccessObject quizDataAccessObject = new QuizDataAccessObject();
 
         NoteViewModel noteViewModel = new NoteViewModel();
         DisplayQuizzesViewModel displayQuizzesViewModel = new DisplayQuizzesViewModel();
+        DisplayNotesViewModel displayNotesViewModel = new DisplayNotesViewModel();
 
         NoteView noteView = NoteUseCaseFactory.create(viewManagerModel, noteViewModel, noteDataAccessObject,
-                displayQuizzesViewModel, quizDataAccessObject);
+                displayQuizzesViewModel, quizDataAccessObject, displayNotesViewModel);
         views.add(noteView, noteView.viewName);
 
         DisplayQuizzesView displayQuizzesView = DisplayQuizzesUseCaseFactory.create(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject);
         views.add(displayQuizzesView, displayQuizzesView.viewName);
+
+        DisplayNotesView displayNotesView = DisplayNotesUseCaseFactory.create(viewManagerModel, displayNotesViewModel, noteDataAccessObject);
+        views.add(displayNotesView, displayNotesView.viewName);
 
         viewManagerModel.setActiveView(noteView.viewName);
         viewManagerModel.firePropertyChanged();
