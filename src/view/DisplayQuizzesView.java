@@ -3,8 +3,13 @@ package view;
 import interface_adapter.quiz.display.DisplayQuizzesController;
 import interface_adapter.quiz.display.DisplayQuizzesState;
 import interface_adapter.quiz.display.DisplayQuizzesViewModel;
+import interface_adapter.quiz.take_quiz.TakeQuizController;
+import interface_adapter.quiz.take_quiz.TakeQuizState;
+import interface_adapter.quiz.take_quiz.TakeQuizViewModel;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,20 +26,21 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
     private String[][] quizData;
     private final DisplayQuizzesController displayQuizzesController;
     private final DisplayQuizzesViewModel displayQuizzesViewModel;
-//    private final NoteViewModel noteViewModel;
-    // Table
+
+    private TakeQuizViewModel takeQuizViewModel;
+
     JTable table;
-
     final JButton start;
-
     final JButton edit;
-
     final JButton back;
 
-    public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel, DisplayQuizzesController controller) {
+    private ListSelectionModel selectionModel;
+    private String selectedTitle;
+
+    public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel,
+                              DisplayQuizzesController controller) {
         this.displayQuizzesViewModel = displayQuizzesViewModel;
         this.displayQuizzesController = controller;
-//        this.noteViewModel = noteViewModel;
 
         displayQuizzesViewModel.addPropertyChangeListener(this);
 
@@ -56,8 +62,11 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
                         if (e.getSource().equals(start)) {
 
                             // TODO: implement start quiz button
+                            // get the quiz id OR title, execute on that
+                            // change screen to the questionview
+                            System.out.println(selectedTitle);
 //                            TakeQuizState currentState = takeQuizViewModel.getState();
-//                            takeQuizController.execute();
+//                            takeQuizController.execute(selectedTitle);
                         }
                     }
                 }
@@ -112,5 +121,21 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         for (String[] quizDatum : quizData) {
             tableModel.addRow(quizDatum);
         }
+
+        selectionModel = table.getSelectionModel();
+        selectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = table.getSelectedRow();
+                    if (selectedRow != -1) {
+                        selectedTitle = table.getValueAt(selectedRow, 0).toString();
+                        System.out.println("Selected Row: " + selectedRow);
+                    } else {
+                        System.out.println("No Row Selected");
+                    }
+                }
+            }
+        });
     }
 }

@@ -9,14 +9,12 @@ import java.util.List;
 public class TakeQuizController {
 
     final TakeQuizInputBoundary takeQuizInteractor;
-
-
     public TakeQuizController(TakeQuizInputBoundary takeQuizInteractor) {
         this.takeQuizInteractor = takeQuizInteractor;
     }
 
-    public void execute(String title, ObjectId objectId){
-        TakeQuizInputData takeQuizInputData = new TakeQuizInputData(title, objectId);
+    public void execute(String title){
+        TakeQuizInputData takeQuizInputData = new TakeQuizInputData(title);
         takeQuizInteractor.execute(takeQuizInputData);
     }
 }
