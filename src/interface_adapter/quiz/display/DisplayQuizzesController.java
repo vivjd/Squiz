@@ -1,4 +1,4 @@
-package interface_adapter.quiz;
+package interface_adapter.quiz.display;
 
 import use_case.quiz.display.DisplayQuizzesInputBoundary;
 

@@ -1,4 +1,4 @@
-package interface_adapter.quiz;
+package interface_adapter.quiz.display;
 
 import interface_adapter.ViewManagerModel;
 import use_case.quiz.display.DisplayQuizzesOutputBoundary;
@@ -35,6 +35,7 @@ public class DisplayQuizzesPresenter implements DisplayQuizzesOutputBoundary {
     public void prepareSuccessView(DisplayQuizzesOutputData quiz) {
         DisplayQuizzesState quizState = displayQuizzesViewModel.getState();
         quizState.setQuizzesTable(quiz.getQuizzes());
+        quizState.setIds(quiz.getIds());
 
         this.displayQuizzesViewModel.setState(quizState);
         displayQuizzesViewModel.firePropertyChanged();

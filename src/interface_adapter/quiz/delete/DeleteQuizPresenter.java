@@ -8,17 +8,17 @@ import use_case.quiz.delete.DeleteQuizOutputData;
 import javax.swing.*;
 
 public class DeleteQuizPresenter implements DeleteQuizOutputBoundary {
-    private DisplayQuizzesViewModel displayQuizzesViewModel;
+    private DeleteQuizViewModel deleteQuizViewModel;
     private ViewManagerModel viewManagerModel;
 
-    public DeleteQuizPresenter(DisplayQuizzesViewModel displayQuizzesViewModel, ViewManagerModel viewManagerModel) {
-        this.displayQuizzesViewModel = displayQuizzesViewModel;
+    public DeleteQuizPresenter(DeleteQuizViewModel deleteQuizViewModel, ViewManagerModel viewManagerModel) {
+        this.deleteQuizViewModel = deleteQuizViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
     @Override
     public void prepareSuccessView(DeleteQuizOutputData response) {
-        JOptionPane.showMessageDialog(null, response.getQuizName());
+
     }
 
     @Override

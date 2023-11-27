@@ -153,4 +153,14 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
             throw new RuntimeException("Quiz with objectId: " + quizId + " not found.");
         }
     }
+
+    @Override
+    public ObjectId[] getAllIds() {
+        List<Quiz> resultList = getAllQuizzes();
+        ObjectId[] ids = new ObjectId[resultList.size()];
+        for (int i = 0; i < ids.length; i++) {
+            ids[i] = resultList.get(i).getId();
+        }
+        return ids;
+    }
 }

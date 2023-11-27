@@ -1,9 +1,15 @@
 package app;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.quiz.DisplayQuizzesController;
-import interface_adapter.quiz.DisplayQuizzesPresenter;
-import interface_adapter.quiz.DisplayQuizzesViewModel;
+import interface_adapter.quiz.delete.DeleteQuizController;
+import interface_adapter.quiz.delete.DeleteQuizPresenter;
+import interface_adapter.quiz.delete.DeleteQuizViewModel;
+import interface_adapter.quiz.display.DisplayQuizzesController;
+import interface_adapter.quiz.display.DisplayQuizzesPresenter;
+import interface_adapter.quiz.display.DisplayQuizzesViewModel;
+import use_case.quiz.delete.DeleteQuizInputBoundary;
+import use_case.quiz.delete.DeleteQuizInteractor;
+import use_case.quiz.delete.DeleteQuizOutputBoundary;
 import use_case.quiz.display.DisplayQuizzesInputBoundary;
 import use_case.quiz.display.DisplayQuizzesInteractor;
 import use_case.quiz.display.DisplayQuizzesOutputBoundary;
@@ -16,10 +22,12 @@ public class DisplayQuizzesUseCaseFactory {
     public static DisplayQuizzesView create(
             ViewManagerModel viewManagerModel,
             DisplayQuizzesViewModel displayQuizzesViewModel,
-            QuizDataAccessInterface quizDataAccessObject) {
+            QuizDataAccessInterface quizDataAccessObject,
+            DeleteQuizViewModel deleteQuizViewModel) {
 
         DisplayQuizzesController quizzesController= createDisplayQuizzesUseCase(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject);
-        return new DisplayQuizzesView(displayQuizzesViewModel, quizzesController);
+        DeleteQuizController deleteQuizController = createDeleteQuizUseCase(viewManagerModel, deleteQuizViewModel, quizDataAccessObject);
+        return new DisplayQuizzesView(displayQuizzesViewModel, quizzesController, deleteQuizController);
     }
 
     private static DisplayQuizzesController createDisplayQuizzesUseCase(
@@ -31,5 +39,17 @@ public class DisplayQuizzesUseCaseFactory {
         DisplayQuizzesInputBoundary displayQuizzesInteractor = new DisplayQuizzesInteractor(quizDataAccessObject, displayQuizzesOutputBoundary);
 
         return new DisplayQuizzesController(displayQuizzesInteractor);
+    }
+
+    private static DeleteQuizController createDeleteQuizUseCase(
+            ViewManagerModel viewManagerModel,
+            DeleteQuizViewModel deleteQuizViewModel,
+            QuizDataAccessInterface quizDataAccessObject
+    ){
+        DeleteQuizOutputBoundary deleteQuizOutputBoundary = new DeleteQuizPresenter(deleteQuizViewModel, viewManagerModel);
+
+        DeleteQuizInputBoundary deleteQuizInteractor = new DeleteQuizInteractor(quizDataAccessObject, deleteQuizOutputBoundary);
+
+        return new DeleteQuizController(deleteQuizInteractor);
     }
 }

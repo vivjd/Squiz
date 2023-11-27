@@ -6,6 +6,7 @@ import interface_adapter.quiz.delete.DeleteQuizViewModel;
 import interface_adapter.quiz.display.DisplayQuizzesController;
 import interface_adapter.quiz.display.DisplayQuizzesState;
 import interface_adapter.quiz.display.DisplayQuizzesViewModel;
+import org.bson.types.ObjectId;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -24,9 +25,8 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
     private String[][] quizData;
     private final DisplayQuizzesController displayQuizzesController;
     private final DisplayQuizzesViewModel displayQuizzesViewModel;
-
-    private final DeleteQuizViewModel deleteQuizViewModel;
     private final DeleteQuizController deleteQuizController;
+
 //    private final NoteViewModel noteViewModel;
     // Table
     JTable table;
@@ -38,10 +38,9 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
     final JButton back;
     final JButton delete;
 
-    public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel, DisplayQuizzesController controller, DeleteQuizViewModel deleteQuizViewModel, DeleteQuizController deleteQuizController) {
+    public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel, DisplayQuizzesController controller, DeleteQuizController deleteQuizController) {
         this.displayQuizzesViewModel = displayQuizzesViewModel;
         this.displayQuizzesController = controller;
-        this.deleteQuizViewModel = deleteQuizViewModel;
         this.deleteQuizController = deleteQuizController;
 //        this.noteViewModel = noteViewModel;
 
@@ -93,15 +92,23 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(delete)){
-                            DeleteQuizState currentState = deleteQuizViewModel.getState();
-//                            deleteQuizController.execute();
-                            deleteQuizViewModel.setState(currentState);
+                            ObjectId quizId = displayQuizzesViewModel.getState().getIds()[table.getSelectedRow()];
+                            deleteQuizController.execute(quizId);
+                            displayQuizzesController.execute();
+                            showDeletePopUp();
                         }
                     }
                 }
         );
 
-        table = new JTable(new DefaultTableModel(new String[0][0], columnNames));
+        table = new JTable(new DefaultTableModel(new String[0][0], columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+
+        table.setRowSelectionAllowed(true);
         table.setBounds(30, 40, 200, 300);
         JScrollPane scrollbar = new JScrollPane(table,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -136,5 +143,9 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         for (String[] quizDatum : quizData) {
             tableModel.addRow(quizDatum);
         }
+    }
+
+    private void showDeletePopUp() {
+        JOptionPane.showMessageDialog(this, "Quiz deleted");
     }
 }

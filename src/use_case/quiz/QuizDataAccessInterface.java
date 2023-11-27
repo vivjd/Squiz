@@ -46,4 +46,6 @@ public interface QuizDataAccessInterface {
     Quiz getQuizById(ObjectId quizId);
 
     void deleteQuizById(ObjectId quizId);
+
+    ObjectId[] getAllIds();
 }
