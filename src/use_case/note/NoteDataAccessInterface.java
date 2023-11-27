@@ -8,7 +8,7 @@ import java.util.List;
 public interface NoteDataAccessInterface {
     void saveNote(Note note);
     Note getNote(String title);
-    List<String> getAllNotes();
-
+    List<Note> getAllNotes();
+    String[][] getAllNotesTable();
     void deleteNote(ObjectId objectId);
 }
