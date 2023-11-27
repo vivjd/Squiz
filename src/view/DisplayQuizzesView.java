@@ -1,8 +1,8 @@
 package view;
 
-import interface_adapter.quiz.display.DisplayQuizzesController;
-import interface_adapter.quiz.display.DisplayQuizzesState;
-import interface_adapter.quiz.display.DisplayQuizzesViewModel;
+import interface_adapter.quiz.DisplayQuizzesController;
+import interface_adapter.quiz.DisplayQuizzesState;
+import interface_adapter.quiz.DisplayQuizzesViewModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -76,7 +76,13 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
                 }
         );
 
-        table = new JTable(new DefaultTableModel(new String[0][0], columnNames));
+        table = new JTable(new DefaultTableModel(new String[0][0], columnNames){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+        table.setRowSelectionAllowed(true);
         table.setBounds(30, 40, 200, 300);
         JScrollPane scrollbar = new JScrollPane(table,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 

@@ -19,9 +19,9 @@ import use_case.note.save.SaveNoteInputBoundary;
 import use_case.note.save.SaveNoteInteractor;
 import use_case.note.save.SaveNoteOutputBoundary;
 
-import use_case.quiz.DisplayQuizzesInputBoundary;
-import use_case.quiz.DisplayQuizzesInteractor;
-import use_case.quiz.DisplayQuizzesOutputBoundary;
+import use_case.quiz.display.DisplayQuizzesInputBoundary;
+import use_case.quiz.display.DisplayQuizzesInteractor;
+import use_case.quiz.display.DisplayQuizzesOutputBoundary;
 import use_case.quiz.QuizDataAccessInterface;
 import view.DisplayQuizzesView;
 import view.NoteView;
