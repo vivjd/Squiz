@@ -1,8 +1,11 @@
 package view;
 
-import interface_adapter.quiz.DisplayQuizzesController;
-import interface_adapter.quiz.DisplayQuizzesState;
-import interface_adapter.quiz.DisplayQuizzesViewModel;
+import interface_adapter.quiz.delete.DeleteQuizController;
+import interface_adapter.quiz.delete.DeleteQuizState;
+import interface_adapter.quiz.delete.DeleteQuizViewModel;
+import interface_adapter.quiz.display.DisplayQuizzesController;
+import interface_adapter.quiz.display.DisplayQuizzesState;
+import interface_adapter.quiz.display.DisplayQuizzesViewModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,6 +24,9 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
     private String[][] quizData;
     private final DisplayQuizzesController displayQuizzesController;
     private final DisplayQuizzesViewModel displayQuizzesViewModel;
+
+    private final DeleteQuizViewModel deleteQuizViewModel;
+    private final DeleteQuizController deleteQuizController;
 //    private final NoteViewModel noteViewModel;
     // Table
     JTable table;
@@ -30,16 +36,20 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
     final JButton edit;
 
     final JButton back;
+    final JButton delete;
 
-    public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel, DisplayQuizzesController controller) {
+    public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel, DisplayQuizzesController controller, DeleteQuizViewModel deleteQuizViewModel, DeleteQuizController deleteQuizController) {
         this.displayQuizzesViewModel = displayQuizzesViewModel;
         this.displayQuizzesController = controller;
+        this.deleteQuizViewModel = deleteQuizViewModel;
+        this.deleteQuizController = deleteQuizController;
 //        this.noteViewModel = noteViewModel;
 
         displayQuizzesViewModel.addPropertyChangeListener(this);
 
         Box buttons = Box.createVerticalBox();
         start = new JButton(DisplayQuizzesViewModel.START_LABEL);
+        delete = new JButton (DisplayQuizzesViewModel.DELETE_LABEL);
         back = new JButton(DisplayQuizzesViewModel.BACK_LABEL);
         edit = new JButton(DisplayQuizzesViewModel.EDIT_LABEL);
         buttons.add(start);
@@ -47,6 +57,8 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         buttons.add(back);
         buttons.add(Box.createVerticalStrut(10));
         buttons.add(edit);
+        buttons.add(Box.createVerticalStrut(10));
+        buttons.add(delete);
         buttons.add(Box.createVerticalStrut(10));
 
         start.addActionListener(
@@ -76,13 +88,20 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
                 }
         );
 
-        table = new JTable(new DefaultTableModel(new String[0][0], columnNames){
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        });
-        table.setRowSelectionAllowed(true);
+        delete.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(delete)){
+                            DeleteQuizState currentState = deleteQuizViewModel.getState();
+//                            deleteQuizController.execute();
+                            deleteQuizViewModel.setState(currentState);
+                        }
+                    }
+                }
+        );
+
+        table = new JTable(new DefaultTableModel(new String[0][0], columnNames));
         table.setBounds(30, 40, 200, 300);
         JScrollPane scrollbar = new JScrollPane(table,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
