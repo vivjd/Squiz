@@ -89,6 +89,16 @@ public class NoteDataAccessObject implements NoteDataAccessInterface, Database {
     }
 
     @Override
+    public ObjectId[] getAllIds() {
+        List<Note> resultList = getAllNotes();
+        ObjectId[] ids = new ObjectId[resultList.size()];
+        for (int i = 0; i < ids.length; i++) {
+            ids[i] = resultList.get(i).getId();
+        }
+        return ids;
+    }
+
+    @Override
     public void deleteNote(ObjectId objectId) {
 
         this.connect();

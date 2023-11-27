@@ -10,5 +10,6 @@ public interface NoteDataAccessInterface {
     Note getNote(String title);
     List<Note> getAllNotes();
     String[][] getAllNotesTable();
+    ObjectId[] getAllIds();
     void deleteNote(ObjectId objectId);
 }
