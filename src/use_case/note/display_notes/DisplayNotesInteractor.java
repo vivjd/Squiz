@@ -1,6 +1,7 @@
 package use_case.note.display_notes;
 
 import entity.Note;
+import org.bson.types.ObjectId;
 import use_case.note.NoteDataAccessInterface;
 import use_case.quiz.DisplayQuizzesInputBoundary;
 
@@ -41,7 +42,8 @@ public class DisplayNotesInteractor implements DisplayNotesInputBoundary {
             notesPresenter.prepareFailView("There are no saved notes to display. Please create a note first and save it.");
         } else {
             String[][] table = noteDataAccessObject.getAllNotesTable();
-            DisplayNotesOutputData displayNotesOutputData = new DisplayNotesOutputData(table);
+            ObjectId[] ids = noteDataAccessObject.getAllIds();
+            DisplayNotesOutputData displayNotesOutputData = new DisplayNotesOutputData(table, ids);
             notesPresenter.prepareSuccessView(displayNotesOutputData);
         }
     }

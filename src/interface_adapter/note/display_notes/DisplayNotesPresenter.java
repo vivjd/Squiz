@@ -36,6 +36,7 @@ public class DisplayNotesPresenter implements DisplayNotesOutputBoundary {
     public void prepareSuccessView(DisplayNotesOutputData note) {
         DisplayNotesState notesState = displayNotesViewModel.getState();
         notesState.setTable(note.getNotes());
+        notesState.setIds(note.getIds());
         this.displayNotesViewModel.setState(notesState);
         displayNotesViewModel.firePropertyChanged();
 
