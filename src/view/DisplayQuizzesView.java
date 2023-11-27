@@ -1,8 +1,12 @@
 package view;
 
+import interface_adapter.note.NoteViewModel;
 import interface_adapter.quiz.display_quizzes.DisplayQuizzesController;
 import interface_adapter.quiz.display_quizzes.DisplayQuizzesState;
 import interface_adapter.quiz.display_quizzes.DisplayQuizzesViewModel;
+import interface_adapter.quiz.take_quiz.TakeQuizController;
+import interface_adapter.quiz.take_quiz.TakeQuizState;
+import interface_adapter.quiz.take_quiz.TakeQuizViewModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +30,7 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
 
     final JButton back;
     private final DisplayQuizzesController displayQuizzesController;
+    private TakeQuizController takeQuizController;
 
     public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel, DisplayQuizzesController controller) {
         this.displayQuizzesViewModel = displayQuizzesViewModel;
@@ -52,7 +57,8 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(start)) {
-//                            TakeQuizState currentState = takeQuizViewModel.getState();
+                            TakeQuizViewModel takeQuizViewModel = new TakeQuizViewModel();
+                            TakeQuizState currentState = takeQuizViewModel.getState();
 //                            takeQuizController.execute();
                         }
                     }

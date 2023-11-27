@@ -17,31 +17,23 @@ public class TakeQuizInteractor implements TakeQuizInputBoundary {
         this.takeQuizPresenter = takeQuizPresenter;
     }
 
+
+    @Override
+    public void start(TakeQuizInputData takeQuizInputData) {
+
+    }
+
     @Override
     public void execute(TakeQuizInputData takeQuizInputData) {
 
-        int score;
 
         Quiz quiz = quizDataAccessObject.getQuiz(takeQuizInputData.getTitle());
         Iterator<Question<?>> questionIterator= quiz.getQuestions().iterator();
-        Iterator<?> responses = takeQuizInputData.getResponses().iterator();
 
-        score = gradeQuiz(questionIterator, responses);
 
-        TakeQuizOutputData outputData = new TakeQuizOutputData(score);
+        TakeQuizOutputData outputData = new TakeQuizOutputData(0);
 
         takeQuizPresenter.prepareSuccessView(outputData);
     }
 
-    private int gradeQuiz(Iterator<Question<?>> questionIterator, Iterator<? extends Object> responseIterator) {
-        int score = 0;
-        while (questionIterator.hasNext() && responseIterator.hasNext()) {
-            Question<?> question = questionIterator.next();
-            Object response = responseIterator.next();
-
-            score += question.checkAnswer(response);
-        }
-
-        return score;
-    }
 }

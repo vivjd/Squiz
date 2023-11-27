@@ -15,8 +15,8 @@ public class TakeQuizController {
         this.takeQuizInteractor = takeQuizInteractor;
     }
 
-    public void execute(String title, ObjectId objectId, List<?> responses){
-        TakeQuizInputData takeQuizInputData = new TakeQuizInputData(title, objectId, responses);
+    public void execute(String title, ObjectId objectId){
+        TakeQuizInputData takeQuizInputData = new TakeQuizInputData(title, objectId);
         takeQuizInteractor.execute(takeQuizInputData);
     }
 }
