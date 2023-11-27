@@ -100,8 +100,8 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                             NoteState currentState = noteViewModel.getState();
                             try {
                                 generateQuizController.execute(
-                                        currentState.getTitle(),
-                                        currentState.getNote());
+                                        currentState.getNote(),
+                                        currentState.getTitle());
                             } catch (Exception ex) {
                                 throw new RuntimeException(ex);
                             }

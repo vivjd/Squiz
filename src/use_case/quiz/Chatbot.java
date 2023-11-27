@@ -45,7 +45,7 @@ public class Chatbot {
         String apiKey = OPENAI_API_KEY;
         String model = "gpt-4-1106-preview";
         String prompt = "[{\"role\": \"user\", \"content\": \"" + userInput + "\"}]";
-        int maxTokens = 2000;
+        int maxTokens = 3000;
 
         String requestBody = "{\"model\": \"" + model + "\", \"messages\": " + prompt + ", \"max_tokens\": " + maxTokens + "}";
 
