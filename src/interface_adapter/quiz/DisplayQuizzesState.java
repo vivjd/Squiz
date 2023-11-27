@@ -1,4 +1,4 @@
-package interface_adapter.quiz.display;
+package interface_adapter.quiz;
 
 /**
  * The {@code DisplayQuizzesState} class represents the state of the "Display Quizzes" view.
