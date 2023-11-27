@@ -1,6 +1,9 @@
 package interface_adapter.quiz;
 import interface_adapter.ViewModel;
 
+import interface_adapter.quiz.display_quiz.DisplayQuizState;
+
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
