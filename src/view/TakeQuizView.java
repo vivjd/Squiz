@@ -1,23 +1,15 @@
 package view;
 
-import data_access.QuestionDataAccessObject;
 import entity.MultipleChoiceQuestion;
 import entity.OpenEndedQuestion;
 import entity.Question;
-import interface_adapter.question.AnswerQuestionController;
-import interface_adapter.question.AnswerQuestionPresenter;
-import interface_adapter.question.QuestionViewModel;
 import interface_adapter.quiz.take_quiz.TakeQuizController;
 import interface_adapter.quiz.take_quiz.TakeQuizState;
 import interface_adapter.quiz.take_quiz.TakeQuizViewModel;
-import use_case.question.AnswerQuestionInputBoundary;
-import use_case.question.AnswerQuestionInteractor;
-import use_case.question.AnswerQuestionOutputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
@@ -34,10 +26,16 @@ public class TakeQuizView extends JPanel implements PropertyChangeListener {
     private JTextArea questionTextArea;
     private JPanel answerPanel;
 
-    public TakeQuizView(TakeQuizViewModel takeQuizViewModel, TakeQuizController takeQuizController, QuestionView questionView) {
+    public TakeQuizView(TakeQuizViewModel takeQuizViewModel, TakeQuizController takeQuizController, AnswerQuestionView answerQuestionView) {
         this.takeQuizViewModel = takeQuizViewModel;
         this.takeQuizController = takeQuizController;
-        this.questionView = questionView;
+        this.questionView = answerQuestionView;
+
+        setLayout(new BorderLayout());
+        add(answerQuestionView, BorderLayout.CENTER);
+
+        JButton submitButton = new JButton("Submit");
+        add(submitButton, BorderLayout.SOUTH);
 
     }
 

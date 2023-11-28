@@ -2,6 +2,7 @@ package app;
 
 import interface_adapter.ViewManagerModel;
 
+import interface_adapter.question.QuestionViewModel;
 import interface_adapter.quiz.display.DisplayQuizzesController;
 import interface_adapter.quiz.display.DisplayQuizzesPresenter;
 import interface_adapter.quiz.display.DisplayQuizzesViewModel;
@@ -25,10 +26,11 @@ public class DisplayQuizzesUseCaseFactory {
             ViewManagerModel viewManagerModel,
             DisplayQuizzesViewModel displayQuizzesViewModel,
             QuizDataAccessInterface quizDataAccessObject,
-            TakeQuizViewModel takeQuizViewModel) {
+            TakeQuizViewModel takeQuizViewModel,
+            QuestionViewModel questionViewModel) {
 
         DisplayQuizzesController quizzesController= createDisplayQuizzesUseCase(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject);
-        TakeQuizController takeQuizController = TakeQuizUseCaseFactory.createTakeQuizController(viewManagerModel, takeQuizViewModel, quizDataAccessObject);
+        TakeQuizController takeQuizController = TakeQuizUseCaseFactory.createTakeQuizController(viewManagerModel, takeQuizViewModel, quizDataAccessObject, questionViewModel);
         return new DisplayQuizzesView(displayQuizzesViewModel, quizzesController, takeQuizController);
     }
 

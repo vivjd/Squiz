@@ -32,4 +32,13 @@ public class AnswerQuestionState {
     public String getFeedback() {
         return feedback;
     }
+
+    @Override
+    public String toString() {
+        return "AnswerQuestionState{" +
+                "questionName='" + questionName + '\'' +
+                ", userAnswer='" + userAnswer + '\'' +
+                ", feedback='" + feedback + '\'' +
+                '}';
+    }
 }

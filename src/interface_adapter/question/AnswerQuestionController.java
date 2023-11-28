@@ -11,6 +11,7 @@ public class AnswerQuestionController {
     }
 
     public void execute(String answer){
+        System.out.println(answer);
         AnswerQuestionInputData answerQuestionInputData = new AnswerQuestionInputData(answer);
         answerQuestionInteractor.execute(answerQuestionInputData);
     }

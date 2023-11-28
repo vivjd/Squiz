@@ -1,9 +1,10 @@
 package app;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.question.QuestionViewModel;
 import interface_adapter.quiz.take_quiz.TakeQuizController;
 import interface_adapter.quiz.take_quiz.TakeQuizPresenter;
-import view.QuestionView;
+import view.AnswerQuestionView;
 import view.TakeQuizView;
 import interface_adapter.quiz.take_quiz.TakeQuizViewModel;
 import use_case.quiz.QuizDataAccessInterface;
@@ -19,18 +20,20 @@ public class TakeQuizUseCaseFactory {
             ViewManagerModel viewManagerModel,
             TakeQuizViewModel takeQuizViewModel,
             QuizDataAccessInterface quizDataAccessObject,
-            QuestionView questionView
+            AnswerQuestionView answerQuestionView,
+            QuestionViewModel questionViewModel
     ) {
-        TakeQuizController takeQuizController = createTakeQuizController(viewManagerModel, takeQuizViewModel, quizDataAccessObject);
-        return new TakeQuizView(takeQuizViewModel, takeQuizController, questionView);
+        TakeQuizController takeQuizController = createTakeQuizController(viewManagerModel, takeQuizViewModel, quizDataAccessObject, questionViewModel);
+        return new TakeQuizView(takeQuizViewModel, takeQuizController, answerQuestionView);
     }
 
     public static TakeQuizController createTakeQuizController(
             ViewManagerModel viewManagerModel,
             TakeQuizViewModel takeQuizViewModel,
-            QuizDataAccessInterface quizDataAccessObject
+            QuizDataAccessInterface quizDataAccessObject,
+            QuestionViewModel questionViewModel
     ) {
-        TakeQuizOutputBoundary takeQuizOutputBoundary = new TakeQuizPresenter(takeQuizViewModel, viewManagerModel);
+        TakeQuizOutputBoundary takeQuizOutputBoundary = new TakeQuizPresenter(takeQuizViewModel, viewManagerModel, questionViewModel);
         TakeQuizInputBoundary takeQuizInputBoundary = new TakeQuizInteractor(quizDataAccessObject, takeQuizOutputBoundary);
 
         return new TakeQuizController(takeQuizInputBoundary);

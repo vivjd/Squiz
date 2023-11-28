@@ -3,6 +3,8 @@ package interface_adapter.quiz.take_quiz;
 import entity.Question;
 import entity.Quiz;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.question.AnswerQuestionState;
+import interface_adapter.question.QuestionViewModel;
 import use_case.quiz.take_quiz.TakeQuizOutputBoundary;
 import use_case.quiz.take_quiz.TakeQuizOutputData;
 
@@ -12,15 +14,22 @@ public class TakeQuizPresenter implements TakeQuizOutputBoundary {
 
     private final TakeQuizViewModel takeQuizViewModel;
     private final ViewManagerModel viewManagerModel;
+    private final QuestionViewModel questionViewModel;
 
-    public TakeQuizPresenter(TakeQuizViewModel takeQuizViewModel, ViewManagerModel viewManagerModel) {
+    public TakeQuizPresenter(TakeQuizViewModel takeQuizViewModel, ViewManagerModel viewManagerModel, QuestionViewModel questionViewModel) {
         this.takeQuizViewModel = takeQuizViewModel;
         this.viewManagerModel = viewManagerModel;
+        this.questionViewModel = questionViewModel;
     }
 
     @Override
     public void prepareExecuteSuccessView(TakeQuizOutputData takeQuizOutputData) {
-        System.out.println(takeQuizViewModel.getState().getQuestions());
+        List<Question<?>> questions = takeQuizViewModel.getState().getQuestions();
+        int currentQuestionIndex = takeQuizViewModel.getState().getCurrentQuestionIndex();
+        AnswerQuestionState questionState = new AnswerQuestionState();
+        questionState.setQuestionName(questions.get(currentQuestionIndex).getQuestion());
+        questionViewModel.setState(questionState);
+        questionViewModel.firePropertyChanged();
     }
 
     @Override

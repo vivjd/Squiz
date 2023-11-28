@@ -8,18 +8,18 @@ import use_case.question.AnswerQuestionInputBoundary;
 import use_case.question.AnswerQuestionInteractor;
 import use_case.question.AnswerQuestionOutputBoundary;
 import use_case.question.QuestionDataAccessInterface;
-import view.QuestionView;
+import view.AnswerQuestionView;
 
 public class AnswerQuestionUseCaseFactory {
 
     private AnswerQuestionUseCaseFactory() {}
 
-    public static QuestionView create(
+    public static AnswerQuestionView create(
             ViewManagerModel viewManagerModel,
             QuestionViewModel questionViewModel,
             QuestionDataAccessInterface questionDataAccessInterface) {
         AnswerQuestionController answerQuestionController = createAnswerQuestionController(viewManagerModel, questionViewModel, questionDataAccessInterface);
-        return new QuestionView(questionViewModel, answerQuestionController);
+        return new AnswerQuestionView(questionViewModel, answerQuestionController);
     }
 
     public static AnswerQuestionController createAnswerQuestionController(
