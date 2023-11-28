@@ -24,10 +24,11 @@ public class DisplayQuizzesUseCaseFactory {
     public static DisplayQuizzesView create(
             ViewManagerModel viewManagerModel,
             DisplayQuizzesViewModel displayQuizzesViewModel,
-            QuizDataAccessInterface quizDataAccessObject) {
+            QuizDataAccessInterface quizDataAccessObject,
+            TakeQuizViewModel takeQuizViewModel) {
 
         DisplayQuizzesController quizzesController= createDisplayQuizzesUseCase(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject);
-        TakeQuizController takeQuizController = TakeQuizUseCaseFactory.createTakeQuizController(viewManagerModel, new TakeQuizViewModel(), quizDataAccessObject);
+        TakeQuizController takeQuizController = TakeQuizUseCaseFactory.createTakeQuizController(viewManagerModel, takeQuizViewModel, quizDataAccessObject);
         return new DisplayQuizzesView(displayQuizzesViewModel, quizzesController, takeQuizController);
     }
 

@@ -1,20 +1,20 @@
 package view;
 
-import data_access.QuestionDataAccessObject;
-import interface_adapter.question.AnswerQuestionController;
-import interface_adapter.question.AnswerQuestionPresenter;
-import interface_adapter.question.QuestionViewModel;
+import entity.MultipleChoiceQuestion;
+import entity.OpenEndedQuestion;
+import entity.Question;
 import interface_adapter.quiz.take_quiz.TakeQuizController;
 import interface_adapter.quiz.take_quiz.TakeQuizState;
 import interface_adapter.quiz.take_quiz.TakeQuizViewModel;
-import use_case.question.AnswerQuestionInputBoundary;
-import use_case.question.AnswerQuestionInputData;
-import use_case.question.AnswerQuestionInteractor;
-import use_case.question.AnswerQuestionOutputBoundary;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.List;
+import java.util.Map;
 
 public class TakeQuizView extends JPanel implements PropertyChangeListener {
 
@@ -23,23 +23,79 @@ public class TakeQuizView extends JPanel implements PropertyChangeListener {
     private final TakeQuizViewModel takeQuizViewModel;
     private final TakeQuizController takeQuizController;
 
-    private QuestionView questionView;
+    private JFrame questionView;
+    private JTextArea questionTextArea;
+    private JPanel answerPanel;
 
     public TakeQuizView(TakeQuizViewModel takeQuizViewModel, TakeQuizController takeQuizController) {
-
         this.takeQuizViewModel = takeQuizViewModel;
         this.takeQuizController = takeQuizController;
-//        QuestionViewModel questionViewModel = new QuestionViewModel();
-//        AnswerQuestionOutputBoundary answerQuestionPresenter =  new AnswerQuestionPresenter(questionViewModel, );
-//        AnswerQuestionInputBoundary answerQuestionInteractor = new AnswerQuestionInteractor(questionDataAccessObject, answerQuestionPresenter);
-//        AnswerQuestionController answerQuestionController = new AnswerQuestionController(answerQuestionInteractor);
-//        questionView = new QuestionView(questionViewModel, answerQuestionController);
+
+        // Initialize the JTextArea for displaying the question
+        questionTextArea = new JTextArea();
+        questionTextArea.setEditable(false);
+        questionTextArea.setLineWrap(true);
+        questionTextArea.setWrapStyleWord(true);
+
+        // Initialize the JPanel for displaying answers
+        answerPanel = new JPanel();
+        answerPanel.setLayout(new BoxLayout(answerPanel, BoxLayout.Y_AXIS));
+
+        takeQuizViewModel.addPropertyChangeListener(this);
+
+        setLayout(new BorderLayout());
+        add(questionTextArea, BorderLayout.NORTH);
+        add(answerPanel, BorderLayout.CENTER);
+
+        JButton nextButton = new JButton("Next Question");
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        add(nextButton, BorderLayout.SOUTH);
+    }
+
+    public void actionPerformed(ActionEvent evt) {
+        System.out.println("Click " + evt.getActionCommand());
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 
         TakeQuizState state = (TakeQuizState) evt.getNewValue();
-        System.out.println(state);
+
+        List<Question<?>> questions = takeQuizViewModel.getState().getQuestions();
+        Question<?> question = questions.get(state.getCurrentQuestionIndex());
+        String questionText = question.getQuestion();
+
+        if (question instanceof MultipleChoiceQuestion) {
+            handleMultipleChoiceQuestion((MultipleChoiceQuestion) question);
+        } else if (question instanceof OpenEndedQuestion) {
+            handleOpenEndedQuestion((OpenEndedQuestion) question);
+        }
+
+        questionTextArea.setText(questionText);
+
+    }
+
+    private void handleOpenEndedQuestion(OpenEndedQuestion question) {
+        JTextField textField = new JTextField();
+        answerPanel.add(textField);
+    }
+
+    private void handleMultipleChoiceQuestion(MultipleChoiceQuestion question) {
+        ButtonGroup buttonGroup = new ButtonGroup();
+
+        for (Map.Entry<Integer, String> entry : question.getAnswerOptions().entrySet()) {
+            int optionIndex = entry.getKey();
+            String optionText = entry.getValue();
+
+            JRadioButton radioButton = new JRadioButton(optionText);
+            radioButton.setActionCommand(String.valueOf(optionIndex));
+            buttonGroup.add(radioButton);
+            answerPanel.add(radioButton);
+        }
     }
 }
