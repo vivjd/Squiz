@@ -27,7 +27,6 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
                     "Format the answer choices for multiple choice questions into a hashmap encapsulated in curly braces in one line. Show the correct answer choice in the next line.";
             String response = Chatbot.getChatGPTResponse(userInput);
             System.out.println(response);
-            GenerateQuizOutputData generateQuizOutputData = new GenerateQuizOutputData(generateQuizInputData.getTitle());
             String[] entireArray = response.split("\n");
             List<String> entirelist = Arrays.asList(entireArray);
             System.out.println(entirelist);
@@ -91,12 +90,14 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
 
             Quiz quiz = new Quiz(generateQuizInputData.getTitle(), LocalDateTime.now());
             quiz.setQuestions(qList);
-            QuizDataAccessObject quizDAO = new QuizDataAccessObject();
-            quizDAO.saveQuiz(quiz);
-
-
-
-
+            if (quiz.getQuizLength() != 10){
+                quizPresenter.prepareFailView("Quiz not Generated. Please try again.");
+            }
+            else{
+                QuizDataAccessObject quizDAO = new QuizDataAccessObject();
+                quizDAO.saveQuiz(quiz);
+                quizPresenter.prepareSuccessView("Quiz Generated");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
