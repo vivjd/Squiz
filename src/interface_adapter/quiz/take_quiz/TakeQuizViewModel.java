@@ -7,12 +7,12 @@ import java.beans.PropertyChangeSupport;
 
 public class TakeQuizViewModel extends ViewModel {
 
-    private TakeQuizState state;
+    private TakeQuizState state = new TakeQuizState();
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public TakeQuizViewModel() {
-        super("take quiz");
+        super("take_quiz");
     }
 
     public TakeQuizState getState() {

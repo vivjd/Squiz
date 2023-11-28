@@ -7,8 +7,9 @@ import java.util.List;
 public class TakeQuizState {
 
     private int currentQuestionIndex = 0;
-    private final List<Question<?>> questions;
+    private List<Question<?>> questions;
 
+    public TakeQuizState() {};
 
     public TakeQuizState(List<Question<?>> questions) {
         this.questions = questions;
@@ -24,5 +25,9 @@ public class TakeQuizState {
 
     public List<Question<?>> getQuestions() {
         return questions;
+    }
+
+    public void setQuestions(List<Question<?>> questions) {
+        this.questions = questions;
     }
 }

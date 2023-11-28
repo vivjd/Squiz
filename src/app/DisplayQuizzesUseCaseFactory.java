@@ -27,7 +27,8 @@ public class DisplayQuizzesUseCaseFactory {
             QuizDataAccessInterface quizDataAccessObject) {
 
         DisplayQuizzesController quizzesController= createDisplayQuizzesUseCase(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject);
-        return new DisplayQuizzesView(displayQuizzesViewModel, quizzesController);
+        TakeQuizController takeQuizController = TakeQuizUseCaseFactory.createTakeQuizController(viewManagerModel, new TakeQuizViewModel(), quizDataAccessObject);
+        return new DisplayQuizzesView(displayQuizzesViewModel, quizzesController, takeQuizController);
     }
 
     private static DisplayQuizzesController createDisplayQuizzesUseCase(

@@ -7,9 +7,11 @@ import interface_adapter.note.NoteViewModel;
 
 
 import interface_adapter.quiz.display.DisplayQuizzesViewModel;
+import interface_adapter.quiz.take_quiz.TakeQuizViewModel;
 import view.DisplayQuizzesView;
 
 import view.NoteView;
+import view.TakeQuizView;
 import view.ViewManager;
 
 import javax.swing.*;
@@ -37,6 +39,7 @@ public class Main {
 
         NoteViewModel noteViewModel = new NoteViewModel();
         DisplayQuizzesViewModel displayQuizzesViewModel = new DisplayQuizzesViewModel();
+        TakeQuizViewModel takeQuizViewModel = new TakeQuizViewModel();
 
         NoteView noteView = NoteUseCaseFactory.create(viewManagerModel, noteViewModel, noteDataAccessObject,
                 displayQuizzesViewModel, quizDataAccessObject);
@@ -45,7 +48,8 @@ public class Main {
         DisplayQuizzesView displayQuizzesView = DisplayQuizzesUseCaseFactory.create(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject);
         views.add(displayQuizzesView, displayQuizzesView.viewName);
 
-
+        TakeQuizView takeQuizView = TakeQuizUseCaseFactory.create(viewManagerModel, takeQuizViewModel, quizDataAccessObject);
+        views.add(takeQuizView, takeQuizView.viewName);
 
         viewManagerModel.setActiveView(noteView.viewName);
         viewManagerModel.firePropertyChanged();

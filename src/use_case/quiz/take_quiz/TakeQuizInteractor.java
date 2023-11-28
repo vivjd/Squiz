@@ -20,7 +20,10 @@ public class TakeQuizInteractor implements TakeQuizInputBoundary {
 
     @Override
     public void start(TakeQuizInputData takeQuizInputData) {
+        Quiz quiz = quizDataAccessObject.getQuiz(takeQuizInputData.getTitle());
+        TakeQuizOutputData outputData = new TakeQuizOutputData(quiz);
 
+        takeQuizPresenter.prepareStartSuccessView(outputData);
     }
 
     @Override
@@ -33,7 +36,7 @@ public class TakeQuizInteractor implements TakeQuizInputBoundary {
 
         TakeQuizOutputData outputData = new TakeQuizOutputData(0);
 
-        takeQuizPresenter.prepareSuccessView(outputData);
+        takeQuizPresenter.prepareExecuteSuccessView(outputData);
     }
 
 }

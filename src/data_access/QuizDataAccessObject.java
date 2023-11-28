@@ -1,6 +1,7 @@
 package data_access;
 
 import com.mongodb.client.*;
+import com.mongodb.client.model.Filters;
 import entity.Quiz;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecProvider;
@@ -71,7 +72,15 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
 
     @Override
     public Quiz getQuiz(String title) {
-        return null;
+        this.connect();
+
+        Quiz quiz = mongoDatabase.getCollection("quizzes", Quiz.class)
+                .find(Filters.eq("title", title))
+                .first();
+
+        this.disconnect();
+
+        return quiz;
     }
 
     /**

@@ -14,16 +14,16 @@ public class TakeQuizUseCaseFactory {
 
     private TakeQuizUseCaseFactory() {};
 
-    private static TakeQuizView create(
+    public static TakeQuizView create(
             ViewManagerModel viewManagerModel,
             TakeQuizViewModel takeQuizViewModel,
             QuizDataAccessInterface quizDataAccessObject
     ) {
-        TakeQuizController takeQuizController= createTakeQuizController(viewManagerModel, takeQuizViewModel, quizDataAccessObject);
+        TakeQuizController takeQuizController = createTakeQuizController(viewManagerModel, takeQuizViewModel, quizDataAccessObject);
         return new TakeQuizView(takeQuizViewModel, takeQuizController);
     }
 
-    private static TakeQuizController createTakeQuizController(
+    public static TakeQuizController createTakeQuizController(
             ViewManagerModel viewManagerModel,
             TakeQuizViewModel takeQuizViewModel,
             QuizDataAccessInterface quizDataAccessObject
