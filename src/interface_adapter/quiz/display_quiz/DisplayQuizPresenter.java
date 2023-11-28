@@ -1,9 +1,9 @@
-package interface_adapter.quiz;
+package interface_adapter.quiz.display_quiz;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.quiz.display_quiz.DisplayQuizState;
-import use_case.quiz.DisplayQuizOutputBoundary;
-import use_case.quiz.DisplayQuizOutputData;
+import interface_adapter.quiz.QuizViewModel;
+import use_case.quiz.display_quiz.DisplayQuizOutputBoundary;
+import use_case.quiz.display_quiz.DisplayQuizOutputData;
 
 public class DisplayQuizPresenter implements DisplayQuizOutputBoundary {
     private final QuizViewModel quizViewModel;

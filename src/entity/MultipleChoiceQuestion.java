@@ -1,18 +1,27 @@
 package entity;
 import java.util.HashMap;
+import java.util.Map;
 
-class MultipleChoiceQuestion extends Question {
-    private HashMap<Integer, String> answerOptions;
+public class MultipleChoiceQuestion extends Question<Integer> {
+    private Map<Integer, String> answerOptions;
+
     private int correctAnswerIndex;
     private String question;
 
-    public MultipleChoiceQuestion(String question, HashMap<Integer, String> answerOptions, int correctAnswerIndex){
+    public MultipleChoiceQuestion(String question, Map<Integer, String> answerOptions, int correctAnswerIndex){
         this.question = question;
         this.answerOptions = answerOptions;
         this.correctAnswerIndex = correctAnswerIndex;
     }
     public String getQuestion(){
         return this.question;
+    }
+
+    @Override
+    public int checkAnswer(Object userResponse) {
+        int userResponseInt = (int) userResponse;
+        if (userResponseInt == correctAnswerIndex) return 1;
+        return 0;
     }
 
     @Override
@@ -23,7 +32,7 @@ class MultipleChoiceQuestion extends Question {
     public void setQuestion(String question){
         this.question = question;
     }
-    public HashMap<Integer, String> getAnswerOptions() {
+    public Map<Integer, String> getAnswerOptions() {
         return answerOptions;
     }
     public void setAnswerOptions(HashMap<Integer, String> ansOps) {
