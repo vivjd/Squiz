@@ -33,7 +33,6 @@ public class TakeQuizInteractor implements TakeQuizInputBoundary {
         Quiz quiz = quizDataAccessObject.getQuiz(takeQuizInputData.getTitle());
         Iterator<Question<?>> questionIterator= quiz.getQuestions().iterator();
 
-
         TakeQuizOutputData outputData = new TakeQuizOutputData(0);
 
         takeQuizPresenter.prepareExecuteSuccessView(outputData);

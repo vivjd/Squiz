@@ -1,12 +1,16 @@
 package use_case.question;
 
 import data_access.QuestionDataAccessObject;
+import entity.MultipleChoiceQuestion;
+import entity.Question;
+
+import java.util.Map;
 
 public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
-    final QuestionDataAccessObject questionDataAccessObject;
+    final QuestionDataAccessInterface questionDataAccessObject;
     final AnswerQuestionOutputBoundary questionPresenter;
 
-    public AnswerQuestionInteractor(QuestionDataAccessObject questionDataAccessObject, AnswerQuestionOutputBoundary questionPresenter) {
+    public AnswerQuestionInteractor(QuestionDataAccessInterface questionDataAccessObject, AnswerQuestionOutputBoundary questionPresenter) {
         this.questionDataAccessObject = questionDataAccessObject;
         this.questionPresenter = questionPresenter;
     }
@@ -26,9 +30,39 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
 
         String userAnswer = answerQuestionInputData.getUserAnswer();
         String questionName = "What is today's date";
-        String answerFeedback = questionDataAccessObject.answerFeedback(questionName, userAnswer);
+        String answerFeedback = answerFeedback(questionName, userAnswer);
         AnswerQuestionOutputData answerQuestionOutputData = new AnswerQuestionOutputData(answerFeedback);
         questionPresenter.prepareSuccessView(answerQuestionOutputData);
 
+    }
+
+    public String answerFeedback(String questionName, String userAnswer){
+        if (isInstanceOfMCQ(questionName)){
+            // there's an issue with the way i'm finding out whether a question is a MCQ or Open ended, will look into it
+            MultipleChoiceQuestion q = (MultipleChoiceQuestion) questionDataAccessObject.getQuestionByName(questionName);
+            String correctAnswer = getMCQCorrectAnswer(q);
+            if (correctAnswer.equals(userAnswer)){
+                return "Your answer is correct!";
+            } else{
+                return "Your answer is incorrect. The correct answer is " + correctAnswer + ".";
+            }
+        } else {
+            //assume that if question is not a MCQ then it must be a OpenEndedQuestion
+            // we need to do some Hugginface API calling here to get feedback
+            // code below assumes we've got gained feedback already
+            String feedback = "Some feedback from hugginface"; //change this
+            return feedback;
+        }
+    }
+
+    public boolean isInstanceOfMCQ(String questionName){
+        // TODO: Implementation below assumes that each Question stores as
+        Question q = questionDataAccessObject.getQuestionByName(questionName);
+        return q instanceof MultipleChoiceQuestion;
+    }
+    public String getMCQCorrectAnswer(MultipleChoiceQuestion q){
+        Map<String, String> answerOptions = q.getAnswerOptions();
+
+        return answerOptions.get(q.getCorrectAnswerIndex());
     }
 }

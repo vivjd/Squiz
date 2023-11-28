@@ -1,11 +1,18 @@
 package view;
 
+import data_access.QuestionDataAccessObject;
 import entity.MultipleChoiceQuestion;
 import entity.OpenEndedQuestion;
 import entity.Question;
+import interface_adapter.question.AnswerQuestionController;
+import interface_adapter.question.AnswerQuestionPresenter;
+import interface_adapter.question.QuestionViewModel;
 import interface_adapter.quiz.take_quiz.TakeQuizController;
 import interface_adapter.quiz.take_quiz.TakeQuizState;
 import interface_adapter.quiz.take_quiz.TakeQuizViewModel;
+import use_case.question.AnswerQuestionInputBoundary;
+import use_case.question.AnswerQuestionInteractor;
+import use_case.question.AnswerQuestionOutputBoundary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,38 +30,15 @@ public class TakeQuizView extends JPanel implements PropertyChangeListener {
     private final TakeQuizViewModel takeQuizViewModel;
     private final TakeQuizController takeQuizController;
 
-    private JFrame questionView;
+    private JPanel questionView;
     private JTextArea questionTextArea;
     private JPanel answerPanel;
 
-    public TakeQuizView(TakeQuizViewModel takeQuizViewModel, TakeQuizController takeQuizController) {
+    public TakeQuizView(TakeQuizViewModel takeQuizViewModel, TakeQuizController takeQuizController, QuestionView questionView) {
         this.takeQuizViewModel = takeQuizViewModel;
         this.takeQuizController = takeQuizController;
+        this.questionView = questionView;
 
-        // Initialize the JTextArea for displaying the question
-        questionTextArea = new JTextArea();
-        questionTextArea.setEditable(false);
-        questionTextArea.setLineWrap(true);
-        questionTextArea.setWrapStyleWord(true);
-
-        // Initialize the JPanel for displaying answers
-        answerPanel = new JPanel();
-        answerPanel.setLayout(new BoxLayout(answerPanel, BoxLayout.Y_AXIS));
-
-        takeQuizViewModel.addPropertyChangeListener(this);
-
-        setLayout(new BorderLayout());
-        add(questionTextArea, BorderLayout.NORTH);
-        add(answerPanel, BorderLayout.CENTER);
-
-        JButton nextButton = new JButton("Next Question");
-        nextButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        add(nextButton, BorderLayout.SOUTH);
     }
 
     public void actionPerformed(ActionEvent evt) {
