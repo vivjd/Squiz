@@ -50,8 +50,6 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
 
 
         displayQuizzesViewModel.addPropertyChangeListener(this);
-        TakeQuizViewModel takeQuizViewModel = new TakeQuizViewModel();
-        takeQuizViewModel.addPropertyChangeListener(this);
 
         Box buttons = Box.createVerticalBox();
         start = new JButton(DisplayQuizzesViewModel.START_LABEL);
@@ -74,10 +72,8 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
                             // TODO: implement start quiz button
                             // get the quiz id OR title, execute on that
                             // change screen to the questionview
-
-                            TakeQuizState currentState = takeQuizViewModel.getState();
                             takeQuizController.start(selectedTitle);
-
+                            takeQuizController.execute(selectedTitle);
 //                            takeQuizController.execute(selectedTitle);
                         }
                     }

@@ -103,7 +103,7 @@ public class QuestionDataAccessObject implements QuestionDataAccessInterface, Da
     }
 
     public String getMCQCorrectAnswer(MultipleChoiceQuestion q){
-        Map<Integer, String> answerOptions = q.getAnswerOptions();
+        Map<String, String> answerOptions = q.getAnswerOptions();
 
         return answerOptions.get(q.getCorrectAnswerIndex());
     }

@@ -20,7 +20,7 @@ public class TakeQuizPresenter implements TakeQuizOutputBoundary {
 
     @Override
     public void prepareExecuteSuccessView(TakeQuizOutputData takeQuizOutputData) {
-
+        System.out.println(takeQuizViewModel.getState().getQuestions());
     }
 
     @Override

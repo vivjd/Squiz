@@ -88,8 +88,8 @@ public class TakeQuizView extends JPanel implements PropertyChangeListener {
     private void handleMultipleChoiceQuestion(MultipleChoiceQuestion question) {
         ButtonGroup buttonGroup = new ButtonGroup();
 
-        for (Map.Entry<Integer, String> entry : question.getAnswerOptions().entrySet()) {
-            int optionIndex = entry.getKey();
+        for (Map.Entry<String, String> entry : question.getAnswerOptions().entrySet()) {
+            String optionIndex = entry.getKey();
             String optionText = entry.getValue();
 
             JRadioButton radioButton = new JRadioButton(optionText);
