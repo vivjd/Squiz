@@ -1,18 +1,16 @@
 package app;
 
 import data_access.NoteDataAccessObject;
+import data_access.QuestionDataAccessObject;
 import data_access.QuizDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.note.NoteViewModel;
 
-import interface_adapter.note.display_notes.DisplayNotesViewModel;
-import interface_adapter.quiz.delete.DeleteQuizViewModel;
-import interface_adapter.quiz.display.DisplayQuizzesViewModel;
-import view.DisplayNotesView;
-import view.DisplayQuizzesView;
 
-import view.NoteView;
-import view.ViewManager;
+import interface_adapter.question.QuestionViewModel;
+import interface_adapter.quiz.display.DisplayQuizzesViewModel;
+import interface_adapter.quiz.take_quiz.TakeQuizViewModel;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,21 +33,35 @@ public class Main {
 
         NoteDataAccessObject noteDataAccessObject = new NoteDataAccessObject();
         QuizDataAccessObject quizDataAccessObject = new QuizDataAccessObject();
+        QuestionDataAccessObject questionDataAccessObject = new QuestionDataAccessObject();
 
         NoteViewModel noteViewModel = new NoteViewModel();
         DisplayQuizzesViewModel displayQuizzesViewModel = new DisplayQuizzesViewModel();
         DisplayNotesViewModel displayNotesViewModel = new DisplayNotesViewModel();
         DeleteQuizViewModel deleteQuizViewModel = new DeleteQuizViewModel();
 
+        TakeQuizViewModel takeQuizViewModel = new TakeQuizViewModel();
+        QuestionViewModel questionViewModel = new QuestionViewModel();
+
+
         NoteView noteView = NoteUseCaseFactory.create(viewManagerModel, noteViewModel, noteDataAccessObject,
                 displayQuizzesViewModel, quizDataAccessObject, displayNotesViewModel);
         views.add(noteView, noteView.viewName);
 
-        DisplayQuizzesView displayQuizzesView = DisplayQuizzesUseCaseFactory.create(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject, deleteQuizViewModel);
-        views.add(displayQuizzesView, displayQuizzesView.viewName);
-
         DisplayNotesView displayNotesView = DisplayNotesUseCaseFactory.create(viewManagerModel, displayNotesViewModel, noteDataAccessObject);
         views.add(displayNotesView, displayNotesView.viewName);
+
+        DisplayQuizzesView displayQuizzesView = DisplayQuizzesUseCaseFactory.create(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject, takeQuizViewModel, questionViewModel);
+        views.add(displayQuizzesView, displayQuizzesView.viewName);
+
+        AnswerQuestionView answerQuestionView = AnswerQuestionUseCaseFactory.create(viewManagerModel, questionViewModel, questionDataAccessObject);
+        views.add(displayQuizzesView, displayQuizzesView.viewName);
+
+        TakeQuizView takeQuizView = TakeQuizUseCaseFactory.create(viewManagerModel, takeQuizViewModel, quizDataAccessObject, answerQuestionView, questionViewModel);
+        views.add(takeQuizView, takeQuizView.viewName);
+
+        answerQuestionView.setAnswerQuestionListener(takeQuizView);
+
 
         viewManagerModel.setActiveView(noteView.viewName);
         viewManagerModel.firePropertyChanged();

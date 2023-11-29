@@ -13,6 +13,7 @@ import org.bson.types.ObjectId;
  * @see DisplayQuizzesViewModel
  * @see DisplayQuizzesPresenter
  */
+
 public class DisplayQuizzesState {
     private String[][] quizzesTable;
 

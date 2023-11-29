@@ -1,28 +1,27 @@
-package interface_adapter.quiz.delete;
+package interface_adapter.quiz.take_quiz;
 
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class DeleteQuizViewModel extends ViewModel {
-    public final String TITLE_LABEL = "Delete Quiz View";
-    public static final String DELETE_LABEL = "Delete";
+public class TakeQuizViewModel extends ViewModel {
 
-    public DeleteQuizState state = new DeleteQuizState();
+    private TakeQuizState state = new TakeQuizState();
 
-    public DeleteQuizViewModel() {
-        super("delete quiz");
+
+    public TakeQuizViewModel() {
+        super("take_quiz");
     }
 
-    public void setState(DeleteQuizState state) {
+    public TakeQuizState getState() {
+        return state;
+    }
 
+    public void setState(TakeQuizState state) {
         this.state = state;
     }
 
-    public DeleteQuizState getState(){
-        return state;
-    }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 

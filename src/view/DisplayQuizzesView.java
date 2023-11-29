@@ -1,14 +1,23 @@
 package view;
 
-import interface_adapter.quiz.delete.DeleteQuizController;
-import interface_adapter.quiz.delete.DeleteQuizState;
-import interface_adapter.quiz.delete.DeleteQuizViewModel;
+import data_access.QuizDataAccessObject;
+import interface_adapter.ViewManagerModel;
 import interface_adapter.quiz.display.DisplayQuizzesController;
 import interface_adapter.quiz.display.DisplayQuizzesState;
 import interface_adapter.quiz.display.DisplayQuizzesViewModel;
+import interface_adapter.quiz.take_quiz.TakeQuizController;
+import interface_adapter.quiz.take_quiz.TakeQuizPresenter;
+import interface_adapter.quiz.take_quiz.TakeQuizState;
+import interface_adapter.quiz.take_quiz.TakeQuizViewModel;
 import org.bson.types.ObjectId;
+import use_case.quiz.QuizDataAccessInterface;
+import use_case.quiz.take_quiz.TakeQuizInputBoundary;
+import use_case.quiz.take_quiz.TakeQuizInteractor;
+import use_case.quiz.take_quiz.TakeQuizOutputBoundary;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,24 +34,23 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
     private String[][] quizData;
     private final DisplayQuizzesController displayQuizzesController;
     private final DisplayQuizzesViewModel displayQuizzesViewModel;
-    private final DeleteQuizController deleteQuizController;
 
-//    private final NoteViewModel noteViewModel;
-    // Table
     JTable table;
-
     final JButton start;
-
     final JButton edit;
-
     final JButton back;
     final JButton delete;
 
-    public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel, DisplayQuizzesController controller, DeleteQuizController deleteQuizController) {
+    private ListSelectionModel selectionModel;
+    private String selectedTitle;
+
+    public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel,
+                              DisplayQuizzesController controller,
+                              TakeQuizController takeQuizController,
+                              TakeQuizViewModel takeQuizViewModel) {
         this.displayQuizzesViewModel = displayQuizzesViewModel;
         this.displayQuizzesController = controller;
-        this.deleteQuizController = deleteQuizController;
-//        this.noteViewModel = noteViewModel;
+
 
         displayQuizzesViewModel.addPropertyChangeListener(this);
 
@@ -60,14 +68,19 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         buttons.add(delete);
         buttons.add(Box.createVerticalStrut(10));
 
+
         start.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(start)) {
+
                             // TODO: implement start quiz button
-//                            TakeQuizState currentState = takeQuizViewModel.getState();
-//                            takeQuizController.execute();
+                            // get the quiz id OR title, execute on that
+                            // change screen to the questionview
+                            takeQuizViewModel.getState().resetAll();
+                            takeQuizController.start(selectedTitle);
+                            takeQuizController.execute(selectedTitle);
                         }
                     }
                 }
@@ -143,6 +156,22 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         for (String[] quizDatum : quizData) {
             tableModel.addRow(quizDatum);
         }
+
+        selectionModel = table.getSelectionModel();
+        selectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = table.getSelectedRow();
+                    if (selectedRow != -1) {
+                        selectedTitle = table.getValueAt(selectedRow, 0).toString();
+                        System.out.println("Selected Row: " + selectedRow);
+                    } else {
+                        System.out.println("No Row Selected");
+                    }
+                }
+            }
+        });
     }
 
     private void showDeletePopUp() {
