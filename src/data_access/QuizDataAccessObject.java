@@ -88,8 +88,8 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
         this.connect();
 
         FindIterable<Quiz> quizzes = mongoDatabase.getCollection("quizzes", Quiz.class).find();
-
         for (Quiz quiz : quizzes) {
+//            System.out.println(quiz.getTitle());
             resultList.add(quiz);
         }
 

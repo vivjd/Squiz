@@ -2,6 +2,9 @@ package interface_adapter.quiz.delete;
 
 import interface_adapter.ViewModel;
 
+import interface_adapter.quiz.display.DisplayQuizzesState;
+
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 

@@ -4,19 +4,25 @@ import com.google.gson.Gson;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 
-public class Quiz {
+import java.util.Iterator;
+import java.util.List;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+
+public class Quiz implements Iterable<Question<?>>{
     @BsonId
     private ObjectId id;
 
     @BsonProperty("title")
     private String title;
     @BsonProperty("questions")
-    List<Question> questions;
+    List<Question<?>> questions;
+
 
     @BsonProperty("creationTime")
     private String creationTime;
@@ -36,9 +42,9 @@ public class Quiz {
         this.title = title;
     }
 
-    public List<Question> getQuestions() {
-        return questions;
-    }
+//    public List<Question> getQuestions() {
+//        return questions;
+//    }
 
     public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
@@ -50,6 +56,10 @@ public class Quiz {
 
     public ObjectId getId() {
         return id;
+    }
+
+    public List<Question<?>> getQuestions() {
+        return questions;
     }
 
     public void setId(ObjectId id) {
@@ -68,7 +78,8 @@ public class Quiz {
         return creationTime;
     }
 
-    public void setQuestions(List<Question> questions) {
+
+    public void setQuestions(List<Question<?>> questions) {
         this.questions = questions;
         this.quizLength = questions.size();
     }
@@ -90,5 +101,39 @@ public class Quiz {
 
         // Use Gson to convert the Quiz object to JSON.
         return gson.toJson(this);
+    }
+
+    @NotNull
+    @Override
+    public Iterator<Question<?>> iterator() {
+        return new QuizIterator();
+    }
+
+    private class QuizIterator implements Iterator<Question<?>> {
+
+        private int currentIndex = 0;
+
+        @Override
+        public boolean hasNext() {
+            return currentIndex < questions.size();
+        }
+
+        @Override
+        public Question<?> next() {
+            if (!hasNext()) {
+                throw new java.util.NoSuchElementException();
+            }
+            return questions.get(currentIndex++);
+        }
+    }
+
+    @Override
+    public void forEach(Consumer<? super Question<?>> action) {
+        Iterable.super.forEach(action);
+    }
+
+    @Override
+    public Spliterator<Question<?>> spliterator() {
+        return Iterable.super.spliterator();
     }
 }
