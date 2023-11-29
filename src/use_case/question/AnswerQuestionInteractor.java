@@ -22,28 +22,25 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
         // After discussion, it seems like that should be provided by the TakeQuiz use case, how do we pass it in?
         // code below assumes that we have already passed this in through some previous step
         // we will have access to the question name?
-//        if (questionDataAccessObject.isInstanceOfMCQ("What is today's date?")){
-//            String correct = ques
-//            AnswerQuestionOutputData answerQuestionOutputData = new AnswerQuestionOutputData();
-//            questionPresenter.prepareSuccessView();
-//        }
 
         String userAnswer = answerQuestionInputData.getUserAnswer();
-        String questionName = "What is today's date";
+        Question<?> questionName = answerQuestionInputData.getQuestion();
         String answerFeedback = answerFeedback(questionName, userAnswer);
         AnswerQuestionOutputData answerQuestionOutputData = new AnswerQuestionOutputData(answerFeedback);
         questionPresenter.prepareSuccessView(answerQuestionOutputData);
 
     }
 
-    public String answerFeedback(String questionName, String userAnswer){
-        if (isInstanceOfMCQ(questionName)){
+    public String answerFeedback(Question<?> question, String userAnswer){
+        if (isInstanceOfMCQ(question)){
             // there's an issue with the way i'm finding out whether a question is a MCQ or Open ended, will look into it
-            MultipleChoiceQuestion q = (MultipleChoiceQuestion) questionDataAccessObject.getQuestionByName(questionName);
+            MultipleChoiceQuestion q = (MultipleChoiceQuestion) question;
             String correctAnswer = getMCQCorrectAnswer(q);
             if (correctAnswer.equals(userAnswer)){
+                System.out.println("Yes");
                 return "Your answer is correct!";
             } else{
+                System.out.println("No");
                 return "Your answer is incorrect. The correct answer is " + correctAnswer + ".";
             }
         } else {
@@ -55,10 +52,9 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
         }
     }
 
-    public boolean isInstanceOfMCQ(String questionName){
+    public boolean isInstanceOfMCQ(Question question){
         // TODO: Implementation below assumes that each Question stores as
-        Question q = questionDataAccessObject.getQuestionByName(questionName);
-        return q instanceof MultipleChoiceQuestion;
+        return question instanceof MultipleChoiceQuestion;
     }
     public String getMCQCorrectAnswer(MultipleChoiceQuestion q){
         Map<String, String> answerOptions = q.getAnswerOptions();

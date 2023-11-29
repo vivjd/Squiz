@@ -48,36 +48,7 @@ public class TakeQuizView extends JPanel implements PropertyChangeListener {
 
         TakeQuizState state = (TakeQuizState) evt.getNewValue();
 
-        List<Question<?>> questions = takeQuizViewModel.getState().getQuestions();
-        Question<?> question = questions.get(state.getCurrentQuestionIndex());
-        String questionText = question.getQuestion();
-
-        if (question instanceof MultipleChoiceQuestion) {
-            handleMultipleChoiceQuestion((MultipleChoiceQuestion) question);
-        } else if (question instanceof OpenEndedQuestion) {
-            handleOpenEndedQuestion((OpenEndedQuestion) question);
-        }
-
-        questionTextArea.setText(questionText);
-
     }
 
-    private void handleOpenEndedQuestion(OpenEndedQuestion question) {
-        JTextField textField = new JTextField();
-        answerPanel.add(textField);
-    }
 
-    private void handleMultipleChoiceQuestion(MultipleChoiceQuestion question) {
-        ButtonGroup buttonGroup = new ButtonGroup();
-
-        for (Map.Entry<String, String> entry : question.getAnswerOptions().entrySet()) {
-            String optionIndex = entry.getKey();
-            String optionText = entry.getValue();
-
-            JRadioButton radioButton = new JRadioButton(optionText);
-            radioButton.setActionCommand(String.valueOf(optionIndex));
-            buttonGroup.add(radioButton);
-            answerPanel.add(radioButton);
-        }
-    }
 }

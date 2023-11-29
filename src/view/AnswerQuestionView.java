@@ -2,14 +2,17 @@ package view;
 
 import entity.MultipleChoiceQuestion;
 import entity.OpenEndedQuestion;
+import entity.Question;
 import interface_adapter.question.AnswerQuestionController;
 import interface_adapter.question.AnswerQuestionState;
 import interface_adapter.question.QuestionViewModel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.HashMap;
 import java.util.Map;
 
 public class AnswerQuestionView extends JPanel implements PropertyChangeListener {
@@ -21,6 +24,7 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
 
     private JTextArea questionTextArea;
     private JPanel answerPanel;
+    private Map<JRadioButton, String> radioButtonValues = new HashMap<>();
 
     public AnswerQuestionView(QuestionViewModel questionViewModel, AnswerQuestionController controller) {
         this.questionViewModel = questionViewModel;
@@ -34,24 +38,33 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
     }
 
     private void initializeUI() {
-        JPanel buttons = new JPanel();
+        setLayout(new BorderLayout(10, 10)); // Add some spacing between components
+
+        JPanel buttonPanel = new JPanel();
         submit = new JButton(QuestionViewModel.SUBMIT_BUTTON_LABEL);
-        buttons.add(submit);
-        add(buttons);
+        buttonPanel.add(submit);
+        add(buttonPanel, BorderLayout.SOUTH); // Place the button at the bottom
 
         answerPanel = new JPanel();
-        add(answerPanel);
+        add(answerPanel, BorderLayout.CENTER);
 
-         questionTextArea = new JTextArea();
-         add(questionTextArea);
+        JPanel questionPanel = new JPanel(new BorderLayout());
+        questionTextArea = new JTextArea();
+        questionTextArea.setEditable(false); // Make it non-editable
+        questionPanel.add(questionTextArea, BorderLayout.CENTER);
+        add(questionPanel, BorderLayout.NORTH);
     }
+
 
     private void setupSubmitButtonAction() {
         submit.addActionListener(e -> {
             if (e.getSource().equals(submit)) {
                 AnswerQuestionState currentState = questionViewModel.getState();
-                answerQuestionController.execute(currentState.getUserAnswer());
                 questionViewModel.setState(currentState);
+                String selection = getSelectedRadioButtonValue();
+                Question<?> question = currentState.getQuestion();
+                answerQuestionController.execute(selection, question);
+
             }
         });
     }
@@ -85,12 +98,25 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
             String optionText = entry.getValue();
 
             JRadioButton radioButton = new JRadioButton(optionText);
-            radioButton.setActionCommand(String.valueOf(optionIndex));
+            radioButton.setActionCommand(optionIndex);
             buttonGroup.add(radioButton);
             answerPanel.add(radioButton);
+
+            // Map the radio button to its value
+            radioButtonValues.put(radioButton, optionText);
         }
 
         revalidate();
+    }
+
+    private String getSelectedRadioButtonValue() {
+        for (Map.Entry<JRadioButton, String> entry : radioButtonValues.entrySet()) {
+            JRadioButton radioButton = entry.getKey();
+            if (radioButton.isSelected()) {
+                return entry.getValue();
+            }
+        }
+        return null;
     }
 
     private void handleInitialQuestionType() {
