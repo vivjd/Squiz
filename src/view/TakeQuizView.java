@@ -31,13 +31,6 @@ public class TakeQuizView extends JPanel implements PropertyChangeListener, Answ
         this.takeQuizController = takeQuizController;
         this.answerQuestionView = answerQuestionView;
 
-
-//        ViewManagerModel viewManagerModel = new ViewManagerModel();
-//        QuestionDataAccessObject questionDataAccessObject = new QuestionDataAccessObject();
-//        QuestionViewModel questionViewModel = new QuestionViewModel();
-//
-//        this.answerQuestionView = AnswerQuestionUseCaseFactory.create(viewManagerModel, questionViewModel, questionDataAccessObject);
-
         setLayout(new BorderLayout());
         add(answerQuestionView, BorderLayout.CENTER);
 

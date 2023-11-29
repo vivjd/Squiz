@@ -19,8 +19,6 @@ public class AnswerQuestionPresenter implements AnswerQuestionOutputBoundary {
         AnswerQuestionState questionState = questionViewModel.getState();
         questionState.setFeedback(userFeedback.getAnswerFeedback());
 
-//        questionState.setQuestionName();
-        // TODO: This is not yet complete. Do we need to set the QuestionName again? And do we need to set the user's input?
     }
 
     @Override
