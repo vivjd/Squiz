@@ -9,6 +9,8 @@ import org.bson.types.ObjectId;
 @BsonDiscriminator
 public abstract class Question <T> {
 
+    @BsonId
+    private ObjectId id;
     boolean answerDisplayed = false;
 
     @BsonProperty("question")
@@ -27,6 +29,6 @@ public abstract class Question <T> {
         return gson.toJson(this);
     }
 
-  public abstract int checkAnswer(Object userResponse);
+    public abstract int checkAnswer(Object userResponse);
 
 }

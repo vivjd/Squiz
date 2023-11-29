@@ -57,7 +57,6 @@ public class TakeQuizPresenter implements TakeQuizOutputBoundary {
             questionViewModel.firePropertyChanged();
         } else {
             int score = takeQuizViewModel.getState().getScore();
-            System.out.println(score);
             viewManagerModel.setActiveView("quiz");
             viewManagerModel.firePropertyChanged();
         }

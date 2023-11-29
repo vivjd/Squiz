@@ -12,7 +12,6 @@ public class MultipleChoiceQuestion extends Question<String> {
 
     private String correctAnswerIndex;
 
-
     @BsonProperty("question")
     private String question;
 
@@ -21,7 +20,6 @@ public class MultipleChoiceQuestion extends Question<String> {
     }
 
     public MultipleChoiceQuestion(@BsonProperty("question") String question,
-
                                   @BsonProperty("answerOptions") Map<String, String> answerOptions,
                                   @BsonProperty("correctAnswerIndex") String correctAnswerIndex) {
 
@@ -29,9 +27,11 @@ public class MultipleChoiceQuestion extends Question<String> {
         this.answerOptions = answerOptions;
         this.correctAnswerIndex = correctAnswerIndex;
     }
-    public String getQuestion(){
+
+    public String getQuestion() {
         return this.question;
     }
+
 
     @Override
     public int checkAnswer(Object userResponse) {
@@ -45,10 +45,9 @@ public class MultipleChoiceQuestion extends Question<String> {
         this.answerDisplayed = true;
     }
 
-    public void setQuestion(String question){
+    public void setQuestion(String question) {
         this.question = question;
     }
-
     public Map<String, String> getAnswerOptions() {
 
         return answerOptions;

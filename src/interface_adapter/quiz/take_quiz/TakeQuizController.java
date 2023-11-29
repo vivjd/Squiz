@@ -14,7 +14,6 @@ public class TakeQuizController {
     }
 
     public void execute(String title){
-        System.out.println("execute");
         TakeQuizInputData takeQuizInputData = new TakeQuizInputData(title);
         takeQuizInteractor.execute(takeQuizInputData);
     }

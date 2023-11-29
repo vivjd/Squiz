@@ -4,6 +4,7 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.note.*;
 
 import interface_adapter.note.display_notes.DisplayNotesController;
+import interface_adapter.note.display_notes.DisplayNotesPresenter;
 import interface_adapter.note.display_notes.DisplayNotesViewModel;
 import interface_adapter.quiz.display.DisplayQuizzesController;
 import interface_adapter.quiz.display.DisplayQuizzesPresenter;

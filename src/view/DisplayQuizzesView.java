@@ -2,6 +2,7 @@ package view;
 
 import data_access.QuizDataAccessObject;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.quiz.delete.DeleteQuizController;
 import interface_adapter.quiz.display.DisplayQuizzesController;
 import interface_adapter.quiz.display.DisplayQuizzesState;
 import interface_adapter.quiz.display.DisplayQuizzesViewModel;
@@ -34,6 +35,7 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
     private String[][] quizData;
     private final DisplayQuizzesController displayQuizzesController;
     private final DisplayQuizzesViewModel displayQuizzesViewModel;
+    private final DeleteQuizController deleteQuizController;
 
     JTable table;
     final JButton start;
@@ -47,9 +49,12 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
     public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel,
                               DisplayQuizzesController controller,
                               TakeQuizController takeQuizController,
-                              TakeQuizViewModel takeQuizViewModel) {
+                              TakeQuizViewModel takeQuizViewModel,
+                              DeleteQuizController deleteQuizController
+    ) {
         this.displayQuizzesViewModel = displayQuizzesViewModel;
         this.displayQuizzesController = controller;
+        this.deleteQuizController = deleteQuizController;
 
 
         displayQuizzesViewModel.addPropertyChangeListener(this);
