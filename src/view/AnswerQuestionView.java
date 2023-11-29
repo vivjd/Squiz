@@ -15,7 +15,7 @@ import java.beans.PropertyChangeListener;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AnswerQuestionView extends JPanel implements PropertyChangeListener {
+public class AnswerQuestionView extends JPanel implements PropertyChangeListener{
     public final String viewName = "question";
     private JButton submit;
     private final QuestionViewModel questionViewModel;
@@ -68,6 +68,7 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
                 String selection = getSelectedRadioButtonValue();
                 Question<?> question = currentState.getQuestion();
                 answerQuestionController.execute(selection, question);
+                showFeedbackPopup(currentState.getFeedback());
                 answerQuestionListener.onSubmitButtonPressed();
 
             }
@@ -144,6 +145,9 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
 
     public void setAnswerQuestionListener(AnswerQuestionListener answerQuestionListener) {
         this.answerQuestionListener = answerQuestionListener;
+    }
+    private void showFeedbackPopup(String feedback){
+        JOptionPane.showMessageDialog(this, feedback);
     }
 
 }

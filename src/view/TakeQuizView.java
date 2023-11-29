@@ -49,7 +49,6 @@ public class TakeQuizView extends JPanel implements PropertyChangeListener, Answ
     public void onSubmitButtonPressed() {
         TakeQuizState currentState = takeQuizViewModel.getState();
         currentState.setCurrentQuestionIndex(currentState.getCurrentQuestionIndex() + 1);
-
         takeQuizController.nextQuestion();
     }
 }
