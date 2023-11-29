@@ -5,5 +5,7 @@ public interface TakeQuizInputBoundary {
     void start(TakeQuizInputData takeQuizInputData);
     void execute(TakeQuizInputData takeQuizInputData);
 
+    void next();
+
 
 }

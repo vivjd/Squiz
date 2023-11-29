@@ -47,6 +47,21 @@ public class TakeQuizPresenter implements TakeQuizOutputBoundary {
     }
 
     @Override
+    public void prepareNextSuccessView(TakeQuizOutputData takeQuizOutputData) {
+        List<Question<?>> questions = takeQuizViewModel.getState().getQuestions();
+        int currentQuestionIndex = takeQuizViewModel.getState().getCurrentQuestionIndex();
+        if (currentQuestionIndex < questions.size()) {
+            AnswerQuestionState questionState = new AnswerQuestionState();
+            questionState.setQuestion(questions.get(currentQuestionIndex));
+            questionViewModel.setState(questionState);
+            questionViewModel.firePropertyChanged();
+        } else {
+            viewManagerModel.setActiveView("quiz");
+            viewManagerModel.firePropertyChanged();
+        }
+    }
+
+    @Override
     public void prepareFailView(String error) {
 
     }

@@ -5,6 +5,7 @@ public interface TakeQuizOutputBoundary {
     void prepareExecuteSuccessView(TakeQuizOutputData takeQuizOutputData);
     void prepareStartSuccessView(TakeQuizOutputData takeQuizOutputData);
 
+    void prepareNextSuccessView(TakeQuizOutputData takeQuizOutputData);
     void prepareFailView(String error);
 
 

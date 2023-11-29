@@ -74,7 +74,6 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
                             // change screen to the questionview
                             takeQuizController.start(selectedTitle);
                             takeQuizController.execute(selectedTitle);
-//                            takeQuizController.execute(selectedTitle);
                         }
                     }
                 }

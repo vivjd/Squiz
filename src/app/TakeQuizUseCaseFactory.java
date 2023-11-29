@@ -16,6 +16,7 @@ public class TakeQuizUseCaseFactory {
 
     private TakeQuizUseCaseFactory() {}
 
+
     public static TakeQuizView create(
             ViewManagerModel viewManagerModel,
             TakeQuizViewModel takeQuizViewModel,

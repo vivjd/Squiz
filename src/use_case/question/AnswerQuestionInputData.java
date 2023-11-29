@@ -2,7 +2,7 @@ package use_case.question;
 
 import entity.Question;
 
-public class AnswerQuestionInputData implements AnswerQuestionInputBoundary{
+public class AnswerQuestionInputData {
     private final String userAnswer;
     private final Question<?> question;
 
@@ -13,12 +13,6 @@ public class AnswerQuestionInputData implements AnswerQuestionInputBoundary{
     public AnswerQuestionInputData(String userAnswer, Question<?> question){
         this.userAnswer = userAnswer;
         this.question = question;
-    }
-
-
-    @Override
-    public void execute(AnswerQuestionInputData answerQuestionInputData) {
-
     }
 
     public Question<?> getQuestion() {

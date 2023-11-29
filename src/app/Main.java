@@ -54,6 +54,8 @@ public class Main {
         TakeQuizView takeQuizView = TakeQuizUseCaseFactory.create(viewManagerModel, takeQuizViewModel, quizDataAccessObject, answerQuestionView, questionViewModel);
         views.add(takeQuizView, takeQuizView.viewName);
 
+        answerQuestionView.setAnswerQuestionListener(takeQuizView);
+
         viewManagerModel.setActiveView(noteView.viewName);
         viewManagerModel.firePropertyChanged();
 

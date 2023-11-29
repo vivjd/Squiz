@@ -14,14 +14,17 @@ public class TakeQuizController {
     }
 
     public void execute(String title){
-        System.out.println(title);
+        System.out.println("execute");
         TakeQuizInputData takeQuizInputData = new TakeQuizInputData(title);
         takeQuizInteractor.execute(takeQuizInputData);
     }
 
     public void start(String title) {
-        System.out.println(title);
         TakeQuizInputData takeQuizInputData = new TakeQuizInputData(title);
         takeQuizInteractor.start(takeQuizInputData);
+    }
+
+    public void nextQuestion() {
+        takeQuizInteractor.next();
     }
 }

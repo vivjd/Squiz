@@ -1,5 +1,6 @@
 package use_case.quiz.take_quiz;
 
+import entity.Question;
 import entity.Quiz;
 
 public class TakeQuizOutputData {
@@ -13,6 +14,11 @@ public class TakeQuizOutputData {
     public TakeQuizOutputData(Quiz quiz) {
         this.quiz = quiz;
     };
+
+    public TakeQuizOutputData() {
+
+    }
+
 
     public int getScore() {
         return score;
