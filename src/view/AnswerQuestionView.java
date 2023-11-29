@@ -30,6 +30,7 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
 
         initializeUI();
         setupSubmitButtonAction();
+        handleInitialQuestionType();
     }
 
     private void initializeUI() {
@@ -54,20 +55,29 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
             }
         });
     }
-
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         System.out.println("AQC PROP CHANGE");
         AnswerQuestionState currentState = questionViewModel.getState();
         questionTextArea.setText(currentState.getQuestionName());
+
+        if (currentState.getQuestion() instanceof OpenEndedQuestion) {
+            handleOpenEndedQuestion((OpenEndedQuestion) currentState.getQuestion());
+        } else if (currentState.getQuestion() instanceof MultipleChoiceQuestion) {
+            handleMultipleChoiceQuestion((MultipleChoiceQuestion) currentState.getQuestion());
+        }
     }
 
     private void handleOpenEndedQuestion(OpenEndedQuestion question) {
+        answerPanel.removeAll();
+
         JTextField textField = new JTextField();
         answerPanel.add(textField);
+        revalidate();
     }
 
     private void handleMultipleChoiceQuestion(MultipleChoiceQuestion question) {
+        answerPanel.removeAll();
         ButtonGroup buttonGroup = new ButtonGroup();
 
         for (Map.Entry<String, String> entry : question.getAnswerOptions().entrySet()) {
@@ -78,6 +88,19 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
             radioButton.setActionCommand(String.valueOf(optionIndex));
             buttonGroup.add(radioButton);
             answerPanel.add(radioButton);
+        }
+
+        revalidate();
+    }
+
+    private void handleInitialQuestionType() {
+        AnswerQuestionState currentState = questionViewModel.getState();
+        if (currentState.getQuestion() != null) {
+            if (currentState.getQuestion() instanceof OpenEndedQuestion) {
+                handleOpenEndedQuestion((OpenEndedQuestion) currentState.getQuestion());
+            } else if (currentState.getQuestion() instanceof MultipleChoiceQuestion) {
+                handleMultipleChoiceQuestion((MultipleChoiceQuestion) currentState.getQuestion());
+            }
         }
     }
 }

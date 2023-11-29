@@ -1,6 +1,10 @@
 package interface_adapter.question;
 
+import entity.Question;
+
 public class AnswerQuestionState {
+
+    private Question<?> question;
     private String questionName;
     private String userAnswer;
     private String feedback;
@@ -40,5 +44,14 @@ public class AnswerQuestionState {
                 ", userAnswer='" + userAnswer + '\'' +
                 ", feedback='" + feedback + '\'' +
                 '}';
+    }
+
+    public Question<?> getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question<?> question) {
+        this.question = question;
+        this.questionName = question.getQuestion();
     }
 }

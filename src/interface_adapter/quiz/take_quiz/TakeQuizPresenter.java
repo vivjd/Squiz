@@ -27,7 +27,7 @@ public class TakeQuizPresenter implements TakeQuizOutputBoundary {
         List<Question<?>> questions = takeQuizViewModel.getState().getQuestions();
         int currentQuestionIndex = takeQuizViewModel.getState().getCurrentQuestionIndex();
         AnswerQuestionState questionState = new AnswerQuestionState();
-        questionState.setQuestionName(questions.get(currentQuestionIndex).getQuestion());
+        questionState.setQuestion(questions.get(currentQuestionIndex));
         questionViewModel.setState(questionState);
         questionViewModel.firePropertyChanged();
     }
