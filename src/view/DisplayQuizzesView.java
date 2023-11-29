@@ -44,7 +44,8 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
 
     public DisplayQuizzesView(DisplayQuizzesViewModel displayQuizzesViewModel,
                               DisplayQuizzesController controller,
-                              TakeQuizController takeQuizController) {
+                              TakeQuizController takeQuizController,
+                              TakeQuizViewModel takeQuizViewModel) {
         this.displayQuizzesViewModel = displayQuizzesViewModel;
         this.displayQuizzesController = controller;
 
@@ -72,6 +73,7 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
                             // TODO: implement start quiz button
                             // get the quiz id OR title, execute on that
                             // change screen to the questionview
+                            takeQuizViewModel.getState().resetAll();
                             takeQuizController.start(selectedTitle);
                             takeQuizController.execute(selectedTitle);
                         }

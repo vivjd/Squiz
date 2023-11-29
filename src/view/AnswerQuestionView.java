@@ -88,6 +88,7 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
 
     private void handleOpenEndedQuestion(OpenEndedQuestion question) {
         answerPanel.removeAll();
+        System.out.println(question);
 
         JTextField textField = new JTextField();
 
@@ -97,6 +98,7 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
         answerPanel.add(textField, BorderLayout.CENTER);
 
         revalidate();
+        repaint();
     }
 
     private void handleMultipleChoiceQuestion(MultipleChoiceQuestion question) {
@@ -111,11 +113,12 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
             radioButton.setActionCommand(optionIndex);
             buttonGroup.add(radioButton);
             answerPanel.add(radioButton);
-
             radioButtonValues.put(radioButton, optionText);
         }
 
+        answerPanel.setLayout(new GridLayout(0, 1));
         revalidate();
+        repaint();
     }
 
     private String getSelectedRadioButtonValue() {
