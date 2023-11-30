@@ -39,7 +39,7 @@ public class DisplayQuizzesInteractor implements DisplayQuizzesInputBoundary {
             quizPresenter.prepareFailView("There are no saved quizzes to display. Please create a quiz first.");
         } else {
             String[][] outputTableData = quizDataAccessObject.getAllQuizzesTable();
-            DisplayQuizzesOutputData displayQuizzesOutputData = new DisplayQuizzesOutputData(outputTableData);
+            DisplayQuizzesOutputData displayQuizzesOutputData = new DisplayQuizzesOutputData(outputTableData, quizDataAccessObject.getAllIds());
             quizPresenter.prepareSuccessView(displayQuizzesOutputData);
         }
     }

@@ -89,7 +89,6 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
 
     private void handleOpenEndedQuestion(OpenEndedQuestion question) {
         answerPanel.removeAll();
-        System.out.println(question);
 
         JTextField textField = new JTextField();
 

@@ -37,10 +37,8 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
             MultipleChoiceQuestion q = (MultipleChoiceQuestion) question;
             String correctAnswer = getMCQCorrectAnswer(q);
             if (correctAnswer.equals(userAnswer)){
-                System.out.println("Yes");
                 return "Your answer is correct!";
             } else{
-                System.out.println("No");
                 return "Your answer is incorrect. The correct answer is " + correctAnswer + ".";
             }
         } else {

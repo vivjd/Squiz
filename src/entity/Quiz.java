@@ -7,9 +7,6 @@ import org.bson.types.ObjectId;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
-
-import java.util.Iterator;
-import java.util.Date;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;

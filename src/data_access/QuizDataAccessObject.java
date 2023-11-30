@@ -2,6 +2,8 @@ package data_access;
 
 import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.FindOneAndDeleteOptions;
+
 import entity.Quiz;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecProvider;
@@ -30,6 +32,7 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
  * @see Database
  */
 public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
+    /** The number of columns in the quiz table. */
     public static final int COLUMN_NUM = 3;
     private MongoClient mongoClient;
     private MongoDatabase mongoDatabase;
@@ -43,12 +46,18 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
     CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
     CodecRegistry pojoCodecRegistry = fromRegistries(getDefaultCodecRegistry(), fromProviders(pojoCodecProvider));
 
+    /**
+     * Establishes a connection to the MongoDB database.
+     */
     @Override
     public void connect() {
         mongoClient = MongoClients.create(connectionString);
         mongoDatabase = mongoClient.getDatabase(databaseName).withCodecRegistry(pojoCodecRegistry);
     }
 
+    /**
+     * Disconnects from the MongoDB database.
+     */
     @Override
     public void disconnect() {
         if (mongoClient != null) {
@@ -70,6 +79,12 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
         this.disconnect();
     }
 
+    /**
+     * Retrieves a quiz from the MongoDB database based on its title.
+     *
+     * @param title The title of the quiz to retrieve.
+     * @return The retrieved quiz.
+     */
     @Override
     public Quiz getQuiz(String title) {
         this.connect();
@@ -95,7 +110,6 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
         this.connect();
 
         FindIterable<Quiz> quizzes = mongoDatabase.getCollection("quizzes", Quiz.class).find();
-
         for (Quiz quiz : quizzes) {
             resultList.add(quiz);
         }
@@ -134,16 +148,50 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
      * @return The retrieved quiz.
      */
     @Override
-    public Quiz getQuizById(String quizId) {
+    public Quiz getQuizById(ObjectId quizId) {
         this.connect();
 
-        ObjectId objectId = new ObjectId(quizId);
         Quiz quiz = mongoDatabase.getCollection("quizzes", Quiz.class)
-                .find(new Document("_id", objectId))
+                .find(new Document("_id", quizId))
                 .first();
 
         this.disconnect();
 
         return quiz;
+    }
+
+    /**
+     * Deletes a quiz from the MongoDB database based on its unique identifier.
+     *
+     * @param quizId The unique identifier of the quiz to delete.
+     */
+    @Override
+    public void deleteQuizById(ObjectId quizId){
+        this.connect();
+        FindOneAndDeleteOptions options = new FindOneAndDeleteOptions().projection(Document.parse("{_id: 1}"));
+        Quiz deletedDocument = mongoDatabase
+                .getCollection("quizzes", Quiz.class)
+                .findOneAndDelete(Filters.eq("_id", quizId), options);
+        this.disconnect();
+        if (deletedDocument != null) {
+            return;
+        } else {
+            throw new RuntimeException("Quiz with objectId: " + quizId + " not found.");
+        }
+    }
+
+    /**
+     * Retrieves all unique identifiers (ObjectIds) of quizzes in the MongoDB database.
+     *
+     * @return An array of ObjectIds representing all quizzes in the database.
+     */
+    @Override
+    public ObjectId[] getAllIds() {
+        List<Quiz> resultList = getAllQuizzes();
+        ObjectId[] ids = new ObjectId[resultList.size()];
+        for (int i = 0; i < ids.length; i++) {
+            ids[i] = resultList.get(i).getId();
+        }
+        return ids;
     }
 }

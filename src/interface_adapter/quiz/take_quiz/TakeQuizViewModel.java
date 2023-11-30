@@ -9,7 +9,6 @@ public class TakeQuizViewModel extends ViewModel {
 
     private TakeQuizState state = new TakeQuizState();
 
-    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public TakeQuizViewModel() {
         super("take_quiz");
@@ -22,6 +21,9 @@ public class TakeQuizViewModel extends ViewModel {
     public void setState(TakeQuizState state) {
         this.state = state;
     }
+
+
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     @Override
     public void firePropertyChanged() {
