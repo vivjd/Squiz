@@ -1,6 +1,10 @@
 package entity;
 
 import com.google.gson.Gson;
+import org.bson.codecs.pojo.annotations.BsonDiscriminator;
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.types.ObjectId;
 
 /**
  * An abstract class representing a generic question with a specified answer type.
@@ -8,21 +12,28 @@ import com.google.gson.Gson;
  * @param <T> The type of the answer to the question.
  */
 public abstract class Question<T> {
+@BsonDiscriminator
+public abstract class Question <T> {
 
 
     /**
      * Flag indicating whether the answer has been displayed.
      */
+    @BsonId
+    private ObjectId id;
     boolean answerDisplayed = false;
 
     /**
      * The text of the question.
      */
+
+    @BsonProperty("question")
     String question;
 
     /**
      * Displays the answer to the question.
      */
+
     public abstract void displayAnswer();
 
     /**
@@ -58,6 +69,7 @@ public abstract class Question<T> {
      * @param userResponse The user's response to the question.
      * @return 1 if the user's response is correct, 0 otherwise.
      */
+    public abstract int checkAnswer(Object userResponse);
     public abstract int checkAnswer(Object userResponse);
 
 }

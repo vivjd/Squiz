@@ -7,8 +7,6 @@ import org.bson.types.ObjectId;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
-
-import java.util.Iterator;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
@@ -21,26 +19,29 @@ public class Quiz implements Iterable<Question<?>>{
     /**
      * The unique identifier for the quiz.
      */
+public class Quiz{
     @BsonId
     private ObjectId id;
 
     /**
      * The title of the quiz.
      */
+    @BsonProperty("title")
     private String title;
 
     /**
      * The list of questions in the quiz.
      */
+
+    @BsonProperty("questions")
     List<Question<?>> questions;
 
-
     @BsonProperty("creationTime")
-    private final LocalDateTime creationTime;
+    private String creationTime;
 
     @BsonProperty("quizLength")
     int quizLength = 0;
-    int numCorrect = 0;
+
 
 
     /**
@@ -51,6 +52,16 @@ public class Quiz implements Iterable<Question<?>>{
      */
     public Quiz(@BsonProperty("title") String title, @BsonProperty("creationTime")LocalDateTime creationTime){
         this.title = title;
+        this.creationTime = creationTime.toString();
+    }
+
+    public Quiz(){}
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
     }
 
@@ -59,6 +70,10 @@ public class Quiz implements Iterable<Question<?>>{
      *
      * @return The unique identifier for the quiz.
      */
+    public void setQuizLength(int quizLength) {
+        this.quizLength = quizLength;
+    }
+
     public ObjectId getId() {
         return id;
     }
@@ -105,7 +120,7 @@ public class Quiz implements Iterable<Question<?>>{
         return numCorrect;
     }
 
-    public LocalDateTime getCreationTime(){
+    public String getCreationTime(){
         return creationTime;
     }
 
@@ -126,6 +141,17 @@ public class Quiz implements Iterable<Question<?>>{
      *
      * @return A JSON representation of the quiz object.
      */
+    @Override
+    public String toString() {
+        return "Quiz{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", questions=" + questions +
+                ", creationTime='" + creationTime + '\'' +
+                ", quizLength=" + quizLength +
+                '}';
+    }
+
     public String toJson() {
         // Create a Gson instance.
         Gson gson = new Gson();

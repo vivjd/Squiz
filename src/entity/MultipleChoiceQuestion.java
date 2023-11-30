@@ -1,4 +1,8 @@
 package entity;
+
+import org.bson.codecs.pojo.annotations.BsonDiscriminator;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +17,9 @@ public class MultipleChoiceQuestion extends Question<Integer> {
      * Map containing answer options where the key is the option index, and the value is the option text.
      */
     private Map<Integer, String> answerOptions;
+@BsonDiscriminator
+public class MultipleChoiceQuestion extends Question<String> {
+    private Map<String, String> answerOptions;
 
     /**
      * Index representing the correct answer among the answer options.
@@ -22,6 +29,9 @@ public class MultipleChoiceQuestion extends Question<Integer> {
     /**
      * The text of the multiple-choice question.
      */
+    private String correctAnswerIndex;
+
+    @BsonProperty("question")
     private String question;
 
 
@@ -34,6 +44,14 @@ public class MultipleChoiceQuestion extends Question<Integer> {
      * @param correctAnswerIndex Index representing the correct answer among the answer options.
      */
     public MultipleChoiceQuestion(String question, Map<Integer, String> answerOptions, int correctAnswerIndex){
+
+    public MultipleChoiceQuestion() {
+    }
+
+    public MultipleChoiceQuestion(@BsonProperty("question") String question,
+                                  @BsonProperty("answerOptions") Map<String, String> answerOptions,
+                                  @BsonProperty("correctAnswerIndex") String correctAnswerIndex) {
+
         this.question = question;
         this.answerOptions = answerOptions;
         this.correctAnswerIndex = correctAnswerIndex;
@@ -45,6 +63,8 @@ public class MultipleChoiceQuestion extends Question<Integer> {
      * @return The text of the multiple-choice question.
      */
     public String getQuestion(){
+
+    public String getQuestion() {
         return this.question;
     }
 
@@ -54,9 +74,10 @@ public class MultipleChoiceQuestion extends Question<Integer> {
      * @param userResponse The user's response to the multiple-choice question.
      * @return 1 if the user's response is correct, 0 otherwise.
      */
+
     @Override
     public int checkAnswer(Object userResponse) {
-        int userResponseInt = (int) userResponse;
+        String userResponseInt = (String) userResponse;
         if (userResponseInt == correctAnswerIndex) return 1;
         return 0;
     }
@@ -75,6 +96,7 @@ public class MultipleChoiceQuestion extends Question<Integer> {
      *
      * @param question The text of the multiple-choice question.
      */public void setQuestion(String question){
+    public void setQuestion(String question) {
         this.question = question;
     }
 
@@ -84,6 +106,8 @@ public class MultipleChoiceQuestion extends Question<Integer> {
      * @return Map containing answer options where the key is the option index, and the value is the option text.
      */
     public Map<Integer, String> getAnswerOptions() {
+    public Map<String, String> getAnswerOptions() {
+
         return answerOptions;
     }
 
@@ -93,6 +117,8 @@ public class MultipleChoiceQuestion extends Question<Integer> {
      * @param ansOps Map containing answer options where the key is the option index, and the value is the option text.
      */
     public void setAnswerOptions(HashMap<Integer, String> ansOps) {
+
+    public void setAnswerOptions(Map<String, String> ansOps) {
         this.answerOptions = ansOps;
     }
 
@@ -102,6 +128,8 @@ public class MultipleChoiceQuestion extends Question<Integer> {
      * @return Index representing the correct answer among the answer options.
      */
     public int getCorrectAnswerIndex() {
+
+    public String getCorrectAnswerIndex() {
         return correctAnswerIndex;
     }
 
@@ -111,6 +139,8 @@ public class MultipleChoiceQuestion extends Question<Integer> {
      * @param correctAnswer Index representing the correct answer among the answer options.
      */
     public void setCorrectAnswerIndex(int correctAnswer){
+
+    public void setCorrectAnswerIndex(String correctAnswer) {
         this.correctAnswerIndex = correctAnswer;
     }
 }

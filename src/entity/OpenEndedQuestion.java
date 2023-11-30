@@ -4,6 +4,11 @@ package entity;
  * Represents an open-ended question with a text question and a string answer.
  * Extends the abstract class Question with String as the answer type.
  */
+
+import org.bson.codecs.pojo.annotations.BsonDiscriminator;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+
+@BsonDiscriminator
 public class OpenEndedQuestion extends Question<String> {
     /**
      * The correct answer to the open-ended question.
@@ -15,6 +20,7 @@ public class OpenEndedQuestion extends Question<String> {
     /**
      * The text of the open-ended question.
      */
+    @BsonProperty("question")
     private String question;
 
 
@@ -25,6 +31,10 @@ public class OpenEndedQuestion extends Question<String> {
      * @param answer   The correct answer to the open-ended question.
      */
     public OpenEndedQuestion(String question, String answer){
+    public OpenEndedQuestion() {
+    }
+
+    public OpenEndedQuestion(@BsonProperty("question") String question, @BsonProperty("answer") String answer){
         this.question = question;
         this.answer = answer;
     }

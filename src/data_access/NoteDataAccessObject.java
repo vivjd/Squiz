@@ -57,19 +57,45 @@ public class NoteDataAccessObject implements NoteDataAccessInterface, Database {
         return null;
     }
 
-    public List<String> getAllNotes() {
-        List<String> resultList = new ArrayList<>();
+    @Override
+    public List<Note> getAllNotes() {
+        List<Note> resultList = new ArrayList<>();
 
         this.connect();
 
         FindIterable<Note> notes = mongoDatabase.getCollection("notes", Note.class).find();
 
         for (Note note : notes) {
-            resultList.add(note.toJson());
+            resultList.add(note);
         }
         this.disconnect();
 
         return resultList;
+    }
+
+    @Override
+    public String[][] getAllNotesTable() {
+        List<Note> resultList = getAllNotes();
+
+        String[][] outputTable = new String[resultList.size()][2];
+        for (int i = 0; i < resultList.size(); i++) {
+            Note currNote = resultList.get(i);
+            outputTable[i][0] = currNote.getTitle();
+            outputTable[i][1] = currNote.getUserPrompt();
+        }
+
+        this.disconnect();
+        return outputTable;
+    }
+
+    @Override
+    public ObjectId[] getAllIds() {
+        List<Note> resultList = getAllNotes();
+        ObjectId[] ids = new ObjectId[resultList.size()];
+        for (int i = 0; i < ids.length; i++) {
+            ids[i] = resultList.get(i).getId();
+        }
+        return ids;
     }
 
     @Override
