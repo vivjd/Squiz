@@ -5,6 +5,8 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.note.DeleteNoteController;
 import interface_adapter.note.DeleteNotePresenter;
 import interface_adapter.note.NoteViewModel;
+import interface_adapter.note.back.BackController;
+import interface_adapter.note.back.BackPresenter;
 import interface_adapter.note.display_notes.DisplayNotesController;
 import interface_adapter.note.display_notes.DisplayNotesPresenter;
 import interface_adapter.note.display_notes.DisplayNotesViewModel;
@@ -23,11 +25,15 @@ public class DisplayNotesUseCaseFactory {
     public static DisplayNotesView create(
             ViewManagerModel viewManagerModel,
             DisplayNotesViewModel displayNotesViewModel,
-            NoteDataAccessInterface noteDataAccessObject) {
+            NoteDataAccessInterface noteDataAccessObject,
+            NoteViewModel noteViewModel) {
 
         DisplayNotesController controller = createDisplayNotesUseCase(viewManagerModel, displayNotesViewModel, noteDataAccessObject);
         DeleteNoteController deleteNoteController = deleteNoteUseCase(viewManagerModel, displayNotesViewModel, noteDataAccessObject);
-        return new DisplayNotesView(displayNotesViewModel, controller, deleteNoteController);
+        BackPresenter backPresenter = new BackPresenter(noteViewModel, viewManagerModel);
+        BackController backController = new BackController(backPresenter);
+
+        return new DisplayNotesView(displayNotesViewModel, controller, deleteNoteController, backController);
     }
 
     private static DisplayNotesController createDisplayNotesUseCase(

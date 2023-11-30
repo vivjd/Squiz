@@ -1,6 +1,7 @@
 package view;
 
 import interface_adapter.note.DeleteNoteController;
+import interface_adapter.note.back.BackController;
 import interface_adapter.note.display_notes.DisplayNotesController;
 import interface_adapter.note.display_notes.DisplayNotesState;
 import interface_adapter.note.display_notes.DisplayNotesViewModel;
@@ -23,13 +24,15 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
     private final JButton view = new JButton(DisplayNotesViewModel.NOTE_LABEL);
     private final DisplayNotesController displayNotesController;
     private final DeleteNoteController deleteNoteController;
+    private final BackController backController;
     private final DisplayNotesViewModel displayNotesViewModel;
 
     public DisplayNotesView(DisplayNotesViewModel displayNotesViewModel, DisplayNotesController displayNotesController,
-                            DeleteNoteController deleteNoteController) {
+                            DeleteNoteController deleteNoteController, BackController backController) {
         this.displayNotesViewModel = displayNotesViewModel;
         this.displayNotesController = displayNotesController;
         this.deleteNoteController = deleteNoteController;
+        this.backController = backController;
 
         displayNotesViewModel.addPropertyChangeListener(this);
 
@@ -67,7 +70,7 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(back)) {
-                            notImplemented();
+                            backController.execute();
                         }
                     }
                 }
