@@ -1,8 +1,6 @@
 package view;
 
 import app.AnswerQuestionUseCaseFactory;
-//import data_access.QuestionDataAccessObject;
-import entity.Question;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.question.QuestionViewModel;
 import interface_adapter.quiz.take_quiz.TakeQuizController;

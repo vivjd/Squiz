@@ -28,11 +28,9 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
     /**
      * Constructs a new {@code AnswerQuestionInteractor} with the specified dependencies.
      *
-     * @param questionDataAccessObject Data access object for retrieving question data.
      * @param questionPresenter        Presenter for displaying the answer feedback.
      */
     public AnswerQuestionInteractor(AnswerQuestionOutputBoundary questionPresenter) {
-//        this.questionDataAccessObject = questionDataAccessObject;
         this.questionPresenter = questionPresenter;
     }
 
