@@ -10,14 +10,30 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+/**
+ * The GenerateQuizInteractor class is responsible for generating a quiz based on user input.
+ * It implements the GenerateQuizInputBoundary interface and utilizes a QuizPresenter to handle the output.
+ */
 public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
+    /** The presenter for displaying quiz generation results. */
     final GenerateQuizOutputBoundary quizPresenter;
 
+    /**
+     * Constructs a GenerateQuizInteractor with the specified quizPresenter.
+     *
+     * @param quizPresenter The presenter for displaying quiz generation results.
+     */
     public GenerateQuizInteractor(GenerateQuizOutputBoundary quizPresenter) {
         this.quizPresenter = quizPresenter;
     }
 
+
+    /**
+     * Executes the quiz generation process based on user input.
+     *
+     * @param generateQuizInputData The input data containing user-specific information.
+     * @throws Exception If an error occurs during the quiz generation process.
+     */
     @Override
     public void execute(GenerateQuizInputData generateQuizInputData) throws Exception {
         try {
