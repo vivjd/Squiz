@@ -3,6 +3,9 @@ package view;
 import interface_adapter.note.SaveNoteController;
 import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
+import interface_adapter.quiz.GenerateQuizController;
+import use_case.quiz.GenerateQuizInteractor;
+import use_case.quiz.GenerateQuizOutputBoundary;
 
 import interface_adapter.note.display_notes.DisplayNotesController;
 import interface_adapter.note.display_notes.DisplayNotesState;
@@ -33,6 +36,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     private final JButton generateQuiz;
 
     private final SaveNoteController saveNoteController;
+    private final GenerateQuizController generateQuizController;
     private final NoteViewModel noteViewModel;
     private final DisplayQuizzesController displayQuizzesController;
     private final DisplayQuizzesViewModel displayQuizzesViewModel;
@@ -44,6 +48,19 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                     DisplayNotesController displayNotesController, DisplayNotesViewModel displayNotesViewModel) {
         this.saveNoteController = saveNoteController;
         this.noteViewModel = noteViewModel;
+        GenerateQuizOutputBoundary quizPresenter = new GenerateQuizOutputBoundary() {
+            @Override
+            public void prepareSuccessView(String quiz) {
+
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+
+            }
+        };
+        GenerateQuizInteractor generateQuizInteractor = new GenerateQuizInteractor(quizPresenter);
+        this.generateQuizController = new GenerateQuizController(generateQuizInteractor);
         this.displayQuizzesController = displayQuizzesController;
         this.displayQuizzesViewModel = displayQuizzesViewModel;
         this.displayNotesController = displayNotesController;
@@ -102,7 +119,23 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                     }
                 }
         );
-
+        generate_quiz.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(generate_quiz)) {
+                            NoteState currentState = noteViewModel.getState();
+                            try {
+                                generateQuizController.execute(
+                                        currentState.getNote(),
+                                        currentState.getTitle());
+                            } catch (Exception ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                    }
+                }
+        );
         allQuizzes.addActionListener(
                 new ActionListener() {
                     @Override
