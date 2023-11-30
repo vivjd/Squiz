@@ -6,23 +6,43 @@ import entity.Question;
 
 import java.util.Map;
 
+/**
+ * The {@code AnswerQuestionInteractor} class is responsible for executing the logic of
+ * answering a question based on the provided input data. It interacts with the specified
+ * data access object and presents the answer feedback through the
+ * {@link AnswerQuestionOutputBoundary} output boundary.
+ *
+ * <p>This class implements the {@link AnswerQuestionInputBoundary} interface.</p>
+ */
 public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
+    /**
+     * Data access object for retrieving question data.
+     */
     final QuestionDataAccessInterface questionDataAccessObject;
+
+    /**
+     * Presenter for displaying the answer feedback.
+     */
     final AnswerQuestionOutputBoundary questionPresenter;
 
+    /**
+     * Constructs a new {@code AnswerQuestionInteractor} with the specified dependencies.
+     *
+     * @param questionDataAccessObject Data access object for retrieving question data.
+     * @param questionPresenter        Presenter for displaying the answer feedback.
+     */
     public AnswerQuestionInteractor(QuestionDataAccessInterface questionDataAccessObject, AnswerQuestionOutputBoundary questionPresenter) {
         this.questionDataAccessObject = questionDataAccessObject;
         this.questionPresenter = questionPresenter;
     }
 
+    /**
+     * Executes the process of answering a question based on the provided input data.
+     *
+     * @param answerQuestionInputData Input data containing user input to the question as well as info regarding the question itself.
+     */
     @Override
     public void execute(AnswerQuestionInputData answerQuestionInputData) {
-        // TODO: Double check implementation. See notes below.
-        // how do we get the question we have outputted to the user previously? how do we pass this in?
-        // After discussion, it seems like that should be provided by the TakeQuiz use case, how do we pass it in?
-        // code below assumes that we have already passed this in through some previous step
-        // we will have access to the question name?
-
         String userAnswer = answerQuestionInputData.getUserAnswer();
         Question<?> questionName = answerQuestionInputData.getQuestion();
         String answerFeedback = answerFeedback(questionName, userAnswer);
@@ -33,9 +53,9 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
 
     private String answerFeedback(Question<?> question, String userAnswer){
         if (isInstanceOfMCQ(question)){
-            // there's an issue with the way i'm finding out whether a question is a MCQ or Open ended, will look into it
             MultipleChoiceQuestion q = (MultipleChoiceQuestion) question;
             String correctAnswer = getMCQCorrectAnswer(q);
+            //TODO: test after QuizGenerator is integrated.
             if (correctAnswer.equals(userAnswer)){
                 return "Your answer is correct!";
             } else{
