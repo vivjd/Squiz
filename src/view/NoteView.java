@@ -7,6 +7,13 @@ import interface_adapter.quiz.GenerateQuizController;
 import use_case.quiz.GenerateQuizInteractor;
 import use_case.quiz.GenerateQuizOutputBoundary;
 
+import interface_adapter.note.display_notes.DisplayNotesController;
+import interface_adapter.note.display_notes.DisplayNotesState;
+import interface_adapter.note.display_notes.DisplayNotesViewModel;
+import interface_adapter.quiz.display.DisplayQuizzesViewModel;
+import interface_adapter.quiz.display.DisplayQuizzesController;
+import interface_adapter.quiz.display.DisplayQuizzesState;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,15 +29,23 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     private final JTextField userInputTitle = new JTextField("enter title here", 30);
 
     private final JButton save;
-    private final JButton edit;
-    private final JButton generate_quiz;
+    private final JButton allQuizzes;
 
+    private final JButton allNotes;
+
+    private final JButton generateQuiz;
 
     private final SaveNoteController saveNoteController;
     private final GenerateQuizController generateQuizController;
     private final NoteViewModel noteViewModel;
+    private final DisplayQuizzesController displayQuizzesController;
+    private final DisplayQuizzesViewModel displayQuizzesViewModel;
+    private final DisplayNotesController displayNotesController;
+    private final DisplayNotesViewModel displayNotesViewModel;
 
-    public NoteView(SaveNoteController saveNoteController, NoteViewModel noteViewModel) {
+    public NoteView(SaveNoteController saveNoteController, NoteViewModel noteViewModel,
+                    DisplayQuizzesController displayQuizzesController, DisplayQuizzesViewModel displayQuizzesViewModel,
+                    DisplayNotesController displayNotesController, DisplayNotesViewModel displayNotesViewModel) {
         this.saveNoteController = saveNoteController;
         this.noteViewModel = noteViewModel;
         GenerateQuizOutputBoundary quizPresenter = new GenerateQuizOutputBoundary() {
@@ -46,6 +61,12 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         };
         GenerateQuizInteractor generateQuizInteractor = new GenerateQuizInteractor(quizPresenter);
         this.generateQuizController = new GenerateQuizController(generateQuizInteractor);
+        this.displayQuizzesController = displayQuizzesController;
+        this.displayQuizzesViewModel = displayQuizzesViewModel;
+        this.displayNotesController = displayNotesController;
+        this.displayNotesViewModel = displayNotesViewModel;
+
+        displayQuizzesViewModel.addPropertyChangeListener(this);
         noteViewModel.addPropertyChangeListener(this);
 
         //creating title and note box
@@ -67,14 +88,18 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
         //creating buttons
         Box buttons = Box.createVerticalBox();
-        edit = new JButton(NoteViewModel.EDIT_LABEL);
+        allQuizzes = new JButton(NoteViewModel.ALL_QUIZZES_LABEL);
         save = new JButton(NoteViewModel.SAVE_LABEL);
-        generate_quiz = new JButton(NoteViewModel.SUBMIT_BUTTON_LABEL);
-        buttons.add(edit);
-        buttons.add(Box.createVerticalStrut(10));
+        generateQuiz = new JButton(NoteViewModel.SUBMIT_BUTTON_LABEL);
+        allNotes = new JButton(NoteViewModel.ALL_NOTES_LABEL);
+
         buttons.add(save);
         buttons.add(Box.createVerticalStrut(10));
-        buttons.add(generate_quiz);
+        buttons.add(allQuizzes);
+        buttons.add(Box.createVerticalStrut(10));
+        buttons.add(allNotes);
+        buttons.add(Box.createVerticalStrut(10));
+        buttons.add(generateQuiz);
 
         save.addActionListener(
                 new ActionListener() {
@@ -87,14 +112,13 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                                     currentState.getTitle(),
                                     currentState.getNote());
 
-                            if (currentState.getEmptyNoteError().isEmpty()) {
+                            if (currentState.getEmptyNoteError() == null) {
                                 showSavedPopup();
                             }
                         }
                     }
                 }
         );
-
         generate_quiz.addActionListener(
                 new ActionListener() {
                     @Override
@@ -112,7 +136,31 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                     }
                 }
         );
+        allQuizzes.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(allQuizzes)) {
+                           DisplayQuizzesState currentState = displayQuizzesViewModel.getState();
+                            displayQuizzesController.execute();
+                            displayQuizzesViewModel.setState(currentState);
+                        }
+                    }
+                }
+        );
 
+        allNotes.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(allNotes)) {
+                            DisplayNotesState currentState = displayNotesViewModel.getState();
+                            displayNotesController.execute();
+                            displayNotesViewModel.setState(currentState);
+                        }
+                    }
+                }
+        );
 
         userInputNote.addKeyListener(
                 new KeyListener() {
@@ -172,9 +220,23 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-            NoteState state = (NoteState) evt.getNewValue();
+        Object newValue = evt.getNewValue();
+        if (newValue instanceof DisplayQuizzesState) {
+            DisplayQuizzesState state = (DisplayQuizzesState) newValue;
+            if (state.getEmptyQuizzesError() != null) {
+                JOptionPane.showMessageDialog(this, state.getEmptyQuizzesError());
+            }
+        } else if (newValue instanceof NoteState) {
+            NoteState state = (NoteState) newValue;
             if (state.getEmptyNoteError() != null) {
                 JOptionPane.showMessageDialog(this, state.getEmptyNoteError());
             }
+        } else if (newValue instanceof  DisplayNotesState) {
+            DisplayNotesState state = (DisplayNotesState) newValue;
+            if (state.getEmptyNotesError() != null) {
+                JOptionPane.showMessageDialog(this, state.getEmptyNotesError());
+            }
+        }
     }
+
 }

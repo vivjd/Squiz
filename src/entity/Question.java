@@ -1,12 +1,21 @@
 package entity;
 
 import com.google.gson.Gson;
+import org.bson.codecs.pojo.annotations.BsonDiscriminator;
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.types.ObjectId;
 
-public abstract class Question<T> {
+@BsonDiscriminator
+public abstract class Question <T> {
 
-
+    @BsonId
+    private ObjectId id;
     boolean answerDisplayed = false;
+
+    @BsonProperty("question")
     String question;
+
 
     public abstract void displayAnswer();
     public abstract void setQuestion(String question);
@@ -20,6 +29,6 @@ public abstract class Question<T> {
         return gson.toJson(this);
     }
 
-  public abstract int checkAnswer(Object userResponse);
+    public abstract int checkAnswer(Object userResponse);
 
 }

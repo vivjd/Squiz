@@ -1,16 +1,26 @@
 package app;
 
-import data_access.NoteDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.note.*;
 import interface_adapter.quiz.GenerateQuizController;
+import interface_adapter.note.display_notes.DisplayNotesController;
+import interface_adapter.note.display_notes.DisplayNotesPresenter;
+import interface_adapter.note.display_notes.DisplayNotesViewModel;
+import interface_adapter.quiz.display.DisplayQuizzesController;
+import interface_adapter.quiz.display.DisplayQuizzesPresenter;
+import interface_adapter.quiz.display.DisplayQuizzesViewModel;
 import use_case.note.NoteDataAccessInterface;
-import use_case.note.delete.DeleteNoteInputBoundary;
-import use_case.note.delete.DeleteNoteInteractor;
-import use_case.note.delete.DeleteNoteOutputBoundary;
+import use_case.note.display_notes.DisplayNotesInputBoundary;
+import use_case.note.display_notes.DisplayNotesInteractor;
+import use_case.note.display_notes.DisplayNotesOutputBoundary;
 import use_case.note.save.SaveNoteInputBoundary;
 import use_case.note.save.SaveNoteInteractor;
 import use_case.note.save.SaveNoteOutputBoundary;
+
+import use_case.quiz.display.DisplayQuizzesInputBoundary;
+import use_case.quiz.display.DisplayQuizzesInteractor;
+import use_case.quiz.display.DisplayQuizzesOutputBoundary;
+import use_case.quiz.QuizDataAccessInterface;
 import view.NoteView;
 
 public class NoteUseCaseFactory {
@@ -20,13 +30,19 @@ public class NoteUseCaseFactory {
     public static NoteView create(
             ViewManagerModel viewManagerModel,
             NoteViewModel noteViewModel,
-            NoteDataAccessInterface noteDataAccessObject) {
+            NoteDataAccessInterface noteDataAccessObject,
+            DisplayQuizzesViewModel displayQuizzesViewModel,
+            QuizDataAccessInterface quizDataAccessObject,
+            DisplayNotesViewModel displayNotesViewModel) {
 
-        SaveNoteController saveNoteController = createNoteUseCase(viewManagerModel, noteViewModel, noteDataAccessObject);
-        return new NoteView(saveNoteController, noteViewModel);
+        SaveNoteController saveNoteController = createSaveNoteUseCase(viewManagerModel, noteViewModel, noteDataAccessObject);
+        DisplayQuizzesController displayQuizzesController = createDisplayQuizzesUseCase(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject);
+        DisplayNotesController displayNotesController = createDisplayNotesUseCase(viewManagerModel, displayNotesViewModel, noteDataAccessObject);
+
+        return new NoteView(saveNoteController, noteViewModel, displayQuizzesController, displayQuizzesViewModel, displayNotesController, displayNotesViewModel);
     }
 
-    private static SaveNoteController createNoteUseCase(
+    private static SaveNoteController createSaveNoteUseCase(
             ViewManagerModel viewManagerModel,
             NoteViewModel noteViewModel,
             NoteDataAccessInterface noteDataAccessObject) {
@@ -37,14 +53,23 @@ public class NoteUseCaseFactory {
         return new SaveNoteController(noteInteractor);
     }
 
-    private static DeleteNoteController deleteNoteUseCase(
+    private static DisplayNotesController createDisplayNotesUseCase(
             ViewManagerModel viewManagerModel,
-            NoteViewModel noteViewModel,
-            NoteDataAccessObject noteDataAccessObject) {
-        DeleteNoteOutputBoundary deleteNoteOutputBoundary = new DeleteNotePresenter(noteViewModel, viewManagerModel);
-        DeleteNoteInputBoundary deleteNoteInteractor = new DeleteNoteInteractor(noteDataAccessObject, deleteNoteOutputBoundary);
+            DisplayNotesViewModel displayNotesViewModel,
+            NoteDataAccessInterface noteDataAccessObject) {
 
-        return new DeleteNoteController(deleteNoteInteractor);
+        DisplayNotesOutputBoundary displayNotesOutputBoundary = new DisplayNotesPresenter(displayNotesViewModel, viewManagerModel);
+        DisplayNotesInputBoundary displayNotesInteractor = new DisplayNotesInteractor(noteDataAccessObject, displayNotesOutputBoundary);
+        return new DisplayNotesController(displayNotesInteractor);
     }
 
+    private static DisplayQuizzesController createDisplayQuizzesUseCase(
+            ViewManagerModel viewManagerModel,
+            DisplayQuizzesViewModel quizzesViewModel,
+            QuizDataAccessInterface quizDataAccessObject) {
+        DisplayQuizzesOutputBoundary displayQuizzesOutputBoundary = new DisplayQuizzesPresenter(quizzesViewModel, viewManagerModel);
+        DisplayQuizzesInputBoundary displayQuizzesInteractor = new DisplayQuizzesInteractor(quizDataAccessObject, displayQuizzesOutputBoundary);
+
+        return new DisplayQuizzesController(displayQuizzesInteractor);
+    }
 }
