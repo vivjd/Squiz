@@ -18,7 +18,7 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
     /**
      * Data access object for retrieving question data.
      */
-    final QuestionDataAccessInterface questionDataAccessObject;
+//    final QuestionDataAccessInterface questionDataAccessObject;
 
     /**
      * Presenter for displaying the answer feedback.
@@ -31,8 +31,8 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
      * @param questionDataAccessObject Data access object for retrieving question data.
      * @param questionPresenter        Presenter for displaying the answer feedback.
      */
-    public AnswerQuestionInteractor(QuestionDataAccessInterface questionDataAccessObject, AnswerQuestionOutputBoundary questionPresenter) {
-        this.questionDataAccessObject = questionDataAccessObject;
+    public AnswerQuestionInteractor(AnswerQuestionOutputBoundary questionPresenter) {
+//        this.questionDataAccessObject = questionDataAccessObject;
         this.questionPresenter = questionPresenter;
     }
 
