@@ -5,11 +5,8 @@ import data_access.QuestionDataAccessObject;
 import data_access.QuizDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.note.NoteViewModel;
-
-
 import interface_adapter.note.display_notes.DisplayNotesViewModel;
 import interface_adapter.question.QuestionViewModel;
-//import interface_adapter.quiz.delete.DeleteQuizViewModel;
 import interface_adapter.quiz.display.DisplayQuizzesViewModel;
 import interface_adapter.quiz.take_quiz.TakeQuizViewModel;
 import view.*;

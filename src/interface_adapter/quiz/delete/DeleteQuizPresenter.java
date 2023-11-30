@@ -5,8 +5,6 @@ import interface_adapter.quiz.display.DisplayQuizzesViewModel;
 import use_case.quiz.delete.DeleteQuizOutputBoundary;
 import use_case.quiz.delete.DeleteQuizOutputData;
 
-import javax.swing.*;
-
 public class DeleteQuizPresenter implements DeleteQuizOutputBoundary {
     private DisplayQuizzesViewModel displayQuizzesViewModel;
     private ViewManagerModel viewManagerModel;
