@@ -3,6 +3,9 @@ package app;
 import interface_adapter.ViewManagerModel;
 
 
+import interface_adapter.note.NoteViewModel;
+import interface_adapter.note.back.BackController;
+import interface_adapter.note.back.BackPresenter;
 import interface_adapter.question.QuestionViewModel;
 import interface_adapter.quiz.delete.DeleteQuizController;
 import interface_adapter.quiz.delete.DeleteQuizPresenter;
@@ -33,13 +36,16 @@ public class DisplayQuizzesUseCaseFactory {
             DisplayQuizzesViewModel displayQuizzesViewModel,
             QuizDataAccessInterface quizDataAccessObject,
             TakeQuizViewModel takeQuizViewModel,
-            QuestionViewModel questionViewModel)
+            QuestionViewModel questionViewModel,
+            NoteViewModel noteViewModel)
 
  {
      DeleteQuizController deleteQuizController = createDeleteQuizUseCase(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject);
         DisplayQuizzesController quizzesController= createDisplayQuizzesUseCase(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject);
         TakeQuizController takeQuizController = TakeQuizUseCaseFactory.createTakeQuizController(viewManagerModel, takeQuizViewModel, quizDataAccessObject, questionViewModel);
-        return new DisplayQuizzesView(displayQuizzesViewModel, quizzesController, takeQuizController, takeQuizViewModel, deleteQuizController);
+        BackPresenter backPresenter = new BackPresenter(noteViewModel, viewManagerModel);
+        BackController backController = new BackController(backPresenter);
+        return new DisplayQuizzesView(displayQuizzesViewModel, quizzesController, takeQuizController, takeQuizViewModel, deleteQuizController,backController);
 
     }
 
