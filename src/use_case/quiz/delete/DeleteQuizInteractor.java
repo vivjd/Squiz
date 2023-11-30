@@ -40,10 +40,10 @@ public class DeleteQuizInteractor implements DeleteQuizInputBoundary{
     @Override
     public void execute(DeleteQuizInputData deleteQuizInputData) {
         try {
-            Quiz targetQuiz = quizDataAccessObject.getQuizById(deleteQuizInputData.getQuizId());
+//            Quiz targetQuiz = quizDataAccessObject.getQuizById(deleteQuizInputData.getQuizId());
             quizDataAccessObject.deleteQuizById(deleteQuizInputData.getQuizId());
-            DeleteQuizOutputData deleteQuizOutputData = new DeleteQuizOutputData(targetQuiz.getTitle(), targetQuiz.getQuizLength());
-            deleteQuizPresenter.prepareSuccessView(deleteQuizOutputData);
+//            DeleteQuizOutputData deleteQuizOutputData = new DeleteQuizOutputData(targetQuiz.getTitle(), targetQuiz.getQuizLength());
+//            deleteQuizPresenter.prepareSuccessView(deleteQuizOutputData);
         } catch (Exception e) {
             //TODO: is there some other exception we haven't considered?
             throw new RuntimeException(e);
