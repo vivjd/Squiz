@@ -1,14 +1,12 @@
 package entity;
 
-import org.bson.codecs.pojo.annotations.BsonCreator;
+
 import org.bson.codecs.pojo.annotations.BsonDiscriminator;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 
 @BsonDiscriminator
-public
-class OpenEndedQuestion extends Question {
+public class OpenEndedQuestion extends Question<String> {
 
-    @BsonProperty("answer")
     private String answer;
     @BsonProperty("question")
     private String question;
@@ -32,6 +30,13 @@ class OpenEndedQuestion extends Question {
     public String getQuestion(){
         return this.question;
     }
+
+    @Override
+    public int checkAnswer(Object userResponse) {
+        if (userResponse == answer) return 1;
+        return 0;
+    }
+
     public String getCorrectAnswer() {
         return answer;
     }

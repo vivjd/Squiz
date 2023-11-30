@@ -1,6 +1,5 @@
 package interface_adapter.note.display_notes;
 
-import interface_adapter.quiz.DisplayQuizzesState;
 import org.bson.types.ObjectId;
 
 /**

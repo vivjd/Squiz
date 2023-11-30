@@ -1,4 +1,4 @@
-package use_case.quiz;
+package use_case.quiz.display;
 
 /**
  * The {@code DisplayQuizzesInputBoundary} interface defines the contract for the input

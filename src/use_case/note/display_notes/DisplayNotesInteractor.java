@@ -3,7 +3,6 @@ package use_case.note.display_notes;
 import entity.Note;
 import org.bson.types.ObjectId;
 import use_case.note.NoteDataAccessInterface;
-import use_case.quiz.DisplayQuizzesInputBoundary;
 
 import java.util.List;
 

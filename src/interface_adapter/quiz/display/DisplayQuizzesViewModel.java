@@ -1,5 +1,7 @@
-package interface_adapter.quiz;
+package interface_adapter.quiz.display;
+
 import interface_adapter.ViewModel;
+
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -24,6 +26,7 @@ public class DisplayQuizzesViewModel extends ViewModel {
     public static final String START_LABEL = "Start Quiz";
     public static final String EDIT_LABEL = "Edit Quiz";
     public static final String QUIZ_LABEL = "Quiz";
+    public static final String DELETE_LABEL = "Delete Quiz";
 
     public static final String BACK_LABEL = "Back";
     private DisplayQuizzesState state = new DisplayQuizzesState();

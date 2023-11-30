@@ -1,6 +1,6 @@
-package interface_adapter.quiz;
+package interface_adapter.quiz.display;
 
-import use_case.quiz.DisplayQuizzesInputBoundary;
+import use_case.quiz.display.DisplayQuizzesInputBoundary;
 
 /**
  * The {@code DisplayQuizzesController} class serves as the controller for the "Display Quizzes" use case.

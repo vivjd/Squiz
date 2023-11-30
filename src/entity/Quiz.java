@@ -4,19 +4,22 @@ import com.google.gson.Gson;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
-public class Quiz {
+public class Quiz{
     @BsonId
     private ObjectId id;
 
     @BsonProperty("title")
     private String title;
+
     @BsonProperty("questions")
-    List<Question> questions;
+    List<Question<?>> questions;
 
     @BsonProperty("creationTime")
     private String creationTime;
@@ -36,10 +39,6 @@ public class Quiz {
         this.title = title;
     }
 
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
     public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
     }
@@ -50,6 +49,10 @@ public class Quiz {
 
     public ObjectId getId() {
         return id;
+    }
+
+    public List<Question<?>> getQuestions() {
+        return questions;
     }
 
     public void setId(ObjectId id) {
@@ -68,7 +71,8 @@ public class Quiz {
         return creationTime;
     }
 
-    public void setQuestions(List<Question> questions) {
+
+    public void setQuestions(List<Question<?>> questions) {
         this.questions = questions;
         this.quizLength = questions.size();
     }
@@ -91,4 +95,5 @@ public class Quiz {
         // Use Gson to convert the Quiz object to JSON.
         return gson.toJson(this);
     }
+
 }

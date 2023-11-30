@@ -1,4 +1,6 @@
-package use_case.quiz;
+package use_case.quiz.display;
+
+import org.bson.types.ObjectId;
 
 /**
  * The {@code DisplayQuizzesOutputData} class represents the output data for displaying quizzes.
@@ -13,6 +15,8 @@ public class DisplayQuizzesOutputData {
      * Each array contains relevant information pertaining to the quiz that will be displayed to the user.
      */
     private final String[][] quizzes;
+
+    private final ObjectId[] ids;
 //    private List<String> quizTitles;
 
     /**
@@ -24,8 +28,12 @@ public class DisplayQuizzesOutputData {
      * Constructs a new {@code DisplayQuizzesOutputData} with the specified (most likely the ones in the databse) quizzes.
      *
      * @param quizzes The 2D array representing the quizzes.
+     * @param ids
      */
-    public DisplayQuizzesOutputData(String[][] quizzes) {this.quizzes = quizzes;}
+    public DisplayQuizzesOutputData(String[][] quizzes, ObjectId[] ids) {
+        this.quizzes = quizzes;
+        this.ids = ids;
+    }
 
 //    public List<String> getQuizTitles(){
 //        return this.quizTitles;
@@ -35,4 +43,7 @@ public class DisplayQuizzesOutputData {
         return quizzes;
     }
 
+    public ObjectId[] getIds() {
+        return ids;
+    }
 }
