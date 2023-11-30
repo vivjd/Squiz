@@ -31,7 +31,15 @@ public class DisplayNotesOutputData {
         this.ids = ids;
     }
 
+    /**
+     * Returns 2D array representing the current notes data found in the Database
+     * @return 2D array of notes data
+     */
     public String[][] getNotes() {return notes;}
 
+    /**
+     * Returns array of the current notes' ObjectID found in the Database
+     * @return array of ObjectId of each notes
+     */
     public ObjectId[] getIds() {return ids;}
 }
