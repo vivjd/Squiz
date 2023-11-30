@@ -10,7 +10,10 @@ public class NoteViewModel extends ViewModel {
 
     public static final String SUBMIT_BUTTON_LABEL = "Generate Quiz";
     public static final String SAVE_LABEL = "Save Note";
-    public static final String EDIT_LABEL = "Edit Quiz";
+    public static final String ALL_QUIZZES_LABEL = "View All Quizzes";
+
+    public static final String ALL_NOTES_LABEL = "View All Notes";
+
     public static final String TITLE_LABEL = "Note Page";
 
     public static final String NOTE_LABEL = "Note";
