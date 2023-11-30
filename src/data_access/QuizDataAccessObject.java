@@ -32,6 +32,7 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
  * @see Database
  */
 public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
+    /** The number of columns in the quiz table. */
     public static final int COLUMN_NUM = 3;
     private MongoClient mongoClient;
     private MongoDatabase mongoDatabase;
@@ -45,12 +46,18 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
     CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
     CodecRegistry pojoCodecRegistry = fromRegistries(getDefaultCodecRegistry(), fromProviders(pojoCodecProvider));
 
+    /**
+     * Establishes a connection to the MongoDB database.
+     */
     @Override
     public void connect() {
         mongoClient = MongoClients.create(connectionString);
         mongoDatabase = mongoClient.getDatabase(databaseName).withCodecRegistry(pojoCodecRegistry);
     }
 
+    /**
+     * Disconnects from the MongoDB database.
+     */
     @Override
     public void disconnect() {
         if (mongoClient != null) {
@@ -72,6 +79,12 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
         this.disconnect();
     }
 
+    /**
+     * Retrieves a quiz from the MongoDB database based on its title.
+     *
+     * @param title The title of the quiz to retrieve.
+     * @return The retrieved quiz.
+     */
     @Override
     public Quiz getQuiz(String title) {
         this.connect();
@@ -147,6 +160,11 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
         return quiz;
     }
 
+    /**
+     * Deletes a quiz from the MongoDB database based on its unique identifier.
+     *
+     * @param quizId The unique identifier of the quiz to delete.
+     */
     @Override
     public void deleteQuizById(ObjectId quizId){
         this.connect();
@@ -162,6 +180,11 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
         }
     }
 
+    /**
+     * Retrieves all unique identifiers (ObjectIds) of quizzes in the MongoDB database.
+     *
+     * @return An array of ObjectIds representing all quizzes in the database.
+     */
     @Override
     public ObjectId[] getAllIds() {
         List<Quiz> resultList = getAllQuizzes();

@@ -8,21 +8,20 @@ import use_case.quiz.delete.DeleteQuizOutputData;
 import javax.swing.*;
 
 public class DeleteQuizPresenter implements DeleteQuizOutputBoundary {
-    private DeleteQuizViewModel deleteQuizViewModel;
+    private DisplayQuizzesViewModel displayQuizzesViewModel;
     private ViewManagerModel viewManagerModel;
 
-    public DeleteQuizPresenter(DeleteQuizViewModel deleteQuizViewModel, ViewManagerModel viewManagerModel) {
-        this.deleteQuizViewModel = deleteQuizViewModel;
+    public DeleteQuizPresenter(DisplayQuizzesViewModel displayQuizzesViewModel, ViewManagerModel viewManagerModel) {
+        this.displayQuizzesViewModel = displayQuizzesViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
     @Override
     public void prepareSuccessView(DeleteQuizOutputData response) {
-
+        //TODO: do we need a presenter for DeleteQuiz (as well as DeleteNote)?
     }
 
     @Override
     public void prepareFailView(String error) {
-
     }
 }

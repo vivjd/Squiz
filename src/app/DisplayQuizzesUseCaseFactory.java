@@ -6,7 +6,6 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.question.QuestionViewModel;
 import interface_adapter.quiz.delete.DeleteQuizController;
 import interface_adapter.quiz.delete.DeleteQuizPresenter;
-import interface_adapter.quiz.delete.DeleteQuizViewModel;
 import interface_adapter.quiz.display.DisplayQuizzesController;
 import interface_adapter.quiz.display.DisplayQuizzesPresenter;
 import interface_adapter.quiz.display.DisplayQuizzesViewModel;
@@ -34,11 +33,10 @@ public class DisplayQuizzesUseCaseFactory {
             DisplayQuizzesViewModel displayQuizzesViewModel,
             QuizDataAccessInterface quizDataAccessObject,
             TakeQuizViewModel takeQuizViewModel,
-            QuestionViewModel questionViewModel,
-            DeleteQuizViewModel deleteQuizViewModel)
+            QuestionViewModel questionViewModel)
 
  {
-     DeleteQuizController deleteQuizController = createDeleteQuizUseCase(viewManagerModel, deleteQuizViewModel, quizDataAccessObject);
+     DeleteQuizController deleteQuizController = createDeleteQuizUseCase(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject);
         DisplayQuizzesController quizzesController= createDisplayQuizzesUseCase(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject);
         TakeQuizController takeQuizController = TakeQuizUseCaseFactory.createTakeQuizController(viewManagerModel, takeQuizViewModel, quizDataAccessObject, questionViewModel);
         return new DisplayQuizzesView(displayQuizzesViewModel, quizzesController, takeQuizController, takeQuizViewModel, deleteQuizController);
@@ -58,10 +56,10 @@ public class DisplayQuizzesUseCaseFactory {
 
     private static DeleteQuizController createDeleteQuizUseCase(
             ViewManagerModel viewManagerModel,
-            DeleteQuizViewModel deleteQuizViewModel,
+            DisplayQuizzesViewModel displayQuizViewModel,
             QuizDataAccessInterface quizDataAccessObject
     ){
-        DeleteQuizOutputBoundary deleteQuizOutputBoundary = new DeleteQuizPresenter(deleteQuizViewModel, viewManagerModel);
+        DeleteQuizOutputBoundary deleteQuizOutputBoundary = new DeleteQuizPresenter(displayQuizViewModel, viewManagerModel);
 
         DeleteQuizInputBoundary deleteQuizInteractor = new DeleteQuizInteractor(quizDataAccessObject, deleteQuizOutputBoundary);
 

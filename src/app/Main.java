@@ -9,7 +9,7 @@ import interface_adapter.note.NoteViewModel;
 
 import interface_adapter.note.display_notes.DisplayNotesViewModel;
 import interface_adapter.question.QuestionViewModel;
-import interface_adapter.quiz.delete.DeleteQuizViewModel;
+//import interface_adapter.quiz.delete.DeleteQuizViewModel;
 import interface_adapter.quiz.display.DisplayQuizzesViewModel;
 import interface_adapter.quiz.take_quiz.TakeQuizViewModel;
 import view.*;
@@ -40,7 +40,7 @@ public class Main {
         NoteViewModel noteViewModel = new NoteViewModel();
         DisplayQuizzesViewModel displayQuizzesViewModel = new DisplayQuizzesViewModel();
         DisplayNotesViewModel displayNotesViewModel = new DisplayNotesViewModel();
-        DeleteQuizViewModel deleteQuizViewModel = new DeleteQuizViewModel();
+//        DeleteQuizViewModel deleteQuizViewModel = new DeleteQuizViewModel();
 
         TakeQuizViewModel takeQuizViewModel = new TakeQuizViewModel();
         QuestionViewModel questionViewModel = new QuestionViewModel();
@@ -53,7 +53,7 @@ public class Main {
         DisplayNotesView displayNotesView = DisplayNotesUseCaseFactory.create(viewManagerModel, displayNotesViewModel, noteDataAccessObject);
         views.add(displayNotesView, displayNotesView.viewName);
 
-        DisplayQuizzesView displayQuizzesView = DisplayQuizzesUseCaseFactory.create(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject, takeQuizViewModel, questionViewModel, deleteQuizViewModel);
+        DisplayQuizzesView displayQuizzesView = DisplayQuizzesUseCaseFactory.create(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject, takeQuizViewModel, questionViewModel);
         views.add(displayQuizzesView, displayQuizzesView.viewName);
 
         AnswerQuestionView answerQuestionView = AnswerQuestionUseCaseFactory.create(viewManagerModel, questionViewModel, questionDataAccessObject);
