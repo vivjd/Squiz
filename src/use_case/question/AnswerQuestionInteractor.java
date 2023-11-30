@@ -1,7 +1,7 @@
 package use_case.question;
 
-import data_access.QuestionDataAccessObject;
 import entity.MultipleChoiceQuestion;
+import entity.OpenEndedQuestion;
 import entity.Question;
 
 import java.util.Map;
@@ -31,7 +31,7 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
 
     }
 
-    public String answerFeedback(Question<?> question, String userAnswer){
+    private String answerFeedback(Question<?> question, String userAnswer){
         if (isInstanceOfMCQ(question)){
             // there's an issue with the way i'm finding out whether a question is a MCQ or Open ended, will look into it
             MultipleChoiceQuestion q = (MultipleChoiceQuestion) question;
@@ -42,19 +42,16 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
                 return "Your answer is incorrect. The correct answer is " + correctAnswer + ".";
             }
         } else {
-            //assume that if question is not a MCQ then it must be a OpenEndedQuestion
-            // we need to do some Hugginface API calling here to get feedback
-            // code below assumes we've got gained feedback already
-            String feedback = "Some feedback from hugginface"; //change this
-            return feedback;
+            OpenEndedQuestion q = (OpenEndedQuestion) question;
+            return "AI Feedback: " + q.getCorrectAnswer();
         }
     }
 
-    public boolean isInstanceOfMCQ(Question question){
-        // TODO: Implementation below assumes that each Question stores as
+    private boolean isInstanceOfMCQ(Question question){
         return question instanceof MultipleChoiceQuestion;
     }
-    public String getMCQCorrectAnswer(MultipleChoiceQuestion q){
+
+    private String getMCQCorrectAnswer(MultipleChoiceQuestion q){
         Map<String, String> answerOptions = q.getAnswerOptions();
 
         return answerOptions.get(q.getCorrectAnswerIndex());
