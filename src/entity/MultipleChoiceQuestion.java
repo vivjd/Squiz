@@ -10,25 +10,12 @@ import java.util.Map;
  * Represents a multiple-choice question with a set of answer options and a correct answer index.
  * Extends the abstract class Question with Integer as the answer type.
  */
-
-public class MultipleChoiceQuestion extends Question<Integer> {
-
+@BsonDiscriminator
+public class MultipleChoiceQuestion extends Question<String> {
     /**
      * Map containing answer options where the key is the option index, and the value is the option text.
      */
-    private Map<Integer, String> answerOptions;
-@BsonDiscriminator
-public class MultipleChoiceQuestion extends Question<String> {
     private Map<String, String> answerOptions;
-
-    /**
-     * Index representing the correct answer among the answer options.
-     */
-    private int correctAnswerIndex;
-
-    /**
-     * The text of the multiple-choice question.
-     */
     private String correctAnswerIndex;
 
     @BsonProperty("question")
@@ -43,10 +30,6 @@ public class MultipleChoiceQuestion extends Question<String> {
      *                           and the value is the option text.
      * @param correctAnswerIndex Index representing the correct answer among the answer options.
      */
-    public MultipleChoiceQuestion(String question, Map<Integer, String> answerOptions, int correctAnswerIndex){
-
-    public MultipleChoiceQuestion() {
-    }
 
     public MultipleChoiceQuestion(@BsonProperty("question") String question,
                                   @BsonProperty("answerOptions") Map<String, String> answerOptions,
@@ -62,7 +45,6 @@ public class MultipleChoiceQuestion extends Question<String> {
      *
      * @return The text of the multiple-choice question.
      */
-    public String getQuestion(){
 
     public String getQuestion() {
         return this.question;
@@ -95,7 +77,7 @@ public class MultipleChoiceQuestion extends Question<String> {
      * Sets the text of the multiple-choice question.
      *
      * @param question The text of the multiple-choice question.
-     */public void setQuestion(String question){
+     */
     public void setQuestion(String question) {
         this.question = question;
     }
@@ -105,7 +87,6 @@ public class MultipleChoiceQuestion extends Question<String> {
      *
      * @return Map containing answer options where the key is the option index, and the value is the option text.
      */
-    public Map<Integer, String> getAnswerOptions() {
     public Map<String, String> getAnswerOptions() {
 
         return answerOptions;
@@ -116,7 +97,6 @@ public class MultipleChoiceQuestion extends Question<String> {
      *
      * @param ansOps Map containing answer options where the key is the option index, and the value is the option text.
      */
-    public void setAnswerOptions(HashMap<Integer, String> ansOps) {
 
     public void setAnswerOptions(Map<String, String> ansOps) {
         this.answerOptions = ansOps;
@@ -127,7 +107,6 @@ public class MultipleChoiceQuestion extends Question<String> {
      *
      * @return Index representing the correct answer among the answer options.
      */
-    public int getCorrectAnswerIndex() {
 
     public String getCorrectAnswerIndex() {
         return correctAnswerIndex;
@@ -138,7 +117,6 @@ public class MultipleChoiceQuestion extends Question<String> {
      *
      * @param correctAnswer Index representing the correct answer among the answer options.
      */
-    public void setCorrectAnswerIndex(int correctAnswer){
 
     public void setCorrectAnswerIndex(String correctAnswer) {
         this.correctAnswerIndex = correctAnswer;

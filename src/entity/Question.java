@@ -11,11 +11,8 @@ import org.bson.types.ObjectId;
  *
  * @param <T> The type of the answer to the question.
  */
-public abstract class Question<T> {
 @BsonDiscriminator
-public abstract class Question <T> {
-
-
+public abstract class Question<T> {
     /**
      * Flag indicating whether the answer has been displayed.
      */
@@ -69,7 +66,6 @@ public abstract class Question <T> {
      * @param userResponse The user's response to the question.
      * @return 1 if the user's response is correct, 0 otherwise.
      */
-    public abstract int checkAnswer(Object userResponse);
     public abstract int checkAnswer(Object userResponse);
 
 }

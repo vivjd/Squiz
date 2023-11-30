@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
@@ -19,7 +20,6 @@ public class Quiz implements Iterable<Question<?>>{
     /**
      * The unique identifier for the quiz.
      */
-public class Quiz{
     @BsonId
     private ObjectId id;
 
@@ -111,19 +111,9 @@ public class Quiz{
         return quizLength;
     }
 
-    /**
-     * Retrieves the number of correct answers in the quiz.
-     *
-     * @return The number of correct answers in the quiz.
-     */
-    public int getNumCorrect() {
-        return numCorrect;
-    }
-
     public String getCreationTime(){
         return creationTime;
     }
-
 
     /**
      * Sets the list of questions in the quiz and updates the quiz length.
