@@ -1,6 +1,5 @@
 package app;
 
-import data_access.NoteDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.note.DeleteNoteController;
 import interface_adapter.note.DeleteNotePresenter;
@@ -10,13 +9,13 @@ import interface_adapter.note.back.BackPresenter;
 import interface_adapter.note.display_notes.DisplayNotesController;
 import interface_adapter.note.display_notes.DisplayNotesPresenter;
 import interface_adapter.note.display_notes.DisplayNotesViewModel;
-
+import use_case.note.NoteDataAccessInterface;
 import use_case.note.delete.DeleteNoteInputBoundary;
 import use_case.note.delete.DeleteNoteInteractor;
 import use_case.note.delete.DeleteNoteOutputBoundary;
-import use_case.note.display_notes.*;
-import use_case.note.NoteDataAccessInterface;
-
+import use_case.note.display_notes.DisplayNotesInputBoundary;
+import use_case.note.display_notes.DisplayNotesInteractor;
+import use_case.note.display_notes.DisplayNotesOutputBoundary;
 import view.DisplayNotesView;
 
 public class DisplayNotesUseCaseFactory {

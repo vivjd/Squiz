@@ -131,7 +131,6 @@ public class QuizDataAccessObject implements QuizDataAccessInterface, Database {
             Quiz currentQuiz = resultList.get(i);
             outputTableData[i][0] = currentQuiz.getTitle();
             outputTableData[i][1] = Integer.toString(currentQuiz.getQuizLength());
-//            outputTableData[i][2] = currentQuiz.getCreationTime().toString();
             outputTableData[i][2] = currentQuiz.getCreationTime();
         }
 
