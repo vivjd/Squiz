@@ -130,16 +130,16 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
                     entirelist.get(mcq1q+2));
             MultipleChoiceQuestion mcq2 = new MultipleChoiceQuestion(entirelist.get(mcq2q),
                     helper(entirelist.get(mcq2q+1)),
-                    entirelist.get(mcq1q+2));
+                    entirelist.get(mcq2q+2));
             MultipleChoiceQuestion mcq3 = new MultipleChoiceQuestion(entirelist.get(mcq3q),
                     helper(entirelist.get(mcq3q+1)),
-                    entirelist.get(mcq1q+2));
+                    entirelist.get(mcq3q+2));
             MultipleChoiceQuestion mcq4 = new MultipleChoiceQuestion(entirelist.get(mcq4q),
                     helper(entirelist.get(mcq4q+1)),
-                    entirelist.get(mcq1q+2));
+                    entirelist.get(mcq4q+2));
             MultipleChoiceQuestion mcq5 = new MultipleChoiceQuestion(entirelist.get(mcq5q),
                     helper(entirelist.get(mcq5q+1)),
-                    entirelist.get(mcq1q+2));
+                    entirelist.get(mcq5q+2));
 
             OpenEndedQuestion opq1 = new OpenEndedQuestion(entirelist.get(opq1q), entirelist.get(opq1q+1));
             OpenEndedQuestion opq2 = new OpenEndedQuestion(entirelist.get(opq2q), entirelist.get(opq2q+1));
