@@ -100,14 +100,19 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
 
             System.out.println(entirelist.get(mcq1q));
             System.out.println(entirelist.get(mcq1q+1));
+            System.out.println(entirelist.get(mcq1q+2));
             System.out.println(entirelist.get(mcq2q));
             System.out.println(entirelist.get(mcq2q+1));
+            System.out.println(entirelist.get(mcq2q+2));
             System.out.println(entirelist.get(mcq3q));
             System.out.println(entirelist.get(mcq3q+1));
+            System.out.println(entirelist.get(mcq3q+2));
             System.out.println(entirelist.get(mcq4q));
             System.out.println(entirelist.get(mcq4q+1));
+            System.out.println(entirelist.get(mcq4q+2));
             System.out.println(entirelist.get(mcq5q));
             System.out.println(entirelist.get(mcq5q+1));
+            System.out.println(entirelist.get(mcq5q+2));
 
             System.out.println(entirelist.get(opq1q));
             System.out.println(entirelist.get(opq1q+1));
@@ -141,6 +146,11 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
             OpenEndedQuestion opq3 = new OpenEndedQuestion(entirelist.get(opq3q), entirelist.get(opq3q+1));
             OpenEndedQuestion opq4 = new OpenEndedQuestion(entirelist.get(opq4q), entirelist.get(opq4q+1));
             OpenEndedQuestion opq5 = new OpenEndedQuestion(entirelist.get(opq5q), entirelist.get(opq5q+1));
+            System.out.println(opq1.getCorrectAnswer());
+            System.out.println(opq2.getCorrectAnswer());
+            System.out.println(opq3.getCorrectAnswer());
+            System.out.println(opq4.getCorrectAnswer());
+            System.out.println(opq5.getCorrectAnswer());
             List<Question<?>> qList = new ArrayList<>();
 
             // Stores all of the questions generated into a list since the Quiz entity takes an a list attribute to store
