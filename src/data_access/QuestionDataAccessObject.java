@@ -1,10 +1,9 @@
 package data_access;
 
 import com.mongodb.client.*;
-
 import com.mongodb.client.model.Filters;
-import entity.Question;
 import entity.MultipleChoiceQuestion;
+import entity.Question;
 import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
@@ -12,10 +11,8 @@ import org.bson.conversions.Bson;
 import use_case.question.QuestionDataAccessInterface;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 import static com.mongodb.MongoClientSettings.getDefaultCodecRegistry;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;

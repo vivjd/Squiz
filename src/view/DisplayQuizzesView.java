@@ -1,20 +1,13 @@
 package view;
 
-import data_access.QuizDataAccessObject;
-import interface_adapter.ViewManagerModel;
+import interface_adapter.note.back.BackController;
 import interface_adapter.quiz.delete.DeleteQuizController;
 import interface_adapter.quiz.display.DisplayQuizzesController;
 import interface_adapter.quiz.display.DisplayQuizzesState;
 import interface_adapter.quiz.display.DisplayQuizzesViewModel;
 import interface_adapter.quiz.take_quiz.TakeQuizController;
-import interface_adapter.quiz.take_quiz.TakeQuizPresenter;
-import interface_adapter.quiz.take_quiz.TakeQuizState;
 import interface_adapter.quiz.take_quiz.TakeQuizViewModel;
 import org.bson.types.ObjectId;
-import use_case.quiz.QuizDataAccessInterface;
-import use_case.quiz.take_quiz.TakeQuizInputBoundary;
-import use_case.quiz.take_quiz.TakeQuizInteractor;
-import use_case.quiz.take_quiz.TakeQuizOutputBoundary;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -43,6 +36,7 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
     private final DisplayQuizzesController displayQuizzesController;
     private final DisplayQuizzesViewModel displayQuizzesViewModel;
     private final DeleteQuizController deleteQuizController;
+    private final BackController backController;
 
     JTable table;
     final JButton start;
@@ -66,11 +60,13 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
                               DisplayQuizzesController controller,
                               TakeQuizController takeQuizController,
                               TakeQuizViewModel takeQuizViewModel,
-                              DeleteQuizController deleteQuizController
+                              DeleteQuizController deleteQuizController,
+                              BackController backController
     ) {
         this.displayQuizzesViewModel = displayQuizzesViewModel;
         this.displayQuizzesController = controller;
         this.deleteQuizController = deleteQuizController;
+        this.backController = backController;
 
         final String noQuizSelectedMessage = "Please select a quiz or return to the home page to create a quiz.";
         displayQuizzesViewModel.addPropertyChangeListener(this);
@@ -112,7 +108,7 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
                     @Override
                     public void actionPerformed(ActionEvent e){
                         if (e.getSource().equals(back)) {
-                            // TODO: implement back button
+                            backController.execute();
                         }
                     }
                 }

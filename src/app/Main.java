@@ -6,13 +6,12 @@ import data_access.QuizDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.note.NoteViewModel;
 
-
 import interface_adapter.note.display_notes.DisplayNotesViewModel;
 import interface_adapter.question.QuestionViewModel;
-//import interface_adapter.quiz.delete.DeleteQuizViewModel;
 import interface_adapter.quiz.display.DisplayQuizzesViewModel;
 import interface_adapter.quiz.take_quiz.TakeQuizViewModel;
 import view.*;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,10 +49,10 @@ public class Main {
                 displayQuizzesViewModel, quizDataAccessObject, displayNotesViewModel);
         views.add(noteView, noteView.viewName);
 
-        DisplayNotesView displayNotesView = DisplayNotesUseCaseFactory.create(viewManagerModel, displayNotesViewModel, noteDataAccessObject);
+        DisplayNotesView displayNotesView = DisplayNotesUseCaseFactory.create(viewManagerModel, displayNotesViewModel, noteDataAccessObject, noteViewModel);
         views.add(displayNotesView, displayNotesView.viewName);
 
-        DisplayQuizzesView displayQuizzesView = DisplayQuizzesUseCaseFactory.create(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject, takeQuizViewModel, questionViewModel);
+        DisplayQuizzesView displayQuizzesView = DisplayQuizzesUseCaseFactory.create(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject, takeQuizViewModel, questionViewModel, noteViewModel);
         views.add(displayQuizzesView, displayQuizzesView.viewName);
 
         AnswerQuestionView answerQuestionView = AnswerQuestionUseCaseFactory.create(viewManagerModel, questionViewModel, questionDataAccessObject);
