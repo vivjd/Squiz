@@ -1,11 +1,6 @@
 package view;
 
-<<<<<<< HEAD
-import data_access.QuizDataAccessObject;
-import interface_adapter.ViewManagerModel;
 import interface_adapter.note.back.BackController;
-=======
->>>>>>> takequiz-documentation
 import interface_adapter.quiz.delete.DeleteQuizController;
 import interface_adapter.quiz.display.DisplayQuizzesController;
 import interface_adapter.quiz.display.DisplayQuizzesState;
