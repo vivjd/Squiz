@@ -1,6 +1,7 @@
 package entity;
 
 import com.google.gson.Gson;
+import org.bson.codecs.pojo.annotations.BsonCreator;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.ObjectId;
@@ -50,12 +51,11 @@ public class Quiz implements Iterable<Question<?>>{
      * @param title        The title of the quiz.
      * @param creationTime The creation time of the quiz.
      */
+    @BsonCreator
     public Quiz(@BsonProperty("title") String title, @BsonProperty("creationTime")LocalDateTime creationTime){
         this.title = title;
         this.creationTime = creationTime.toString();
     }
-
-    public Quiz(){}
 
     public void setTitle(String title) {
         this.title = title;
@@ -142,6 +142,11 @@ public class Quiz implements Iterable<Question<?>>{
                 '}';
     }
 
+    /**
+     * Converts the quiz object to JSON using the Gson library.
+     *
+     * @return A JSON representation of the quiz object.
+     */
     public String toJson() {
         // Create a Gson instance.
         Gson gson = new Gson();
@@ -161,6 +166,9 @@ public class Quiz implements Iterable<Question<?>>{
         return new QuizIterator();
     }
 
+    /**
+     * Private inner class representing an iterator over the questions in the quiz.
+     */
     private class QuizIterator implements Iterator<Question<?>> {
 
         private int currentIndex = 0;
