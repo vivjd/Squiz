@@ -55,8 +55,9 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
         return question instanceof MultipleChoiceQuestion;
     }
     public String getMCQCorrectAnswer(MultipleChoiceQuestion q){
-        Map<String, String> answerOptions = q.getAnswerOptions();
-
-        return answerOptions.get(q.getCorrectAnswerIndex());
+//        Map<String, String> answerOptions = q.getAnswerOptions();
+//
+//        return answerOptions.get(q.getCorrectAnswerIndex());
+        return q.getCorrectAnswerIndex();
     }
 }

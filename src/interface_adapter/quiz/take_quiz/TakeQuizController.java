@@ -1,10 +1,7 @@
 package interface_adapter.quiz.take_quiz;
 
-import org.bson.types.ObjectId;
 import use_case.quiz.take_quiz.TakeQuizInputBoundary;
 import use_case.quiz.take_quiz.TakeQuizInputData;
-
-import java.util.List;
 
 public class TakeQuizController {
 
