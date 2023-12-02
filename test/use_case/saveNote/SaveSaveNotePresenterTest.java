@@ -2,7 +2,7 @@ package use_case.saveNote;
 
 import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
-import interface_adapter.note.SaveSaveNotePresenter;
+import interface_adapter.note.save.SaveNotePresenter;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -27,7 +27,7 @@ public class SaveSaveNotePresenterTest {
     @Test
     public void testPrepareSuccessView() {
         // Create an instance of SaveSaveNotePresenter with the mocked dependencies
-        SaveSaveNotePresenter saveSaveNotePresenter = new SaveSaveNotePresenter(mockNoteViewModel, mockViewManagerModel);
+        SaveNotePresenter saveSaveNotePresenter = new SaveNotePresenter(mockNoteViewModel, mockViewManagerModel);
 
         // Create a mocked SaveNoteOutputData for a successful scenario
         SaveNoteOutputData mockSaveNoteOutputData = mock(SaveNoteOutputData.class);
@@ -49,7 +49,7 @@ public class SaveSaveNotePresenterTest {
     @Test
     public void testPrepareFailView() {
         // Create an instance of SaveSaveNotePresenter with the mocked dependencies
-        SaveSaveNotePresenter saveSaveNotePresenter = new SaveSaveNotePresenter(mockNoteViewModel, mockViewManagerModel);
+        SaveNotePresenter saveSaveNotePresenter = new SaveNotePresenter(mockNoteViewModel, mockViewManagerModel);
 
         NoteState mockNoteState = mock(NoteState.class);
         when(mockNoteViewModel.getState()).thenReturn(mockNoteState);
