@@ -140,8 +140,8 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                                 try {
                                     waitUntilGeneratedPopup();
                                     generateQuizController.execute(
-                                            currentState.getNote(),
-                                            currentState.getTitle());
+                                            noteText,
+                                            titleText);
                                     quizGeneratedPopup();
                                 } catch (Exception ex) {
                                     throw new RuntimeException(ex);

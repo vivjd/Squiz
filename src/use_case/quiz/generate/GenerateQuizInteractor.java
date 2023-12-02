@@ -171,7 +171,7 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
      */
     private static Map<String, String> helper(String input){
         String res = input.substring(1, input.length()-1);           //remove curly brackets
-        String[] keyValuePairs = res.split(",");              //split the string to creat key-value pairs
+        String[] keyValuePairs = res.split(",");              //split the string to create key-value pairs
         Map<String,String> acformated = new HashMap<>();
 
         for(String pair : keyValuePairs)                        //iterate over the pairs
