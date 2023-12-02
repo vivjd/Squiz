@@ -15,4 +15,8 @@ public class GenerateQuizOutputData {
     public GenerateQuizOutputData(String title) {
         this.msg = "Quiz is generated. Title: " + title + " (QUIZ)";
     }
+
+    public String getMsg() {
+        return this.msg;
+    }
 }
