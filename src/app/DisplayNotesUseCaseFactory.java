@@ -24,20 +24,27 @@ import use_case.quiz.GenerateQuizOutputBoundary;
 import view.DisplayNotesView;
 
 /**
- * Responsible for building the initial view for the "Display Notes" use case
+ * The DisplayNotesUseCaseFactory class is responsible for creating and initializing the components
+ * necessary for the DisplayNotes feature, including the DisplayNotesView, DisplayNotesController, DeleteNoteController,
+ * and BackController. It encapsulates the instantiation of controllers and associated input and output boundaries,
+ * facilitating the separation of concerns in the architecture.
  */
 public class DisplayNotesUseCaseFactory {
+
+    /**
+     * Private constructor to prevent instantiation of the factory class.
+     */
     private DisplayNotesUseCaseFactory() {}
 
     /**
-     * Method is responsible for creating the initial view for
-     * the "Display Notes" use case
-     * @param viewManagerModel is the manager model responsible for tracking the current
-     *                         view in the program
-     * @param displayNotesViewModel is the view model responsible for the display notes page
-     * @param noteDataAccessObject is the object that interacts with the back end
-     * @param noteViewModel is the view model responsible for the note main page
-     * @return the initial DisplayNotesView for the "Display Notes" use case
+     * Creates an instance of the DisplayNotesView by initializing the required components,
+     * such as the DisplayNotesController, DeleteNoteController, and BackController.
+     *
+     * @param viewManagerModel           The ViewManagerModel responsible for managing views in the application.
+     * @param displayNotesViewModel      The DisplayNotesViewModel representing the data for displaying notes.
+     * @param noteDataAccessObject       The NoteDataAccessInterface for accessing note-related data.
+     * @param noteViewModel              The NoteViewModel representing the data for an individual note.
+     * @return The created DisplayNotesView instance.
      */
     public static DisplayNotesView create(
             ViewManagerModel viewManagerModel,
@@ -54,6 +61,14 @@ public class DisplayNotesUseCaseFactory {
         return new DisplayNotesView(displayNotesViewModel, controller, deleteNoteController, backController, generateQuizController);
     }
 
+    /**
+     * Creates an instance of the DisplayNotesController by initializing the associated input and output boundaries.
+     *
+     * @param viewManagerModel           The ViewManagerModel responsible for managing views in the application.
+     * @param displayNotesViewModel      The DisplayNotesViewModel representing the data for displaying notes.
+     * @param noteDataAccessObject       The NoteDataAccessInterface for accessing note-related data.
+     * @return The created DisplayNotesController instance.
+     */
     private static DisplayNotesController createDisplayNotesUseCase(
             ViewManagerModel viewManagerModel,
             DisplayNotesViewModel displayNotesViewModel,
@@ -64,6 +79,14 @@ public class DisplayNotesUseCaseFactory {
         return new DisplayNotesController(displayNotesInteractor);
     }
 
+    /**
+     * Creates an instance of the DeleteNoteController by initializing the associated input and output boundaries.
+     *
+     * @param viewManagerModel           The ViewManagerModel responsible for managing views in the application.
+     * @param displayNotesViewModel      The DisplayNotesViewModel representing the data for displaying notes.
+     * @param noteDataAccessObject       The NoteDataAccessInterface for accessing note-related data.
+     * @return The created DeleteNoteController instance.
+     */
     private static DeleteNoteController deleteNoteUseCase(
             ViewManagerModel viewManagerModel,
             DisplayNotesViewModel displayNotesViewModel,
