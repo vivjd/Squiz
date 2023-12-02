@@ -1,4 +1,4 @@
-package use_case.note.display_notes;
+package use_case.note.display;
 
 /**
  * This interface defines methods for the execution of the use case in response to the user's

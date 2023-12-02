@@ -1,4 +1,4 @@
-package interface_adapter.note.display_notes;
+package interface_adapter.note.display;
 
 import org.bson.types.ObjectId;
 

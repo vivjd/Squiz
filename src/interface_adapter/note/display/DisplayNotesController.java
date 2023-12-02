@@ -1,6 +1,6 @@
-package interface_adapter.note.display_notes;
+package interface_adapter.note.display;
 
-import use_case.note.display_notes.DisplayNotesInputBoundary;
+import use_case.note.display.DisplayNotesInputBoundary;
 
 /**
  * The {@code DisplayNotes Controller} class serves as the controller for the "Display Notes" use case.
