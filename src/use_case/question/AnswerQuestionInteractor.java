@@ -73,5 +73,6 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
         Map<String, String> answerOptions = q.getAnswerOptions();
 
         return answerOptions.get(q.getCorrectAnswerIndex());
+
     }
 }

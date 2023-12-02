@@ -7,12 +7,14 @@ import entity.Quiz;
 import entity.Question;
 import java.time.LocalDateTime;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+
 /**
  * The GenerateQuizInteractor class is responsible for generating a quiz based on user input.
  * It implements the GenerateQuizInputBoundary interface and utilizes a QuizPresenter to handle the output.
+ *
+ * This class takes user input, processes it using ChatGPT, and generates a quiz consisting of multiple-choice
+ * and open-ended questions. The generated quiz is then stored in the data access layer.
  */
 public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
     /** The presenter for displaying quiz generation results. */
@@ -44,7 +46,8 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
             String userInput = "create 5 multiple choice questions with 4 options and answer indicated followed by 5 Open-ended questions with answers to each question, each about this note: "
                     + generateQuizInputData.getNote()
                     + "; for the multiple choice, it should follow the format of question, followed by a hashmap of answer options, which are followed by the index of the correct answer in that hashmap." +
-                    "Format the answer choices for multiple choice questions into a hashmap encapsulated in curly braces in one line. Show the correct answer choice in the next line.";
+                    "Format the answer choices for multiple choice questions into a hashmap encapsulated in curly braces in one line. Show the correct answer choice in the next line." +
+                    "Follow this format for the answer choices: {Option A: ~~~, Option B: ~~~, Option C: ~~~}. No empty lines are allowed.";
             String response = Chatbot.getChatGPTResponse(userInput);
             System.out.println(response);
 
@@ -73,6 +76,7 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
                 }
             }
 
+
             // The formatted list at this point is as following:
             // [question_1, answerChoices, correctAnswer,
             //  question_2, answerChoices, correctAnswer,
@@ -80,33 +84,61 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
 
             // This design of list allows the following lines...:
 
-            int mcq1q = mcqStart + 1;
-            int mcq2q = mcq1q + 3;
-            int mcq3q = mcq2q + 3;
-            int mcq4q = mcq3q + 3;
-            int mcq5q = mcq4q + 3;
-            int opq1q = openStart + 1;
+            int mcq1q = mcqStart + 2;
+            int mcq2q = mcq1q + 4;
+            int mcq3q = mcq2q + 4;
+            int mcq4q = mcq3q + 4;
+            int mcq5q = mcq4q + 4;
+            int opq1q = openStart + 2;
             int opq2q = opq1q + 2;
             int opq3q = opq2q + 2;
             int opq4q = opq3q + 2;
             int opq5q = opq4q + 2;
 
             // Generating Question entities accordingly
+            // Before doing so, answer choices for each MCQ has to be converted into a HashMap of Stirng and String:
+
+            System.out.println(entirelist.get(mcq1q));
+            System.out.println(entirelist.get(mcq1q+1));
+            System.out.println(entirelist.get(mcq1q+2));
+            System.out.println(entirelist.get(mcq2q));
+            System.out.println(entirelist.get(mcq2q+1));
+            System.out.println(entirelist.get(mcq2q+2));
+            System.out.println(entirelist.get(mcq3q));
+            System.out.println(entirelist.get(mcq3q+1));
+            System.out.println(entirelist.get(mcq3q+2));
+            System.out.println(entirelist.get(mcq4q));
+            System.out.println(entirelist.get(mcq4q+1));
+            System.out.println(entirelist.get(mcq4q+2));
+            System.out.println(entirelist.get(mcq5q));
+            System.out.println(entirelist.get(mcq5q+1));
+            System.out.println(entirelist.get(mcq5q+2));
+
+            System.out.println(entirelist.get(opq1q));
+            System.out.println(entirelist.get(opq1q+1));
+            System.out.println(entirelist.get(opq2q));
+            System.out.println(entirelist.get(opq2q+1));
+            System.out.println(entirelist.get(opq3q));
+            System.out.println(entirelist.get(opq3q+1));
+            System.out.println(entirelist.get(opq4q));
+            System.out.println(entirelist.get(opq4q+1));
+            System.out.println(entirelist.get(opq5q));
+            System.out.println(entirelist.get(opq5q+1));
 
             MultipleChoiceQuestion mcq1 = new MultipleChoiceQuestion(entirelist.get(mcq1q),
-                    entirelist.get(mcq1q+1),
+                    helper(entirelist.get(mcq1q+1)),
                     entirelist.get(mcq1q+2));
             MultipleChoiceQuestion mcq2 = new MultipleChoiceQuestion(entirelist.get(mcq2q),
-                    entirelist.get(mcq2q+1),
+                    helper(entirelist.get(mcq2q+1)),
                     entirelist.get(mcq1q+2));
             MultipleChoiceQuestion mcq3 = new MultipleChoiceQuestion(entirelist.get(mcq3q),
-                    entirelist.get(mcq3q+1),
+                    helper(entirelist.get(mcq3q+1)),
                     entirelist.get(mcq1q+2));
             MultipleChoiceQuestion mcq4 = new MultipleChoiceQuestion(entirelist.get(mcq4q),
-                    entirelist.get(mcq4q+1),
+                    helper(entirelist.get(mcq4q+1)),
                     entirelist.get(mcq1q+2));
             MultipleChoiceQuestion mcq5 = new MultipleChoiceQuestion(entirelist.get(mcq5q),
-                    entirelist.get(mcq5q+1),
+                    helper(entirelist.get(mcq5q+1)),
                     entirelist.get(mcq1q+2));
 
             OpenEndedQuestion opq1 = new OpenEndedQuestion(entirelist.get(opq1q), entirelist.get(opq1q+1));
@@ -114,6 +146,11 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
             OpenEndedQuestion opq3 = new OpenEndedQuestion(entirelist.get(opq3q), entirelist.get(opq3q+1));
             OpenEndedQuestion opq4 = new OpenEndedQuestion(entirelist.get(opq4q), entirelist.get(opq4q+1));
             OpenEndedQuestion opq5 = new OpenEndedQuestion(entirelist.get(opq5q), entirelist.get(opq5q+1));
+            System.out.println(opq1.getCorrectAnswer());
+            System.out.println(opq2.getCorrectAnswer());
+            System.out.println(opq3.getCorrectAnswer());
+            System.out.println(opq4.getCorrectAnswer());
+            System.out.println(opq5.getCorrectAnswer());
             List<Question<?>> qList = new ArrayList<>();
 
             // Stores all of the questions generated into a list since the Quiz entity takes an a list attribute to store
@@ -139,6 +176,7 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
                 quizPresenter.prepareFailView("Quiz not Generated. Please try again.");
             }
             else{
+                System.out.println("success!");
                 QuizDataAccessObject quizDAO = new QuizDataAccessObject();
                 quizDAO.saveQuiz(quiz);
                 quizPresenter.prepareSuccessView("Quiz Generated");
@@ -146,6 +184,25 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    /**
+     * Helper method to convert a string representation of answer choices into a Map.
+     *
+     * @param input The string representation of answer choices in the format {Option A: ~~~, Option B: ~~~, Option C: ~~~}.
+     * @return A Map containing the answer choices.
+     */
+    private static Map<String, String> helper(String input){
+        String res = input.substring(1, input.length()-1);           //remove curly brackets
+        System.out.println(res);
+        String[] keyValuePairs = res.split(",");              //split the string to creat key-value pairs
+        Map<String,String> acformated = new HashMap<>();
+
+        for(String pair : keyValuePairs)                        //iterate over the pairs
+        {
+            String[] entry = pair.split(":");                   //split the pairs to get key and value
+            acformated.put(entry[0], entry[1]);          //add them to the hashmap and trim whitespaces
+        }
+        return acformated;
     }
 //    private static int convert(String c){
 //        if (c.equalsIgnoreCase("A")){
