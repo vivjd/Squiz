@@ -1,32 +1,34 @@
 package interface_adapter.quiz.delete;
 
+import interface_adapter.note.DeleteNoteController;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import use_case.note.delete.DeleteNoteInputBoundary;
 import use_case.quiz.delete.DeleteQuizInputBoundary;
 import use_case.quiz.delete.DeleteQuizInputData;
 
 import static org.mockito.Mockito.*;
 public class DeleteQuizControllerTest {
     @Mock
-    private DeleteQuizInputBoundary deleteQuizInteractor;
+    private DeleteNoteInputBoundary deleteNoteInteractor;
 
-    private DeleteQuizController deleteQuizController;
+    private DeleteNoteController deleteNoteController;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        deleteQuizController = new DeleteQuizController(deleteQuizInteractor);
+        deleteNoteController = new DeleteNoteController(deleteNoteInteractor);
     }
 
     @Test
     public void testExecute() {
-        ObjectId quizId = new ObjectId("656583e8d05ae3b112ed77c1");
+        ObjectId noteId = new ObjectId("656583e8d05ae3b112ed77c1");
 
-        deleteQuizController.execute(quizId);
+        deleteNoteController.execute(noteId);
 
-        verify(deleteQuizInteractor).execute(argThat(argument -> argument.getQuizId().equals(quizId)));
+        verify(deleteNoteInteractor).execute(argThat(argument -> argument.getObjectId().equals(noteId)));
     }
 }
