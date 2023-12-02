@@ -10,8 +10,15 @@ import use_case.question.AnswerQuestionOutputData;
  * {@link AnswerQuestionOutputBoundary} interface to handle success and failure scenarios.
  */
 public class AnswerQuestionPresenter implements AnswerQuestionOutputBoundary {
+
+    /**
+     * The view model representing the state of the question interface.
+     */
     private QuestionViewModel questionViewModel;
 
+    /**
+     * The model managing the active views in the application.
+     */
     private ViewManagerModel viewManagerModel;
 
     /**
@@ -34,6 +41,8 @@ public class AnswerQuestionPresenter implements AnswerQuestionOutputBoundary {
     public void prepareSuccessView(AnswerQuestionOutputData userFeedback) {
         AnswerQuestionState questionState = questionViewModel.getState();
         questionState.setFeedback(userFeedback.getAnswerFeedback());
+
+
     }
 
     /**
