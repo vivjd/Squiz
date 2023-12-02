@@ -1,8 +1,6 @@
 package interface_adapter.quiz.display;
 
-import interface_adapter.note.display_notes.DisplayNotesController;
 import org.junit.jupiter.api.Test;
-import use_case.note.display_notes.DisplayNotesInputBoundary;
 import use_case.quiz.display.DisplayQuizzesInputBoundary;
 
 import static org.mockito.Mockito.*;

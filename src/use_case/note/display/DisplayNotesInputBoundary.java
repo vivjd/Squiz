@@ -1,4 +1,4 @@
-package use_case.note.display_notes;
+package use_case.note.display;
 
 public interface DisplayNotesInputBoundary {
     /**

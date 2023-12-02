@@ -1,7 +1,7 @@
-package interface_adapter.note;
+package interface_adapter.note.delete;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.note.display_notes.DisplayNotesViewModel;
+import interface_adapter.note.display.DisplayNotesViewModel;
 import use_case.note.delete.DeleteNoteOutputBoundary;
 
 /**

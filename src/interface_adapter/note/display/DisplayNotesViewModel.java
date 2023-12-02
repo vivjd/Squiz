@@ -1,7 +1,6 @@
-package interface_adapter.note.display_notes;
+package interface_adapter.note.display;
 
 import interface_adapter.ViewModel;
-import interface_adapter.note.display_notes.DisplayNotesState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -26,6 +25,7 @@ public class DisplayNotesViewModel extends ViewModel{
     public static final String DELETE_LABEL = "Delete Note";
     public static final String BACK_LABEL = "Back";
     public static final String NOTE_LABEL = "View Note";
+    public static final String GENERATE_QUIZ_LABEL = "Generate Quiz";
 
     private DisplayNotesState state = new DisplayNotesState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);

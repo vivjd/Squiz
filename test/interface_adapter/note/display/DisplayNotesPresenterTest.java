@@ -1,15 +1,12 @@
 package interface_adapter.note.display;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.note.display_notes.DisplayNotesPresenter;
-import interface_adapter.note.display_notes.DisplayNotesState;
-import interface_adapter.note.display_notes.DisplayNotesViewModel;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import use_case.note.display_notes.DisplayNotesOutputData;
+import use_case.note.display.DisplayNotesOutputData;
 
 import static org.mockito.Mockito.*;
 

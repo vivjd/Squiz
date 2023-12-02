@@ -1,4 +1,4 @@
-package interface_adapter.note;
+package interface_adapter.note.save;
 
 import use_case.note.save.SaveNoteInputBoundary;
 import use_case.note.save.SaveNoteInputData;

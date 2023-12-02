@@ -1,4 +1,4 @@
-package interface_adapter.note;
+package interface_adapter.note.delete;
 
 import org.bson.types.ObjectId;
 import use_case.note.delete.DeleteNoteInputBoundary;

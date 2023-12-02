@@ -5,9 +5,6 @@ import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_case.note.NoteDataAccessInterface;
-import use_case.note.display_notes.DisplayNotesInteractor;
-import use_case.note.display_notes.DisplayNotesOutputBoundary;
-import use_case.note.display_notes.DisplayNotesOutputData;
 
 import java.util.ArrayList;
 import java.util.List;

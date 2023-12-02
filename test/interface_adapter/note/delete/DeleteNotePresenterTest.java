@@ -1,8 +1,7 @@
 package interface_adapter.note.delete;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.note.display_notes.DisplayNotesViewModel;
-import interface_adapter.note.DeleteNotePresenter;
+import interface_adapter.note.display.DisplayNotesViewModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

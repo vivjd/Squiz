@@ -1,6 +1,5 @@
 package interface_adapter.quiz.delete;
 
-import interface_adapter.note.DeleteNoteController;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

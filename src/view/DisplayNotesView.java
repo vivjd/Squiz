@@ -1,10 +1,11 @@
 package view;
 
-import interface_adapter.note.DeleteNoteController;
+import interface_adapter.note.delete.DeleteNoteController;
 import interface_adapter.note.back.BackController;
-import interface_adapter.note.display_notes.DisplayNotesController;
-import interface_adapter.note.display_notes.DisplayNotesState;
-import interface_adapter.note.display_notes.DisplayNotesViewModel;
+import interface_adapter.note.display.DisplayNotesController;
+import interface_adapter.note.display.DisplayNotesState;
+import interface_adapter.note.display.DisplayNotesViewModel;
+import interface_adapter.quiz.GenerateQuizController;
 import org.bson.types.ObjectId;
 
 import javax.swing.*;
@@ -22,17 +23,20 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
     private final JButton delete = new JButton(DisplayNotesViewModel.DELETE_LABEL);
     private final JButton back = new JButton(DisplayNotesViewModel.BACK_LABEL);
     private final JButton view = new JButton(DisplayNotesViewModel.NOTE_LABEL);
+    private final JButton generateQuiz = new JButton(DisplayNotesViewModel.GENERATE_QUIZ_LABEL);
     private final DisplayNotesController displayNotesController;
     private final DeleteNoteController deleteNoteController;
     private final BackController backController;
     private final DisplayNotesViewModel displayNotesViewModel;
+    private final GenerateQuizController generateQuizController;
 
     public DisplayNotesView(DisplayNotesViewModel displayNotesViewModel, DisplayNotesController displayNotesController,
-                            DeleteNoteController deleteNoteController, BackController backController) {
+                            DeleteNoteController deleteNoteController, BackController backController, GenerateQuizController generateQuizController) {
         this.displayNotesViewModel = displayNotesViewModel;
         this.displayNotesController = displayNotesController;
         this.deleteNoteController = deleteNoteController;
         this.backController = backController;
+        this.generateQuizController = generateQuizController;
 
         displayNotesViewModel.addPropertyChangeListener(this);
 
@@ -86,6 +90,24 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
                     }
                 }
         );
+
+        generateQuiz.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(generateQuiz)){
+                            String title = notesData[table.getSelectedRow()][0];
+                            String content = notesData[table.getSelectedRow()][1];
+                            try {
+                                generateQuizController.execute(content, title);
+                                JOptionPane.showMessageDialog(null, "Quiz generated and saved. You can access it in the 'View all Quizzes' Page.");
+                            } catch (Exception ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                    }
+                }
+        );
     }
 
     private Box createButtons() {
@@ -95,6 +117,8 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
         buttons.add(delete);
         buttons.add(Box.createVerticalStrut(10));
         buttons.add(back);
+        buttons.add(Box.createVerticalStrut(10));
+        buttons.add(generateQuiz);
         buttons.add(Box.createVerticalStrut(10));
 
         return buttons;

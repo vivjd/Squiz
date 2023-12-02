@@ -1,10 +1,8 @@
-package interface_adapter.note.display_notes;
+package interface_adapter.note.display;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.note.display_notes.DisplayNotesViewModel;
-import use_case.note.display_notes.DisplayNotesOutputBoundary;
-import use_case.note.display_notes.DisplayNotesOutputData;
-import use_case.quiz.display.DisplayQuizzesOutputBoundary;
+import use_case.note.display.DisplayNotesOutputBoundary;
+import use_case.note.display.DisplayNotesOutputData;
 
 /**
  * The {@code DisplayQuizzesPresenter} class implements the {@link DisplayNotesOutputBoundary}

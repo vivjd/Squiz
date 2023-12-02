@@ -2,7 +2,6 @@ package use_case.note.display;
 
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
-import use_case.note.display_notes.DisplayNotesOutputData;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 

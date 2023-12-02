@@ -1,14 +1,16 @@
-package interface_adapter.note;
+package interface_adapter.note.save;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.note.NoteState;
+import interface_adapter.note.NoteViewModel;
 import use_case.note.save.SaveNoteOutputData;
 import use_case.note.save.SaveNoteOutputBoundary;
 
-public class SaveSaveNotePresenter implements SaveNoteOutputBoundary {
+public class SaveNotePresenter implements SaveNoteOutputBoundary {
     private final NoteViewModel noteViewModel;
     private ViewManagerModel viewManagerModel;
 
-    public SaveSaveNotePresenter(NoteViewModel noteViewModel, ViewManagerModel viewManagerModel) {
+    public SaveNotePresenter(NoteViewModel noteViewModel, ViewManagerModel viewManagerModel) {
         this.noteViewModel = noteViewModel;
         this.viewManagerModel = viewManagerModel;
     }
