@@ -6,29 +6,28 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import use_case.note.delete.DeleteNoteInputBoundary;
 import use_case.quiz.delete.DeleteQuizInputBoundary;
-import use_case.quiz.delete.DeleteQuizInputData;
 
 import static org.mockito.Mockito.*;
 public class DeleteQuizControllerTest {
-    @Mock
-    private DeleteNoteInputBoundary deleteNoteInteractor;
 
-    private DeleteNoteController deleteNoteController;
+    @Mock
+    private DeleteQuizInputBoundary deleteQuizInteractor;
+
+    private DeleteQuizController deleteQuizController;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        deleteNoteController = new DeleteNoteController(deleteNoteInteractor);
+        deleteQuizController = new DeleteQuizController(deleteQuizInteractor);
     }
 
     @Test
     public void testExecute() {
-        ObjectId noteId = new ObjectId("656583e8d05ae3b112ed77c1");
+        ObjectId quizId = new ObjectId("656583e8d05ae3b112ed77c1");
 
-        deleteNoteController.execute(noteId);
+        deleteQuizController.execute(quizId);
 
-        verify(deleteNoteInteractor).execute(argThat(argument -> argument.getObjectId().equals(noteId)));
+        verify(deleteQuizInteractor).execute(argThat(argument -> argument.getQuizId().equals(quizId)));
     }
 }

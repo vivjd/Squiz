@@ -15,46 +15,62 @@ import static org.mockito.Mockito.*;
 
 public class DisplayNotesPresenterTest {
     @Mock
-    private DisplayNotesViewModel mockViewModel;
+    private DisplayNotesViewModel displayNotesViewModel;
 
     @Mock
-    private ViewManagerModel mockViewManagerModel;
+    private ViewManagerModel viewManagerModel;
 
     private DisplayNotesPresenter displayNotesPresenter;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
-        displayNotesPresenter = new DisplayNotesPresenter(mockViewModel, mockViewManagerModel);
+        displayNotesPresenter = new DisplayNotesPresenter(displayNotesViewModel, viewManagerModel);
     }
 
     @Test
-    void testPrepareSuccessView() {
+    public void testPrepareSuccessView() {
+        // Mocking the output data
         String[][] mockNotes = {{"Note 1", "Content 1"}, {"Note 2", "Content 2"}};
         ObjectId[] mockIds = {new ObjectId("656583e8d05ae3b112ed77c1"), new ObjectId("656583e8d05ae3b112ed77c2")};
         DisplayNotesOutputData mockOutputData = new DisplayNotesOutputData(mockNotes, mockIds);
 
+        // Mocking the DisplayNotesState
         DisplayNotesState mockNotesState = mock(DisplayNotesState.class);
-        when(mockViewModel.getState()).thenReturn(mockNotesState);
+        when(displayNotesViewModel.getState()).thenReturn(mockNotesState);
 
+        // Execute the prepareSuccessView method
         displayNotesPresenter.prepareSuccessView(mockOutputData);
 
-        verify(mockViewModel, times(2)).firePropertyChanged();  // State and view model
-        verify(mockViewManagerModel, times(1)).firePropertyChanged();  // View manager model
-        verify(mockViewModel.getState(), times(1)).setTable(mockNotes);
-        verify(mockViewModel.getState(), times(1)).setIds(mockIds);
-        verify(mockViewModel, times(1)).setState(any(DisplayNotesState.class));
-        verify(mockViewManagerModel, times(1)).setActiveView(anyString());
+        // Verify that the DisplayNotesState is updated correctly
+        verify(mockNotesState).setTable(mockNotes);
+        verify(mockNotesState).setIds(mockIds);
+
+        // Verify that the DisplayNotesViewModel is updated correctly
+        verify(displayNotesViewModel).setState(mockNotesState);
+        verify(displayNotesViewModel).firePropertyChanged();
+
+        // Verify that the ViewManagerModel is updated with the correct active view
+        verify(viewManagerModel).setActiveView(displayNotesViewModel.getViewName());
+        verify(viewManagerModel).firePropertyChanged();
     }
 
     @Test
-    void testPrepareFailView() {
-        String errorMessage = "Test error message";
+    public void testPrepareFailView() {
+        // Mocking the error message
+        String errorMessage = "Error: No notes to display.";
 
+        // Mocking the DisplayNotesState
+        DisplayNotesState mockNotesState = mock(DisplayNotesState.class);
+        when(displayNotesViewModel.getState()).thenReturn(mockNotesState);
+
+        // Execute the prepareFailView method
         displayNotesPresenter.prepareFailView(errorMessage);
 
-        verify(mockViewModel, times(1)).firePropertyChanged();
-        verify(mockViewModel.getState(), times(1)).setEmptyNotesError(errorMessage);
-        verify(mockViewModel, times(1)).setState(any(DisplayNotesState.class));
+        // Verify that the DisplayNotesState is updated correctly
+        verify(mockNotesState).setEmptyNotesError(errorMessage);
+
+        // Verify that the DisplayNotesViewModel is updated correctly
+        verify(displayNotesViewModel).firePropertyChanged();
     }
 }

@@ -1,16 +1,44 @@
 package interface_adapter.note.delete;
 
-import org.junit.Test;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.note.display_notes.DisplayNotesViewModel;
+import interface_adapter.note.DeleteNotePresenter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class DeleteNotePresenterTest {
+    @Mock
+    private DisplayNotesViewModel mockDisplayNotesViewModel;
 
-    @Test
-    public void prepareSuccessView() {
+    @Mock
+    private ViewManagerModel mockViewManagerModel;
+
+    private DeleteNotePresenter deleteNotePresenter;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        deleteNotePresenter = new DeleteNotePresenter(mockDisplayNotesViewModel, mockViewManagerModel);
     }
 
     @Test
-    public void prepareFailView() {
+    void testPrepareSuccessView() {
+        deleteNotePresenter.prepareSuccessView();
+
+        verifyNoInteractions(mockDisplayNotesViewModel);
+        verifyNoInteractions(mockViewManagerModel);
+    }
+
+    @Test
+    void testPrepareFailView() {
+        String errorMessage = "Error: Note deletion failed.";
+
+        deleteNotePresenter.prepareFailView(errorMessage);
+
+        verifyNoInteractions(mockViewManagerModel);
     }
 }

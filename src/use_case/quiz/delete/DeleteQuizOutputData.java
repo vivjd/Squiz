@@ -3,6 +3,8 @@ package use_case.quiz.delete;
 /**
  * The {@code DeleteQuizOutputData} class represents the output data for a deleted quiz.
  * It encapsulates information about the deleted quiz, including its name and length.
+ *
+ * This class is reserved for future implementations but is currently not used.
  */
 public class DeleteQuizOutputData {
     private String quizName;

@@ -7,6 +7,8 @@ import use_case.note.delete.DeleteNoteOutputBoundary;
 /**
  * The DeleteNotePresenter class is responsible for presenting the results of the note deletion process.
  * It implements the DeleteNoteOutputBoundary interface.
+ *
+ * This class is currently not used in our implementation.
  */
 public class DeleteNotePresenter implements DeleteNoteOutputBoundary {
 
