@@ -26,7 +26,6 @@ public class GenerateQuizInteractorTest {
 
         // Define the behavior of the mocked GenerateQuizInputData
         when(mockGenerateQuizInputData.getNote()).thenReturn("Sample Note");
-
         try {
             // Call the execute method with the mocked input data
             generateQuizInteractor.execute(mockGenerateQuizInputData);
