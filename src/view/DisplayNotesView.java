@@ -1,7 +1,7 @@
 package view;
 
 import interface_adapter.note.DeleteNoteController;
-import interface_adapter.note.back.BackController;
+import interface_adapter.back.BackController;
 import interface_adapter.note.display_notes.DisplayNotesController;
 import interface_adapter.note.display_notes.DisplayNotesState;
 import interface_adapter.note.display_notes.DisplayNotesViewModel;
