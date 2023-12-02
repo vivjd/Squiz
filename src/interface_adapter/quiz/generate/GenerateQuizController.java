@@ -1,6 +1,6 @@
-package interface_adapter.quiz;
-import use_case.quiz.GenerateQuizInputBoundary;
-import use_case.quiz.GenerateQuizInputData;
+package interface_adapter.quiz.generate;
+import use_case.quiz.generate.GenerateQuizInputBoundary;
+import use_case.quiz.generate.GenerateQuizInputData;
 
 /**
  * Controller responsible for handling the generation of quizzes.

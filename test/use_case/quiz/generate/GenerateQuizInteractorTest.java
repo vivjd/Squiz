@@ -4,9 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import use_case.quiz.GenerateQuizInputData;
-import use_case.quiz.GenerateQuizInteractor;
-import use_case.quiz.GenerateQuizOutputBoundary;
 
 import static org.mockito.Mockito.*;
 

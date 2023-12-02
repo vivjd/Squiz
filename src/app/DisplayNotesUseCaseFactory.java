@@ -9,8 +9,8 @@ import interface_adapter.back.BackPresenter;
 import interface_adapter.note.display.DisplayNotesController;
 import interface_adapter.note.display.DisplayNotesPresenter;
 import interface_adapter.note.display.DisplayNotesViewModel;
-import interface_adapter.quiz.GenerateQuizController;
-import interface_adapter.quiz.GenerateQuizPresenter;
+import interface_adapter.quiz.generate.GenerateQuizController;
+import interface_adapter.quiz.generate.GenerateQuizPresenter;
 import use_case.note.NoteDataAccessInterface;
 import use_case.note.delete.DeleteNoteInputBoundary;
 import use_case.note.delete.DeleteNoteInteractor;
@@ -18,9 +18,9 @@ import use_case.note.delete.DeleteNoteOutputBoundary;
 import use_case.note.display.DisplayNotesInputBoundary;
 import use_case.note.display.DisplayNotesInteractor;
 import use_case.note.display.DisplayNotesOutputBoundary;
-import use_case.quiz.GenerateQuizInputBoundary;
-import use_case.quiz.GenerateQuizInteractor;
-import use_case.quiz.GenerateQuizOutputBoundary;
+import use_case.quiz.generate.GenerateQuizInputBoundary;
+import use_case.quiz.generate.GenerateQuizInteractor;
+import use_case.quiz.generate.GenerateQuizOutputBoundary;
 import view.DisplayNotesView;
 
 /**

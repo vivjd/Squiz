@@ -1,4 +1,4 @@
-package use_case.quiz;
+package use_case.quiz.generate;
 
 /**
  * The GenerateQuizInputData class represents input data for the quiz generation process.

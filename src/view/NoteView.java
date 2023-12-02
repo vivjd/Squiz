@@ -3,9 +3,9 @@ package view;
 import interface_adapter.note.save.SaveNoteController;
 import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
-import interface_adapter.quiz.GenerateQuizController;
-import use_case.quiz.GenerateQuizInteractor;
-import use_case.quiz.GenerateQuizOutputBoundary;
+import interface_adapter.quiz.generate.GenerateQuizController;
+import use_case.quiz.generate.GenerateQuizInteractor;
+import use_case.quiz.generate.GenerateQuizOutputBoundary;
 
 import interface_adapter.note.display.DisplayNotesController;
 import interface_adapter.note.display.DisplayNotesState;

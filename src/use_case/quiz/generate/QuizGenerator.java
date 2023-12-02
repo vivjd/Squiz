@@ -1,4 +1,4 @@
-package use_case.quiz;
+package use_case.quiz.generate;
 
 import entity.Quiz;
 

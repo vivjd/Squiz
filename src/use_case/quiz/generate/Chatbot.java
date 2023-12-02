@@ -1,4 +1,4 @@
-package use_case.quiz;
+package use_case.quiz.generate;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.apache.http.HttpEntity;
