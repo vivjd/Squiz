@@ -1,10 +1,8 @@
 package interface_adapter.note.display_notes;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.note.display_notes.DisplayNotesViewModel;
 import use_case.note.display_notes.DisplayNotesOutputBoundary;
 import use_case.note.display_notes.DisplayNotesOutputData;
-import use_case.quiz.display.DisplayQuizzesOutputBoundary;
 
 /**
  * The {@code DisplayQuizzesPresenter} class implements the {@link DisplayNotesOutputBoundary}
@@ -22,6 +20,11 @@ public class DisplayNotesPresenter implements DisplayNotesOutputBoundary {
     private final DisplayNotesViewModel displayNotesViewModel;
     private ViewManagerModel viewManagerModel;
 
+    /**
+     * Constructor for the Presenter of the "Display Notes" use case
+     * @param displayNotesViewModel is the view model of the "Display Notes" use case
+     * @param viewManagerModel is the manager model that controls the active view
+     */
     public DisplayNotesPresenter(DisplayNotesViewModel displayNotesViewModel, ViewManagerModel viewManagerModel) {
         this.displayNotesViewModel = displayNotesViewModel;
         this.viewManagerModel = viewManagerModel;

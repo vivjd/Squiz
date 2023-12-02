@@ -14,6 +14,9 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 
+/**
+ * Responsible for the final screen when the "Display Notes" use case is executed
+ */
 public class DisplayNotesView extends JPanel implements PropertyChangeListener{
     public final String viewName = "display_notes";
     private String[] columnNames = {"Note Title", "Note Content"};
@@ -27,6 +30,17 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
     private final BackController backController;
     private final DisplayNotesViewModel displayNotesViewModel;
 
+    /**
+     * Constructor of the DisplayNotesView
+     * Initializes the screen by creating the format of the JPanel
+     * @param displayNotesViewModel is the view model for the "Display Notes" Use Case
+     * @param displayNotesController is the controller responsible for the "Display Notes"
+     *                               Use Case; is executed when the table needs to be updated
+     * @param deleteNoteController is the controller responsible for the "Delete Note" Use Case;
+     *                             is executed when the delete button is pressed by the user
+     * @param backController is the controller responsible for the "Back" use case; is executed
+     *                       when the back button is pressed by the user
+     */
     public DisplayNotesView(DisplayNotesViewModel displayNotesViewModel, DisplayNotesController displayNotesController,
                             DeleteNoteController deleteNoteController, BackController backController) {
         this.displayNotesViewModel = displayNotesViewModel;
@@ -88,18 +102,13 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
         );
     }
 
-    private Box createButtons() {
-        Box buttons = Box.createVerticalBox();
-        buttons.add(view);
-        buttons.add(Box.createVerticalStrut(10));
-        buttons.add(delete);
-        buttons.add(Box.createVerticalStrut(10));
-        buttons.add(back);
-        buttons.add(Box.createVerticalStrut(10));
-
-        return buttons;
-    }
-
+    /**
+     * Method responsible for checking if there is an error in the state
+     * If there is, display the error to the user; if not, update the table to ensure
+     * the user has the current number of notes found in the data base
+     * @param evt A PropertyChangeEvent object describing the event source
+     *          and the property that has changed.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         DisplayNotesState state = (DisplayNotesState) evt.getNewValue();
@@ -127,5 +136,17 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
 
     private void showDeletePopUp() {
         JOptionPane.showMessageDialog(this, "note deleted");
+    }
+
+    private Box createButtons() {
+        Box buttons = Box.createVerticalBox();
+        buttons.add(view);
+        buttons.add(Box.createVerticalStrut(10));
+        buttons.add(delete);
+        buttons.add(Box.createVerticalStrut(10));
+        buttons.add(back);
+        buttons.add(Box.createVerticalStrut(10));
+
+        return buttons;
     }
 }
