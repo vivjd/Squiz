@@ -2,6 +2,7 @@ package interface_adapter.quiz.take_quiz;
 
 import entity.Question;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class TakeQuizState {
@@ -26,6 +27,10 @@ public class TakeQuizState {
 
     public List<Question<?>> getQuestions() {
         return questions;
+    }
+
+    public Iterator<Question<?>> getQuestionsIterator() {
+        return questions.iterator();
     }
 
     public void setQuestions(List<Question<?>> questions) {
