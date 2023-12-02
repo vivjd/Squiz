@@ -1,5 +1,6 @@
 package app;
 
+import entity.Question;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.question.AnswerQuestionController;
 import interface_adapter.question.AnswerQuestionPresenter;
@@ -7,6 +8,7 @@ import interface_adapter.question.QuestionViewModel;
 import use_case.question.AnswerQuestionInputBoundary;
 import use_case.question.AnswerQuestionInteractor;
 import use_case.question.AnswerQuestionOutputBoundary;
+import use_case.question.QuestionDataAccessInterface;
 import view.AnswerQuestionView;
 
 /**
@@ -33,8 +35,9 @@ public class AnswerQuestionUseCaseFactory {
      */
     public static AnswerQuestionView create(
             ViewManagerModel viewManagerModel,
-            QuestionViewModel questionViewModel) {
-        AnswerQuestionController answerQuestionController = createAnswerQuestionController(viewManagerModel, questionViewModel);
+            QuestionViewModel questionViewModel,
+            QuestionDataAccessInterface questionDataAccessObject) {
+        AnswerQuestionController answerQuestionController = createAnswerQuestionController(viewManagerModel, questionViewModel, questionDataAccessObject);
         return new AnswerQuestionView(questionViewModel, answerQuestionController);
     }
 
@@ -48,10 +51,11 @@ public class AnswerQuestionUseCaseFactory {
      */
     public static AnswerQuestionController createAnswerQuestionController(
             ViewManagerModel viewManagerModel,
-            QuestionViewModel questionViewModel)
+            QuestionViewModel questionViewModel,
+            QuestionDataAccessInterface questionDataAccessObject)
     {
         AnswerQuestionOutputBoundary answerQuestionOutputBoundary = new AnswerQuestionPresenter(questionViewModel, viewManagerModel);
-        AnswerQuestionInputBoundary answerQuestionInputBoundary = new AnswerQuestionInteractor(answerQuestionOutputBoundary);
+        AnswerQuestionInputBoundary answerQuestionInputBoundary = new AnswerQuestionInteractor(questionDataAccessObject, answerQuestionOutputBoundary);
 
         return new AnswerQuestionController(answerQuestionInputBoundary);
 

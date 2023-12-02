@@ -2,6 +2,7 @@ package use_case.question;
 
 import data_access.QuestionDataAccessObject;
 import entity.MultipleChoiceQuestion;
+import entity.OpenEndedQuestion;
 import entity.Question;
 
 import java.util.Map;
@@ -30,7 +31,7 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
      *
      * @param questionPresenter        Presenter for displaying the answer feedback.
      */
-    public AnswerQuestionInteractor(AnswerQuestionOutputBoundary questionPresenter) {
+    public AnswerQuestionInteractor(QuestionDataAccessInterface questionDataAccessObject, AnswerQuestionOutputBoundary questionPresenter) {
         this.questionDataAccessObject = questionDataAccessObject;
         this.questionPresenter = questionPresenter;
     }
