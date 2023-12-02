@@ -21,6 +21,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Objects;
 
 public class NoteView extends JPanel implements ActionListener, PropertyChangeListener{
     public final String viewName = "note";
@@ -127,19 +128,21 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                             NoteState currentState = noteViewModel.getState();
                             String noteText = userInputNote.getText();
                             String titleText = userInputTitle.getText();
-                            if (noteText == ""){
+                            if (Objects.equals(noteText, "")){
                                 System.out.println("note empty");
                                 noteEmptyPopup();
                             }
-                            if (titleText == ""){
+                            if (Objects.equals(titleText, "")){
                                 System.out.println("title empty");
                                 titleEmptyPopup();
                             }
                             else{
                                 try {
+                                    waitUntilGeneratedPopup();
                                     generateQuizController.execute(
                                             currentState.getNote(),
                                             currentState.getTitle());
+                                    quizGeneratedPopup();
                                 } catch (Exception ex) {
                                     throw new RuntimeException(ex);
                                 }
@@ -230,6 +233,13 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     private void noteEmptyPopup(){
         JOptionPane.showMessageDialog(this, "Note is empty, please provide a note.");
     }
+    private void quizGeneratedPopup(){
+        JOptionPane.showMessageDialog(this, "Quiz is successfully generated.");
+    }
+    private void waitUntilGeneratedPopup(){
+        JOptionPane.showMessageDialog(this, "Quiz is being generated. Please wait for the next popup");
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

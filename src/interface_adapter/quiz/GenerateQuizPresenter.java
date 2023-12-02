@@ -1,9 +1,11 @@
 package interface_adapter.quiz;
 
+import use_case.quiz.GenerateQuizOutputBoundary;
+
 /**
  * The GenerateQuizPresenter class is responsible for presenting the results of the quiz generation process.
  */
-public class GenerateQuizPresenter {
+public class GenerateQuizPresenter implements GenerateQuizOutputBoundary {
 
     /**
      * Constructs a GenerateQuizPresenter.

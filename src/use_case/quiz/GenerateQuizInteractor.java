@@ -67,11 +67,9 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
             for (String x : entireArray){
                 if (x.toUpperCase().contains("HOICE QUESTION")){
                     mcqStart = entirelist.indexOf(x);
-                    System.out.println(mcqStart);
                 }
                 else if (x.toUpperCase().contains("NDED QUESTION")){
                     openStart = entirelist.indexOf(x);
-                    System.out.println(openStart);
                 }
             }
 
@@ -89,40 +87,25 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
             int mcq4q = mcq3q + 4;
             int mcq5q = mcq4q + 4;
             int opq1q = openStart + 2;
-            int opq2q = opq1q + 2;
-            int opq3q = opq2q + 2;
-            int opq4q = opq3q + 2;
-            int opq5q = opq4q + 2;
+            int opq2q = opq1q + 3;
+            int opq3q = opq2q + 3;
+            int opq4q = opq3q + 3;
+            int opq5q = opq4q + 3;
+
+
+//            System.out.println(entirelist.get(opq1q));
+//            System.out.println(entirelist.get(opq1q + 1));
+//            System.out.println(entirelist.get(opq2q));
+//            System.out.println(entirelist.get(opq2q + 1));
+//            System.out.println(entirelist.get(opq3q));
+//            System.out.println(entirelist.get(opq3q + 1));
+//            System.out.println(entirelist.get(opq4q));
+//            System.out.println(entirelist.get(opq4q + 1));
+//            System.out.println(entirelist.get(opq5q));
+//            System.out.println(entirelist.get(opq5q + 1));
 
             // Generating Question entities accordingly
             // Before doing so, answer choices for each MCQ has to be converted into a HashMap of Stirng and String:
-
-            System.out.println(entirelist.get(mcq1q));
-            System.out.println(entirelist.get(mcq1q+1));
-            System.out.println(entirelist.get(mcq1q+2));
-            System.out.println(entirelist.get(mcq2q));
-            System.out.println(entirelist.get(mcq2q+1));
-            System.out.println(entirelist.get(mcq2q+2));
-            System.out.println(entirelist.get(mcq3q));
-            System.out.println(entirelist.get(mcq3q+1));
-            System.out.println(entirelist.get(mcq3q+2));
-            System.out.println(entirelist.get(mcq4q));
-            System.out.println(entirelist.get(mcq4q+1));
-            System.out.println(entirelist.get(mcq4q+2));
-            System.out.println(entirelist.get(mcq5q));
-            System.out.println(entirelist.get(mcq5q+1));
-            System.out.println(entirelist.get(mcq5q+2));
-
-            System.out.println(entirelist.get(opq1q));
-            System.out.println(entirelist.get(opq1q+1));
-            System.out.println(entirelist.get(opq2q));
-            System.out.println(entirelist.get(opq2q+1));
-            System.out.println(entirelist.get(opq3q));
-            System.out.println(entirelist.get(opq3q+1));
-            System.out.println(entirelist.get(opq4q));
-            System.out.println(entirelist.get(opq4q+1));
-            System.out.println(entirelist.get(opq5q));
-            System.out.println(entirelist.get(opq5q+1));
 
             MultipleChoiceQuestion mcq1 = new MultipleChoiceQuestion(entirelist.get(mcq1q),
                     helper(entirelist.get(mcq1q+1)),
@@ -145,11 +128,6 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
             OpenEndedQuestion opq3 = new OpenEndedQuestion(entirelist.get(opq3q), entirelist.get(opq3q+1));
             OpenEndedQuestion opq4 = new OpenEndedQuestion(entirelist.get(opq4q), entirelist.get(opq4q+1));
             OpenEndedQuestion opq5 = new OpenEndedQuestion(entirelist.get(opq5q), entirelist.get(opq5q+1));
-            System.out.println(opq1.getCorrectAnswer());
-            System.out.println(opq2.getCorrectAnswer());
-            System.out.println(opq3.getCorrectAnswer());
-            System.out.println(opq4.getCorrectAnswer());
-            System.out.println(opq5.getCorrectAnswer());
             List<Question<?>> qList = new ArrayList<>();
 
             // Stores all of the questions generated into a list since the Quiz entity takes an a list attribute to store
@@ -192,7 +170,6 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
      */
     private static Map<String, String> helper(String input){
         String res = input.substring(1, input.length()-1);           //remove curly brackets
-        System.out.println(res);
         String[] keyValuePairs = res.split(",");              //split the string to creat key-value pairs
         Map<String,String> acformated = new HashMap<>();
 
