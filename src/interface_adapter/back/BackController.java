@@ -13,7 +13,7 @@ public class BackController {
      * Constructor to create controller for the "Back" use case
      * @param backPresenter is the Presenter of the "Back" use case
      */
-    public BackController(BackPresenter backPresenter) {this.backPresenter = backPresenter;}
+    public BackController(BackOutputBoundary backPresenter) {this.backPresenter = backPresenter;}
 
     /**
      * Executes the "Back" use case by invoking the corresponding method on the Back Presenter to
