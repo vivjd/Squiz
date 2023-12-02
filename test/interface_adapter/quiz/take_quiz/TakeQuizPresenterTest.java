@@ -36,13 +36,10 @@ public class TakeQuizPresenterTest {
 
     @Test
     public void prepareExecuteSuccessView_ShouldUpdateQuestionViewModel() {
-        // Arrange
         TakeQuizOutputData takeQuizOutputData = mock(TakeQuizOutputData.class);
 
-        // Act
         takeQuizPresenter.prepareExecuteSuccessView(takeQuizOutputData);
 
-        // Assert
         verify(questionViewModel).setState(any(AnswerQuestionState.class));
         verify(questionViewModel).firePropertyChanged();
     }
@@ -64,13 +61,10 @@ public class TakeQuizPresenterTest {
 
     @Test
     public void prepareNextSuccessView_ShouldUpdateQuestionViewModelOrSetActiveView() {
-        // Arrange
         TakeQuizOutputData takeQuizOutputData = mock(TakeQuizOutputData.class);
 
-        // Act
         takeQuizPresenter.prepareNextSuccessView(takeQuizOutputData);
 
-        // Assert
         verify(questionViewModel, atMostOnce()).setState(any(AnswerQuestionState.class));
         verify(questionViewModel, atMostOnce()).firePropertyChanged();
         verify(viewManagerModel, atMostOnce()).setActiveView(anyString());
@@ -79,10 +73,7 @@ public class TakeQuizPresenterTest {
 
     @Test
     public void prepareFailView_ShouldNotThrowException() {
-        // Act
         takeQuizPresenter.prepareFailView("error");
 
-        // Assert
-        // No exception should be thrown
     }
 }
