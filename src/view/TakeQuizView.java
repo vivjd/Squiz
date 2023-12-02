@@ -1,10 +1,5 @@
 package view;
 
-import app.AnswerQuestionUseCaseFactory;
-import data_access.QuestionDataAccessObject;
-import entity.Question;
-import interface_adapter.ViewManagerModel;
-import interface_adapter.question.QuestionViewModel;
 import interface_adapter.quiz.take_quiz.TakeQuizController;
 import interface_adapter.quiz.take_quiz.TakeQuizState;
 import interface_adapter.quiz.take_quiz.TakeQuizViewModel;
@@ -12,10 +7,8 @@ import use_case.quiz.take_quiz.AnswerQuestionListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.List;
 
 public class TakeQuizView extends JPanel implements PropertyChangeListener, AnswerQuestionListener {
 
@@ -49,6 +42,15 @@ public class TakeQuizView extends JPanel implements PropertyChangeListener, Answ
     public void onSubmitButtonPressed() {
         TakeQuizState currentState = takeQuizViewModel.getState();
         currentState.setCurrentQuestionIndex(currentState.getCurrentQuestionIndex() + 1);
-        takeQuizController.nextQuestion();
+        if (currentState.getCurrentQuestionIndex() < currentState.getQuestions().size()) {
+            takeQuizController.nextQuestion();
+        } else {
+            showQuizDonePopUp();
+            takeQuizController.nextQuestion();
+        }
+    }
+
+    private void showQuizDonePopUp() {
+        JOptionPane.showMessageDialog(this, "Quiz Completed!");
     }
 }
