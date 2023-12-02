@@ -5,7 +5,7 @@ import interface_adapter.back.BackController;
 import interface_adapter.note.display.DisplayNotesController;
 import interface_adapter.note.display.DisplayNotesState;
 import interface_adapter.note.display.DisplayNotesViewModel;
-import interface_adapter.quiz.GenerateQuizController;
+import interface_adapter.quiz.generate.GenerateQuizController;
 import org.bson.types.ObjectId;
 
 import javax.swing.*;

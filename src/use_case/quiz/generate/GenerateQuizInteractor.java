@@ -1,10 +1,11 @@
-package use_case.quiz;
+package use_case.quiz.generate;
 
 import data_access.QuizDataAccessObject;
 import entity.MultipleChoiceQuestion;
 import entity.OpenEndedQuestion;
 import entity.Quiz;
 import entity.Question;
+
 import java.time.LocalDateTime;
 
 import java.util.*;

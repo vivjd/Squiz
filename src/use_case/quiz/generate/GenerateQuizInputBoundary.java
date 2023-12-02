@@ -1,4 +1,4 @@
-package use_case.quiz;
+package use_case.quiz.generate;
 
 /**
  * The GenerateQuizInputBoundary interface defines the contract for classes responsible for executing
