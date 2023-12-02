@@ -119,11 +119,11 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                     }
                 }
         );
-        generate_quiz.addActionListener(
+        generateQuiz.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (e.getSource().equals(generate_quiz)) {
+                        if (e.getSource().equals(generateQuiz)) {
                             NoteState currentState = noteViewModel.getState();
                             try {
                                 generateQuizController.execute(

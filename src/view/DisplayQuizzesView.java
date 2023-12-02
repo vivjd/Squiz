@@ -1,6 +1,6 @@
 package view;
 
-import interface_adapter.back.BackController;
+import interface_adapter.note.back.BackController;
 import interface_adapter.quiz.delete.DeleteQuizController;
 import interface_adapter.quiz.display.DisplayQuizzesController;
 import interface_adapter.quiz.display.DisplayQuizzesState;
