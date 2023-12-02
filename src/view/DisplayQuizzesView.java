@@ -1,6 +1,6 @@
 package view;
 
-import interface_adapter.note.back.BackController;
+import interface_adapter.back.BackController;
 import interface_adapter.quiz.delete.DeleteQuizController;
 import interface_adapter.quiz.display.DisplayQuizzesController;
 import interface_adapter.quiz.display.DisplayQuizzesState;
@@ -171,7 +171,7 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
      * It will delete all the initial data in the table and add all the current quizzes from quizData
      * into the table.
      */
-    private void updateTable(){
+    public void updateTable(){
         quizData = displayQuizzesViewModel.getState().getQuizzesTable();
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         tableModel.setRowCount(0);

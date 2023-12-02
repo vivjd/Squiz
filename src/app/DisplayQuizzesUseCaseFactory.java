@@ -3,8 +3,8 @@ package app;
 import interface_adapter.ViewManagerModel;
 
 import interface_adapter.note.NoteViewModel;
-import interface_adapter.note.back.BackController;
-import interface_adapter.note.back.BackPresenter;
+import interface_adapter.back.BackController;
+import interface_adapter.back.BackPresenter;
 
 import interface_adapter.question.QuestionViewModel;
 import interface_adapter.quiz.delete.DeleteQuizController;

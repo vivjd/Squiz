@@ -1,15 +1,15 @@
 package view;
 
-import interface_adapter.note.SaveNoteController;
+import interface_adapter.note.save.SaveNoteController;
 import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
 import interface_adapter.quiz.GenerateQuizController;
 import use_case.quiz.GenerateQuizInteractor;
 import use_case.quiz.GenerateQuizOutputBoundary;
 
-import interface_adapter.note.display_notes.DisplayNotesController;
-import interface_adapter.note.display_notes.DisplayNotesState;
-import interface_adapter.note.display_notes.DisplayNotesViewModel;
+import interface_adapter.note.display.DisplayNotesController;
+import interface_adapter.note.display.DisplayNotesState;
+import interface_adapter.note.display.DisplayNotesViewModel;
 import interface_adapter.quiz.display.DisplayQuizzesViewModel;
 import interface_adapter.quiz.display.DisplayQuizzesController;
 import interface_adapter.quiz.display.DisplayQuizzesState;

@@ -7,7 +7,6 @@ import interface_adapter.question.QuestionViewModel;
 import use_case.question.AnswerQuestionInputBoundary;
 import use_case.question.AnswerQuestionInteractor;
 import use_case.question.AnswerQuestionOutputBoundary;
-import use_case.question.QuestionDataAccessInterface;
 import view.AnswerQuestionView;
 
 /**
@@ -34,9 +33,8 @@ public class AnswerQuestionUseCaseFactory {
      */
     public static AnswerQuestionView create(
             ViewManagerModel viewManagerModel,
-            QuestionViewModel questionViewModel,
-            QuestionDataAccessInterface questionDataAccessInterface) {
-        AnswerQuestionController answerQuestionController = createAnswerQuestionController(viewManagerModel, questionViewModel, questionDataAccessInterface);
+            QuestionViewModel questionViewModel) {
+        AnswerQuestionController answerQuestionController = createAnswerQuestionController(viewManagerModel, questionViewModel);
         return new AnswerQuestionView(questionViewModel, answerQuestionController);
     }
 
@@ -50,11 +48,10 @@ public class AnswerQuestionUseCaseFactory {
      */
     public static AnswerQuestionController createAnswerQuestionController(
             ViewManagerModel viewManagerModel,
-            QuestionViewModel questionViewModel,
-            QuestionDataAccessInterface questionDataAccessInterface)
+            QuestionViewModel questionViewModel)
     {
         AnswerQuestionOutputBoundary answerQuestionOutputBoundary = new AnswerQuestionPresenter(questionViewModel, viewManagerModel);
-        AnswerQuestionInputBoundary answerQuestionInputBoundary = new AnswerQuestionInteractor(questionDataAccessInterface, answerQuestionOutputBoundary);
+        AnswerQuestionInputBoundary answerQuestionInputBoundary = new AnswerQuestionInteractor(answerQuestionOutputBoundary);
 
         return new AnswerQuestionController(answerQuestionInputBoundary);
 

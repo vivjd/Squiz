@@ -1,12 +1,12 @@
 package app;
 
 import data_access.NoteDataAccessObject;
-import data_access.QuestionDataAccessObject;
+//import data_access.QuestionDataAccessObject;
 import data_access.QuizDataAccessObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.note.NoteViewModel;
 
-import interface_adapter.note.display_notes.DisplayNotesViewModel;
+import interface_adapter.note.display.DisplayNotesViewModel;
 import interface_adapter.question.QuestionViewModel;
 import interface_adapter.quiz.display.DisplayQuizzesViewModel;
 import interface_adapter.quiz.take_quiz.TakeQuizViewModel;
@@ -34,7 +34,7 @@ public class Main {
 
         NoteDataAccessObject noteDataAccessObject = new NoteDataAccessObject();
         QuizDataAccessObject quizDataAccessObject = new QuizDataAccessObject();
-        QuestionDataAccessObject questionDataAccessObject = new QuestionDataAccessObject();
+//        QuestionDataAccessObject questionDataAccessObject = new QuestionDataAccessObject();
 
         NoteViewModel noteViewModel = new NoteViewModel();
         DisplayQuizzesViewModel displayQuizzesViewModel = new DisplayQuizzesViewModel();
@@ -55,7 +55,7 @@ public class Main {
         DisplayQuizzesView displayQuizzesView = DisplayQuizzesUseCaseFactory.create(viewManagerModel, displayQuizzesViewModel, quizDataAccessObject, takeQuizViewModel, questionViewModel, noteViewModel);
         views.add(displayQuizzesView, displayQuizzesView.viewName);
 
-        AnswerQuestionView answerQuestionView = AnswerQuestionUseCaseFactory.create(viewManagerModel, questionViewModel, questionDataAccessObject);
+        AnswerQuestionView answerQuestionView = AnswerQuestionUseCaseFactory.create(viewManagerModel, questionViewModel);
         views.add(displayQuizzesView, displayQuizzesView.viewName);
 
         TakeQuizView takeQuizView = TakeQuizUseCaseFactory.create(viewManagerModel, takeQuizViewModel, quizDataAccessObject, answerQuestionView, questionViewModel);

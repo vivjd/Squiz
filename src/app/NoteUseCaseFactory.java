@@ -2,17 +2,18 @@ package app;
 
 import interface_adapter.ViewManagerModel;
 import interface_adapter.note.*;
-import interface_adapter.quiz.GenerateQuizController;
-import interface_adapter.note.display_notes.DisplayNotesController;
-import interface_adapter.note.display_notes.DisplayNotesPresenter;
-import interface_adapter.note.display_notes.DisplayNotesViewModel;
+import interface_adapter.note.display.DisplayNotesController;
+import interface_adapter.note.display.DisplayNotesPresenter;
+import interface_adapter.note.display.DisplayNotesViewModel;
+import interface_adapter.note.save.SaveNoteController;
+import interface_adapter.note.save.SaveNotePresenter;
 import interface_adapter.quiz.display.DisplayQuizzesController;
 import interface_adapter.quiz.display.DisplayQuizzesPresenter;
 import interface_adapter.quiz.display.DisplayQuizzesViewModel;
 import use_case.note.NoteDataAccessInterface;
-import use_case.note.display_notes.DisplayNotesInputBoundary;
-import use_case.note.display_notes.DisplayNotesInteractor;
-import use_case.note.display_notes.DisplayNotesOutputBoundary;
+import use_case.note.display.DisplayNotesInputBoundary;
+import use_case.note.display.DisplayNotesInteractor;
+import use_case.note.display.DisplayNotesOutputBoundary;
 import use_case.note.save.SaveNoteInputBoundary;
 import use_case.note.save.SaveNoteInteractor;
 import use_case.note.save.SaveNoteOutputBoundary;
@@ -73,7 +74,7 @@ public class NoteUseCaseFactory {
             NoteViewModel noteViewModel,
             NoteDataAccessInterface noteDataAccessObject) {
 
-        SaveNoteOutputBoundary saveNoteOutputBoundary = new SaveSaveNotePresenter(noteViewModel, viewManagerModel);
+        SaveNoteOutputBoundary saveNoteOutputBoundary = new SaveNotePresenter(noteViewModel, viewManagerModel);
         SaveNoteInputBoundary noteInteractor = new SaveNoteInteractor(noteDataAccessObject, saveNoteOutputBoundary);
 
         return new SaveNoteController(noteInteractor);
