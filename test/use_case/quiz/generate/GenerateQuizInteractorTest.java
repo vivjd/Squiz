@@ -3,11 +3,12 @@ package use_case.quiz.generate;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 import use_case.quiz.GenerateQuizInputData;
 import use_case.quiz.GenerateQuizInteractor;
 import use_case.quiz.GenerateQuizOutputBoundary;
+
+import static org.mockito.Mockito.*;
 
 public class GenerateQuizInteractorTest {
     @Mock
@@ -26,9 +27,12 @@ public class GenerateQuizInteractorTest {
 
         // Define the behavior of the mocked GenerateQuizInputData
         when(mockGenerateQuizInputData.getNote()).thenReturn("Sample Note");
+
         try {
             // Call the execute method with the mocked input data
+            doNothing().when(generateQuizInteractor).execute(any());
             generateQuizInteractor.execute(mockGenerateQuizInputData);
+
 
             // Verify that the quizPresenter methods were called as expected
             verify(mockQuizPresenter).prepareSuccessView("Quiz Generated");

@@ -125,8 +125,8 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(generateQuiz)) {
                             NoteState currentState = noteViewModel.getState();
-                            String noteText = userInputNote.getText().strip();
-                            String titleText = userInputTitle.getText().strip();
+                            String noteText = userInputNote.getText();
+                            String titleText = userInputTitle.getText();
                             if (noteText == ""){
                                 System.out.println("note empty");
                                 noteEmptyPopup();
