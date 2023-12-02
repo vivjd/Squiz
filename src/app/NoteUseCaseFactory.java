@@ -23,10 +23,28 @@ import use_case.quiz.display.DisplayQuizzesOutputBoundary;
 import use_case.quiz.QuizDataAccessInterface;
 import view.NoteView;
 
+/**
+ * The NoteUseCaseFactory class is responsible for creating and initializing the components
+ * necessary for the Note feature, including the NoteView, SaveNoteController, DisplayQuizzesController,
+ * and DisplayNotesController. It encapsulates the instantiation of controllers and associated input
+ * and output boundaries, facilitating the separation of concerns in the architecture.
+ */
 public class NoteUseCaseFactory {
     private NoteUseCaseFactory() {
     }
 
+    /**
+     * Creates an instance of the NoteView by initializing the required components,
+     * such as the SaveNoteController, DisplayQuizzesController, and DisplayNotesController.
+     *
+     * @param viewManagerModel           The ViewManagerModel responsible for managing views in the application.
+     * @param noteViewModel              The NoteViewModel representing the data for the note.
+     * @param noteDataAccessObject       The NoteDataAccessInterface for accessing note-related data.
+     * @param displayQuizzesViewModel    The DisplayQuizzesViewModel representing the data for displaying quizzes.
+     * @param quizDataAccessObject       The QuizDataAccessInterface for accessing quiz-related data.
+     * @param displayNotesViewModel      The DisplayNotesViewModel representing the data for displaying notes.
+     * @return The created NoteView instance.
+     */
     public static NoteView create(
             ViewManagerModel viewManagerModel,
             NoteViewModel noteViewModel,
@@ -42,6 +60,14 @@ public class NoteUseCaseFactory {
         return new NoteView(saveNoteController, noteViewModel, displayQuizzesController, displayQuizzesViewModel, displayNotesController, displayNotesViewModel);
     }
 
+    /**
+     * Creates an instance of the SaveNoteController by initializing the associated input and output boundaries.
+     *
+     * @param viewManagerModel           The ViewManagerModel responsible for managing views in the application.
+     * @param noteViewModel              The NoteViewModel representing the data for the note.
+     * @param noteDataAccessObject       The NoteDataAccessInterface for accessing note-related data.
+     * @return The created SaveNoteController instance.
+     */
     private static SaveNoteController createSaveNoteUseCase(
             ViewManagerModel viewManagerModel,
             NoteViewModel noteViewModel,
@@ -53,6 +79,14 @@ public class NoteUseCaseFactory {
         return new SaveNoteController(noteInteractor);
     }
 
+    /**
+     * Creates an instance of the DisplayNotesController by initializing the associated input and output boundaries.
+     *
+     * @param viewManagerModel           The ViewManagerModel responsible for managing views in the application.
+     * @param displayNotesViewModel      The DisplayNotesViewModel representing the data for displaying notes.
+     * @param noteDataAccessObject       The NoteDataAccessInterface for accessing note-related data.
+     * @return The created DisplayNotesController instance.
+     */
     private static DisplayNotesController createDisplayNotesUseCase(
             ViewManagerModel viewManagerModel,
             DisplayNotesViewModel displayNotesViewModel,
@@ -63,6 +97,14 @@ public class NoteUseCaseFactory {
         return new DisplayNotesController(displayNotesInteractor);
     }
 
+    /**
+     * Creates an instance of the DisplayQuizzesController by initializing the associated input and output boundaries.
+     *
+     * @param viewManagerModel           The ViewManagerModel responsible for managing views in the application.
+     * @param quizzesViewModel           The DisplayQuizzesViewModel representing the data for displaying quizzes.
+     * @param quizDataAccessObject       The QuizDataAccessInterface for accessing quiz-related data.
+     * @return The created DisplayQuizzesController instance.
+     */
     private static DisplayQuizzesController createDisplayQuizzesUseCase(
             ViewManagerModel viewManagerModel,
             DisplayQuizzesViewModel quizzesViewModel,

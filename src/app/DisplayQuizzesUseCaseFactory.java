@@ -23,9 +23,31 @@ import use_case.quiz.display.DisplayQuizzesInteractor;
 import use_case.quiz.display.DisplayQuizzesOutputBoundary;
 import view.DisplayQuizzesView;
 
+/**
+ * The DisplayQuizzesUseCaseFactory class is responsible for creating and initializing the components
+ * necessary for the DisplayQuizzes feature, including the DisplayQuizzesView, DisplayQuizzesController,
+ * TakeQuizController, DeleteQuizController, and BackController. It encapsulates the instantiation of controllers
+ * and associated input and output boundaries, facilitating the separation of concerns in the architecture.
+ */
 public class DisplayQuizzesUseCaseFactory {
+
+    /**
+     * Private constructor to prevent instantiation of the factory class.
+     */
     private DisplayQuizzesUseCaseFactory () {}
 
+    /**
+     * Creates an instance of the DisplayQuizzesView by initializing the required components,
+     * such as the DisplayQuizzesController, TakeQuizController, DeleteQuizController, and BackController.
+     *
+     * @param viewManagerModel           The ViewManagerModel responsible for managing views in the application.
+     * @param displayQuizzesViewModel    The DisplayQuizzesViewModel representing the data for displaying quizzes.
+     * @param quizDataAccessObject       The QuizDataAccessInterface for accessing quiz-related data.
+     * @param takeQuizViewModel          The TakeQuizViewModel representing the data for taking a quiz.
+     * @param questionViewModel          The QuestionViewModel representing the data for a quiz question.
+     * @param noteViewModel              The NoteViewModel representing the data for an individual note.
+     * @return The created DisplayQuizzesView instance.
+     */
     public static DisplayQuizzesView create(
             ViewManagerModel viewManagerModel,
             DisplayQuizzesViewModel displayQuizzesViewModel,
@@ -44,6 +66,14 @@ public class DisplayQuizzesUseCaseFactory {
 
     }
 
+    /**
+     * Creates an instance of the DisplayQuizzesController by initializing the associated input and output boundaries.
+     *
+     * @param viewManagerModel           The ViewManagerModel responsible for managing views in the application.
+     * @param displayQuizzesViewModel    The DisplayQuizzesViewModel representing the data for displaying quizzes.
+     * @param quizDataAccessObject       The QuizDataAccessInterface for accessing quiz-related data.
+     * @return The created DisplayQuizzesController instance.
+     */
     private static DisplayQuizzesController createDisplayQuizzesUseCase(
             ViewManagerModel viewManagerModel,
             DisplayQuizzesViewModel displayQuizzesViewModel,
@@ -55,6 +85,14 @@ public class DisplayQuizzesUseCaseFactory {
         return new DisplayQuizzesController(displayQuizzesInteractor);
     }
 
+    /**
+     * Creates an instance of the DeleteQuizController by initializing the associated input and output boundaries.
+     *
+     * @param viewManagerModel           The ViewManagerModel responsible for managing views in the application.
+     * @param displayQuizViewModel       The DisplayQuizzesViewModel representing the data for displaying quizzes.
+     * @param quizDataAccessObject       The QuizDataAccessInterface for accessing quiz-related data.
+     * @return The created DeleteQuizController instance.
+     */
     private static DeleteQuizController createDeleteQuizUseCase(
             ViewManagerModel viewManagerModel,
             DisplayQuizzesViewModel displayQuizViewModel,
