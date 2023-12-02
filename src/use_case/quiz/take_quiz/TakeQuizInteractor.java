@@ -5,7 +5,6 @@ import entity.Quiz;
 import use_case.quiz.QuizDataAccessInterface;
 
 import java.util.Iterator;
-import java.util.List;
 
 public class TakeQuizInteractor implements TakeQuizInputBoundary {
 
@@ -30,10 +29,7 @@ public class TakeQuizInteractor implements TakeQuizInputBoundary {
     @Override
     public void execute(TakeQuizInputData takeQuizInputData) {
 
-
-        Quiz quiz = quizDataAccessObject.getQuiz(takeQuizInputData.getTitle());
-        questionIterator = quiz.getQuestions().iterator();
-        TakeQuizOutputData outputData = new TakeQuizOutputData(0);
+        TakeQuizOutputData outputData = new TakeQuizOutputData();
 
         takeQuizPresenter.prepareExecuteSuccessView(outputData);
     }
