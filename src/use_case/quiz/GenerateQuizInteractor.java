@@ -39,7 +39,6 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
     @Override
     public void execute(GenerateQuizInputData generateQuizInputData) throws Exception {
         try {
-
             // User's input, note, is obtained through controller and passed in as a part of tailored ChatGPT prompt to
             // generate the raw string format of quiz.
 
