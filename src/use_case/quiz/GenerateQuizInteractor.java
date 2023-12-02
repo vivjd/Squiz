@@ -176,10 +176,10 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
                 quizPresenter.prepareFailView("Quiz not Generated. Please try again.");
             }
             else{
+                quizPresenter.prepareSuccessView("Quiz Generated");
                 System.out.println("success!");
                 QuizDataAccessObject quizDAO = new QuizDataAccessObject();
                 quizDAO.saveQuiz(quiz);
-                quizPresenter.prepareSuccessView("Quiz Generated");
             }
         } catch (Exception e) {
             e.printStackTrace();
