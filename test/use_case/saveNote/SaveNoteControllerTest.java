@@ -1,5 +1,5 @@
 package use_case.saveNote;
-import interface_adapter.note.SaveNoteController;
+import interface_adapter.note.save.SaveNoteController;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
