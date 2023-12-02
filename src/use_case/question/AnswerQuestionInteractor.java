@@ -1,28 +1,46 @@
 package use_case.question;
 
-import data_access.QuestionDataAccessObject;
 import entity.MultipleChoiceQuestion;
+import entity.OpenEndedQuestion;
 import entity.Question;
 
 import java.util.Map;
 
+/**
+ * The {@code AnswerQuestionInteractor} class is responsible for executing the logic of
+ * answering a question based on the provided input data. It interacts with the specified
+ * data access object and presents the answer feedback through the
+ * {@link AnswerQuestionOutputBoundary} output boundary.
+ *
+ * <p>This class implements the {@link AnswerQuestionInputBoundary} interface.</p>
+ */
 public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
-    final QuestionDataAccessInterface questionDataAccessObject;
+    /**
+     * Data access object for retrieving question data.
+     */
+//    final QuestionDataAccessInterface questionDataAccessObject;
+
+    /**
+     * Presenter for displaying the answer feedback.
+     */
     final AnswerQuestionOutputBoundary questionPresenter;
 
-    public AnswerQuestionInteractor(QuestionDataAccessInterface questionDataAccessObject, AnswerQuestionOutputBoundary questionPresenter) {
-        this.questionDataAccessObject = questionDataAccessObject;
+    /**
+     * Constructs a new {@code AnswerQuestionInteractor} with the specified dependencies.
+     *
+     * @param questionPresenter        Presenter for displaying the answer feedback.
+     */
+    public AnswerQuestionInteractor(AnswerQuestionOutputBoundary questionPresenter) {
         this.questionPresenter = questionPresenter;
     }
 
+    /**
+     * Executes the process of answering a question based on the provided input data.
+     *
+     * @param answerQuestionInputData Input data containing user input to the question as well as info regarding the question itself.
+     */
     @Override
     public void execute(AnswerQuestionInputData answerQuestionInputData) {
-        // TODO: Double check implementation. See notes below.
-        // how do we get the question we have outputted to the user previously? how do we pass this in?
-        // After discussion, it seems like that should be provided by the TakeQuiz use case, how do we pass it in?
-        // code below assumes that we have already passed this in through some previous step
-        // we will have access to the question name?
-
         String userAnswer = answerQuestionInputData.getUserAnswer();
         Question<?> questionName = answerQuestionInputData.getQuestion();
         String answerFeedback = answerFeedback(questionName, userAnswer);
@@ -31,33 +49,30 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
 
     }
 
-    public String answerFeedback(Question<?> question, String userAnswer){
+    private String answerFeedback(Question<?> question, String userAnswer){
         if (isInstanceOfMCQ(question)){
-            // there's an issue with the way i'm finding out whether a question is a MCQ or Open ended, will look into it
             MultipleChoiceQuestion q = (MultipleChoiceQuestion) question;
             String correctAnswer = getMCQCorrectAnswer(q);
+            //TODO: test after QuizGenerator is integrated.
             if (correctAnswer.equals(userAnswer)){
                 return "Your answer is correct!";
             } else{
                 return "Your answer is incorrect. The correct answer is " + correctAnswer + ".";
             }
         } else {
-            //assume that if question is not a MCQ then it must be a OpenEndedQuestion
-            // we need to do some Hugginface API calling here to get feedback
-            // code below assumes we've got gained feedback already
-            String feedback = "Some feedback from hugginface"; //change this
-            return feedback;
+            OpenEndedQuestion q = (OpenEndedQuestion) question;
+            return "AI Feedback: " + q.getCorrectAnswer();
         }
     }
 
-    public boolean isInstanceOfMCQ(Question question){
-        // TODO: Implementation below assumes that each Question stores as
+    private boolean isInstanceOfMCQ(Question question){
         return question instanceof MultipleChoiceQuestion;
     }
-    public String getMCQCorrectAnswer(MultipleChoiceQuestion q){
-//        Map<String, String> answerOptions = q.getAnswerOptions();
-//
-//        return answerOptions.get(q.getCorrectAnswerIndex());
-        return q.getCorrectAnswerIndex();
+
+    private String getMCQCorrectAnswer(MultipleChoiceQuestion q){
+        Map<String, String> answerOptions = q.getAnswerOptions();
+
+        return answerOptions.get(q.getCorrectAnswerIndex());
+
     }
 }

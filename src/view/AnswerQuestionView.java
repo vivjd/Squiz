@@ -15,6 +15,11 @@ import java.beans.PropertyChangeListener;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The {@code AnswerQuestionView} class represents the graphical user interface for answering questions during take quiz.
+ * It extends {@link JPanel} and implements {@link PropertyChangeListener} to react to changes in the
+ * underlying question state.
+ */
 public class AnswerQuestionView extends JPanel implements PropertyChangeListener{
     public final String viewName = "question";
     private JButton submit;
@@ -27,6 +32,12 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
     private JPanel answerPanel;
     private Map<JRadioButton, String> radioButtonValues = new HashMap<>();
 
+    /**
+     * Constructs a new {@code AnswerQuestionView} with the specified dependencies.
+     *
+     * @param questionViewModel      The view model containing the question state.
+     * @param controller The controller for handling user interactions related to answering questions.
+     */
     public AnswerQuestionView(QuestionViewModel questionViewModel,
                               AnswerQuestionController controller
     ) {
@@ -74,6 +85,12 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
             }
         });
     }
+
+    /**
+     * Reacts to property change events in the underlying question state and updates the view.
+     *
+     * @param evt The property change event.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 
@@ -142,6 +159,11 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
         }
     }
 
+    /**
+     * Sets the answer question listener for handling events.
+     *
+     * @param answerQuestionListener The answer question listener.
+     */
     public void setAnswerQuestionListener(AnswerQuestionListener answerQuestionListener) {
         this.answerQuestionListener = answerQuestionListener;
     }
