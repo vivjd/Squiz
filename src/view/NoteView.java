@@ -25,8 +25,8 @@ import java.beans.PropertyChangeListener;
 public class NoteView extends JPanel implements ActionListener, PropertyChangeListener{
     public final String viewName = "note";
 
-    private final JTextArea userInputNote = new JTextArea("enter your notes here");
-    private final JTextField userInputTitle = new JTextField("enter title here", 30);
+    private final JTextArea userInputNote = new JTextArea("");
+    private final JTextField userInputTitle = new JTextField("", 30);
 
     private final JButton save;
     private final JButton allQuizzes;
@@ -125,12 +125,24 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(generateQuiz)) {
                             NoteState currentState = noteViewModel.getState();
-                            try {
-                                generateQuizController.execute(
-                                        currentState.getNote(),
-                                        currentState.getTitle());
-                            } catch (Exception ex) {
-                                throw new RuntimeException(ex);
+                            String noteText = userInputNote.getText().strip();
+                            String titleText = userInputTitle.getText().strip();
+                            if (noteText == ""){
+                                System.out.println("note empty");
+                                noteEmptyPopup();
+                            }
+                            if (titleText == ""){
+                                System.out.println("title empty");
+                                titleEmptyPopup();
+                            }
+                            else{
+                                try {
+                                    generateQuizController.execute(
+                                            currentState.getNote(),
+                                            currentState.getTitle());
+                                } catch (Exception ex) {
+                                    throw new RuntimeException(ex);
+                                }
                             }
                         }
                     }
@@ -211,6 +223,12 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
     private void showSavedPopup(){
         JOptionPane.showMessageDialog(this, "Note Saved.");
+    }
+    private void titleEmptyPopup(){
+        JOptionPane.showMessageDialog(this, "Title is empty. Please provide a title");
+    }
+    private void noteEmptyPopup(){
+        JOptionPane.showMessageDialog(this, "Note is empty, please provide a note.");
     }
 
     @Override
