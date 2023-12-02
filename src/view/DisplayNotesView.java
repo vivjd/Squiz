@@ -1,7 +1,7 @@
 package view;
 
 import interface_adapter.note.delete.DeleteNoteController;
-import interface_adapter.note.back.BackController;
+import interface_adapter.back.BackController;
 import interface_adapter.note.display.DisplayNotesController;
 import interface_adapter.note.display.DisplayNotesState;
 import interface_adapter.note.display.DisplayNotesViewModel;
@@ -15,6 +15,9 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 
+/**
+ * Responsible for the final screen when the "Display Notes" use case is executed
+ */
 public class DisplayNotesView extends JPanel implements PropertyChangeListener{
     public final String viewName = "display_notes";
     private String[] columnNames = {"Note Title", "Note Content"};
@@ -30,6 +33,17 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
     private final DisplayNotesViewModel displayNotesViewModel;
     private final GenerateQuizController generateQuizController;
 
+    /**
+     * Constructor of the DisplayNotesView
+     * Initializes the screen by creating the format of the JPanel
+     * @param displayNotesViewModel is the view model for the "Display Notes" Use Case
+     * @param displayNotesController is the controller responsible for the "Display Notes"
+     *                               Use Case; is executed when the table needs to be updated
+     * @param deleteNoteController is the controller responsible for the "Delete Note" Use Case;
+     *                             is executed when the delete button is pressed by the user
+     * @param backController is the controller responsible for the "Back" use case; is executed
+     *                       when the back button is pressed by the user
+     */
     public DisplayNotesView(DisplayNotesViewModel displayNotesViewModel, DisplayNotesController displayNotesController,
                             DeleteNoteController deleteNoteController, BackController backController, GenerateQuizController generateQuizController) {
         this.displayNotesViewModel = displayNotesViewModel;
@@ -124,6 +138,13 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
         return buttons;
     }
 
+    /**
+     * Method responsible for checking if there is an error in the state
+     * If there is, display the error to the user; if not, update the table to ensure
+     * the user has the current number of notes found in the data base
+     * @param evt A PropertyChangeEvent object describing the event source
+     *          and the property that has changed.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         DisplayNotesState state = (DisplayNotesState) evt.getNewValue();

@@ -30,15 +30,33 @@ public class DisplayNotesViewModel extends ViewModel{
     private DisplayNotesState state = new DisplayNotesState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
+    /**
+     * empty constructor responsible for creating a DisplayNotesViewModel
+     */
     public DisplayNotesViewModel(){super("display_notes");}
 
+    /**
+     * Returns the state of the display notes view model
+     * @return the current DisplayNotesState
+     */
     public DisplayNotesState getState(){return state;}
 
+    /**
+     * Sets the state of the display notes view model
+     * @param state is the DisplayNotesState of the use case
+     */
     public void setState(DisplayNotesState state){this.state = state;}
 
+    /**
+     * Method is called to let the ViewModel know to alert the View
+     */
     @Override
     public void firePropertyChanged() {support.firePropertyChange("state", null, this.state);}
 
+    /**
+     * Method is called to add PropertyChangeListeners
+     * @param listener is the PropertyChangeListener
+     */
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);

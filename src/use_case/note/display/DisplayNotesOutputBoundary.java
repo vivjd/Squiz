@@ -9,6 +9,15 @@ package use_case.note.display;
  *
  */
 public interface DisplayNotesOutputBoundary {
-    void prepareSuccessView(DisplayNotesOutputData quiz);
+    /**
+     * Method is responsible for displaying the success
+     * @param note is the note data to present to the user
+     */
+    void prepareSuccessView(DisplayNotesOutputData note);
+
+    /**
+     * Method is responsible for displaying the failure of the program
+     * @param error is a String that tells the user the error it is
+     */
     void prepareFailView(String error);
 }
