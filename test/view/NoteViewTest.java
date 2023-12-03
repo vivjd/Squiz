@@ -171,8 +171,8 @@ public class NoteViewTest {
         JButton button = getButton(2);
         JTextArea text = getTitleArea();
         JTextField title = getTitleText();
-        text.setText("hello");
-        title.setText("testing 123 testing 123 testing 123 testing 123 testing 123 testing 123 testing 123 testing 123");
+        title.setText("hello");
+        text.setText("testing 123 testing 123 testing 123 testing 123 testing 123 testing 123 testing 123 testing 123");
 
         createCloseTimer().start();
 
