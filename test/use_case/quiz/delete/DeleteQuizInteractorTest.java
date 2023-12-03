@@ -40,13 +40,13 @@ public class DeleteQuizInteractorTest {
         DeleteQuizInputData deleteQuizInputData = new DeleteQuizInputData(quizIdToDelete);
 
         doThrow(new RuntimeException("Mocked Exception"))
-                .when(quizDataAccessObject).getQuizById(quizIdToDelete);
+                .when(quizDataAccessObject).deleteQuizById(quizIdToDelete);
 
         try {
             deleteQuizInteractor.execute(deleteQuizInputData);
             fail("Should throw a runtime Exception");
         } catch (RuntimeException e) {
-            verify(quizDataAccessObject).getQuizById(quizIdToDelete);
+            verify(quizDataAccessObject).deleteQuizById(quizIdToDelete);
             verifyNoMoreInteractions(quizDataAccessObject);
             verifyNoInteractions(deleteQuizOutputBoundary);
         }
