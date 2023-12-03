@@ -96,11 +96,11 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
         buttons.add(save);
         buttons.add(Box.createVerticalStrut(10));
-        buttons.add(allQuizzes);
+        buttons.add(generateQuiz);
         buttons.add(Box.createVerticalStrut(10));
         buttons.add(allNotes);
         buttons.add(Box.createVerticalStrut(10));
-        buttons.add(generateQuiz);
+        buttons.add(allQuizzes);
 
         save.addActionListener(
                 new ActionListener() {
