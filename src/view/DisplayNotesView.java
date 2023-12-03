@@ -113,8 +113,9 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
                             String title = notesData[table.getSelectedRow()][0];
                             String content = notesData[table.getSelectedRow()][1];
                             try {
+                                JOptionPane.showMessageDialog(null, "Quiz is being generated. Please wait for the next popup.");
                                 generateQuizController.execute(content, title);
-                                JOptionPane.showMessageDialog(null, "Quiz generated and saved. You can access it in the 'View all Quizzes' Page.");
+                                JOptionPane.showMessageDialog(null, "Quiz generated and saved. You can access it in the 'View All Quizzes' Page.");
                             } catch (Exception ex) {
                                 throw new RuntimeException(ex);
                             }

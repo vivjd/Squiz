@@ -62,7 +62,7 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
             // there's an issue with the way i'm finding out whether a question is a MCQ or Open ended, will look into it
             MultipleChoiceQuestion q = (MultipleChoiceQuestion) question;
             String correctAnswer = getMCQCorrectAnswer(q);
-            return "The correct answer was: " + correctAnswer;
+            return correctAnswer;
         } else {
             //assume that if question is not a MCQ then it must be a OpenEndedQuestion
             // we need to do some Hugginface API calling here to get feedback
@@ -70,7 +70,7 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
 //            String feedback = "Some feedback from hugginface"; //change this
             OpenEndedQuestion q = (OpenEndedQuestion) question;
             String feedback = q.getCorrectAnswer();
-            return "the correct answer was: " + feedback;
+            return feedback;
         }
     }
 

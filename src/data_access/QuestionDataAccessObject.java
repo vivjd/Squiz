@@ -80,25 +80,6 @@ public class QuestionDataAccessObject implements QuestionDataAccessInterface, Da
         return q instanceof MultipleChoiceQuestion;
     }
 
-    public String answerFeedback(String questionName, String userAnswer){
-        if (isInstanceOfMCQ(questionName)){
-            // there's an issue with the way i'm finding out whether a question is a MCQ or Open ended, will look into it
-            MultipleChoiceQuestion q = (MultipleChoiceQuestion) getQuestionByName(questionName);
-            String correctAnswer = getMCQCorrectAnswer(q);
-            if (correctAnswer.equals(userAnswer)){
-                return "Your answer is correct!";
-            } else{
-                return "Your answer is incorrect. The correct answer is " + correctAnswer + ".";
-            }
-        } else {
-            //assume that if question is not a MCQ then it must be a OpenEndedQuestion
-            // we need to do some Hugginface API calling here to get feedback
-            // code below assumes we've got gained feedback already
-            String feedback = "Some feedback from hugginface"; //change this
-            return feedback;
-        }
-    }
-
     public String getMCQCorrectAnswer(MultipleChoiceQuestion q){
         Map<String, String> answerOptions = q.getAnswerOptions();
 
@@ -131,18 +112,4 @@ public class QuestionDataAccessObject implements QuestionDataAccessInterface, Da
         }
         return resultList;
     }
-
-//    public boolean getQuestionType(){
-//        this.connect();
-//
-//        // Assuming there is a field in the Question class named "name"
-//        Bson filter = Filters.eq("name", questionName);
-//
-//        MongoCollection<Question> collection = mongoDatabase.getCollection("questions", Question.class);
-//        Question question = collection.find(filter).first();
-//
-//        this.disconnect();
-//
-//        return question;
-//    }
 }

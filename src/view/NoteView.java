@@ -134,10 +134,10 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                             String noteText = userInputNote.getText();
                             String titleText = userInputTitle.getText();
                             if (Objects.equals(titleText, "")){
-                                messagePopUp("The note title is empty. Please enter a title for your note.");
+                                messagePopUp("Please enter a title for your note.");
                             }
                             else if (Objects.equals(noteText, "") || noteText.length() < 50){
-                                messagePopUp("The contents of the note is empty. Please enter some text for your note.");
+                                messagePopUp("Please enter a minimum of 50 characters for your note.");
                             }
                             else{
                                 try {
@@ -145,7 +145,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                                     generateQuizController.execute(
                                             currentState.getNote(),
                                             currentState.getTitle());
-                                    messagePopUp("Your quiz has been successfully generated.");
+                                    messagePopUp("Quiz generated and saved. You can access it in the 'View All Quizzes' Page.");
                                     refresh();
                                 } catch (Exception ex) {
                                     throw new RuntimeException(ex);
