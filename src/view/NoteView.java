@@ -118,6 +118,8 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                             if (currentState.getEmptyNoteError() == null) {
                                 showSavedPopup();
                             }
+
+                            refresh();
                         }
                     }
                 }
@@ -145,6 +147,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                                     throw new RuntimeException(ex);
                                 }
                             }
+                            refresh();
                         }
                     }
                 }
@@ -157,6 +160,8 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                            DisplayQuizzesState currentState = displayQuizzesViewModel.getState();
                             displayQuizzesController.execute();
                             displayQuizzesViewModel.setState(currentState);
+                            refresh();
+
                         }
                     }
                 }
@@ -170,6 +175,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                             DisplayNotesState currentState = displayNotesViewModel.getState();
                             displayNotesController.execute();
                             displayNotesViewModel.setState(currentState);
+                            refresh();
                         }
                     }
                 }
@@ -238,6 +244,17 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         JOptionPane.showMessageDialog(this, "Quiz is being generated. Please wait for the next popup");
     }
 
+    private void refresh() {
+        NoteState state = noteViewModel.getState();
+
+        userInputNote.setText("");
+        userInputTitle.setText("");
+
+        state.setNote("");
+        state.setTitle("");
+
+        state.setEmptyNoteError(null);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -251,6 +268,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
             DisplayQuizzesState state = (DisplayQuizzesState) newValue;
             if (state.getEmptyQuizzesError() != null) {
                 JOptionPane.showMessageDialog(this, state.getEmptyQuizzesError());
+
             }
         } else if (newValue instanceof NoteState) {
             NoteState state = (NoteState) newValue;
