@@ -31,7 +31,7 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
     private JTextArea questionTextArea;
     private JPanel answerPanel;
     private Map<JRadioButton, String> radioButtonValues = new HashMap<>();
-    final int maxLineLength = 55;
+    private final int MAXLINELENGTH = 55;
 
     /**
      * Constructs a new {@code AnswerQuestionView} with the specified dependencies.
@@ -186,7 +186,7 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
         java.util.List<String> lines = new java.util.ArrayList<>();
 
         for (String word : words) {
-            if (currentLine.length() + word.length() <= maxLineLength) {
+            if (currentLine.length() + word.length() <= MAXLINELENGTH) {
                 currentLine.append(word).append(" ");
             } else {
                 lines.add(currentLine.toString().trim());
