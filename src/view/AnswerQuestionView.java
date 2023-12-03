@@ -31,6 +31,7 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
     private JTextArea questionTextArea;
     private JPanel answerPanel;
     private Map<JRadioButton, String> radioButtonValues = new HashMap<>();
+    private final int MAXLINELENGTH = 55;
 
     /**
      * Constructs a new {@code AnswerQuestionView} with the specified dependencies.
@@ -167,8 +168,34 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
     public void setAnswerQuestionListener(AnswerQuestionListener answerQuestionListener) {
         this.answerQuestionListener = answerQuestionListener;
     }
+
     private void showFeedbackPopup(String feedback){
-        JOptionPane.showMessageDialog(this, feedback);
+        String[] lines = splitTextIntoLines(feedback);
+
+        String wrappedFeedback = String.join("<br>", lines);
+        String htmlContent = "<html>" + wrappedFeedback + "</html>";
+
+        JOptionPane.showMessageDialog(this, new JLabel(htmlContent));
+
     }
 
+    private String[] splitTextIntoLines(String text) {
+        // Split the text into lines based on the specified maxLineLength and word boundaries
+        String[] words = text.split("\\s+");
+        StringBuilder currentLine = new StringBuilder();
+        java.util.List<String> lines = new java.util.ArrayList<>();
+
+        for (String word : words) {
+            if (currentLine.length() + word.length() <= MAXLINELENGTH) {
+                currentLine.append(word).append(" ");
+            } else {
+                lines.add(currentLine.toString().trim());
+                currentLine = new StringBuilder(word + " ");
+            }
+        }
+
+        lines.add(currentLine.toString().trim());
+
+        return lines.toArray(new String[0]);
+    }
 }

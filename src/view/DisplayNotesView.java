@@ -167,10 +167,10 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
     }
 
     private void notImplemented() {
-        JOptionPane.showMessageDialog(this, "not implemented");
+        JOptionPane.showMessageDialog(this, "Not yet implemented.");
     }
 
     private void showDeletePopUp() {
-        JOptionPane.showMessageDialog(this, "note deleted");
+        JOptionPane.showMessageDialog(this, "The selected note has been deleted!");
     }
 }
