@@ -110,16 +110,14 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(save)) {
                             NoteState currentState = noteViewModel.getState();
-
                             saveNoteController.execute(
                                     currentState.getTitle(),
                                     currentState.getNote());
 
                             if (currentState.getEmptyNoteError() == null) {
+                                refresh();
                                 showSavedPopup();
                             }
-
-                            refresh();
                         }
                     }
                 }
@@ -134,7 +132,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                             String titleText = userInputTitle.getText();
                             if (Objects.equals(titleText, "")){
                                 titleEmptyPopup();
-                            } else if (Objects.equals(noteText, "")){
+                            } else if (Objects.equals(noteText, "") || (noteText.length() < 50)){
                                 noteEmptyPopup();
                             } else{
                                 try {
@@ -143,11 +141,11 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                                             currentState.getNote(),
                                             currentState.getTitle());
                                     quizGeneratedPopup();
+                                    refresh();
                                 } catch (Exception ex) {
                                     throw new RuntimeException(ex);
                                 }
                             }
-                            refresh();
                         }
                     }
                 }
@@ -268,7 +266,6 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
             DisplayQuizzesState state = (DisplayQuizzesState) newValue;
             if (state.getEmptyQuizzesError() != null) {
                 JOptionPane.showMessageDialog(this, state.getEmptyQuizzesError());
-
             }
         } else if (newValue instanceof NoteState) {
             NoteState state = (NoteState) newValue;

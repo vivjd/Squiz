@@ -32,7 +32,7 @@ public class SaveNoteInteractor implements SaveNoteInputBoundary {
         if (inputTitle.isEmpty()) {
             // Display a message telling the user to input a title
             notePresenter.prepareFailView("Please enter a title for your note.");
-        } else if (inputNote.isEmpty()) {
+        } else if (inputNote.length() < 50) {
             // Display a message telling the user to input contents for their note
             notePresenter.prepareFailView("Please enter a minimum of 50 characters for your note.");
         } else {
