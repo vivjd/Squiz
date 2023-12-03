@@ -130,9 +130,9 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
         buttons.add(Box.createVerticalStrut(10));
         buttons.add(delete);
         buttons.add(Box.createVerticalStrut(10));
-        buttons.add(back);
-        buttons.add(Box.createVerticalStrut(10));
         buttons.add(generateQuiz);
+        buttons.add(Box.createVerticalStrut(10));
+        buttons.add(back);
         buttons.add(Box.createVerticalStrut(10));
 
         return buttons;

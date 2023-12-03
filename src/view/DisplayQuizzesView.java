@@ -78,11 +78,11 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
         edit = new JButton(DisplayQuizzesViewModel.EDIT_LABEL);
         buttons.add(start);
         buttons.add(Box.createVerticalStrut(10));
-        buttons.add(back);
-        buttons.add(Box.createVerticalStrut(10));
         buttons.add(edit);
         buttons.add(Box.createVerticalStrut(10));
         buttons.add(delete);
+        buttons.add(Box.createVerticalStrut(10));
+        buttons.add(back);
         buttons.add(Box.createVerticalStrut(10));
 
 
