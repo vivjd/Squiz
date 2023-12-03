@@ -4,7 +4,6 @@ import entity.Quiz;
 
 public class TakeQuizOutputData {
 
-    private int score = 0;
     private Quiz quiz;
 
     public TakeQuizOutputData(Quiz quiz) {
@@ -15,10 +14,6 @@ public class TakeQuizOutputData {
 
     }
 
-
-    public int getScore() {
-        return score;
-    }
 
     public Quiz getQuiz() {
         return quiz;
