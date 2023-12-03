@@ -1,4 +1,4 @@
-package use_case.quiz.generate;
+package use_case.quiz.generate.strategies;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.apache.http.HttpEntity;
@@ -19,7 +19,7 @@ import java.io.InputStreamReader;
  * The Chatbot class interacts with the OpenAI GPT model to generate responses based on user input.
  * This class is executed in the GenerateQuizInteractor.
  */
-public class GPT implements TextGeneratorEndpoints{
+public class GPT implements QuizCreatorStrategy{
     /** The Dotenv instance for loading environment variables. */
     static Dotenv dotenv = Dotenv.load();
 
@@ -38,7 +38,7 @@ public class GPT implements TextGeneratorEndpoints{
         try {
             GPT gpt = new GPT();
             String userInput = gpt.getUserInput();
-            String response = gpt.getChatGPTResponse(userInput);
+            String response = gpt.getChatAnswer(userInput);
 
             System.out.println("ChatGPT: " + response);
         } catch (Exception e) {
@@ -73,7 +73,7 @@ public class GPT implements TextGeneratorEndpoints{
      * @throws Exception If an error occurs during the interaction with the GPT model.
      */
     @Override
-    public String getChatGPTResponse(String userInput) throws Exception {
+    public String getChatAnswer(String userInput) throws Exception {
         String apiKey = OPENAI_API_KEY;
         String model = "gpt-4-1106-preview";
         String prompt = "[{\"role\": \"user\", \"content\": \"" + userInput + "\"}]";

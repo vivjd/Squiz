@@ -5,6 +5,8 @@ import entity.MultipleChoiceQuestion;
 import entity.OpenEndedQuestion;
 import entity.Quiz;
 import entity.Question;
+import use_case.quiz.generate.strategies.GPT;
+import use_case.quiz.generate.strategies.QuizCreator;
 
 import java.time.LocalDateTime;
 
@@ -49,7 +51,9 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
                     + "; for the multiple choice, it should follow the format of question, followed by a hashmap of answer options, which are followed by the index of the correct answer in that hashmap." +
                     "Format the answer choices for multiple choice questions into a hashmap encapsulated in curly braces in one line. Show the correct answer choice in the next line." +
                     "Follow this format for the answer choices: {Option A: ~~~, Option B: ~~~, Option C: ~~~}. No empty lines are allowed.";
-            String response = gpt.getChatGPTResponse(userInput);
+            QuizCreator quizCreator = new QuizCreator(new GPT());
+            String response = quizCreator.getQuiz(userInput);
+
             System.out.println(response);
 
             // To format the raw string appropriately to facilitate converting to various entities, tje raw string is
