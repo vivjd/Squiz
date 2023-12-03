@@ -14,7 +14,7 @@ public class NoteViewTest {
     private static boolean popUpDiscovered = false;
     private static String message = "";
 
-    public JButton getButton(int num) {
+    private JButton getButton(int num) {
         JFrame app = null;
         Window[] windows = Window.getWindows();
 
@@ -43,6 +43,163 @@ public class NoteViewTest {
         System.out.println(button.getText());
 
         return button;
+    }
+
+    private JTextField getTitleText() {
+        JFrame app = null;
+        Window[] windows = Window.getWindows();
+
+        for (Window window : windows) {
+            if (window instanceof JFrame) {
+                app = (JFrame) window;
+            }
+        }
+
+        assertNotNull(app);
+
+        Component root = app.getComponent(0);
+
+        Component cp = ((JRootPane) root).getContentPane();
+
+        JPanel jp = (JPanel) cp;
+
+        JPanel jp2 = (JPanel) jp.getComponent(0);
+
+        NoteView sv = (NoteView) jp2.getComponent(0);
+
+        Box box = (Box) sv.getComponent(0);
+
+        LabelTextPanel panel = (LabelTextPanel) box.getComponent(0);
+
+        JTextField text = (JTextField) panel.getComponent(1);
+
+        return text;
+    }
+
+    private JTextArea getTitleArea() {
+        JFrame app = null;
+        Window[] windows = Window.getWindows();
+
+        for (Window window : windows) {
+            if (window instanceof JFrame) {
+                app = (JFrame) window;
+            }
+        }
+
+        assertNotNull(app);
+
+        Component root = app.getComponent(0);
+
+        Component cp = ((JRootPane) root).getContentPane();
+
+        JPanel jp = (JPanel) cp;
+
+        JPanel jp2 = (JPanel) jp.getComponent(0);
+
+        NoteView sv = (NoteView) jp2.getComponent(0);
+
+        Box box = (Box) sv.getComponent(0);
+
+        JScrollPane panel = (JScrollPane) box.getComponent(3);
+
+        JViewport text = (JViewport) panel.getComponent(0);
+
+        JTextArea note = (JTextArea) text.getComponent(0);
+
+        return note;
+    }
+
+    @Test
+    public void setTitleAndTextSuccess() {
+        Main.main(null);
+        JTextField title = getTitleText();
+        title.setText("hello");
+        JButton button = getButton(0);
+        JTextArea text = getTitleArea();
+        text.setText("t e s t i n g t e s t i n g 1 2 3 4 5");
+
+        createCloseTimer().start();
+
+        button.doClick();
+        assert(popUpDiscovered);
+        assert(message.equals("Your note has been saved."));
+    }
+
+    @Test
+    public void setTitleAndSaveError() {
+        Main.main(null);
+        JTextField text = getTitleText();
+        text.setText("hello");
+        JButton button = getButton(0);
+
+        createCloseTimer().start();
+
+        button.doClick();
+        assert(popUpDiscovered);
+        assert(message.equals("Please enter a minimum of 40 words for your hello note."));
+    }
+
+    @Test
+    public void emptyGenerateError1() {
+        Main.main(null);
+        JButton button = getButton(6);
+
+        createCloseTimer().start();
+
+        button.doClick();
+        assert(popUpDiscovered);
+        assert(message.equals("The contents of the note is empty. Please enter some text for your note."));
+    }
+
+    @Test
+    public void emptyGenerateError2() {
+        Main.main(null);
+        JButton button = getButton(6);
+        JTextArea text = getTitleArea();
+        text.setText("hello");
+
+        createCloseTimer().start();
+
+        button.doClick();
+        assert(popUpDiscovered);
+        assert(message.equals("The note title is empty. Please enter a title for your note."));
+    }
+
+    @Test
+    public void generateQuizSuccess() {
+        Main.main(null);
+        JButton button = getButton(6);
+        JTextArea text = getTitleArea();
+        JTextField title = getTitleText();
+        text.setText("hello");
+        title.setText("testing 123");
+
+        createCloseTimer().start();
+
+        button.doClick();
+
+        assert(popUpDiscovered);
+    }
+
+    @Test
+    public void testDisplayNotes() {
+        Main.main(null);
+        JButton button = getButton(4);
+        createCloseTimer().start();
+
+        button.doClick();
+        assert(popUpDiscovered);
+        assert(message.equals("Showing all notes in new page..."));
+    }
+
+    @Test
+    public void testDisplayQuizzes() {
+        Main.main(null);
+        JButton button = getButton(2);
+        createCloseTimer().start();
+
+        button.doClick();
+        assert(message.equals("Showing all quizzes in new page..."));
     }
 
     @Test
@@ -112,6 +269,4 @@ public class NoteViewTest {
         t.setRepeats(false);
         return t;
     }
-
-
 }
