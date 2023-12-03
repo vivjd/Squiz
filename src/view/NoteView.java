@@ -96,11 +96,13 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
         buttons.add(save);
         buttons.add(Box.createVerticalStrut(10));
-        buttons.add(allQuizzes);
+        buttons.add(generateQuiz);
         buttons.add(Box.createVerticalStrut(10));
         buttons.add(allNotes);
         buttons.add(Box.createVerticalStrut(10));
-        buttons.add(generateQuiz);
+        buttons.add(allQuizzes);
+
+
 
         save.addActionListener(
                 new ActionListener() {
@@ -128,15 +130,11 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                             NoteState currentState = noteViewModel.getState();
                             String noteText = userInputNote.getText();
                             String titleText = userInputTitle.getText();
-                            if (Objects.equals(noteText, "")){
-                                System.out.println("note empty");
-                                noteEmptyPopup();
-                            }
                             if (Objects.equals(titleText, "")){
-                                System.out.println("title empty");
                                 titleEmptyPopup();
-                            }
-                            else{
+                            } else if (Objects.equals(noteText, "")){
+                                noteEmptyPopup();
+                            } else{
                                 try {
                                     waitUntilGeneratedPopup();
                                     generateQuizController.execute(
@@ -228,10 +226,10 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         JOptionPane.showMessageDialog(this, "Your note has been saved.");
     }
     private void titleEmptyPopup(){
-        JOptionPane.showMessageDialog(this, "The note title is empty. Please enter a title for your note.");
+        JOptionPane.showMessageDialog(this, "Please enter a title for your note.");
     }
     private void noteEmptyPopup(){
-        JOptionPane.showMessageDialog(this, "The contents of the note is empty. Please enter some text for your note.");
+        JOptionPane.showMessageDialog(this, "Please enter a minimum of 50 characters for your note.");
     }
     private void quizGeneratedPopup(){
         JOptionPane.showMessageDialog(this, "Your quiz has been successfully generated.");
