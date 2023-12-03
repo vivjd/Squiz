@@ -1,9 +1,9 @@
 package use_case.quiz.generate.strategies;
 
 /**
- * this class is responsible for creating a Quiz through Quizlet
+ * this class is responsible for creating a Quiz through Google Search
  */
-public class NaverClova implements QuizCreatorStrategy {
+public class GoogleSearch implements QuizCreatorStrategy {
     @Override
     public String getUserInput() throws Exception {
         return null;

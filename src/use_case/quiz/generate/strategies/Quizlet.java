@@ -1,9 +1,9 @@
 package use_case.quiz.generate.strategies;
 
 /**
- * this class is responsible for creating a Quiz through Google Search
+ * this class is responsible for creating a Quiz through Quizlet
  */
-public class GoogleBard implements QuizCreatorStrategy {
+public class Quizlet implements QuizCreatorStrategy {
     @Override
     public String getUserInput() throws Exception {
         return null;
