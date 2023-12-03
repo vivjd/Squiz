@@ -225,16 +225,16 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     }
 
     private void showSavedPopup(){
-        JOptionPane.showMessageDialog(this, "Note Saved.");
+        JOptionPane.showMessageDialog(this, "Your note has been saved.");
     }
     private void titleEmptyPopup(){
-        JOptionPane.showMessageDialog(this, "Title is empty. Please provide a title");
+        JOptionPane.showMessageDialog(this, "The note title is empty. Please enter a title for your note.");
     }
     private void noteEmptyPopup(){
-        JOptionPane.showMessageDialog(this, "Note is empty, please provide a note.");
+        JOptionPane.showMessageDialog(this, "The contents of the note is empty. Please enter some text for your note.");
     }
     private void quizGeneratedPopup(){
-        JOptionPane.showMessageDialog(this, "Quiz is successfully generated.");
+        JOptionPane.showMessageDialog(this, "Your quiz has been successfully generated.");
     }
     private void waitUntilGeneratedPopup(){
         JOptionPane.showMessageDialog(this, "Quiz is being generated. Please wait for the next popup");

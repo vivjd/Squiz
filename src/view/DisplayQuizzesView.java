@@ -198,6 +198,6 @@ public class DisplayQuizzesView extends JPanel implements PropertyChangeListener
     }
 
     private void showDeletePopUp() {
-        JOptionPane.showMessageDialog(this, "Quiz deleted");
+        JOptionPane.showMessageDialog(this, "The selected quiz has been deleted!");
     }
 }
