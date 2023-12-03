@@ -117,7 +117,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                                     currentState.getTitle(),
                                     currentState.getNote());
 
-                            if (currentState.getEmptyNoteError() == null) {
+                            if (!title.isEmpty() && text.length() >= 50) {
                                 messagePopUp("Your note has been saved.");
                                 refresh();
                             }
@@ -136,7 +136,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                             if (Objects.equals(titleText, "")){
                                 messagePopUp("The note title is empty. Please enter a title for your note.");
                             }
-                            else if (Objects.equals(noteText, "")){
+                            else if (Objects.equals(noteText, "") || noteText.length() < 50){
                                 messagePopUp("The contents of the note is empty. Please enter some text for your note.");
                             }
                             else{
