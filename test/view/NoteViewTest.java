@@ -116,7 +116,7 @@ public class NoteViewTest {
         title.setText("hello");
         JButton button = getButton(0);
         JTextArea text = getTitleArea();
-        text.setText("t e s t i n g t e s t i n g 1 2 3 4 5");
+        text.setText("t e s t i n g t e s t i n g 1 2 3 4 5 t e s t i n g t e s t i n g 1 2 3 4 5 t e s t i n g t e s t i n g 1 2 3 4 5");
 
         createCloseTimer().start();
 
@@ -136,27 +136,13 @@ public class NoteViewTest {
 
         button.doClick();
         assert(popUpDiscovered);
-        assert(message.equals("Please enter a minimum of 40 words for your hello note."));
+        assert(message.equals("Please enter a minimum of 50 characters for your note."));
     }
 
     @Test
     public void emptyGenerateError1() {
         Main.main(null);
-        JButton button = getButton(6);
-
-        createCloseTimer().start();
-
-        button.doClick();
-        assert(popUpDiscovered);
-        assert(message.equals("The contents of the note is empty. Please enter some text for your note."));
-    }
-
-    @Test
-    public void emptyGenerateError2() {
-        Main.main(null);
-        JButton button = getButton(6);
-        JTextArea text = getTitleArea();
-        text.setText("hello");
+        JButton button = getButton(2);
 
         createCloseTimer().start();
 
@@ -166,13 +152,27 @@ public class NoteViewTest {
     }
 
     @Test
+    public void emptyGenerateError2() {
+        Main.main(null);
+        JButton button = getButton(2);
+        JTextField title = getTitleText();
+        title.setText("hello");
+
+        createCloseTimer().start();
+
+        button.doClick();
+        assert(popUpDiscovered);
+        assert(message.equals("The contents of the note is empty. Please enter some text for your note."));
+    }
+
+    @Test
     public void generateQuizSuccess() {
         Main.main(null);
-        JButton button = getButton(6);
+        JButton button = getButton(2);
         JTextArea text = getTitleArea();
         JTextField title = getTitleText();
-        text.setText("hello");
-        title.setText("testing 123");
+        title.setText("hello");
+        text.setText("testing 123 testing 123 testing 123 testing 123 testing 123 testing 123 testing 123 testing 123");
 
         createCloseTimer().start();
 
@@ -195,7 +195,7 @@ public class NoteViewTest {
     @Test
     public void testDisplayQuizzes() {
         Main.main(null);
-        JButton button = getButton(2);
+        JButton button = getButton(6);
         createCloseTimer().start();
 
         button.doClick();
@@ -223,7 +223,7 @@ public class NoteViewTest {
     @Test
     public void quizzesButtonPresent() {
         Main.main(null);
-        JButton button = getButton(2);
+        JButton button = getButton(6);
         assert(button.getText().equals("View All Quizzes"));
     }
 
@@ -237,7 +237,7 @@ public class NoteViewTest {
     @Test
     public void quizButtonPresent() {
         Main.main(null);
-        JButton button = getButton(6);
+        JButton button = getButton(2);
         assert(button.getText().equals("Generate Quiz"));
     }
 
