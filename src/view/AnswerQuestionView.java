@@ -126,7 +126,7 @@ public class AnswerQuestionView extends JPanel implements PropertyChangeListener
             String optionIndex = entry.getKey();
             String optionText = entry.getValue();
 
-            JRadioButton radioButton = new JRadioButton(optionText);
+            JRadioButton radioButton = new JRadioButton(optionIndex.replace('\"', ' ') + ":" + optionText);
             radioButton.setActionCommand(optionIndex);
             buttonGroup.add(radioButton);
             answerPanel.add(radioButton);
