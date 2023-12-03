@@ -1,6 +1,5 @@
 package app;
 
-import entity.Question;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.question.AnswerQuestionController;
 import interface_adapter.question.AnswerQuestionPresenter;
@@ -30,7 +29,7 @@ public class AnswerQuestionUseCaseFactory {
      *
      * @param viewManagerModel            The ViewManagerModel responsible for managing views in the application.
      * @param questionViewModel           The QuestionViewModel representing the data for the question.
-     * @param questionDataAccessInterface The QuestionDataAccessInterface for accessing question-related data.
+     * @param questionDataAccessObject The QuestionDataAccessInterface for accessing question-related data.
      * @return The created AnswerQuestionView instance.
      */
     public static AnswerQuestionView create(
@@ -46,7 +45,7 @@ public class AnswerQuestionUseCaseFactory {
      *
      * @param viewManagerModel            The ViewManagerModel responsible for managing views in the application.
      * @param questionViewModel           The QuestionViewModel representing the data for the question.
-     * @param questionDataAccessInterface The QuestionDataAccessInterface for accessing question-related data.
+     * @param questionDataAccessObject The QuestionDataAccessInterface for accessing question-related data.
      * @return The created AnswerQuestionController instance.
      */
     public static AnswerQuestionController createAnswerQuestionController(
