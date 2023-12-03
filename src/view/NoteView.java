@@ -29,15 +29,15 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     private final JTextArea userInputNote = new JTextArea("");
     private final JTextField userInputTitle = new JTextField("", 30);
 
-    private final JButton save;
+    final JButton save;
     private final JButton allQuizzes;
 
     private final JButton allNotes;
 
-    private final JButton generateQuiz;
+    final JButton generateQuiz;
 
     private final SaveNoteController saveNoteController;
-    private final GenerateQuizController generateQuizController;
+    final GenerateQuizController generateQuizController;
     private final NoteViewModel noteViewModel;
     private final DisplayQuizzesController displayQuizzesController;
     private final DisplayQuizzesViewModel displayQuizzesViewModel;
@@ -224,7 +224,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
     }
 
-    private void showSavedPopup(){
+    void showSavedPopup(){
         JOptionPane.showMessageDialog(this, "Note Saved.");
     }
     private void titleEmptyPopup(){
@@ -233,10 +233,10 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     private void noteEmptyPopup(){
         JOptionPane.showMessageDialog(this, "Note is empty, please provide a note.");
     }
-    private void quizGeneratedPopup(){
+    void quizGeneratedPopup(){
         JOptionPane.showMessageDialog(this, "Quiz is successfully generated.");
     }
-    private void waitUntilGeneratedPopup(){
+    void waitUntilGeneratedPopup(){
         JOptionPane.showMessageDialog(this, "Quiz is being generated. Please wait for the next popup");
     }
 
