@@ -1,40 +1,84 @@
 package interface_adapter.quiz.take_quiz;
 
-import org.junit.Test;
+import entity.MultipleChoiceQuestion;
+import entity.OpenEndedQuestion;
+import entity.Question;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TakeQuizStateTest {
 
     @Test
-    public void getCurrentQuestionIndex() {
+    void getCurrentQuestionIndex_ShouldReturnInitialIndex() {
+        TakeQuizState takeQuizState = new TakeQuizState();
+
+        int currentIndex = takeQuizState.getCurrentQuestionIndex();
+
+        assertEquals(0, currentIndex);
     }
 
     @Test
-    public void setCurrentQuestionIndex() {
+    void setCurrentQuestionIndex_ShouldSetIndex() {
+        TakeQuizState takeQuizState = new TakeQuizState();
+
+        takeQuizState.setCurrentQuestionIndex(2);
+
+        assertEquals(2, takeQuizState.getCurrentQuestionIndex());
     }
 
     @Test
-    public void getQuestions() {
+    void getQuestions_ShouldReturnNullInitially() {
+        TakeQuizState takeQuizState = new TakeQuizState();
+
+        List<Question<?>> questions = takeQuizState.getQuestions();
+
+        assertEquals(null, questions);
     }
 
     @Test
-    public void getQuestionsIterator() {
+    void setQuestions_ShouldSetQuestions() {
+        TakeQuizState takeQuizState = new TakeQuizState();
+        List<Question<?>> newQuestions = Arrays.asList(new MultipleChoiceQuestion(), new OpenEndedQuestion());
+
+        takeQuizState.setQuestions(newQuestions);
+
+        assertEquals(newQuestions, takeQuizState.getQuestions());
+    }
+
+
+    @Test
+    void getScore_ShouldReturnInitialScore() {
+        TakeQuizState takeQuizState = new TakeQuizState();
+
+        int score = takeQuizState.getScore();
+
+        assertEquals(0, score);
     }
 
     @Test
-    public void setQuestions() {
+    void setScore_ShouldSetScore() {
+        TakeQuizState takeQuizState = new TakeQuizState();
+
+        takeQuizState.setScore(15);
+
+        assertEquals(15, takeQuizState.getScore());
     }
 
     @Test
-    public void getScore() {
-    }
+    void resetAll_ShouldResetStateVariables() {
+        TakeQuizState takeQuizState = new TakeQuizState();
+        takeQuizState.setCurrentQuestionIndex(2);
+        takeQuizState.setScore(20);
+        takeQuizState.setQuestions(Arrays.asList(new MultipleChoiceQuestion(), new OpenEndedQuestion()));
 
-    @Test
-    public void setScore() {
-    }
+        takeQuizState.resetAll();
 
-    @Test
-    public void resetAll() {
+        assertEquals(0, takeQuizState.getCurrentQuestionIndex());
+        assertEquals(null, takeQuizState.getQuestions());
+        assertEquals(0, takeQuizState.getScore());
     }
 }
