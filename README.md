@@ -22,7 +22,7 @@ Features we plan have implemented:
 - **Displaying all notes:** users can see all the notes from the database. From there, they can generate a quiz with it or delete it.
 - **Displaying all quizzes:** users can see all the quizzes from the database. From there, they can take the quiz or delete it.
 
-Future implementations they will enhance our program more:
+Future implementations that will enhance our program more:
 - **Searching quizzes:** users will be able to search for existing quizzes and be able to test themselves with the quiz they select.
 - **Edit quiz:** users will be able to delete certain questions they don't want anymore.
 - **Customized input questions:** sometimes users want to create their own questions for their quiz. This option allows them to write their own answers and questions. After they added their questions, they will be shuffled into the generated quiz questions.
