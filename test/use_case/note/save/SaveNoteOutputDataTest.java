@@ -1,6 +1,5 @@
-package use_case.saveNote;
+package use_case.note.save;
 import org.junit.jupiter.api.Test;
-import use_case.note.save.SaveNoteOutputData;
 
 import static org.junit.jupiter.api.Assertions.*;
 

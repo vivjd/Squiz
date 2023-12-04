@@ -113,8 +113,9 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
                             String title = notesData[table.getSelectedRow()][0];
                             String content = notesData[table.getSelectedRow()][1];
                             try {
+                                JOptionPane.showMessageDialog(null, "Quiz is being generated. Please wait for the next popup.");
                                 generateQuizController.execute(content, title);
-                                JOptionPane.showMessageDialog(null, "Quiz generated and saved. You can access it in the 'View all Quizzes' Page.");
+                                JOptionPane.showMessageDialog(null, "Quiz generated and saved. You can access it in the 'View All Quizzes' Page.");
                             } catch (Exception ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -130,9 +131,9 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
         buttons.add(Box.createVerticalStrut(10));
         buttons.add(delete);
         buttons.add(Box.createVerticalStrut(10));
-        buttons.add(back);
-        buttons.add(Box.createVerticalStrut(10));
         buttons.add(generateQuiz);
+        buttons.add(Box.createVerticalStrut(10));
+        buttons.add(back);
         buttons.add(Box.createVerticalStrut(10));
 
         return buttons;
@@ -167,10 +168,10 @@ public class DisplayNotesView extends JPanel implements PropertyChangeListener{
     }
 
     private void notImplemented() {
-        JOptionPane.showMessageDialog(this, "not implemented");
+        JOptionPane.showMessageDialog(this, "Not yet implemented.");
     }
 
     private void showDeletePopUp() {
-        JOptionPane.showMessageDialog(this, "note deleted");
+        JOptionPane.showMessageDialog(this, "The selected note has been deleted!");
     }
 }

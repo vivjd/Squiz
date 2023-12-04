@@ -1,11 +1,8 @@
 package use_case.question;
 
-import data_access.QuestionDataAccessObject;
 import entity.MultipleChoiceQuestion;
 import entity.OpenEndedQuestion;
 import entity.Question;
-
-import java.util.Map;
 
 /**
  * The {@code AnswerQuestionInteractor} class is responsible for executing the logic of
@@ -59,18 +56,14 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
 
     public String answerFeedback(Question<?> question, String userAnswer){
         if (isInstanceOfMCQ(question)){
-            // there's an issue with the way i'm finding out whether a question is a MCQ or Open ended, will look into it
             MultipleChoiceQuestion q = (MultipleChoiceQuestion) question;
             String correctAnswer = getMCQCorrectAnswer(q);
-            return "The correct answer was: " + correctAnswer;
+            return correctAnswer;
         } else {
-            //assume that if question is not a MCQ then it must be a OpenEndedQuestion
-            // we need to do some Hugginface API calling here to get feedback
-            // code below assumes we've got gained feedback already
-//            String feedback = "Some feedback from hugginface"; //change this
+
             OpenEndedQuestion q = (OpenEndedQuestion) question;
             String feedback = q.getCorrectAnswer();
-            return "the correct answer was: " + feedback;
+            return feedback;
         }
     }
 
