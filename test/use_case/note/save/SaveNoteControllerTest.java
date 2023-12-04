@@ -1,12 +1,10 @@
-package use_case.saveNote;
+package use_case.note.save;
 import interface_adapter.note.save.SaveNoteController;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
-import use_case.note.save.SaveNoteInputBoundary;
-import use_case.note.save.SaveNoteInputData;
 
 public class SaveNoteControllerTest {
 
