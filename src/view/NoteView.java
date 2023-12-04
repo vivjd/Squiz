@@ -143,6 +143,9 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                                 try {
                                     messagePopUp("Quiz is being generated. Please wait for the next popup");
                                     generateQuizController.execute(
+                                            noteText,
+                                            titleText);
+                                    quizGeneratedPopup();
                                             currentState.getNote(),
                                             currentState.getTitle());
                                     messagePopUp("Quiz generated and saved. You can access it in the 'View All Quizzes' Page.");

@@ -5,5 +5,7 @@ package use_case.quiz.generate.strategies;
  * execute a certain strategy
  */
 public interface QuizCreatorStrategy {
-     String getChatAnswer(String input) throws Exception;
+    String getUserInput() throws Exception;
+
+    String getChatAnswer(String input) throws Exception;
 }

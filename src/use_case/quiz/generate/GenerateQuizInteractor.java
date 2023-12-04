@@ -5,8 +5,8 @@ import entity.MultipleChoiceQuestion;
 import entity.OpenEndedQuestion;
 import entity.Quiz;
 import entity.Question;
+import use_case.quiz.generate.strategies.GPT;
 import use_case.quiz.generate.strategies.QuizCreator;
-import use_case.quiz.generate.strategies.ChatGPT;
 
 import java.time.LocalDateTime;
 
@@ -44,17 +44,16 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
         try {
             // User's input, note, is obtained through controller and passed in as a part of tailored ChatGPT prompt to
             // generate the raw string format of quiz.
+            GPT gpt = new GPT();
 
             String userInput = "create 5 multiple choice questions with 4 options and answer indicated followed by 5 Open-ended questions with answers to each question, each about this note: "
                     + generateQuizInputData.getNote()
                     + "; for the multiple choice, it should follow the format of question, followed by a hashmap of answer options, which are followed by the index of the correct answer in that hashmap." +
                     "Format the answer choices for multiple choice questions into a hashmap encapsulated in curly braces in one line. Show the correct answer choice in the next line." +
                     "Follow this format for the answer choices: {Option A: ~~~, Option B: ~~~, Option C: ~~~}. No empty lines are allowed.";
-
-
-            QuizCreator quizCreator = new QuizCreator(new ChatGPT());
-
+            QuizCreator quizCreator = new QuizCreator(new GPT());
             String response = quizCreator.getQuiz(userInput);
+
             System.out.println(response);
 
             // To format the raw string appropriately to facilitate converting to various entities, tje raw string is
@@ -177,7 +176,7 @@ public class GenerateQuizInteractor implements GenerateQuizInputBoundary {
      */
     private static Map<String, String> helper(String input){
         String res = input.substring(1, input.length()-1);           //remove curly brackets
-        String[] keyValuePairs = res.split(",");              //split the string to creat key-value pairs
+        String[] keyValuePairs = res.split(",");              //split the string to create key-value pairs
         Map<String,String> acformated = new HashMap<>();
 
         for(String pair : keyValuePairs)                        //iterate over the pairs
