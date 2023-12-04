@@ -58,12 +58,12 @@ public class AnswerQuestionInteractor implements AnswerQuestionInputBoundary{
         if (isInstanceOfMCQ(question)){
             MultipleChoiceQuestion q = (MultipleChoiceQuestion) question;
             String correctAnswer = getMCQCorrectAnswer(q);
-            return "The correct answer was: " + correctAnswer;
+            return correctAnswer;
         } else {
 
             OpenEndedQuestion q = (OpenEndedQuestion) question;
             String feedback = q.getCorrectAnswer();
-            return "the correct answer was: " + feedback;
+            return feedback;
         }
     }
 
