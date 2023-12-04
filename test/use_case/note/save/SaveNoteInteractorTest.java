@@ -1,4 +1,4 @@
-package use_case.saveNote;
+package use_case.note.save;
 import entity.Note;
 import org.junit.Before;
 import org.junit.Test;
@@ -6,10 +6,6 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 import use_case.note.NoteDataAccessInterface;
-import use_case.note.save.SaveNoteInputData;
-import use_case.note.save.SaveNoteInteractor;
-import use_case.note.save.SaveNoteOutputBoundary;
-import use_case.note.save.SaveNoteOutputData;
 
 public class SaveNoteInteractorTest {
 
@@ -33,7 +29,7 @@ public class SaveNoteInteractorTest {
         SaveNoteInteractor saveNoteInteractor = new SaveNoteInteractor(mockNoteDataAccessObject, mockNotePresenter);
 
         // Define the behavior of the mocked SaveNoteInputData
-        when(mockSaveNoteInputData.getInputText()).thenReturn("Sample note content");
+        when(mockSaveNoteInputData.getInputText()).thenReturn("Sample note content iarweounybwcuinlrubwyhuirilqyeabchaiulkwbirawylr");
         when(mockSaveNoteInputData.getTitle()).thenReturn("Sample Title");
 
         // Call the execute method with the mocked input data
@@ -55,7 +51,7 @@ public class SaveNoteInteractorTest {
         SaveNoteInteractor saveNoteInteractor = new SaveNoteInteractor(mockNoteDataAccessObject, mockNotePresenter);
 
         // Define the behavior of the mocked SaveNoteInputData
-        when(mockSaveNoteInputData.getInputText()).thenReturn("Sample note content");
+        when(mockSaveNoteInputData.getInputText()).thenReturn("Sample note content iarweounybwcuinlrubwyhuirilqyeabchaiulkwbirawylr");
         when(mockSaveNoteInputData.getTitle()).thenReturn("");
 
         // Call the execute method with the mocked input data
@@ -90,6 +86,6 @@ public class SaveNoteInteractorTest {
         verify(mockNotePresenter, never()).prepareSuccessView(any(SaveNoteOutputData.class));
 
         // Verify that the notePresenter prepareFailView method was called
-        verify(mockNotePresenter).prepareFailView("Please enter a minimum of 40 words for your Sample Title note.");
+        verify(mockNotePresenter).prepareFailView("Please enter a minimum of 50 characters for your note.");
     }
 }

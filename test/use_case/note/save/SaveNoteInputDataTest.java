@@ -1,8 +1,6 @@
-package use_case.saveNote;
+package use_case.note.save;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import use_case.note.save.SaveNoteInputData;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

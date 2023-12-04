@@ -1,4 +1,4 @@
-package use_case.saveNote;
+package use_case.note.save;
 
 import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 import interface_adapter.ViewManagerModel;
-import use_case.note.save.SaveNoteOutputData;
 
 public class SaveSaveNotePresenterTest {
 
