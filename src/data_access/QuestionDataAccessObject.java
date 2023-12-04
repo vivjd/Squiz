@@ -18,6 +18,10 @@ import static com.mongodb.MongoClientSettings.getDefaultCodecRegistry;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
+/**
+ * this class serves as our DAO for Questions
+ * serves as a bridge between entities and data base
+ */
 public class QuestionDataAccessObject implements QuestionDataAccessInterface, Database {
     private MongoClient mongoClient;
     private MongoDatabase mongoDatabase;
@@ -31,12 +35,18 @@ public class QuestionDataAccessObject implements QuestionDataAccessInterface, Da
     CodecProvider pojoCodecProvider = PojoCodecProvider.builder().automatic(true).build();
     CodecRegistry pojoCodecRegistry = fromRegistries(getDefaultCodecRegistry(), fromProviders(pojoCodecProvider));
 
+    /**
+     * method to connect to the data base
+     */
     @Override
     public void connect() {
         mongoClient = MongoClients.create(connectionString);
         mongoDatabase = mongoClient.getDatabase(databaseName).withCodecRegistry(pojoCodecRegistry);
     }
 
+    /**
+     * method to disconnect to the data base
+     */
     @Override
     public void disconnect() {
         if (mongoClient != null) {
@@ -45,6 +55,10 @@ public class QuestionDataAccessObject implements QuestionDataAccessInterface, Da
     }
 
 
+    /**
+     * saves the question to the database
+     * @param question is the question to save
+     */
     @Override
     public void saveQuestion(Question question) {
         this.connect();
@@ -54,11 +68,20 @@ public class QuestionDataAccessObject implements QuestionDataAccessInterface, Da
         this.disconnect();
     }
 
+    /**
+     * returns the Question
+     * @return question
+     */
     @Override
     public Question getQuestion() {
         return null;
     }
 
+    /**
+     * returns a question based on its name
+     * @param questionName is the String of the name of the question
+     * @return Question with the name given
+     */
     @Override
     public Question getQuestionByName(String questionName) {
         this.connect();
@@ -74,18 +97,33 @@ public class QuestionDataAccessObject implements QuestionDataAccessInterface, Da
         return question;
     }
 
+    /**
+     * checks if the name of the question is MCQ
+     * @param questionName is the name of the question
+     * @return True if yes, False otherwise
+     */
     public boolean isInstanceOfMCQ(String questionName){
         // TODO: Implementation below assumes that each Question stores as
         Question q = getQuestionByName(questionName);
         return q instanceof MultipleChoiceQuestion;
     }
 
+
+    /**
+     * returns the correct answer of MCQ
+     * @param q is the question
+     * @return the answer to the question given
+     */
     public String getMCQCorrectAnswer(MultipleChoiceQuestion q){
         Map<String, String> answerOptions = q.getAnswerOptions();
 
         return answerOptions.get(q.getCorrectAnswerIndex());
     }
 
+    /**
+     * returns all the questions
+     * @return List<String> questions
+     */
     public List<String> getAllQuestionNames(){
         List<String> resultList = new ArrayList<>();
 
@@ -100,6 +138,10 @@ public class QuestionDataAccessObject implements QuestionDataAccessInterface, Da
         return resultList;
     }
 
+    /**
+     * returns all the Questions
+     * @return List<Question> Questions
+     */
     public List<Question> getQuestions(){
         List<Question> resultList = new ArrayList<>();
 
