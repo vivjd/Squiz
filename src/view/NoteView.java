@@ -145,9 +145,6 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                                     generateQuizController.execute(
                                             noteText,
                                             titleText);
-                                    quizGeneratedPopup();
-                                            currentState.getNote(),
-                                            currentState.getTitle());
                                     messagePopUp("Quiz generated and saved. You can access it in the 'View All Quizzes' Page.");
                                     refresh();
                                 } catch (Exception ex) {
