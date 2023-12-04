@@ -148,7 +148,7 @@ public class NoteViewTest {
 
         button.doClick();
         assert(popUpDiscovered);
-        assert(message.equals("The note title is empty. Please enter a title for your note."));
+        assert(message.equals("Please enter a title for your note."));
     }
 
     @Test
@@ -162,7 +162,7 @@ public class NoteViewTest {
 
         button.doClick();
         assert(popUpDiscovered);
-        assert(message.equals("The contents of the note is empty. Please enter some text for your note."));
+        assert(message.equals("Please enter a minimum of 50 characters for your note."));
     }
 
     @Test
