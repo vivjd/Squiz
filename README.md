@@ -1,9 +1,6 @@
 # CSC207CourseProject
 Members: Vivian Deng, Jaehyeong Jang, Min Tun Myo, Emily Shen
 
-## Links to files
-https://utoronto-my.sharepoint.com/:f:/r/personal/viv_deng_mail_utoronto_ca/Documents/CSC207/CSC207%20Course%20Project?csf=1&web=1&e=QwX3N4
-
 ## Problem Domain
 As university students, studying plays a large part in our daily lives and remains a crucial component of our academic career. Although there is a wide variety of studying available apps, we want to create a study application tailored to how university students study.
 
